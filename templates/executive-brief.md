@@ -1,0 +1,16 @@
+# Executive Brief (≤1 page)
+
+## Recommendation
+…
+
+## Evidence (1–3 bullets)
+…
+
+## Classical alternative & gap
+…
+
+## Cost / risk / next gate
+…
+
+## Sources / result-record IDs
+…
