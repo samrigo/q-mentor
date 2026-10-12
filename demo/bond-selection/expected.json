@@ -1,0 +1,19 @@
+{
+  "optimum": {
+    "x": [1, 0, 1, 0, 1, 0],
+    "bitstring": "101010",
+    "labels": ["A", "C", "E"],
+    "yield_score": 11.9,
+    "risk": 1.67,
+    "duration": 14.7,
+    "energy": -9.3725
+  },
+  "next_best_feasible": {
+    "x": [1, 0, 0, 1, 1, 0],
+    "labels": ["A", "D", "E"],
+    "energy": -9.1675,
+    "gap": 0.2050
+  },
+  "n_assignments": 64,
+  "tolerance": 1e-6
+}
