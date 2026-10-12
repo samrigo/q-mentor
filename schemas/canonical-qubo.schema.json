@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/schemas/canonical-qubo.schema.json",
+  "title": "CanonicalQUBO",
+  "type": "object",
+  "required": [
+    "Q",
+    "constant",
+    "variables",
+    "convention",
+    "bit_order"
+  ],
+  "properties": {
+    "Q": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        }
+      }
+    },
+    "constant": {
+      "type": "number"
+    },
+    "variables": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "convention": {
+      "const": "E(x)=x^T Q x + c; Q full symmetric; off-diagonals counted twice"
+    },
+    "bit_order": {
+      "const": "index0-leftmost"
+    },
+    "penalties": {
+      "type": "object"
+    }
+  }
+}

@@ -1,16 +1,17 @@
-# Executive Brief (≤1 page)
+# Executive brief: <title>
 
-## Recommendation
-…
+_Generated from <record paths>. Synthetic/public data only._
 
-## Evidence (1–3 bullets)
-…
+**Decision:** <verdict enum> - one-sentence rationale.
 
-## Classical alternative & gap
-…
+## Evidence
+- Classical baseline result first.
+- Target equivalence / capability.
+- Quantum runs with seed, shots, interval.
 
-## Cost / risk / next gate
-…
+## Evidence level
+<level>. Levels 1-3 are not quantum advantage.
 
-## Sources / result-record IDs
-…
+## Cost and risk
+## Limits
+## Next gate (what must be true, who decides)

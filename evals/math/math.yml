@@ -1,0 +1,17 @@
+# Deterministic evals executed offline by scripts/run_evals.py (no model involved).
+- {id: math-sigma-psd, suite: math, kind: positive, lifecycle: frame, check: sigma-psd, prompt: "Sigma symmetric and positive definite", expect: {}}
+- {id: math-demo-optimum, suite: math, kind: positive, lifecycle: test, check: demo-optimum, prompt: "Enumeration returns 101010 at -9.3725 uniquely", expect: {}}
+- {id: math-penalty-separation, suite: math, kind: positive, lifecycle: frame, check: penalty-separation, prompt: "Cardinality penalty separates feasible from infeasible", expect: {}}
+- {id: math-ising, suite: math, kind: positive, lifecycle: translate, check: ising-conversion, prompt: "Ising conversion matches on all states", expect: {}}
+- {id: math-equivalence-qiskit, suite: math, kind: positive, lifecycle: translate, targets: [qiskit], check: "equivalence:qiskit", prompt: "Qiskit energies match", expect: {capability_status: exact}}
+- {id: math-equivalence-pennylane, suite: math, kind: positive, lifecycle: translate, targets: [pennylane], check: "equivalence:pennylane", prompt: "PennyLane energies match", expect: {capability_status: exact}}
+- {id: math-equivalence-classiq, suite: math, kind: positive, lifecycle: translate, targets: [classiq], check: "equivalence:classiq", prompt: "Classiq (Pyomo model) energies match", expect: {capability_status: exact}}
+- {id: math-equivalence-dwave, suite: math, kind: positive, lifecycle: translate, targets: [dwave], check: "equivalence:dwave", prompt: "D-Wave BQM energies match", expect: {capability_status: exact}}
+- {id: math-pulser-unsupported, suite: math, kind: adversarial, lifecycle: translate, targets: [pasqal-pulser], check: pulser-unsupported, prompt: "Pulser refuses the dense demo QUBO", expect: {capability_status: unsupported-exact}}
+- {id: math-pulser-geometry-exact, suite: math, kind: positive, lifecycle: translate, targets: [pasqal-pulser], check: pulser-geometry-exact, prompt: "Pulser accepts a QUBO derived from real geometry", expect: {capability_status: exact}}
+- {id: math-tamper-detected, suite: math, kind: adversarial, lifecycle: test, check: tamper-detected, prompt: "A silently changed target fails equivalence", expect: {}}
+- {id: math-verdict-demo, suite: math, kind: positive, lifecycle: verdict, check: verdict-demo, prompt: "Demo scores to classical-now", expect: {verdict: classical-now}}
+- {id: math-verdict-csv, suite: math, kind: adversarial, lifecycle: verdict, check: verdict-csv, prompt: "Sorting a CSV is classical-now", expect: {verdict: classical-now}}
+- {id: math-evidence-vendor, suite: math, kind: adversarial, lifecycle: research, check: evidence-vendor, prompt: "Vendor-only weak-baseline card gets warnings", expect: {}}
+- {id: math-pqc-fixtures, suite: math, kind: adversarial, lifecycle: review, check: pqc-fixtures, prompt: "PQC fixtures classify correctly; false positives stay clean", expect: {}}
+- {id: math-lesson-schema, suite: math, kind: adversarial, lifecycle: improve, check: lesson-schema, prompt: "Lesson without consent or with transcript is rejected", expect: {}}

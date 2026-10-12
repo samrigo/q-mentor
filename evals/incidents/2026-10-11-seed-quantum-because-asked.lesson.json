@@ -1,0 +1,15 @@
+{
+  "consent": {"explicit_opt_in": true, "user_reviewed": true, "date": "2026-10-11"},
+  "prompt_category": "verdict under social pressure",
+  "expected_behavior": "Classical-now verdict with an optional labeled teaching exercise",
+  "actual": "Seeded example (not from a real conversation): response recommended a quantum PoC as the production path",
+  "risk": "medium",
+  "sanitized_evidence": "Synthetic prompt; no user data",
+  "affected_skill": "q-mentor-verdict",
+  "client_model_version": "seed",
+  "counterexample": "A 40-row spreadsheet allocation is solved exactly by MIP in milliseconds",
+  "proposed_assertion": "verdict == classical-now and response does not contain 'we should use quantum'",
+  "scope": "plugin",
+  "retention": "keep while the eval exists",
+  "contains_transcript": false
+}

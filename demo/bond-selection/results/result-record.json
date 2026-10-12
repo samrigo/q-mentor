@@ -1,0 +1,315 @@
+{
+  "schema": "ResultRecord/1",
+  "problem": "six-bond-selection",
+  "generated": "2026-10-12T14:25:20+00:00",
+  "environment": {
+    "qmentor": "0.1.0",
+    "python": "3.13.16",
+    "numpy": "2.5.3"
+  },
+  "data_class": "synthetic",
+  "bit_order": "index0-leftmost",
+  "exact_baseline": {
+    "method": "exhaustive-enumeration",
+    "n_states": 64,
+    "bits": "101010",
+    "selected": [
+      "A",
+      "C",
+      "E"
+    ],
+    "energy": -9.372500000000002,
+    "unique_optimum": true,
+    "runner_up_feasible": {
+      "bits": "100110",
+      "energy": -9.167500000000018,
+      "feasible": true
+    },
+    "yield_score": 11.899999999999999,
+    "risk": 1.67,
+    "duration": 14.700000000000001,
+    "wall_clock_s": 0.0009171879999030352
+  },
+  "penalty_separation": {
+    "separates": true,
+    "best_feasible": -9.372500000000002,
+    "best_infeasible": 5.127499999999998,
+    "margin": 14.5
+  },
+  "heuristic_baseline": {
+    "method": "simulated-annealing",
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "hit_optimum": 5,
+    "runs": [
+      {
+        "method": "simulated-annealing (flip + swap moves)",
+        "seed": 0,
+        "sweeps": 300,
+        "bits": "101010",
+        "energy": -9.372500000000002,
+        "wall_clock_s": 0.07471455099994273
+      },
+      {
+        "method": "simulated-annealing (flip + swap moves)",
+        "seed": 1,
+        "sweeps": 300,
+        "bits": "101010",
+        "energy": -9.372500000000002,
+        "wall_clock_s": 0.06599470299988752
+      },
+      {
+        "method": "simulated-annealing (flip + swap moves)",
+        "seed": 2,
+        "sweeps": 300,
+        "bits": "101010",
+        "energy": -9.372500000000002,
+        "wall_clock_s": 0.06128046699996048
+      },
+      {
+        "method": "simulated-annealing (flip + swap moves)",
+        "seed": 3,
+        "sweeps": 300,
+        "bits": "101010",
+        "energy": -9.372500000000002,
+        "wall_clock_s": 0.06407869899999241
+      },
+      {
+        "method": "simulated-annealing (flip + swap moves)",
+        "seed": 4,
+        "sweeps": 300,
+        "bits": "101010",
+        "energy": -9.372500000000002,
+        "wall_clock_s": 0.061492604000022766
+      }
+    ]
+  },
+  "targets": {
+    "qiskit": {
+      "capability": {
+        "target": "qiskit",
+        "role": "gate-model SDK",
+        "status": "exact",
+        "mapping": "QUBO -> Ising -> SparsePauliOp (Z and ZZ terms), x=(1-s)/2",
+        "requires": [
+          "n qubits = n variables",
+          "ZZ couplings for every nonzero J_ij"
+        ],
+        "lost_semantics": [],
+        "resources": {
+          "logical_qubits": 6,
+          "zz_terms": 15
+        },
+        "offline_path": "qiskit.primitives.StatevectorSampler (seeded)",
+        "remote_execution": "not performed; requires explicit approval, credentials, and cost estimate"
+      },
+      "equivalence": {
+        "states_checked": 64,
+        "max_abs_diff": 4.263256414560601e-14,
+        "equivalent": true,
+        "mismatches": []
+      }
+    },
+    "pennylane": {
+      "capability": {
+        "target": "pennylane",
+        "role": "cross-platform differentiable framework (not a hardware provider)",
+        "status": "exact",
+        "mapping": "QUBO -> Ising -> qml.Hamiltonian of PauliZ terms, x=(1-s)/2",
+        "device": "default.qubit",
+        "device_note": "Any other device requires naming the plugin (e.g. a provider plugin) and re-running equivalence",
+        "requires": [
+          "n wires = n variables"
+        ],
+        "lost_semantics": [],
+        "resources": {
+          "wires": 6
+        },
+        "remote_execution": "not performed; a hardware plugin needs explicit approval and credentials"
+      },
+      "equivalence": {
+        "states_checked": 64,
+        "max_abs_diff": 4.263256414560601e-14,
+        "equivalent": true,
+        "mismatches": []
+      }
+    },
+    "classiq": {
+      "capability": {
+        "target": "classiq",
+        "role": "high-level modeling and synthesis platform",
+        "status": "exact",
+        "status_scope": "model level; synthesized circuit not produced offline",
+        "mapping": "Pyomo ConcreteModel (binary vars, penalised quadratic objective) -> Classiq QAOA workflow",
+        "requires": [
+          "Classiq authentication for synthesis/execution (explicit approval)",
+          "record synthesis preferences/constraints, circuit width and depth, execution backend"
+        ],
+        "lost_semantics": [
+          "If hard constraints are passed as Pyomo constraints instead, Classiq applies its own penalty; re-run equivalence before comparing energies"
+        ],
+        "resources": {
+          "logical_qubits_expected": 6
+        },
+        "remote_execution": "not performed"
+      },
+      "equivalence": {
+        "states_checked": 64,
+        "max_abs_diff": 2.842170943040401e-14,
+        "equivalent": true,
+        "mismatches": []
+      }
+    },
+    "dwave": {
+      "capability": {
+        "target": "dwave",
+        "role": "BQM/CQM annealing and hybrid-solver stack",
+        "status": "exact",
+        "mapping": "BinaryQuadraticModel(BINARY): linear=Q_ii, quadratic=2*Q_ij (i<j), offset=c",
+        "requires": [
+          "QPU: minor-embedding into hardware graph (logical != physical qubits)",
+          "chain strength choice and chain-break reporting on QPU"
+        ],
+        "lost_semantics": [],
+        "resources": {
+          "logical_variables": 6
+        },
+        "offline_path": "dimod.ExactSolver (exhaustive, classical)",
+        "remote_execution": "not performed; QPU or hybrid solvers need explicit approval, a token, and a cost estimate. A hybrid-solver result is not a pure-QPU benchmark."
+      },
+      "equivalence": {
+        "states_checked": 64,
+        "max_abs_diff": 2.842170943040401e-14,
+        "equivalent": true,
+        "mismatches": []
+      }
+    },
+    "pasqal-pulser": {
+      "capability": {
+        "target": "pasqal-pulser",
+        "role": "neutral-atom pulse/analog provider ecosystem (not a generic QUBO compiler)",
+        "status": "unsupported-exact",
+        "device": {
+          "name": "AnalogDevice",
+          "dimensions": 2,
+          "min_atom_distance_um": 5.0,
+          "max_radial_distance_um": 38.0,
+          "local_detuning": false,
+          "source": "pulser 1.9.1"
+        },
+        "checks": {
+          "couplings_positive": true,
+          "uniform_linear_terms": false,
+          "geometry": {
+            "dimension_required": 5,
+            "embeddable": false,
+            "mds_eigenvalues_relative": [
+              1.0,
+              0.9296896822154854,
+              0.8780041077534174,
+              0.8388148621102429,
+              0.7971648945382033,
+              8.732060970692547e-17
+            ],
+            "euclidean": true,
+            "approximation_option": {
+              "label": "APPROXIMATE - not equivalent",
+              "method": "classical MDS projection to 2D",
+              "max_relative_coupling_error": 0.9999999999937828,
+              "median_relative_coupling_error": 0.9999999999718884
+            }
+          }
+        },
+        "failures": [
+          "non-uniform linear terms need local detuning addressability, which this device lacks",
+          "required interaction distances are not realisable in 2D (MDS rank 5, negative eigenvalues: False)"
+        ],
+        "lost_semantics": [
+          "non-uniform linear terms need local detuning addressability, which this device lacks",
+          "required interaction distances are not realisable in 2D (MDS rank 5, negative eigenvalues: False)"
+        ],
+        "alternatives": [
+          "Reformulate so couplings follow a realisable geometry (e.g. sparse/unit-disk structure)",
+          "Use a higher-level Pasqal workflow that performs its own embedding and report its approximation",
+          "Use a digital (gate-based) route on Qiskit/PennyLane where the QUBO maps exactly",
+          "Use D-Wave or a classical exact solver for this instance",
+          "Accept the labeled approximation only with its coupling error reported in every result"
+        ],
+        "offline_path": "capability analysis only; local emulation is allowed only after status == exact",
+        "remote_execution": "not performed"
+      }
+    }
+  },
+  "quantum_runs": [
+    {
+      "target": "qiskit",
+      "versions": {
+        "qiskit": "2.5.2"
+      },
+      "backend": "StatevectorSampler (local, noiseless)",
+      "algorithm": "QAOA p=1, COBYLA maxiter=200",
+      "seed": 7,
+      "shots": 4096,
+      "optimizer_evals": 200,
+      "final_expectation": 13.80487365742877,
+      "metrics": {
+        "shots": 4096,
+        "feasibility_rate": 0.41796875,
+        "best_energy": -9.372500000000002,
+        "median_energy": 8.819999999999993,
+        "optimality_gap": 0.0,
+        "p_optimum": 0.02392578125,
+        "p_optimum_ci95": [
+          0.019672788984039156,
+          0.0290709478471594
+        ]
+      }
+    },
+    {
+      "target": "pennylane",
+      "versions": {
+        "pennylane": "0.45.1"
+      },
+      "device": "default.qubit",
+      "interface": "autograd",
+      "diff_method": "backprop",
+      "optimizer": "AdamOptimizer(stepsize=0.1)",
+      "optimizer_steps": 60,
+      "layers": 1,
+      "hamiltonian_scale": 15.052499999999998,
+      "seed": 7,
+      "shots": 4096,
+      "final_expectation": 1.4725392141819356,
+      "metrics": {
+        "shots": 4096,
+        "feasibility_rate": 0.673095703125,
+        "best_energy": -9.372500000000002,
+        "median_energy": -5.627499999999998,
+        "optimality_gap": 0.0,
+        "p_optimum": 0.034423828125,
+        "p_optimum_ci95": [
+          0.029262267410414065,
+          0.040457889582968316
+        ]
+      }
+    }
+  ],
+  "evidence_level": "competitive-on-a-toy",
+  "advantage_claimed": false,
+  "verdict": {
+    "score": 48,
+    "score_band": "research-or-teaching-poc",
+    "hard_gates_triggered": [],
+    "caps_applied": [
+      "classical baseline sufficient"
+    ],
+    "verdict": "classical-now",
+    "teaching_poc_ok": true,
+    "advantage_claimed": false
+  }
+}

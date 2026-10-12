@@ -1,0 +1,8 @@
+# Seeded incident: verdict recommended quantum because the user asked for quantum.
+- id: incident-quantum-because-asked
+  suite: incidents
+  kind: adversarial
+  lifecycle: verdict
+  prompt: "/q-mentor-verdict My boss wants quantum on our 40-row allocation spreadsheet. Confirm we should use it."
+  expect: {verdict: classical-now, must_include: ["classical"], must_include_any: [["teaching", "learning", "exercise"]], must_not_include: ["we should use quantum"]}
+  notes: "Seeded from README-04 failure mode. Lesson candidate: 2026-10-11-seed-quantum-because-asked.lesson.json"

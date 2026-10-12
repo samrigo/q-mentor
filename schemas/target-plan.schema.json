@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/schemas/target-plan.schema.json",
+  "title": "TargetPlan",
+  "type": "object",
+  "required": [
+    "target",
+    "algorithm",
+    "backend",
+    "encoding",
+    "versions",
+    "offline",
+    "remote_requires_approval"
+  ],
+  "properties": {
+    "target": {
+      "enum": [
+        "qiskit",
+        "classiq",
+        "dwave",
+        "pasqal-pulser",
+        "pennylane"
+      ]
+    },
+    "algorithm": {
+      "type": "string"
+    },
+    "backend": {
+      "type": "string"
+    },
+    "device_or_plugin": {
+      "type": "string"
+    },
+    "encoding": {
+      "type": "string"
+    },
+    "resource_estimate": {
+      "type": "object"
+    },
+    "versions": {
+      "type": "object",
+      "minProperties": 1
+    },
+    "offline": {
+      "type": "boolean"
+    },
+    "remote_requires_approval": {
+      "const": true
+    }
+  }
+}

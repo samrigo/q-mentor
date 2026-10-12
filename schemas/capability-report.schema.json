@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/schemas/capability-report.schema.json",
+  "title": "CapabilityReport",
+  "type": "object",
+  "required": [
+    "target",
+    "role",
+    "status",
+    "lost_semantics",
+    "remote_execution"
+  ],
+  "properties": {
+    "target": {
+      "enum": [
+        "qiskit",
+        "classiq",
+        "dwave",
+        "pasqal-pulser",
+        "pennylane"
+      ]
+    },
+    "role": {
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "exact",
+        "approximate",
+        "unsupported-exact",
+        "unknown"
+      ]
+    },
+    "mapping": {
+      "type": "string"
+    },
+    "requires": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "lost_semantics": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "failures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "alternatives": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "device": {},
+    "remote_execution": {
+      "type": "string"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "unsupported-exact"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "failures",
+          "alternatives"
+        ],
+        "properties": {
+          "failures": {
+            "minItems": 1
+          },
+          "alternatives": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

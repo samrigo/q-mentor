@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/schemas/evidence-card.schema.json",
+  "title": "EvidenceCard",
+  "type": "object",
+  "required": [
+    "claim",
+    "source",
+    "source_status",
+    "boundary",
+    "baseline",
+    "artifacts",
+    "limitations",
+    "replication",
+    "scores",
+    "status"
+  ],
+  "properties": {
+    "claim": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string",
+      "pattern": "^(https?://|doi:|file:|attached:)"
+    },
+    "source_status": {
+      "enum": [
+        "peer-reviewed",
+        "preprint",
+        "official-documentation",
+        "vendor-result",
+        "secondary"
+      ]
+    },
+    "boundary": {
+      "type": "string"
+    },
+    "baseline": {
+      "type": "string"
+    },
+    "artifacts": {
+      "type": "string"
+    },
+    "limitations": {
+      "type": "string"
+    },
+    "replication": {
+      "enum": [
+        "independent",
+        "same-team-only",
+        "attempted-and-failed",
+        "unknown"
+      ]
+    },
+    "evidence_level": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5
+    },
+    "scores": {
+      "type": "object",
+      "required": [
+        "source_rigor",
+        "baseline_strength",
+        "artifact_completeness",
+        "scale_relevance",
+        "replication"
+      ],
+      "additionalProperties": {
+        "enum": [
+          0,
+          1,
+          2
+        ]
+      }
+    },
+    "status": {
+      "enum": [
+        "candidate",
+        "promoted",
+        "rejected"
+      ]
+    }
+  }
+}

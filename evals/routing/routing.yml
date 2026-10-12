@@ -1,0 +1,17 @@
+# Routing evals: the agent must select exactly this skill. Graded from a captured response whose
+# first line is "skill: <name>" (see evals/README.md).
+- {id: route-learn, suite: routing, kind: positive, lifecycle: learn, prompt: "What is a QUBO and why do penalties matter?", expect: {skill: q-mentor-learn}}
+- {id: route-research, suite: routing, kind: positive, lifecycle: research, prompt: "What does current research say about QAOA for portfolio optimization? Give me evidence.", expect: {skill: q-mentor-research}}
+- {id: route-brainstorm, suite: routing, kind: positive, lifecycle: explore, prompt: "Where could quantum computing help a bond desk?", expect: {skill: q-mentor-brainstorm}}
+- {id: route-frame, suite: routing, kind: positive, lifecycle: frame, prompt: "Turn 'pick 3 of 6 bonds near duration 15 with low risk' into variables, objective, and constraints.", expect: {skill: q-mentor-frame}}
+- {id: route-verdict, suite: routing, kind: positive, lifecycle: verdict, prompt: "Should we use quantum computing for the six-bond selection problem?", expect: {skill: q-mentor-verdict}}
+- {id: route-design, suite: routing, kind: positive, lifecycle: design, prompt: "Design the teaching experiment for the six-bond problem with Qiskit and PennyLane locally.", expect: {skill: q-mentor-design}}
+- {id: route-translate, suite: routing, kind: positive, lifecycle: translate, prompt: "Map this QUBO to D-Wave and Pasqal Pulser.", expect: {skill: q-mentor-translate}}
+- {id: route-evaluate, suite: routing, kind: positive, lifecycle: evaluate, prompt: "Grade this experiment plan for baseline fairness and reproducibility.", expect: {skill: q-mentor-evaluate}}
+- {id: route-implement, suite: routing, kind: positive, lifecycle: implement, prompt: "The design is accepted; implement the Qiskit adapter.", expect: {skill: q-mentor-implement}}
+- {id: route-test, suite: routing, kind: positive, lifecycle: test, prompt: "Write cross-provider energy equivalence tests for all 64 assignments.", expect: {skill: q-mentor-test}}
+- {id: route-review, suite: routing, kind: positive, lifecycle: review, prompt: "Review this QAOA notebook for math and claim errors.", expect: {skill: q-mentor-review}}
+- {id: route-pqc, suite: routing, kind: positive, lifecycle: review, prompt: "Find quantum-vulnerable crypto in this repository.", expect: {skill: q-mentor-pqc-scan}}
+- {id: route-exec, suite: routing, kind: positive, lifecycle: communicate, prompt: "Write a one-page brief for leadership from results/result-record.json.", expect: {skill: q-mentor-exec}}
+- {id: route-improve, suite: routing, kind: positive, lifecycle: improve, prompt: "Eval behavior-csv-sort failed last night; propose an eval-first fix.", expect: {skill: q-mentor-improve}}
+- {id: route-ambiguous, suite: routing, kind: adversarial, lifecycle: frame, prompt: "Quantum my bonds.", expect: {must_include: ["?"], max_words: 120}, notes: "Ambiguous: ask one question naming likely skills instead of guessing."}

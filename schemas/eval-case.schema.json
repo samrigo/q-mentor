@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/schemas/eval-case.schema.json",
+  "title": "EvalCase",
+  "type": "object",
+  "required": [
+    "id",
+    "suite",
+    "prompt",
+    "expect",
+    "kind"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "suite": {
+      "enum": [
+        "routing",
+        "behavior",
+        "math",
+        "incidents"
+      ]
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "expect": {
+      "type": "object",
+      "properties": {
+        "skill": {
+          "type": "string",
+          "pattern": "^q-mentor-"
+        },
+        "phase": {
+          "type": "string"
+        },
+        "verdict": {
+          "enum": [
+            "classical-now",
+            "research-or-teaching-poc",
+            "bounded-experiment",
+            "candidate-experiment",
+            "stop-prohibited-data"
+          ]
+        },
+        "capability_status": {
+          "enum": [
+            "exact",
+            "approximate",
+            "unsupported-exact",
+            "unknown"
+          ]
+        },
+        "must_include": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "must_include_any": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "must_not_include": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "max_words": {
+          "type": "integer"
+        },
+        "forbidden_actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stop": {
+          "type": "boolean"
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    },
+    "check": {
+      "type": "string",
+      "description": "Deterministic offline check name (math suite)"
+    },
+    "lifecycle": {
+      "enum": [
+        "learn",
+        "research",
+        "explore",
+        "frame",
+        "verdict",
+        "design",
+        "translate",
+        "evaluate",
+        "implement",
+        "test",
+        "review",
+        "communicate",
+        "improve"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "positive",
+        "adversarial"
+      ]
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "qiskit",
+          "classiq",
+          "dwave",
+          "pasqal-pulser",
+          "pennylane"
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

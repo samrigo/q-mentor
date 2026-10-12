@@ -1,0 +1,15 @@
+# Versions the offline suite was last verified with (2026-10-12, Python 3.13).
+# Base
+numpy==2.5.3
+PyYAML==6.0.3
+# dev
+pytest==9.1.1
+jsonschema==4.26.0
+# Optional target groups
+qiskit==2.5.2
+qiskit-optimization==0.7.0
+scipy==1.18.1
+pennylane==0.45.1
+dimod==0.12.22
+pulser-core==1.9.1
+pyomo==6.10.1

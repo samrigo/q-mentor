@@ -4,17 +4,52 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  validate:
+  core:
+    name: Core (offline, no provider SDKs)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate package structure
-        run: python scripts/validate_package.py
-      - name: Validate math / demo optimum
-        run: python scripts/validate_math.py
+      - run: pip install -e ".[dev]"
+      - run: python scripts/validate_package.py
+      - run: python scripts/run_evals.py
+      - run: python -m pytest -m "not slow" -ra
+      - run: python -m qmentor.demo --skip-quantum --out /tmp/demo-results
+
+  targets:
+    name: All local targets (simulators only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev,all-targets]"
+      - run: pip freeze > installed-versions.txt
+      - run: python scripts/run_evals.py
+      - run: python -m pytest -ra
+      - run: python -m qmentor.demo --out /tmp/demo-results
+      - uses: actions/upload-artifact@v4
+        with:
+          name: demo-results
+          path: |
+            /tmp/demo-results
+            installed-versions.txt
+
+  secrets-and-deps:
+    name: Dependency review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: high

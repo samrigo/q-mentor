@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qmentor"
+version = "0.1.0"
+description = "Deterministic helpers for the Q-Mentor GitHub Copilot plugin: canonical QUBO math, exact baselines, target equivalence, capability gates."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.26", "PyYAML>=6.0"]
+
+[project.optional-dependencies]
+# Tested versions recorded in knowledge/sources.yml (last_verified 2026-10-12).
+dev = ["pytest>=8", "jsonschema>=4.21"]
+qiskit = ["qiskit>=2.0,<3", "qiskit-optimization>=0.7,<0.8", "scipy>=1.11"]
+pennylane = ["pennylane>=0.45,<0.46"]
+dwave = ["dimod>=0.12,<0.13"]
+classiq = ["pyomo>=6.7"]          # offline model validation; the classiq SDK itself is NOT installed by default
+pasqal = ["pulser-core>=1.9,<1.10"]
+all-targets = ["qmentor[qiskit,pennylane,dwave,classiq,pasqal]"]
+
+[tool.setuptools.packages.find]
+include = ["qmentor*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: local QAOA simulation runs (seconds to minutes)"]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::PendingDeprecationWarning", "ignore:.*SparseEfficiencyWarning.*", "ignore::UserWarning"]

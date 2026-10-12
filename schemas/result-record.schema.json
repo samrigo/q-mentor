@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/schemas/result-record.schema.json",
+  "title": "ResultRecord",
+  "type": "object",
+  "required": [
+    "schema",
+    "problem",
+    "environment",
+    "data_class",
+    "bit_order",
+    "exact_baseline",
+    "targets",
+    "quantum_runs",
+    "evidence_level",
+    "advantage_claimed"
+  ],
+  "properties": {
+    "schema": {
+      "const": "ResultRecord/1"
+    },
+    "problem": {
+      "type": "string"
+    },
+    "generated": {
+      "type": "string"
+    },
+    "environment": {
+      "type": "object",
+      "required": [
+        "qmentor",
+        "python"
+      ]
+    },
+    "data_class": {
+      "enum": [
+        "synthetic",
+        "public"
+      ]
+    },
+    "bit_order": {
+      "const": "index0-leftmost"
+    },
+    "exact_baseline": {
+      "type": "object",
+      "required": [
+        "method",
+        "bits",
+        "energy",
+        "n_states"
+      ],
+      "properties": {
+        "bits": {
+          "type": "string",
+          "pattern": "^[01]+$"
+        },
+        "energy": {
+          "type": "number"
+        }
+      }
+    },
+    "heuristic_baseline": {
+      "type": "object"
+    },
+    "targets": {
+      "type": "object"
+    },
+    "quantum_runs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "target"
+        ]
+      }
+    },
+    "evidence_level": {
+      "enum": [
+        "formulated",
+        "executable",
+        "competitive-on-a-toy",
+        "scales-experimentally",
+        "advantage-evidence"
+      ]
+    },
+    "advantage_claimed": {
+      "type": "boolean"
+    },
+    "verdict": {
+      "type": "object",
+      "required": [
+        "verdict",
+        "score"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "advantage_claimed": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "evidence_level": {
+            "const": "advantage-evidence"
+          }
+        }
+      }
+    }
+  ]
+}

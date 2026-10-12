@@ -1,0 +1,20 @@
+{
+  "name": "samrigo-q-mentor",
+  "owner": {
+    "name": "Sam Rigo"
+  },
+  "metadata": {
+    "description": "Q-Mentor: honest, vendor-neutral quantum-computing guide for GitHub Copilot",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "q-mentor",
+      "description": "Learn, research, frame, verdict, design, translate, evaluate, implement, test, review, and brief quantum-computing work - always against the strongest classical alternative.",
+      "version": "0.1.0",
+      "source": "./",
+      "license": "MIT",
+      "keywords": ["quantum-computing", "qubo", "optimization", "pqc"]
+    }
+  ]
+}

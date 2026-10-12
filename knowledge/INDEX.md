@@ -1,17 +1,18 @@
-# Knowledge Pack Index
+# Knowledge index
 
-Load only the packs a skill needs (≤3 per skill).
+Read **only** the pack a skill links. Each pack answers one question, stays under ~1,000 tokens, and cites entries in [sources.yml](sources.yml).
 
-| Pack | Purpose |
-|------|---------|
-| `quantum-basics.md` | Qubits, superposition, measurement, gates vs annealing |
-| `optimization-math.md` | QUBO, Ising, penalties, mean-variance selection |
-| `quantum-fit.md` | When quantum is and is not a fit |
-| `research-method.md` | Evidence cards, source grading, replication |
-| `providers-qiskit.md` | Qiskit quadratic program → QAOA / sampling |
-| `providers-classiq.md` | Classiq / Qmod high-level model |
-| `providers-dwave.md` | D-Wave Ocean BQM / hybrid |
-| `providers-pasqal-pulser.md` | Neutral-atom geometry & Pulser constraints |
-| `framework-pennylane.md` | PennyLane devices, gradients, Hamiltonians |
-| `pqc.md` | Post-quantum cryptography inventory guidance |
-| `sources.yml` | Versioned primary-source registry |
+| Pack | Question it answers | Typical skills |
+|---|---|---|
+| [quantum-basics](quantum-basics.md) | What are qubits, gates, measurement, noise, and the hardware paradigms? | learn |
+| [optimization-math](optimization-math.md) | How do QUBO, Ising, penalties, QAOA, and annealing work under our conventions? | learn, frame, design, translate, implement, test, review |
+| [quantum-fit](quantum-fit.md) | When is a problem worth a quantum experiment, and how is evidence levelled? | brainstorm, verdict, evaluate, review, exec |
+| [research-method](research-method.md) | How are research claims graded into evidence cards? | research, evaluate, improve |
+| [providers-qiskit](providers-qiskit.md) | How does the canonical model map to Qiskit (gate model)? | design, translate, implement |
+| [providers-classiq](providers-classiq.md) | How does it map to Classiq (high-level modeling and synthesis)? | translate |
+| [providers-dwave](providers-dwave.md) | How does it map to D-Wave Ocean (BQM, annealing, hybrid)? | translate |
+| [providers-pasqal-pulser](providers-pasqal-pulser.md) | What can Pasqal/Pulser neutral-atom programs represent exactly? | translate |
+| [framework-pennylane](framework-pennylane.md) | How does it map to PennyLane (differentiable framework + device)? | design, translate, implement |
+| [pqc](pqc.md) | Which cryptography is quantum-exposed, and what does NIST standardize? | learn, pqc-scan |
+
+Domain packs live in [`../domains/`](../domains/). Execution-target packs are optional at install time (`scripts/deploy_repo_local.py --targets`).

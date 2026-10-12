@@ -1,31 +1,28 @@
-# Frame Template
+# Frame: <problem name>
 
-## Business decision
-…
+- **Decision and owner:**
+- **Data class:** synthetic | public (anything else: stop)
 
-## Success measure
-…
+## Variables
+| ID | Meaning | Domain | Unit |
+|---|---|---|---|
 
-## Variables & domains
-…
+Bit order: variable 0 is the leftmost bit.
 
 ## Objective
-…
+Sense: minimize | maximize. Formula with every symbol defined:
 
 ## Constraints
-…
+| Name | Kind (hard / soft) | Formula | Penalty weight and how it will be tested |
+|---|---|---|---|
 
-## Data / units / provenance
-…
-
-## Assumptions
-…
-
+## Data and provenance
+## Assumptions (labeled)
 ## Unknowns
-…
-
-## Classical baseline
-…
-
+## Success measures
+## Classical baseline to run
 ## Validation plan
-…
+- [ ] Symmetry / PSD checks
+- [ ] Units consistent
+- [ ] Toy enumeration reproduces a known optimum
+- [ ] Penalty separation proven by enumeration

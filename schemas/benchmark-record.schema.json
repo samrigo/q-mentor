@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/schemas/benchmark-record.schema.json",
+  "title": "BenchmarkRecord",
+  "type": "object",
+  "required": [
+    "problem",
+    "method",
+    "class",
+    "best",
+    "wall_clock_s",
+    "versions"
+  ],
+  "properties": {
+    "problem": {
+      "type": "string"
+    },
+    "method": {
+      "type": "string"
+    },
+    "class": {
+      "enum": [
+        "exact",
+        "heuristic",
+        "quantum-simulator",
+        "quantum-hardware",
+        "annealer",
+        "hybrid"
+      ]
+    },
+    "seeds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "shots": {
+      "type": "integer"
+    },
+    "feasibility_rate": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "best": {
+      "type": "number"
+    },
+    "median": {
+      "type": "number"
+    },
+    "optimality_gap": {
+      "type": "number"
+    },
+    "ci95": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "wall_clock_s": {
+      "type": "number"
+    },
+    "solver_time_s": {
+      "type": "number"
+    },
+    "cost": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "versions": {
+      "type": "object"
+    }
+  }
+}

@@ -1,37 +1,52 @@
-# Optimization Math (canonical conventions)
+# Optimization math (canonical conventions)
 
-## Binary quadratic form
+`last_verified: 2026-10-12` · sources: `lucas-2014`, `farhi-2014`, `markowitz-1952`, `qiskit-finance-portfolio`
 
-For binary decisions \(x_i \in \{0,1\}\):
+## Operational rule
 
-\[
-\min_x \; E(x) = x^T Q x + c
-\]
+Every adapter preserves **one** canonical energy. Prove it by enumerating all assignments on toy sizes; never by visual inspection.
 
-Document whether off-diagonal terms appear once or twice. This repository uses the **full symmetric matrix** convention (cross terms appear twice when expanded).
+## Canonical QUBO
+
+```text
+E(x) = x^T Q x + c,   x_i in {0,1}
+```
+
+- `Q` is stored **full and symmetric**: off-diagonal couplings appear twice (Q_ij and Q_ji). Libraries that store a coupling once need `2 Q_ij`.
+- Because x_i^2 = x_i, linear terms live on the diagonal.
+- **Bit order:** variable 0 is the leftmost character of a bitstring.
 
 ## Ising conversion
 
-\(x_i = (1 - s_i)/2\) with \(s_i \in \{-1,+1\}\). Adapters must test the conversion, not rely on visual inspection.
+`x_i = (1 - s_i)/2`, so s_i = +1 means x_i = 0 (matches Pauli-Z on |0>).
+
+```text
+E(s) = offset + sum_i h_i s_i + sum_{i<j} J_ij s_i s_j
+h_i = -Q_ii/2 - sum_{j!=i} Q_ij/2;  J_ij = Q_ij/2;  offset = c + sum_i Q_ii/2 + sum_{i<j} Q_ij/2
+```
+
+D-Wave dimod uses s = 2x - 1 (opposite sign): flip h, keep J.
 
 ## Constraints as penalties
 
-Equality \(g(x)=0\) → \(A[g(x)]^2\). Choose \(A\) large enough that no infeasible improvement in the original objective can dominate the penalty. For small fixtures, enumerate every assignment and prove separation.
+Equality g(x) = a^T x - b = 0 becomes A (a^T x - b)^2 = A[x^T(a a^T)x - 2b a^T x + b^2]. Choose A large enough that no infeasible state beats the best feasible one, but not so large that coefficient range harms hardware precision. **Test** separation by enumeration on small fixtures; treat A as a modeling decision, not a constant.
 
-## Mean-variance (didactic)
+## Mean-variance selection
 
-\[
-\min_x \; q\, x^T \Sigma x - \mu^T x
-\quad\text{s.t.}\quad
-\mathbf{1}^T x = B
-\]
+```text
+minimize  q x^T Sigma x - mu^T x   subject to  1^T x = B
+```
 
-Real portfolios add prices, lots, liquidity, turnover, taxes, limits, scenarios. The toy model is **not** production-ready.
+Sigma must be symmetric PSD, q > 0. Real portfolios add prices, lots, liquidity, turnover, taxes, limits, scenarios, and estimation error; the toy is didactic.
 
-## Six-bond demo energy
+## QAOA
 
-\[
-E(x) = 1.5\, x^T \Sigma x - \mu^T x + 15(\sum x - 3)^2 + 0.25(d^T x - 15)^2
-\]
+Alternate cost evolution exp(-i gamma H_C) and mixer exp(-i beta sum X) for p layers; a classical optimizer tunes angles. It is a hybrid **heuristic**, sensitive to encoding, depth, optimizer, initialization, shots, noise, and seed. No general practical speedup is established.
 
-See `demo/bond-selection/`.
+## Annealing
+
+Samplers minimize an Ising/BQM energy. Report logical variables vs physical qubits, chain strength, chain breaks, reads, embedding time, and post-processing. Hybrid-solver results are not pure-QPU results.
+
+## Classical baselines
+
+Exact: enumeration (<= ~20 variables), MIP (branch-and-bound), CP-SAT. Heuristic: simulated annealing with problem-aware moves, tabu search. Give baselines comparable tuning effort.

@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/schemas/problem-spec.schema.json",
+  "title": "ProblemSpec",
+  "type": "object",
+  "required": [
+    "name",
+    "provenance",
+    "variables",
+    "objective",
+    "constraints"
+  ],
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "schema": {
+      "const": "ProblemSpec/1"
+    },
+    "description": {
+      "type": "string"
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "data_class"
+      ],
+      "properties": {
+        "data_class": {
+          "enum": [
+            "synthetic",
+            "public"
+          ]
+        },
+        "source": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        }
+      }
+    },
+    "variables": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "domain"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "domain": {
+            "enum": [
+              "binary"
+            ]
+          }
+        }
+      }
+    },
+    "objective": {
+      "type": "object",
+      "required": [
+        "sense",
+        "risk_aversion",
+        "expected_return",
+        "risk_matrix"
+      ],
+      "properties": {
+        "sense": {
+          "enum": [
+            "minimize"
+          ]
+        },
+        "risk_aversion": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "expected_return": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "risk_matrix": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "units": {
+          "type": "string"
+        }
+      }
+    },
+    "constraints": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "kind",
+          "coefficients",
+          "target",
+          "penalty"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "hard-equality",
+              "soft-target"
+            ]
+          },
+          "coefficients": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "target": {
+            "type": "number"
+          },
+          "penalty": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          }
+        }
+      }
+    },
+    "bit_order": {
+      "type": "string"
+    },
+    "success_measures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

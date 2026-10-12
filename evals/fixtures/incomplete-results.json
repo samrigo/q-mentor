@@ -1,0 +1,1 @@
+{"schema": "ResultRecord/1", "problem": "six-bond-selection", "quantum_runs": [{"target": "qiskit"}], "note": "exact_baseline missing; metrics missing"}

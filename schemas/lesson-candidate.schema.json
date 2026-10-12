@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/schemas/lesson-candidate.schema.json",
+  "title": "LessonCandidate",
+  "type": "object",
+  "required": [
+    "consent",
+    "prompt_category",
+    "expected_behavior",
+    "actual",
+    "risk",
+    "affected_skill",
+    "proposed_assertion",
+    "scope",
+    "retention",
+    "contains_transcript"
+  ],
+  "properties": {
+    "consent": {
+      "type": "object",
+      "required": [
+        "explicit_opt_in",
+        "user_reviewed"
+      ],
+      "properties": {
+        "explicit_opt_in": {
+          "const": true
+        },
+        "user_reviewed": {
+          "const": true
+        },
+        "date": {
+          "type": "string"
+        }
+      }
+    },
+    "prompt_category": {
+      "type": "string"
+    },
+    "expected_behavior": {
+      "type": "string"
+    },
+    "actual": {
+      "type": "string"
+    },
+    "risk": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "sanitized_evidence": {
+      "type": "string"
+    },
+    "affected_skill": {
+      "type": "string",
+      "pattern": "^q-mentor-"
+    },
+    "client_model_version": {
+      "type": "string"
+    },
+    "counterexample": {
+      "type": "string"
+    },
+    "proposed_assertion": {
+      "type": "string"
+    },
+    "scope": {
+      "enum": [
+        "personal",
+        "repository",
+        "plugin"
+      ]
+    },
+    "retention": {
+      "type": "string"
+    },
+    "contains_transcript": {
+      "const": false
+    }
+  }
+}
