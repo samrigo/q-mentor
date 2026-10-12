@@ -1,0 +1,37 @@
+# Primary source registry – last_verified: 2026-10-11
+sources:
+  - id: agent-plugins-1.0
+    title: Agent Plugins Specification 1.0.0
+    url: https://agent-plugins.org/
+    owner: agentplugins
+    last_verified: 2026-10-11
+  - id: qiskit-docs
+    title: Qiskit Documentation
+    url: https://docs.quantum.ibm.com/
+    owner: IBM
+    last_verified: 2026-10-11
+  - id: dwave-ocean
+    title: D-Wave Ocean SDK
+    url: https://docs.ocean.dwavesys.com/
+    owner: D-Wave
+    last_verified: 2026-10-11
+  - id: pennylane
+    title: PennyLane Documentation
+    url: https://pennylane.ai/
+    owner: Xanadu
+    last_verified: 2026-10-11
+  - id: pulser
+    title: Pulser Documentation
+    url: https://pulser.readthedocs.io/
+    owner: Pasqal
+    last_verified: 2026-10-11
+  - id: classiq
+    title: Classiq Documentation
+    url: https://docs.classiq.io/
+    owner: Classiq
+    last_verified: 2026-10-11
+  - id: nist-pqc
+    title: NIST Post-Quantum Cryptography
+    url: https://csrc.nist.gov/projects/post-quantum-cryptography
+    owner: NIST
+    last_verified: 2026-10-11
