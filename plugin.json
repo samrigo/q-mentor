@@ -1,0 +1,24 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "q-mentor",
+  "version": "1.0.0",
+  "description": "Honest, vendor-neutral quantum-computing guide for GitHub Copilot. Teaches concepts, researches evidence, screens problems, designs and implements experiments, tests results, and always names the strongest classical alternative. Finance is the first domain pack.",
+  "author": {
+    "name": "samrigo",
+    "url": "https://github.com/samrigo"
+  },
+  "homepage": "https://github.com/samrigo/q-mentor",
+  "repository": "https://github.com/samrigo/q-mentor",
+  "license": "MIT",
+  "keywords": [
+    "quantum-computing",
+    "optimization",
+    "qubo",
+    "qaoa",
+    "annealing",
+    "copilot",
+    "agent-plugin",
+    "finance",
+    "education"
+  ]
+}
