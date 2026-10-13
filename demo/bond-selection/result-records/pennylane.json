@@ -1,0 +1,70 @@
+{
+  "schema": "qmentor.result-record.v2",
+  "target": "pennylane",
+  "versions": {
+    "pennylane": "0.45.1"
+  },
+  "device": "default.qubit",
+  "interface": "autograd",
+  "diff_method": "backprop",
+  "optimizer": "AdamOptimizer(stepsize=0.05), steps=80",
+  "layers": 2,
+  "seed": 7,
+  "shots": 4096,
+  "baseline": {
+    "method": "exhaustive enumeration",
+    "states": 64,
+    "optimum": {
+      "bitstring": "101010",
+      "selected": [
+        "A",
+        "C",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.9,
+      "risk": 1.67,
+      "duration": 14.7,
+      "energy": -9.3725
+    },
+    "unique": true,
+    "runner_up": {
+      "bitstring": "100110",
+      "selected": [
+        "A",
+        "D",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.3,
+      "risk": 1.38,
+      "duration": 15.5,
+      "energy": -9.1675
+    },
+    "gap": 0.205,
+    "best_infeasible_energy": 5.1275
+  },
+  "quantum": {
+    "final_expected_energy": 16.996436,
+    "best_sampled": {
+      "bitstring": "101010",
+      "selected": [
+        "A",
+        "C",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.9,
+      "risk": 1.67,
+      "duration": 14.7,
+      "energy": -9.3725,
+      "count": 40
+    },
+    "feasibility_rate": 0.3894,
+    "optimum_probability": 0.0098,
+    "wall_clock_s": 4.303
+  },
+  "evidence_level": "executable on a local simulator; not a hardware result and not quantum advantage",
+  "recorded_on": "2026-10-13",
+  "environment": "CPython 3.13.16, x86_64 Linux, fresh venv with the pinned SDK versions"
+}

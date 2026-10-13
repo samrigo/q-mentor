@@ -1,0 +1,53 @@
+{
+  "schema": "qmentor.result-record.v2",
+  "target": "dwave-ocean",
+  "versions": {
+    "dimod": "0.12.22",
+    "dwave-samplers": "1.8.0"
+  },
+  "logical_variables": 6,
+  "physical_qubits": null,
+  "baseline": {
+    "method": "dimod.ExactSolver",
+    "optimum": {
+      "bitstring": "101010",
+      "selected": [
+        "A",
+        "C",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.9,
+      "risk": 1.67,
+      "duration": 14.7,
+      "energy": -9.3725
+    },
+    "energy_from_bqm": -9.3725,
+    "wall_clock_s": 0.00086
+  },
+  "heuristic": {
+    "method": "dwave.samplers.SimulatedAnnealingSampler (classical, local)",
+    "seed": 7,
+    "num_reads": 200,
+    "best": {
+      "bitstring": "101010",
+      "selected": [
+        "A",
+        "C",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.9,
+      "risk": 1.67,
+      "duration": 14.7,
+      "energy": -9.3725
+    },
+    "feasibility_rate": 1.0,
+    "optimum_rate": 0.145,
+    "wall_clock_s": 0.012991
+  },
+  "qpu": "not run (requires explicit approval; no chain/embedding data)",
+  "evidence_level": "executable classical toolchain; no quantum hardware used",
+  "recorded_on": "2026-10-13",
+  "environment": "CPython 3.13.16, x86_64 Linux, fresh venv with the pinned SDK versions"
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "qmentor.result-record.v2",
+  "target": "classiq",
+  "versions": {
+    "classiq": "1.32.0"
+  },
+  "baseline": {
+    "method": "exhaustive enumeration",
+    "states": 64,
+    "optimum": {
+      "bitstring": "101010",
+      "selected": [
+        "A",
+        "C",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.9,
+      "risk": 1.67,
+      "duration": 14.7,
+      "energy": -9.3725
+    },
+    "unique": true,
+    "runner_up": {
+      "bitstring": "100110",
+      "selected": [
+        "A",
+        "D",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.3,
+      "risk": 1.38,
+      "duration": 15.5,
+      "energy": -9.1675
+    },
+    "gap": 0.205,
+    "best_infeasible_energy": 5.1275
+  },
+  "offline_model_validation": {
+    "model_bytes": 19312,
+    "phase_expressions_found": 1,
+    "max_energy_error_all_64_states": 1.2789769243681803e-13,
+    "native_qmod": "bond_selection.qmod"
+  },
+  "remote": {
+    "status": "not-run",
+    "reason": "remote synthesis/execution requires explicit approval"
+  },
+  "validation_state": "imported (model created and cost verified locally); synthesis unverified",
+  "evidence_level": "formulated (level 1); no quantum hardware used; not quantum advantage",
+  "recorded_on": "2026-10-13",
+  "environment": "CPython 3.13.16, x86_64 Linux, fresh venv with the pinned SDK versions"
+}

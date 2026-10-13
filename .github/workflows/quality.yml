@@ -1,0 +1,53 @@
+name: quality
+
+on:
+  push:
+    branches: [main, Claude-v2]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - name: Install validator dependencies (pinned)
+        run: python -m pip install -r requirements-dev.txt
+      - name: Package, registry, schemas, skills, coverage
+        run: python scripts/validate_package.py
+      - name: Math fixtures
+        run: python scripts/validate_math.py
+      - name: Routing fixtures
+        run: python scripts/validate_routing.py
+      - name: Response-contract fixtures
+        run: python scripts/validate_responses.py
+      - name: Static example scan and conversion fixtures
+        run: python scripts/validate_examples.py --static
+      - name: Source registry (offline)
+        run: python scripts/verify_sources.py
+      - name: Executive brief regenerates from records
+        run: python scripts/build_report.py && git diff --exit-code demo/bond-selection/REPORT.md
+
+  examples:
+    needs: contracts
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [qiskit, pennylane, dwave, pasqal-pulser, bond-selection/classiq, pulser-to-classiq]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
+      - name: Install validator dependencies (pinned)
+        run: python -m pip install -r requirements-dev.txt
+      - name: Fresh environment from lock, compile, test (offline providers, no credentials)
+        run: python scripts/validate_examples.py --only ${{ matrix.target }}

@@ -1,0 +1,163 @@
+# Q-Mentor skill registry (contract: qmentor.skill-registry.v2).
+# The custom agent reads this file at the start of every task and owns chaining.
+# prerequisites: run only when the artifacts in `requires` are missing or invalid.
+# follow_ons: possible next skills; the requested outcome decides which run.
+# Validated by scripts/validate_package.py against schemas/skill-registry.schema.json.
+contract_version: qmentor.skill-registry.v2
+plugin_version: 2.0.0
+max_skills_per_turn: 5
+max_chain_depth: 5
+user_supplied_artifacts: [UserGoal, UserDocument, SourceCode, Diff, Paper]  # ConsentRecord must be given explicitly
+skills:
+  - name: q-mentor-orchestrate
+    user_invocable: false
+    intents: [multi-phase, end-to-end, analyze and implement, convert and validate, full workflow]
+    requires: [UserGoal]
+    produces: [PhasePlan]
+    prerequisites: []
+    follow_ons: [q-mentor-learn, q-mentor-research, q-mentor-brainstorm, q-mentor-frame, q-mentor-verdict, q-mentor-design, q-mentor-translate, q-mentor-evaluate, q-mentor-implement, q-mentor-test, q-mentor-review, q-mentor-pqc-scan, q-mentor-exec, q-mentor-improve]
+    side_effects: none
+    tools: [read, search]
+    packs: []
+  - name: q-mentor-learn
+    user_invocable: true
+    intents: [explain, what is, teach, how does, mental model, intuition]
+    requires: [UserGoal]
+    produces: [Explanation]
+    prerequisites: []
+    follow_ons: [q-mentor-research, q-mentor-frame]
+    side_effects: none
+    tools: [read]
+    packs: [knowledge/quantum-basics.md, knowledge/optimization-math.md]
+  - name: q-mentor-research
+    user_invocable: true
+    intents: [evidence, paper, latest, state of the art, literature, claim check]
+    requires: [UserGoal]
+    produces: [EvidenceCard]
+    prerequisites: []
+    follow_ons: [q-mentor-evaluate]
+    side_effects: none
+    tools: [read, search, web]
+    packs: [knowledge/research-method.md, knowledge/recent-research.md]
+  - name: q-mentor-brainstorm
+    user_invocable: true
+    intents: [use cases, ideas, where could quantum help, shortlist, options]
+    requires: [UserGoal]
+    produces: [UseCaseTable]
+    prerequisites: []
+    follow_ons: [q-mentor-frame, q-mentor-verdict]
+    side_effects: none
+    tools: [read]
+    packs: [knowledge/quantum-fit.md]
+  - name: q-mentor-frame
+    user_invocable: true
+    intents: [formulate, frame, model the problem, variables, objective, constraints, QUBO]
+    requires: [UserGoal]
+    produces: [ProblemSpec, CanonicalProblem]
+    prerequisites: []
+    follow_ons: [q-mentor-verdict, q-mentor-design]
+    side_effects: none
+    tools: [read, search]
+    packs: [knowledge/optimization-math.md, domains/finance/portfolio-optimization.md]
+  - name: q-mentor-verdict
+    user_invocable: true
+    intents: [should we use quantum, is quantum a fit, go no-go, readiness, verdict]
+    requires: [ProblemSpec]
+    produces: [Verdict]
+    prerequisites: [q-mentor-frame]
+    follow_ons: [q-mentor-design, q-mentor-exec]
+    side_effects: none
+    tools: [read]
+    packs: [knowledge/quantum-fit.md]
+  - name: q-mentor-design
+    user_invocable: true
+    intents: [design, architecture, plan the experiment, target plan]
+    requires: [Verdict, CanonicalProblem]
+    produces: [Design, TargetPlan]
+    prerequisites: [q-mentor-verdict]
+    follow_ons: [q-mentor-translate, q-mentor-evaluate]
+    side_effects: none
+    tools: [read, search]
+    packs: [knowledge/optimization-math.md]
+  - name: q-mentor-translate
+    user_invocable: true
+    intents: [convert, translate, port, compare targets, same problem in another SDK]
+    requires: [CanonicalProblem]
+    produces: [ProgramIR, CapabilityReport, TranslationRecord]
+    prerequisites: [q-mentor-frame]
+    follow_ons: [q-mentor-evaluate, q-mentor-implement, q-mentor-test]
+    side_effects: none
+    tools: [read, search]
+    packs: [knowledge/providers-qiskit.md, knowledge/providers-classiq.md, knowledge/providers-dwave.md, knowledge/providers-pasqal-pulser.md, knowledge/framework-pennylane.md]
+  - name: q-mentor-evaluate
+    user_invocable: true
+    intents: [grade, scorecard, assess paper, assess proposal, fair comparison, benchmark plan]
+    requires: [UserGoal]
+    produces: [Scorecard, ExperimentPlan]
+    prerequisites: []
+    follow_ons: [q-mentor-design, q-mentor-implement, q-mentor-exec]
+    side_effects: none
+    tools: [read, search]
+    packs: [knowledge/research-method.md, knowledge/quantum-fit.md]
+  - name: q-mentor-implement
+    user_invocable: true
+    intents: [implement, write the code, build the example, scaffold]
+    requires: [Design]
+    produces: [Implementation]
+    prerequisites: [q-mentor-design]
+    follow_ons: [q-mentor-test, q-mentor-review]
+    side_effects: edit
+    tools: [read, search, edit]
+    packs: [knowledge/providers-qiskit.md, knowledge/providers-classiq.md, knowledge/providers-dwave.md, knowledge/providers-pasqal-pulser.md, knowledge/framework-pennylane.md]
+  - name: q-mentor-test
+    user_invocable: true
+    intents: [test, validate, verify, run the checks, equivalence]
+    requires: [Implementation]
+    produces: [TestReport, ResultRecord]
+    prerequisites: [q-mentor-implement]
+    follow_ons: [q-mentor-implement, q-mentor-review, q-mentor-exec]
+    side_effects: execute
+    tools: [read, search, edit, execute]
+    packs: []
+  - name: q-mentor-review
+    user_invocable: true
+    intents: [review, check this code, audit the math, sanity check]
+    requires: [Diff]
+    produces: [Findings]
+    prerequisites: []
+    follow_ons: [q-mentor-implement, q-mentor-test, q-mentor-pqc-scan]
+    side_effects: none
+    tools: [read, search]
+    packs: [knowledge/optimization-math.md]
+  - name: q-mentor-pqc-scan
+    user_invocable: true
+    intents: [post-quantum, PQC, crypto inventory, RSA, ECC, harvest now decrypt later]
+    requires: [SourceCode]
+    produces: [CryptoFindings]
+    prerequisites: []
+    follow_ons: [q-mentor-review]
+    side_effects: none
+    tools: [read, search]
+    packs: [knowledge/pqc.md]
+  - name: q-mentor-exec
+    user_invocable: true
+    intents: [executive summary, brief, leadership, one pager]
+    requires_any: [ResultRecord, Verdict]
+    requires: []
+    produces: [ExecutiveBrief]
+    prerequisites: []
+    follow_ons: [q-mentor-improve]
+    side_effects: none
+    tools: [read]
+    packs: []
+  - name: q-mentor-improve
+    user_invocable: true
+    intents: [improve the plugin, lesson, incident, regression, update knowledge]
+    requires_any: [ConsentRecord, TestReport, EvidenceCard]
+    requires: []
+    produces: [LessonCandidate, ChangeProposal]
+    prerequisites: []
+    follow_ons: [q-mentor-research, q-mentor-test]
+    side_effects: edit
+    tools: [read, search, edit]
+    packs: [templates/conversation-lesson.md]

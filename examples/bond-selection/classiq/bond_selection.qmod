@@ -1,0 +1,28 @@
+qfunc hadamard_transform_expanded___0(target: qbit[6]) {
+  repeat (index: 6) {
+    H(target[index]);
+  }
+}
+
+qfunc gate_operand_0_lambda___0_0_expanded___0(q: qbit, beta_captured__qaoa_layer__1: real) {
+  RX(beta_captured__qaoa_layer__1, q);
+}
+
+qfunc apply_to_all_expanded___0(target: qbit[6], beta_captured__qaoa_layer__1: real) {
+  repeat (index: 6) {
+    gate_operand_0_lambda___0_0_expanded___0(target[index], beta_captured__qaoa_layer__1);
+  }
+}
+
+qfunc qaoa_layer_expanded___0(gamma: real, beta: real, x: qbit[6]) {
+  phase ((((((((((((((((-((((((92.1475 * x[0]) + (102.67 * x[1])) + (110.665 * x[2])) + (114.02 * x[3])) + (120.76 * x[4])) + (122.4775 * x[5]))) + ((34.11 * x[0]) * x[1])) + ((35.55 * x[0]) * x[2])) + ((36.36 * x[0]) * x[3])) + ((37.8 * x[0]) * x[4])) + ((38.595 * x[0]) * x[5])) + ((40.06 * x[1]) * x[2])) + ((41.49 * x[1]) * x[3])) + ((44.18 * x[1]) * x[4])) + ((45.51 * x[1]) * x[5])) + ((45.81 * x[2]) * x[3])) + ((49.6 * x[2]) * x[4])) + ((51.21 * x[2]) * x[5])) + ((52.35 * x[3]) * x[4])) + ((54.51 * x[3]) * x[5])) + ((60.21 * x[4]) * x[5]), gamma);
+  apply_to_all_expanded___0(x, beta);
+}
+
+qfunc main(params: real[4], output x: qbit[6]) {
+  allocate(6, x);
+  hadamard_transform_expanded___0(x);
+  repeat (k: 2) {
+    qaoa_layer_expanded___0(params[2 * k], params[(2 * k) + 1], x);
+  }
+}

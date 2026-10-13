@@ -1,0 +1,11 @@
+{
+  "contract_version": "qmentor.response.v2",
+  "status": "complete",
+  "mode": "machine",
+  "result": "Classical now; quantum teaching PoC only.",
+  "assumptions": ["Goal is learning, not production."],
+  "evidence": [{"claim": "Optimum is A, C, E at -9.3725", "source": "scripts/validate_math.py", "source_type": "local-computation", "label": "fact"}],
+  "validation": {"state": "locally-executed", "checks": ["enumeration of 64 states"]},
+  "skills_used": ["q-mentor-frame", "q-mentor-verdict"],
+  "next_action": "None"
+}

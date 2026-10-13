@@ -1,0 +1,9 @@
+# Expected reference-scanner output (scripts/pqc_inventory.py). confidence: high = import + call site.
+findings:
+  - {file: tls_client.py, algorithm: RSA, category: public-key-shor-exposed, confidence: high}
+  - {file: tls_client.py, algorithm: ECC, category: public-key-shor-exposed, confidence: high}
+  - {file: kex.conf, algorithm: DH, category: public-key-shor-exposed, confidence: medium}
+  - {file: kex.conf, algorithm: ECC, category: public-key-shor-exposed, confidence: medium}
+  - {file: storage.py, algorithm: AES-128, category: symmetric-review-key-size, confidence: high}
+  - {file: storage.py, algorithm: SHA-256, category: hash-review-output-size, confidence: high}
+  - {file: notes.md, algorithm: RSA, category: unclear, confidence: low}

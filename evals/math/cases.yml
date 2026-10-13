@@ -1,0 +1,17 @@
+# Deterministic math fixtures for scripts/validate_math.py.
+cases:
+  - id: reference-penalty-separates
+    override: {}
+    expect: {penalty_separates: true, optimum_bitstring: "101010"}
+  - id: weak-penalty-is-detected
+    description: With A = 0.5 an infeasible assignment beats the feasible optimum; the validator must say so.
+    override: {cardinality_penalty_A: 0.5}
+    expect: {penalty_separates: false}
+  - id: no-duration-term-changes-optimum
+    description: Dropping the duration term is a modelling change, not a translation; the optimum moves.
+    override: {duration_weight: 0.0}
+    expect: {penalty_separates: true, optimum_bitstring_not: "101010"}
+  - id: reversed-bit-order-is-wrong
+    description: Reading the optimum little-endian gives a different, worse energy.
+    reversed_probe: "101010"
+    expect: {reversed_energy_greater_than_optimum: true}

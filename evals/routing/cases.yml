@@ -1,0 +1,95 @@
+# Routing fixtures. `prompt` is for live Copilot runs; `primary`, `present`, `follow_ons`
+# encode the intended reading so scripts/validate_routing.py can test the registry.
+cases:
+  - id: three-skill-chain
+    prompt: "Is quantum worth trying for my six-bond selection, and if so design the experiment."
+    primary: q-mentor-design
+    present: []
+    expect: {status: complete, chain: [q-mentor-frame, q-mentor-verdict, q-mentor-design]}
+  - id: direct-invocation-needs-prerequisite
+    prompt: "/q-mentor-verdict should we use quantum to pick 3 of 6 bonds?"
+    primary: q-mentor-verdict
+    present: []
+    expect: {status: complete, chain: [q-mentor-frame, q-mentor-verdict]}
+  - id: reuse-existing-artifact
+    prompt: "Here is my ProblemSpec. Should we use quantum?"
+    primary: q-mentor-verdict
+    present: [ProblemSpec, CanonicalProblem]
+    expect: {status: complete, chain: [q-mentor-verdict]}
+  - id: ambiguous-handoff-translate-only
+    prompt: "Show me how this canonical QUBO looks in D-Wave Ocean."
+    primary: q-mentor-translate
+    present: [CanonicalProblem]
+    expect: {status: complete, chain: [q-mentor-translate]}
+  - id: implement-and-validate
+    prompt: "Implement the accepted design for Qiskit and validate it."
+    primary: q-mentor-implement
+    present: [Design, CanonicalProblem]
+    follow_ons: [q-mentor-test]
+    expect: {status: complete, chain: [q-mentor-implement, q-mentor-test]}
+  - id: end-to-end-demo-hits-cap
+    prompt: "Analyze, design, implement, validate and review the six-bond example."
+    primary: q-mentor-implement
+    present: []
+    follow_ons: [q-mentor-test, q-mentor-review]
+    expect: {status: checkpoint}
+  - id: end-to-end-first-phase
+    prompt: "Analyze, design, implement and validate the six-bond example."
+    primary: q-mentor-implement
+    present: []
+    follow_ons: [q-mentor-test]
+    expect: {status: complete, chain: [q-mentor-frame, q-mentor-verdict, q-mentor-design, q-mentor-implement, q-mentor-test]}
+  - id: cycle-attempt-duplicate-implement
+    prompt: "Implement, test, then implement again and test again in this turn."
+    primary: q-mentor-implement
+    present: [Design]
+    follow_ons: [q-mentor-test, q-mentor-implement]
+    expect: {status: blocked}
+  - id: unavailable-skill
+    prompt: "/q-mentor-deploy push this to IBM hardware"
+    primary: q-mentor-deploy
+    present: []
+    expect: {status: blocked}
+  - id: exec-without-results
+    prompt: "Write the executive brief for the experiment we planned."
+    primary: q-mentor-exec
+    present: [Design]
+    expect: {status: blocked}
+  - id: exec-from-verdict
+    prompt: "Brief leadership on the verdict."
+    primary: q-mentor-exec
+    present: [Verdict]
+    expect: {status: complete, chain: [q-mentor-exec]}
+  - id: improve-without-consent
+    prompt: "Improve the plugin from this chat."
+    primary: q-mentor-improve
+    present: []
+    expect: {status: blocked}
+  - id: learn-standalone
+    prompt: "What is a QUBO?"
+    primary: q-mentor-learn
+    present: []
+    expect: {status: complete, chain: [q-mentor-learn]}
+  - id: improve-with-consent
+    prompt: "Yes, save the sanitized lesson about the dimod spin sign."
+    primary: q-mentor-improve
+    present: [ConsentRecord]
+    expect: {status: complete, chain: [q-mentor-improve]}
+  - id: review-then-pqc
+    prompt: "Review this diff; it touches TLS key handling."
+    primary: q-mentor-review
+    present: []
+    follow_ons: [q-mentor-pqc-scan]
+    expect: {status: complete, chain: [q-mentor-review, q-mentor-pqc-scan]}
+  - id: research-then-evaluate
+    prompt: "Find the evidence for quantum annealing in portfolio optimization and grade it."
+    primary: q-mentor-research
+    present: []
+    follow_ons: [q-mentor-evaluate]
+    expect: {status: complete, chain: [q-mentor-research, q-mentor-evaluate]}
+  - id: brainstorm-then-frame
+    prompt: "Where could quantum help our fixed-income desk? Then model the best option."
+    primary: q-mentor-brainstorm
+    present: []
+    follow_ons: [q-mentor-frame]
+    expect: {status: complete, chain: [q-mentor-brainstorm, q-mentor-frame]}

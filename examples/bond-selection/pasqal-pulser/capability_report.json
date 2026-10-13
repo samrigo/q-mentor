@@ -1,0 +1,58 @@
+{
+  "schema": "qmentor.capability-report.v2",
+  "problem_id": "six-bond-selection",
+  "target": "pasqal-pulser",
+  "device": "AnalogDevice",
+  "device_facts": {
+    "interaction_coeff_C6": 865723.02,
+    "min_atom_distance_um": 5,
+    "max_radial_distance_um": 38,
+    "channels": [
+      "rydberg_global"
+    ]
+  },
+  "status": "unsupported-exact",
+  "checks": [
+    {
+      "check": "coupling sign",
+      "required": "all b_ij > 0 (Rydberg repulsion)",
+      "observed": "min b_ij = 34.1100",
+      "pass": true
+    },
+    {
+      "check": "geometric degrees of freedom",
+      "required": "15 independent couplings",
+      "observed": "2D register offers 9 (rigid-motion-free) coordinates",
+      "pass": false
+    },
+    {
+      "check": "best-fit embedding error",
+      "required": "max relative coupling error <= 1%",
+      "observed": "375.5%",
+      "pass": false
+    },
+    {
+      "check": "device distance limits",
+      "required": "min distance >= 5 um, radius <= 38 um",
+      "observed": "best-fit min distance 7.17 um, radius 7.64 um",
+      "pass": true
+    },
+    {
+      "check": "per-qubit linear terms",
+      "required": "local detuning or DMM to realise 6 distinct a_i",
+      "observed": "a_i spread -122.48..-92.15; device local detuning available: False",
+      "pass": false
+    }
+  ],
+  "lost_semantics": [
+    "independent pairwise couplings (geometry fixes all 15 from 12 coordinates)",
+    "per-asset linear terms (global channel applies one detuning to all atoms)"
+  ],
+  "approximation_offered": false,
+  "alternatives": [
+    "Run the same canonical QUBO on a gate-model target (Qiskit, Classiq, PennyLane) or D-Wave BQM; see sibling examples.",
+    "Reformulate toward a geometry-native problem (e.g. weighted independent set on a register) and re-run this report.",
+    "Use a device with local detuning (DMM) and re-check the coupling-fit error; any result must be labelled approximate with this bound.",
+    "Check docs.pasqal.com for a higher-level QUBO workflow; record its version before relying on it."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v2/schemas/result-record.schema.json",
+  "title": "qmentor.result-record.v2",
+  "type": "object",
+  "required": ["schema", "target", "versions", "baseline", "evidence_level"],
+  "properties": {
+    "schema": {"const": "qmentor.result-record.v2"},
+    "target": {"enum": ["qiskit", "classiq", "dwave-ocean", "pasqal-pulser", "pennylane"]},
+    "versions": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string"}},
+    "baseline": {"type": "object"},
+    "seed": {"type": "integer"},
+    "shots": {"type": "integer"},
+    "evidence_level": {"type": "string", "pattern": "(not quantum advantage|no quantum hardware)"}
+  }
+}

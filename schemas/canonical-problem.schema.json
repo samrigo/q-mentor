@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v2/schemas/canonical-problem.schema.json",
+  "title": "qmentor.canonical-problem.v2",
+  "description": "A ProblemSpec with either model data + parameters (expanded by code) or an explicit QUBO.",
+  "type": "object",
+  "required": ["schema", "id", "variables", "bit_order", "objective", "provenance"],
+  "properties": {
+    "schema": {"const": "qmentor.canonical-problem.v2"},
+    "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+    "description": {"type": "string"},
+    "provenance": {
+      "type": "object",
+      "required": ["data_class"],
+      "properties": {"data_class": {"enum": ["synthetic", "public"]}}
+    },
+    "variables": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "required": ["index", "id", "domain"],
+        "properties": {"index": {"type": "integer", "minimum": 0}, "id": {"type": "string"}, "domain": {"enum": ["binary", "spin", "integer", "continuous"]}, "label": {"type": "string"}}
+      }
+    },
+    "bit_order": {"type": "string", "minLength": 1},
+    "objective": {
+      "type": "object", "required": ["sense", "expression"],
+      "properties": {"sense": {"enum": ["minimize", "maximize"]}, "expression": {"type": "string"}, "matrix_convention": {"type": "string"}}
+    },
+    "constraints": {"type": "array", "items": {"type": "object", "required": ["id", "type", "expression"]}},
+    "data": {"type": "object"},
+    "parameters": {"type": "object"},
+    "qubo": {
+      "type": "object", "required": ["linear", "quadratic", "constant"],
+      "properties": {
+        "linear": {"type": "array", "items": {"type": "number"}},
+        "quadratic": {"type": "array", "items": {"type": "array", "prefixItems": [{"type": "integer"}, {"type": "integer"}, {"type": "number"}], "minItems": 3, "maxItems": 3}},
+        "constant": {"type": "number"},
+        "units": {"type": "string"}
+      }
+    },
+    "qubo_convention": {"type": "object"}
+  },
+  "oneOf": [
+    {"required": ["data", "parameters", "qubo_convention"]},
+    {"required": ["qubo"]}
+  ]
+}

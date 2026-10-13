@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Local mirror of the constraints of https://agent-plugins.org/schemas/1.0.0/plugin.schema.json as read on 2026-10-13 (closed top level; required $schema and name; name pattern; closed author object). Run scripts/validate_package.py --live-schema to validate against the published file instead.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["$schema", "name"],
+  "properties": {
+    "$schema": {"const": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json"},
+    "name": {"type": "string", "minLength": 1, "maxLength": 64, "pattern": "^(?!.*(?:--|\\.\\.))[a-z0-9](?:[a-z0-9.-]*[a-z0-9])?$"},
+    "version": {"type": "string"},
+    "description": {"type": "string"},
+    "author": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {"name": {"type": "string"}, "email": {"type": "string"}, "url": {"type": "string"}}
+    },
+    "homepage": {"type": "string"},
+    "repository": {"type": "string"},
+    "license": {"type": "string"},
+    "keywords": {"type": "array", "items": {"type": "string"}},
+    "extensions": {"type": "object", "additionalProperties": {"type": "object"}}
+  }
+}

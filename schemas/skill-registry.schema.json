@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v2/schemas/skill-registry.schema.json",
+  "title": "qmentor.skill-registry.v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "plugin_version", "max_skills_per_turn", "max_chain_depth", "user_supplied_artifacts", "skills"],
+  "properties": {
+    "contract_version": {"const": "qmentor.skill-registry.v2"},
+    "plugin_version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+    "max_skills_per_turn": {"type": "integer", "minimum": 1, "maximum": 5},
+    "max_chain_depth": {"type": "integer", "minimum": 1, "maximum": 5},
+    "user_supplied_artifacts": {"type": "array", "items": {"type": "string"}},
+    "skills": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "user_invocable", "intents", "requires", "produces", "prerequisites", "follow_ons", "side_effects", "tools", "packs"],
+        "properties": {
+          "name": {"type": "string", "pattern": "^q-mentor-[a-z-]+$"},
+          "user_invocable": {"type": "boolean"},
+          "intents": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "requires": {"type": "array", "items": {"type": "string"}},
+          "requires_any": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "produces": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "prerequisites": {"type": "array", "items": {"type": "string"}},
+          "follow_ons": {"type": "array", "items": {"type": "string"}},
+          "side_effects": {"enum": ["none", "edit", "execute"]},
+          "tools": {"type": "array", "items": {"enum": ["read", "search", "edit", "execute", "web"]}},
+          "packs": {"type": "array", "maxItems": 5, "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

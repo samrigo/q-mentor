@@ -1,0 +1,85 @@
+{
+  "schema": "qmentor.result-record.v2",
+  "target": "qiskit",
+  "versions": {
+    "qiskit": "2.5.2",
+    "qiskit-optimization": "0.7.0"
+  },
+  "baseline": {
+    "method": "exhaustive enumeration",
+    "states": 64,
+    "optimum": {
+      "bitstring": "101010",
+      "selected": [
+        "A",
+        "C",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.9,
+      "risk": 1.67,
+      "duration": 14.7,
+      "energy": -9.3725
+    },
+    "unique": true,
+    "runner_up": {
+      "bitstring": "100110",
+      "selected": [
+        "A",
+        "D",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.3,
+      "risk": 1.38,
+      "duration": 15.5,
+      "energy": -9.1675
+    },
+    "gap": 0.205,
+    "best_infeasible_energy": 5.1275,
+    "wall_clock_s": 0.000472
+  },
+  "quantum": {
+    "algorithm": "QAOA reps=2, COBYLA maxiter=120",
+    "backend": "qiskit.primitives.StatevectorSampler (local, noiseless)",
+    "seed": 7,
+    "shots": 4096,
+    "qubits": 6,
+    "transpiled": false,
+    "optimizer_evaluations": 38,
+    "best_sampled": {
+      "bitstring": "101010",
+      "selected": [
+        "A",
+        "C",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.9,
+      "risk": 1.67,
+      "duration": 14.7,
+      "energy": -9.3725,
+      "count": 288
+    },
+    "best_feasible_sampled": {
+      "bitstring": "101010",
+      "selected": [
+        "A",
+        "C",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.9,
+      "risk": 1.67,
+      "duration": 14.7,
+      "energy": -9.3725,
+      "count": 288
+    },
+    "feasibility_rate": 0.3333,
+    "optimum_probability": 0.0703,
+    "wall_clock_s": 2.012
+  },
+  "evidence_level": "executable (level 2); matching a 64-state toy is not quantum advantage",
+  "recorded_on": "2026-10-13",
+  "environment": "CPython 3.13.16, x86_64 Linux, fresh venv with the pinned SDK versions"
+}

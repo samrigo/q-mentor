@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v2/schemas/program-ir.schema.json",
+  "title": "qmentor.program-ir.v2",
+  "description": "Source semantics extracted before any conversion. Raw source text alone is never an IR.",
+  "type": "object",
+  "required": ["schema", "source", "paradigm", "register", "initial_state", "hamiltonian", "controls", "gates", "measurement", "decoding", "unsupported_features_for_gate_targets"],
+  "properties": {
+    "schema": {"const": "qmentor.program-ir.v2"},
+    "source": {
+      "type": "object", "required": ["framework", "version", "parse_status"],
+      "properties": {"framework": {"type": "string"}, "version": {"type": "string"}, "entry": {"type": "string"},
+                     "parse_status": {"enum": ["imported-and-built", "parsed", "failed"]}}
+    },
+    "paradigm": {"type": "string"},
+    "register": {"type": "object"},
+    "initial_state": {"type": "string"},
+    "hamiltonian": {"type": "object"},
+    "controls": {"type": "array"},
+    "gates": {"type": "array"},
+    "measurement": {"type": "object", "required": ["basis"]},
+    "decoding": {"type": "object", "required": ["bit_order"]},
+    "unsupported_features_for_gate_targets": {"type": "array", "items": {"type": "string"}}
+  }
+}

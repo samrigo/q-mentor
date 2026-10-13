@@ -1,0 +1,645 @@
+# Source registry. verification: 'kit' = taken from the v2 build kit (README-07) and not yet
+# live-checked; 'live' = URL fetched and content checked on last_verified. volatile sources must
+# be re-verified every release (scripts/verify_sources.py --live).
+contract_version: qmentor.sources.v2
+sources:
+  - id: copilot-plugins-about
+    title: "About GitHub Copilot plugins"
+    url: https://docs.github.com/en/copilot/concepts/agents/about-plugins
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [README.md]
+  - id: copilot-cli-plugins-creating
+    title: "Creating a plugin for Copilot CLI"
+    url: https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: live
+    used_by: [README.md]
+  - id: copilot-cli-plugin-reference
+    title: "Copilot CLI plugin reference"
+    url: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: live
+    used_by: [registry/compatibility.yml]
+  - id: agent-plugins-spec
+    title: "Agent Plugins specification"
+    url: https://agent-plugins.org/specification
+    owner: "Agent Plugins"
+    type: specification
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: live
+    used_by: [plugin.json]
+  - id: agent-plugins-schema-1-0-0
+    title: "Agent Plugins plugin.json schema 1.0.0"
+    url: https://agent-plugins.org/schemas/1.0.0/plugin.schema.json
+    owner: "Agent Plugins"
+    type: specification
+    volatility: active
+    source_date: "1.0.0"
+    last_verified: 2026-10-13
+    verification: live
+    used_by: [plugin.json, scripts/validate_package.py]
+  - id: copilot-add-skills
+    title: "Adding agent skills"
+    url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: live
+    used_by: [skills/]
+  - id: copilot-custom-agents-config
+    title: "Custom agents configuration"
+    url: https://docs.github.com/en/copilot/reference/custom-agents-configuration
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: live
+    used_by: [com.github.copilot/agents/]
+  - id: copilot-cli-command-reference
+    title: "Copilot CLI command reference"
+    url: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [docs/INSTALL.md]
+  - id: copilot-hooks-reference
+    title: "Hooks reference"
+    url: https://docs.github.com/en/copilot/reference/hooks-reference
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [docs/DECISIONS.md]
+  - id: copilot-tool-permissions
+    title: "Allowing tools in Copilot CLI"
+    url: https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/allowing-tools
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [skills/]
+  - id: copilot-repo-instructions
+    title: "Repository custom instructions"
+    url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [.github/copilot-instructions.md]
+  - id: copilot-optimize-usage
+    title: "Optimize AI usage and cost"
+    url: https://docs.github.com/en/copilot/tutorials/optimize-ai-usage
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [docs/GOVERNANCE.md]
+  - id: copilot-models-pricing
+    title: "Models and pricing"
+    url: https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [docs/GOVERNANCE.md]
+  - id: copilot-budgets
+    title: "Budget controls"
+    url: https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/budgets
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [docs/GOVERNANCE.md]
+  - id: artifact-attestations
+    title: "Artifact attestations"
+    url: https://docs.github.com/en/actions/concepts/security/artifact-attestations
+    owner: "GitHub"
+    type: vendor-documentation
+    volatility: active
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [docs/RELEASE.md]
+  - id: markowitz-1952
+    title: "Markowitz, Portfolio Selection"
+    url: https://doi.org/10.1111/j.1540-6261.1952.tb01525.x
+    owner: "Journal of Finance"
+    type: peer-reviewed
+    volatility: stable
+    source_date: "1952"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [domains/finance/portfolio-optimization.md]
+  - id: feynman-1982
+    title: "Feynman, Simulating Physics with Computers"
+    url: https://doi.org/10.1007/BF02650179
+    owner: "Int. J. Theor. Phys."
+    type: peer-reviewed
+    volatility: stable
+    source_date: "1982"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/quantum-basics.md]
+  - id: deutsch-1985
+    title: "Deutsch, Quantum theory, the Church-Turing principle and the universal quantum computer"
+    url: https://doi.org/10.1098/rspa.1985.0070
+    owner: "Proc. R. Soc. A"
+    type: peer-reviewed
+    volatility: stable
+    source_date: "1985"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/quantum-basics.md]
+  - id: shor-1994
+    title: "Shor, Algorithms for quantum computation: discrete logarithms and factoring"
+    url: https://doi.org/10.1109/SFCS.1994.365700
+    owner: "IEEE FOCS"
+    type: peer-reviewed
+    volatility: stable
+    source_date: "1994"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/pqc.md]
+  - id: grover-1996
+    title: "Grover, A fast quantum mechanical algorithm for database search"
+    url: https://doi.org/10.1145/237814.237866
+    owner: "ACM STOC"
+    type: peer-reviewed
+    volatility: stable
+    source_date: "1996"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/pqc.md]
+  - id: farhi-2014-qaoa
+    title: "Farhi, Goldstone & Gutmann, A Quantum Approximate Optimization Algorithm"
+    url: https://arxiv.org/abs/1411.4028
+    owner: "arXiv"
+    type: preprint
+    volatility: stable
+    source_date: "2014"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/optimization-math.md]
+  - id: lucas-2014
+    title: "Lucas, Ising formulations of many NP problems"
+    url: https://doi.org/10.3389/fphy.2014.00005
+    owner: "Frontiers in Physics"
+    type: peer-reviewed
+    volatility: stable
+    source_date: "2014"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/optimization-math.md]
+  - id: preskill-2018
+    title: "Preskill, Quantum Computing in the NISQ era and beyond"
+    url: https://arxiv.org/abs/1801.00862
+    owner: "arXiv / Quantum"
+    type: peer-reviewed
+    volatility: stable
+    source_date: "2018"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/quantum-basics.md]
+  - id: egger-2020
+    title: "Egger et al., Quantum computing for Finance: state of the art and future prospects"
+    url: https://arxiv.org/abs/2006.14510
+    owner: "arXiv"
+    type: preprint
+    volatility: stable
+    source_date: "2020"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [domains/finance/claims-and-limits.md]
+  - id: hoefler-2023
+    title: "Hoefler, Häner & Troyer, Disentangling hype from practicality: on realistically achieving quantum advantage"
+    url: https://arxiv.org/abs/2307.00523
+    owner: "arXiv"
+    type: preprint
+    volatility: stable
+    source_date: "2023"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/quantum-fit.md]
+  - id: pulser-2022
+    title: "Silvério et al., Pulser: an open-source package for the design of pulse sequences in programmable neutral-atom arrays"
+    url: https://doi.org/10.22331/q-2022-01-24-629
+    owner: "Quantum"
+    type: peer-reviewed
+    volatility: stable
+    source_date: "2022"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/providers-pasqal-pulser.md]
+  - id: pennylane-paper
+    title: "Bergholm et al., PennyLane: automatic differentiation of hybrid quantum-classical computations"
+    url: https://arxiv.org/abs/1811.04968
+    owner: "arXiv"
+    type: preprint
+    volatility: stable
+    source_date: "2018"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/framework-pennylane.md]
+  - id: qiskit-finance-portfolio
+    title: "Qiskit Finance portfolio optimization tutorial"
+    url: https://qiskit-community.github.io/qiskit-finance/tutorials/01_portfolio_optimization.html
+    owner: "Qiskit community"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [domains/finance/portfolio-optimization.md]
+  - id: qiskit-optimization-docs
+    title: "Qiskit Optimization documentation"
+    url: https://qiskit-community.github.io/qiskit-optimization/
+    owner: "Qiskit community"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "0.7.0"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/providers-qiskit.md]
+  - id: qiskit-optimization-converters
+    title: "Qiskit Optimization converters tutorial"
+    url: https://qiskit-community.github.io/qiskit-optimization/tutorials/02_converters_for_quadratic_programs.html
+    owner: "Qiskit community"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "0.7.0"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [examples/bond-selection/qiskit/]
+  - id: qiskit-optimization-release-notes
+    title: "Qiskit Optimization release notes"
+    url: https://qiskit-community.github.io/qiskit-optimization/release_notes.html
+    owner: "Qiskit community"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [registry/compatibility.yml]
+  - id: ortools-cpsat
+    title: "OR-Tools CP-SAT solver"
+    url: https://developers.google.com/optimization/cp/cp_solver
+    owner: "Google"
+    type: vendor-documentation
+    volatility: active
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/optimization-math.md]
+  - id: ortools-mip
+    title: "OR-Tools MIP guide"
+    url: https://developers.google.com/optimization/mip
+    owner: "Google"
+    type: vendor-documentation
+    volatility: active
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/optimization-math.md]
+  - id: cvxpy
+    title: "CVXPY documentation"
+    url: https://www.cvxpy.org/
+    owner: "CVXPY"
+    type: vendor-documentation
+    volatility: active
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [domains/finance/portfolio-optimization.md]
+  - id: classiq-docs
+    title: "Classiq documentation"
+    url: https://docs.classiq.io/
+    owner: "Classiq"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/providers-classiq.md]
+  - id: classiq-qmod-reference
+    title: "Qmod reference"
+    url: https://docs.classiq.io/qmod-reference
+    owner: "Classiq"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/providers-classiq.md]
+  - id: classiq-library-portfolio
+    title: "Classiq library portfolio optimization"
+    url: https://github.com/Classiq/classiq-library/tree/main/applications/finance/portfolio_optimization
+    owner: "Classiq"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [examples/bond-selection/classiq/]
+  - id: dwave-ocean
+    title: "D-Wave Ocean SDK documentation"
+    url: https://docs.dwavequantum.com/en/latest/ocean/
+    owner: "D-Wave"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/providers-dwave.md]
+  - id: dwave-models
+    title: "D-Wave model concepts"
+    url: https://docs.dwavequantum.com/en/latest/concepts/models.html
+    owner: "D-Wave"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/providers-dwave.md]
+  - id: dwave-samplesets
+    title: "D-Wave SampleSet semantics"
+    url: https://docs.dwavequantum.com/en/latest/concepts/samplesets.html
+    owner: "D-Wave"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/providers-dwave.md]
+  - id: dwave-examples
+    title: "D-Wave example repositories"
+    url: https://github.com/dwave-examples
+    owner: "D-Wave"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/providers-dwave.md]
+  - id: pasqal-docs
+    title: "Pasqal documentation"
+    url: https://docs.pasqal.com/
+    owner: "Pasqal"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/providers-pasqal-pulser.md]
+  - id: pulser-programming
+    title: "Pulser programming guide"
+    url: https://docs.pasqal.com/pulser/programming/
+    owner: "Pasqal"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/providers-pasqal-pulser.md]
+  - id: pulser-qubo-tutorial
+    title: "Pulser QUBO/QAA tutorial"
+    url: https://docs.pasqal.com/pulser/tutorials/qubo/
+    owner: "Pasqal"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [examples/bond-selection/pasqal-pulser/]
+  - id: pulser-noise
+    title: "Pulser noise models"
+    url: https://docs.pasqal.com/pulser/noise_model/
+    owner: "Pasqal"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [examples/bond-selection/pasqal-pulser/]
+  - id: pulser-repo
+    title: "Pulser source repository"
+    url: https://github.com/pasqal-io/Pulser
+    owner: "Pasqal"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/providers-pasqal-pulser.md]
+  - id: pennylane-docs
+    title: "PennyLane documentation"
+    url: https://docs.pennylane.ai/en/stable/
+    owner: "Xanadu"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/framework-pennylane.md]
+  - id: pennylane-qaoa
+    title: "PennyLane QAOA module"
+    url: https://docs.pennylane.ai/en/stable/code/qp_qaoa.html
+    owner: "Xanadu"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/framework-pennylane.md]
+  - id: pennylane-devices
+    title: "PennyLane devices"
+    url: https://docs.pennylane.ai/en/stable/code/qp_devices.html
+    owner: "Xanadu"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/framework-pennylane.md]
+  - id: pennylane-interfaces
+    title: "PennyLane interfaces and gradients"
+    url: https://docs.pennylane.ai/en/stable/introduction/interfaces.html
+    owner: "Xanadu"
+    type: vendor-documentation
+    volatility: volatile
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/framework-pennylane.md]
+  - id: rr-quantum-optimization-review
+    title: "Challenges and opportunities in quantum optimization"
+    url: https://www.nature.com/articles/s42254-024-00770-9
+    owner: "Nature Reviews Physics"
+    type: peer-reviewed
+    volatility: active
+    source_date: "2024"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/recent-research.md]
+  - id: rr-robust-benchmarking
+    title: "Towards Robust Benchmarking of Quantum Optimization Algorithms"
+    url: https://arxiv.org/abs/2405.07624
+    owner: "arXiv"
+    type: preprint
+    volatility: active
+    source_date: "2024"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/recent-research.md, knowledge/research-method.md]
+  - id: rr-qaoa-review
+    title: "A review on Quantum Approximate Optimization Algorithm and its variants"
+    url: https://www.sciencedirect.com/science/article/pii/S0370157324001078
+    owner: "Physics Reports"
+    type: peer-reviewed
+    volatility: active
+    source_date: "2024"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/recent-research.md]
+  - id: rr-pennylane-lightning-hpc
+    title: "Hybrid quantum programming with PennyLane Lightning on HPC platforms"
+    url: https://arxiv.org/abs/2403.02512
+    owner: "arXiv"
+    type: preprint
+    volatility: active
+    source_date: "2024"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/recent-research.md]
+  - id: rr-ml-error-mitigation
+    title: "Machine learning for practical quantum error mitigation"
+    url: https://www.nature.com/articles/s42256-024-00927-2
+    owner: "Nature Machine Intelligence"
+    type: peer-reviewed
+    volatility: active
+    source_date: "2024"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/recent-research.md]
+  - id: rr-rydberg-weighted-graph
+    title: "Demonstration of Weighted-Graph Optimization on a Rydberg-Atom Array"
+    url: https://doi.org/10.1103/PRXQuantum.6.010301
+    owner: "PRX Quantum"
+    type: peer-reviewed
+    volatility: active
+    source_date: "2025"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/recent-research.md]
+  - id: rr-sdk-benchmarking
+    title: "Benchmarking the performance of quantum computing software for quantum circuit creation, manipulation and compilation"
+    url: https://www.nature.com/articles/s43588-025-00792-y
+    owner: "Nature Computational Science"
+    type: peer-reviewed
+    volatility: active
+    source_date: "2025"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/recent-research.md]
+  - id: rr-qec-below-threshold
+    title: "Quantum error correction below the surface code threshold"
+    url: https://doi.org/10.1038/s41586-024-08449-y
+    owner: "Nature"
+    type: peer-reviewed
+    volatility: active
+    source_date: "2025"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/recent-research.md]
+  - id: rr-e2e-portfolio-annealing
+    title: "End-to-End Portfolio Optimization with Quantum Annealing"
+    url: https://arxiv.org/abs/2504.08843
+    owner: "arXiv"
+    type: preprint
+    volatility: active
+    source_date: "2025"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/recent-research.md, domains/finance/claims-and-limits.md]
+  - id: nist-pqc
+    title: "NIST Post-Quantum Cryptography project"
+    url: https://csrc.nist.gov/Projects/Post-Quantum-Cryptography
+    owner: "NIST"
+    type: official-standard
+    volatility: active
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/pqc.md]
+  - id: fips-203
+    title: "FIPS 203: ML-KEM"
+    url: https://csrc.nist.gov/pubs/fips/203/final
+    owner: "NIST"
+    type: official-standard
+    volatility: stable
+    source_date: "2024-08"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/pqc.md]
+  - id: fips-204
+    title: "FIPS 204: ML-DSA"
+    url: https://csrc.nist.gov/pubs/fips/204/final
+    owner: "NIST"
+    type: official-standard
+    volatility: stable
+    source_date: "2024-08"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/pqc.md]
+  - id: fips-205
+    title: "FIPS 205: SLH-DSA"
+    url: https://csrc.nist.gov/pubs/fips/205/final
+    owner: "NIST"
+    type: official-standard
+    volatility: stable
+    source_date: "2024-08"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/pqc.md]
+  - id: nccoe-pqc
+    title: "NCCoE Migration to Post-Quantum Cryptography"
+    url: https://www.nccoe.nist.gov/crypto-agility-considerations-migrating-post-quantum-cryptographic-algorithms
+    owner: "NIST NCCoE"
+    type: official-standard
+    volatility: active
+    source_date: "living"
+    last_verified: 2026-10-13
+    verification: kit
+    used_by: [knowledge/pqc.md]

@@ -1,0 +1,25 @@
+{
+  "schema": "qmentor.translation-record.v2",
+  "source": {"framework": "pulser", "version": "1.9.1", "program_ir": "program_ir.json"},
+  "target": {"framework": "classiq", "version": "1.32.0", "project": "classiq/"},
+  "overall_status": "reimplementation",
+  "summary": "The shared QUBO is re-expressed as a Classiq QAOA model through canonical_problem.json. The Pulser analog adiabatic program itself is not converted: it has no exact gate equivalent.",
+  "mappings": [
+    {"source_semantic": "register geometry + C6/r^6 interactions", "target": "QUBO pair coefficients b_ij in the phase cost", "status": "exact", "evidence": "all 16 assignments agree with canonical energy (classiq/test_example.py)"},
+    {"source_semantic": "final detuning delta as uniform linear term", "target": "linear coefficients a_i = -delta", "status": "exact", "evidence": "same test"},
+    {"source_semantic": "analog adiabatic evolution Omega(t), delta(t)", "target": "none (QAOA with 2 layers is a different algorithm)", "status": "unsupported-exact", "evidence": "no gate-model equivalent claimed; success probabilities are not comparable"},
+    {"source_semantic": "initial state all |g>", "target": "allocate + hadamard_transform (uniform superposition)", "status": "reimplementation", "evidence": "algorithm-specific; not the same state"},
+    {"source_semantic": "ground-rydberg measurement, '1' = |r>", "target": "computational-basis measurement, '1' = |1>", "status": "exact", "evidence": "bit order q0..q3 preserved; decoding uses canonical energy"},
+    {"source_semantic": "device noise / SPAM model", "target": "not represented", "status": "unsupported-exact", "evidence": "target noise must be configured separately and labelled"}
+  ],
+  "losses": [
+    "analog schedule semantics and its noise behaviour",
+    "hardware-specific blockade physics (only its QUBO image is kept)"
+  ],
+  "generated_files": ["classiq/adapter.py", "classiq/main.py", "classiq/test_example.py", "classiq/expected.json", "classiq/requirements.lock", "classiq/pulser_native_qaoa.qmod"],
+  "validation": {
+    "commands": ["python -m pytest -q classiq"],
+    "observed_state": "imported",
+    "not_run": ["Classiq synthesis and execution (credential-required, opt-in)"]
+  }
+}

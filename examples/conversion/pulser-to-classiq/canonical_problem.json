@@ -1,0 +1,77 @@
+{
+  "schema": "qmentor.canonical-problem.v2",
+  "id": "pulser-native-4-atom-line",
+  "provenance": {
+    "derived_from": "program_ir.json",
+    "data_class": "synthetic"
+  },
+  "variables": [
+    {
+      "index": 0,
+      "id": "q0",
+      "domain": "binary"
+    },
+    {
+      "index": 1,
+      "id": "q1",
+      "domain": "binary"
+    },
+    {
+      "index": 2,
+      "id": "q2",
+      "domain": "binary"
+    },
+    {
+      "index": 3,
+      "id": "q3",
+      "domain": "binary"
+    }
+  ],
+  "bit_order": "character k = variable k (register order)",
+  "qubo": {
+    "linear": [
+      -6.0,
+      -6.0,
+      -6.0,
+      -6.0
+    ],
+    "quadratic": [
+      [
+        0,
+        1,
+        18.555448816872428
+      ],
+      [
+        0,
+        2,
+        0.2899288877636317
+      ],
+      [
+        0,
+        3,
+        0.025453290558124043
+      ],
+      [
+        1,
+        2,
+        18.555448816872428
+      ],
+      [
+        1,
+        3,
+        0.2899288877636317
+      ],
+      [
+        2,
+        3,
+        18.555448816872428
+      ]
+    ],
+    "constant": 0.0,
+    "units": "rad/us"
+  },
+  "objective": {
+    "sense": "minimize",
+    "expression": "sum_i a_i x_i + sum_{i<j} b_ij x_i x_j + c"
+  }
+}

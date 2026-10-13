@@ -1,0 +1,112 @@
+annotated-types==0.8.0
+    # via pydantic
+attrs==26.1.0
+    # via
+    #   jsonschema
+    #   referencing
+auth0-python==3.24.1
+    # via pasqal-cloud
+certifi==2026.7.22
+    # via requests
+cffi==2.1.1
+    # via cryptography
+charset-normalizer==3.5.2
+    # via requests
+contourpy==1.4.0
+    # via matplotlib
+cryptography==50.0.2
+    # via pyjwt
+cycler==0.12.1
+    # via matplotlib
+fonttools==4.66.1
+    # via matplotlib
+idna==3.20
+    # via requests
+iniconfig==2.3.1
+    # via pytest
+jsonschema==4.26.0
+    # via pulser-core
+jsonschema-specifications==2025.9.1
+    # via jsonschema
+kiwisolver==1.5.1
+    # via matplotlib
+matplotlib==3.11.2
+    # via pulser-core
+numpy==2.5.4
+    # via
+    #   contourpy
+    #   matplotlib
+    #   pulser-core
+    #   qutip
+    #   scipy
+packaging==26.3
+    # via
+    #   matplotlib
+    #   pulser-core
+    #   pytest
+    #   qutip
+pasqal-cloud==0.24.0
+    # via pulser
+pillow==12.3.0
+    # via matplotlib
+pluggy==1.6.0
+    # via pytest
+pulser==1.9.1
+    # via -r bond-selection/pasqal-pulser/requirements.in
+pulser-core==1.9.1
+    # via
+    #   pasqal-cloud
+    #   pulser
+    #   pulser-simulation
+pulser-simulation==1.9.1
+    # via pulser
+pycparser==3.11
+    # via cffi
+pydantic==2.14.1
+    # via pasqal-cloud
+pydantic-core==2.50.1
+    # via pydantic
+pygments==2.21.0
+    # via pytest
+pyjwt==2.15.1
+    # via
+    #   auth0-python
+    #   pasqal-cloud
+pyparsing==3.3.3
+    # via matplotlib
+pytest==8.4.2
+    # via -r bond-selection/pasqal-pulser/requirements.in
+python-dateutil==2.9.0.post0
+    # via matplotlib
+qutip==5.3.1
+    # via pulser-simulation
+referencing==0.37.0
+    # via
+    #   jsonschema
+    #   jsonschema-specifications
+    #   pulser-core
+requests==2.34.2
+    # via
+    #   auth0-python
+    #   pasqal-cloud
+rpds-py==2026.9.1
+    # via
+    #   jsonschema
+    #   referencing
+scipy==1.18.1
+    # via
+    #   pulser-core
+    #   qutip
+six==1.17.0
+    # via python-dateutil
+tenacity==9.2.1
+    # via pasqal-cloud
+typing-extensions==4.16.0
+    # via
+    #   pydantic
+    #   pydantic-core
+    #   typing-inspection
+typing-inspection==0.4.4
+    # via pydantic
+urllib3==2.8.0
+    # via requests

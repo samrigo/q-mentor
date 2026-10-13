@@ -1,0 +1,13 @@
+example: true
+consent: "explicit yes (example only)"
+scope: plugin
+prompt_category: translation
+expected_behaviour: D-Wave SPIN energies must use s_dimod = -s_canonical.
+actual_failure: A generated adapter reused canonical spins with dimod SPIN and reported wrong energies.
+risk: Wrong optimum reported as equivalent.
+sanitized_evidence: "Energy mismatch on 101010: -9.3725 expected."
+affected: knowledge/providers-dwave.md
+version: {plugin: 2.0.0, client: unverified, model: unspecified}
+counterexample: BINARY vartype adapters are unaffected.
+proposed_assertion: examples/bond-selection/dwave/test_example.py::test_spin_convention_is_negated_canonical_spin
+retention: keep until merged

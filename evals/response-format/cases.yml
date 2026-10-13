@@ -1,0 +1,15 @@
+# Response-contract linter fixtures: the linter must accept the good ones and reject the bad ones
+# with the listed reason code.
+cases:
+  - {file: good-brief-verdict.md, mode: brief, expect: pass}
+  - {file: good-failure.md, mode: brief, expect: pass}
+  - {file: good-detailed.md, mode: detailed, expect: pass}
+  - {file: good-machine.json, mode: machine, expect: pass}
+  - {file: bad-verbose.md, mode: brief, expect: fail, reason: too-long}
+  - {file: bad-headings.md, mode: brief, expect: fail, reason: heading-order}
+  - {file: bad-praise-narration.md, mode: brief, expect: fail, reason: praise-or-narration}
+  - {file: bad-duplicate-conclusion.md, mode: brief, expect: fail, reason: duplicate-sentence}
+  - {file: bad-advantage-claim.md, mode: brief, expect: fail, reason: unsupported-advantage}
+  - {file: bad-placeholder-code.md, mode: brief, expect: fail, reason: placeholder-code}
+  - {file: bad-machine-extra-key.json, mode: machine, expect: fail, reason: schema}
+  - {file: bad-machine-invalid.json, mode: machine, expect: fail, reason: invalid-json}

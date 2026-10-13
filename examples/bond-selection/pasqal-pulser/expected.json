@@ -1,0 +1,17 @@
+{
+  "schema": "qmentor.expected.v2",
+  "six_bond": {
+    "capability_status": "unsupported-exact",
+    "failing_checks": ["geometric degrees of freedom", "best-fit embedding error", "per-qubit linear terms"],
+    "approximation_offered": false
+  },
+  "native_problem": {
+    "device": "AnalogDevice",
+    "atoms": 4,
+    "optimum_bitstring": "1001",
+    "optimum_energy_rad_per_us": -11.974547,
+    "runner_up_bitstrings": ["0101", "1010"],
+    "independent_set_mass_min_noiseless": 0.8
+  },
+  "tolerances": {"energy_abs": 1e-6}
+}

@@ -1,0 +1,4 @@
+pyyaml==6.0.3
+jsonschema==4.25.1
+pyflakes==3.4.0
+pytest==8.4.2

@@ -1,0 +1,22 @@
+dimod==0.12.22
+    # via
+    #   -r bond-selection/dwave/requirements.in
+    #   dwave-samplers
+dwave-samplers==1.8.0
+    # via -r bond-selection/dwave/requirements.in
+iniconfig==2.3.1
+    # via pytest
+networkx==3.7
+    # via dwave-samplers
+numpy==2.5.4
+    # via
+    #   dimod
+    #   dwave-samplers
+packaging==26.3
+    # via pytest
+pluggy==1.6.0
+    # via pytest
+pygments==2.21.0
+    # via pytest
+pytest==8.4.2
+    # via -r bond-selection/dwave/requirements.in

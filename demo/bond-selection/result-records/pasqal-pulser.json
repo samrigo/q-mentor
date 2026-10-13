@@ -1,0 +1,126 @@
+{
+  "schema": "qmentor.result-record.v2",
+  "target": "pasqal-pulser",
+  "versions": {
+    "pulser": "1.9.1"
+  },
+  "six_bond_capability": "unsupported-exact",
+  "baseline": {
+    "method": "exhaustive enumeration of the 16 native assignments",
+    "optimum": {
+      "energy": -11.974546709441876,
+      "bitstring": "1001"
+    }
+  },
+  "native_problem": {
+    "device": "AnalogDevice",
+    "atoms": 4,
+    "spacing_um": 6.0,
+    "delta_final_rad_per_us": 6.0,
+    "omega_max_rad_per_us": 5.026548,
+    "duration_ns": 4000,
+    "exact_ranking": [
+      [
+        -11.974546709441876,
+        "1001"
+      ],
+      [
+        -11.710071112236369,
+        "0101"
+      ],
+      [
+        -11.710071112236369,
+        "1010"
+      ],
+      [
+        -6.0,
+        "0001"
+      ]
+    ]
+  },
+  "noiseless_emulation": {
+    "optimum_bitstring": "1001",
+    "total_shots": 2000,
+    "optimum_probability": 0.461,
+    "top_states": [
+      {
+        "bitstring": "1001",
+        "count": 922,
+        "energy": -11.974547
+      },
+      {
+        "bitstring": "1010",
+        "count": 518,
+        "energy": -11.710071
+      },
+      {
+        "bitstring": "0101",
+        "count": 489,
+        "energy": -11.710071
+      },
+      {
+        "bitstring": "0010",
+        "count": 29,
+        "energy": -6.0
+      },
+      {
+        "bitstring": "0100",
+        "count": 24,
+        "energy": -6.0
+      }
+    ],
+    "best_sampled": {
+      "bitstring": "1001",
+      "count": 922,
+      "energy": -11.974547
+    }
+  },
+  "spam_noise_emulation": {
+    "optimum_bitstring": "1001",
+    "total_shots": 40000,
+    "optimum_probability": 0.3895,
+    "top_states": [
+      {
+        "bitstring": "1001",
+        "count": 15580,
+        "energy": -11.974547
+      },
+      {
+        "bitstring": "1010",
+        "count": 10113,
+        "energy": -11.710071
+      },
+      {
+        "bitstring": "0101",
+        "count": 8470,
+        "energy": -11.710071
+      },
+      {
+        "bitstring": "1000",
+        "count": 1549,
+        "energy": -6.0
+      },
+      {
+        "bitstring": "0001",
+        "count": 1430,
+        "energy": -6.0
+      }
+    ],
+    "best_sampled": {
+      "bitstring": "1001",
+      "count": 15580,
+      "energy": -11.974547
+    },
+    "noise": {
+      "state_prep_error": 0.005,
+      "p_false_pos": 0.01,
+      "p_false_neg": 0.05,
+      "trajectories": 20
+    }
+  },
+  "seed": 7,
+  "shots": 2000,
+  "evidence_level": "executable on a local emulator; geometry-native toy only; not quantum advantage",
+  "recorded_on": "2026-10-13",
+  "environment": "CPython 3.13.16, x86_64 Linux, fresh venv with the pinned SDK versions"
+}

@@ -1,0 +1,12 @@
+# Conversion fixtures. scripts/validate_examples.py --static must reject every `reject` case
+# for the stated reason and accept every `accept` case.
+cases:
+  - {file: stale_pulser_source.py, kind: source, expect: reject, reason: stale-api}
+  - {file: deprecated_emulator_source.py, kind: source, expect: reject, reason: stale-api}
+  - {file: missing_import_target.py, kind: target, expect: reject, reason: undefined-name}
+  - {file: undefined_name_target.py, kind: target, expect: reject, reason: undefined-name}
+  - {file: incomplete_target.py, kind: target, expect: reject, reason: placeholder}
+  - {file: credential_required_target.py, kind: target, expect: reject, reason: ungated-remote}
+  - {file: energy_changing_expression.txt, kind: energy-expression, problem: six-bond, expect: reject, reason: energy-mismatch}
+  - {file: good_reimplementation_expression.txt, kind: energy-expression, problem: six-bond, expect: accept}
+  - {file: ../../examples/conversion/pulser-to-classiq/translation_record.json, kind: translation-record, expect: accept}

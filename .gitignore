@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.synthesis_options.json
+evals/behavior/responses/
+.DS_Store

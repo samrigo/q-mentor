@@ -1,0 +1,14 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "q-mentor",
+  "version": "2.0.0",
+  "description": "Honest, vendor-neutral quantum-computing guide for GitHub Copilot: teaches, researches, frames, gives verdicts (including 'classical now'), designs, translates across Qiskit, Classiq, D-Wave, Pasqal/Pulser and PennyLane, implements, tests and reviews, always against a classical baseline.",
+  "author": {
+    "name": "Sam Rigo",
+    "url": "https://github.com/samrigo"
+  },
+  "homepage": "https://github.com/samrigo/q-mentor/tree/Claude-v2",
+  "repository": "https://github.com/samrigo/q-mentor",
+  "license": "MIT",
+  "keywords": ["quantum-computing", "optimization", "qubo", "qaoa", "qiskit", "classiq", "dwave", "pulser", "pennylane", "post-quantum-cryptography", "copilot"]
+}

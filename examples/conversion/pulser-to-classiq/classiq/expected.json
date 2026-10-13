@@ -1,0 +1,7 @@
+{
+  "schema": "qmentor.expected.v2",
+  "problem_id": "pulser-native-4-atom-line",
+  "optimum_bitstring": "1001",
+  "optimum_energy": -11.974547,
+  "tolerances": {"energy_abs": 1e-9}
+}
