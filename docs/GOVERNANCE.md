@@ -16,8 +16,9 @@ Repository access does not imply permission to use every file as model context.
 
 ## Tool permissions
 The agent declares `read, search, edit, execute, web` explicitly (never `*`). Skills pre-approve
-only read/search (plus `web` for research and `edit` for implement/test/improve). No skill
-pre-approves `shell`/`bash`/`execute`: every command is confirmed by the user.
+only read/search (plus `web` for research and `edit` for implement, convert and improve). No skill
+pre-approves `shell`/`bash`/`execute`: every command is confirmed by the user (`scripts/validate_package.py`
+fails the build otherwise).
 Tool names in `allowed-tools` follow the Copilot custom-agent aliases; clients ignore names they
 do not recognise, so nothing is pre-approved by accident.
 

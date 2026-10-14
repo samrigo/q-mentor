@@ -20,7 +20,13 @@ python scripts/validate_math.py
 
 Ask Copilot (q-mentor agent): *"Analyze, design, implement, and validate the six-bond example across the supported targets."*
 The orchestrator runs frame → verdict → design → implement → test in the first turn (five-skill cap),
-checkpoints, then continues with translate/evaluate/review/exec. Expected verdict: **classical now;
-quantum teaching PoC only** — 64 states are trivial to enumerate. Target results are in `examples/`.
+checkpoints, then continues with translate/convert/evaluate/review/exec. Expected verdict: **classical now;
+quantum teaching PoC only** — 64 states are trivial to enumerate.
+
+Nine local targets (`examples/bond-selection/`): Qiskit, Cirq, pytket, PennyLane, Classiq and D-Wave reproduce the
+canonical energy on all 64 states; Pulser and Bloqade refuse the dense QUBO as `unsupported-exact` and run a
+geometry-native program instead; Perceval reports the six-bond circuit as `conditional-impractical` (success
+≈ 1.8 × 10⁻³⁴) and runs a two-variable sub-problem. `result-records/` holds the nine records and `REPORT.md` the
+executive brief generated from them (`python scripts/build_report.py`).
 
 Second verdict fixture: *"Use quantum computing to sort a 200-row CSV"* → classical now (`evals/behavior/cases.yml`).

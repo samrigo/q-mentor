@@ -15,6 +15,12 @@ and lists its sources in `sources.yml` with `last_verified` dates.
 | [providers-pasqal-pulser.md](providers-pasqal-pulser.md) | When can a QUBO run on neutral atoms with Pulser? | volatile |
 | [framework-pennylane.md](framework-pennylane.md) | How does the canonical model map to PennyLane? | volatile |
 | [recent-research.md](recent-research.md) | Which recent papers are on the watchlist, and what do they not show? | active |
+| [hardware-index.md](hardware-index.md) | Which family, model, SDK, backend and support level apply? | active |
+| [hardware-superconducting.md](hardware-superconducting.md) | Gate, cat-qubit, and flux-annealer facts and evidence | active |
+| [hardware-ions-atoms.md](hardware-ions-atoms.md) | Trapped ions and neutral atoms: questions, paths, evidence | active |
+| [hardware-photonic-spin.md](hardware-photonic-spin.md) | Photonic DV/CV, silicon spin, diamond | active |
+| [hardware-nmr-helium.md](hardware-nmr-helium.md) | NMR, electrons on helium, topological research limits | active |
+| [conversion-atlas.md](conversion-atlas.md) | Which conversion class applies to a source/target pair, and what proves it? | volatile |
 | [pqc.md](pqc.md) | What does a post-quantum crypto inventory look for? | active |
 
 Domain packs live in `domains/<domain>/`. Organisation-specific lessons never go here.

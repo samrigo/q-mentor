@@ -1,131 +1,75 @@
 # Q-Mentor for GitHub Copilot
 
-[![quality](https://github.com/samrigo/q-mentor/actions/workflows/quality.yml/badge.svg?branch=Claude-v2)](https://github.com/samrigo/q-mentor/actions/workflows/quality.yml?query=branch%3AClaude-v2)
+[![quality](https://github.com/samrigo/q-mentor/actions/workflows/quality.yml/badge.svg?branch=Claude-v3)](https://github.com/samrigo/q-mentor/actions/workflows/quality.yml?query=branch%3AClaude-v3)
 
-An honest, vendor-neutral quantum-computing guide inside GitHub Copilot. It teaches concepts, researches
-evidence, screens problems, designs and implements experiments, tests results, and **always names the
-strongest classical alternative**. "Classical now" is a first-class answer.
+An honest, vendor-neutral quantum-computing guide inside GitHub Copilot. It teaches, researches, screens problems,
+designs, converts code across hardware families, implements, tests, reviews, and **always names the strongest
+classical alternative**. "Classical now" is a first-class answer.
 
-Finance is the first domain pack and reference demo; the lifecycle, schemas and evals are domain-neutral.
-
-- **Package:** Agent Plugins `1.0.0` manifest (`plugin.json`), one Copilot custom agent, 15 lazily loaded skills.
-- **No runtime:** no web service, database, MCP server, telemetry or paid quantum job.
-- **Version:** 2.0.0 (built from the Q-Mentor Copilot build kit v2.0.0).
+- **Version:** 3.1.1, built from the Q-Mentor Copilot build kit v3.1.1 (kept verbatim in [`brief/`](brief/)).
+- **Package:** Agent Plugins `1.0.0` manifest, one Copilot custom agent, 17 lazily loaded skills, a small registry.
+- **No runtime:** no web service, database, MCP server, telemetry, credentials, or paid quantum job by default.
+- **Observed:** Copilot CLI 1.0.97 installs it and discovers all 17 skills (plugin and repository mode).
 
 ## Install
 
-This v2 build lives on the `Claude-v2` branch of `samrigo/q-mentor`. Install it from a clone of that branch:
-
 ```bash
-git clone -b Claude-v2 https://github.com/samrigo/q-mentor.git
+git clone -b Claude-v3 https://github.com/samrigo/q-mentor.git
 copilot plugin install ./q-mentor
 ```
 
-Then pick the **q-mentor** agent (`/agent`) or just ask a quantum question. For the cloud agent, Copilot app
-or IDE agent mode, deploy into a repository:
-
-```bash
-python scripts/deploy_repo_local.py --target /path/to/repo --targets qiskit dwave --domains finance
-```
-
-Update, removal, pinning and limits: [docs/INSTALL.md](docs/INSTALL.md).
+Then ask "What can Q-Mentor do?" or just describe the outcome you want. Repository-local deployment for the cloud
+agent, Copilot app, or IDE agent mode, plus update, rollback, and removal: [docs/INSTALL.md](docs/INSTALL.md).
 
 ## Use it
 
-Describe the outcome; Q-Mentor picks the skills.
-
 | Ask | What happens |
 |---|---|
-| "Should we use quantum to pick 3 of these 6 bonds?" | frame → verdict: **classical now**, with the score, hard gates and a revisit trigger |
-| "Analyze, design, implement and validate the six-bond example." | frame → verdict → design → implement → test, then a checkpoint and the next phase |
-| "Run the six-bond QUBO on Pasqal." | capability report: **unsupported-exact**, with reasons and alternatives |
-| "Convert this Pulser program to Classiq." | ProgramIR → per-semantic status → reimplementation of the shared QUBO; analog schedule unsupported |
-| "Inventory post-quantum risk in this repo." | RSA/ECC/DH findings vs symmetric/hash review items, handed to a security owner |
+| "What can Q-Mentor do?" | `help` renders the menu from `registry/skills.yml` (no second, hand-kept menu) |
+| "Should we use quantum to pick 3 of these 6 bonds?" | frame → verdict: **classical now**, with score, hard gates, revisit trigger |
+| "Run the six-bond QUBO on Pasqal." | capability report: **unsupported-exact** (geometry), with alternatives |
+| "Convert this Pulser program to Classiq and tell me if it got better." | translate → convert: **reimplementation**, verified cost on all states, fixed-budget p=1/2/4 comparison → **not improved** |
+| "Port my Qiskit circuit to Perceval." | **conditional**: exact postselected distribution *and* the unconditional success rate |
+| "Write code for an electron-on-helium computer." | **unsupported**: research-only, capability report, no fictional code |
+| "Inventory post-quantum risk in this repo." | public-key findings vs symmetric/hash notes, routed to a security owner |
 
-Answers follow `qmentor.response.v2`: `Status`, `Result`, `Validation`, `Next`, under 180 words.
-Ask for **detailed** or **machine** (JSON) mode when you need it.
+Every answer uses its skill's mandatory `qmentor.response.v3` template: the answer first, then `Status`, then fixed
+fields (for a decision: Why, Cost / risk, Next gate). Business answers avoid jargon; technical answers keep the same
+fields and link artifacts; `machine` mode is JSON; `code-only` is code plus a manifest. Requested code is never cut.
 
-## Skills
+## What is inside
 
-| Skill | Job |
+| Path | Contents |
 |---|---|
-| `q-mentor-orchestrate` (internal) | Pick and order the minimum skills from `registry/skills.yml`; ≤ 5 per turn, no cycles |
-| `q-mentor-learn` | One concept: analogy, formula, misconception, source |
-| `q-mentor-research` | Evidence cards from primary sources; contradictions kept |
-| `q-mentor-brainstorm` | ≤ 5 ranked options, classical included |
-| `q-mentor-frame` | ProblemSpec + CanonicalProblem |
-| `q-mentor-verdict` | Classical now / PoC / bounded / candidate experiment |
-| `q-mentor-design` | Target-neutral design and target plans |
-| `q-mentor-translate` | Semantic translation with CapabilityReport and TranslationRecord |
-| `q-mentor-evaluate` | Scorecard or fair experiment plan |
-| `q-mentor-implement` | Smallest complete, pinned change |
-| `q-mentor-test` | Deterministic, equivalence, statistical and noise tests; observed validation state |
-| `q-mentor-review` | Findings only |
-| `q-mentor-pqc-scan` | Crypto inventory, never migration |
-| `q-mentor-exec` | One-page brief from result records only |
-| `q-mentor-improve` | Opt-in, eval-first change proposals |
+| `skills/` (17) | `SKILL.md` per skill; each cites its one response template |
+| `com.github.copilot/agents/` | the `q-mentor` custom agent (thin orchestrator) |
+| `registry/` | `skills.yml` (routing + help), `backends.yml` (37 backends, 12 families, support levels), `conversion-edges.yml` (README-14 classes), `compatibility.yml` |
+| `templates/responses/` | the 12 response templates as data |
+| `schemas/` | response, registry, canonical problem, ProgramIR, translation, conversion edge, optimization and result records, backend capability |
+| `knowledge/`, `domains/finance/` | curated packs (< 1,000 tokens each) and the source registry with link-check results |
+| `examples/bond-selection/` | nine `tested-local` targets: Qiskit, Cirq, pytket, PennyLane, Classiq, D-Wave, Pulser, Bloqade, Perceval |
+| `examples/conversion/` | gate↔gate, gate→photonic, analog↔analog, BQM→QAOA, and the Pulser→Classiq optimization regression |
+| `evals/` | routing, response-format, hardware, conversion, research, behaviour (live), incidents |
+| `scripts/` | deterministic gates, help renderer, routers, linter, deployment |
 
-Lifecycle: learn/research → explore → frame → verdict → design → translate → evaluate → implement → test → review → communicate → improve.
-
-## Reference demo: six-bond selection
-
-Synthetic data. Exact enumeration finds **A, C, E** (`101010`, energy −9.3725) among 64 states; the verdict is
-**classical now; quantum teaching PoC only**. All five targets express the same canonical problem where they can:
-
-| Target | Status | Observed (2026-10-13) |
-|---|---|---|
-| Qiskit 2.5.2 | exact; `locally-executed` | QAOA p=2 best sample `101010`, P(optimum) 0.07 |
-| PennyLane 0.45.1 (`default.qubit`) | exact; `locally-executed` | best sample `101010`, P(optimum) 0.01 |
-| D-Wave Ocean (dimod 0.12.22) | exact; `locally-executed` | ExactSolver optimum; SA hits it 14.5 % (penalty landscape) |
-| Classiq 1.32.0 | exact objective; `imported` | model + native Qmod verified on 64 states; synthesis unverified (credentials) |
-| Pasqal/Pulser 1.9.1 | six-bond **unsupported-exact** | 15 couplings vs 9 geometric DoF, ≈375 % fit error, global-only detuning; geometry-native 4-atom toy runs on the emulator |
-
-Generated brief: [demo/bond-selection/REPORT.md](demo/bond-selection/REPORT.md). Details: [examples/](examples/).
-
-## Develop and verify
+## Quality gates
 
 ```bash
-python -m pip install -r requirements-dev.txt
-python scripts/validate_package.py      # manifest, agent, skills, registry DAG, schemas, coverage, PQC fixture
-python scripts/validate_math.py         # 64-state ground truth, QUBO/Ising, penalty separation
-python scripts/validate_routing.py      # 17 routing cases
-python scripts/validate_responses.py    # response-contract linter fixtures
-python scripts/validate_examples.py     # fresh env per target from locks; --static for scans only
-python scripts/verify_sources.py        # source registry; --live before releases
+python scripts/validate_package.py      # manifest, skills, templates, registries, schemas, help, coverage, pins
+python scripts/validate_math.py         # six-bond: 64 states, optimum 101010 at -9.3725, gap 0.2050
+python scripts/validate_routing.py      # intent selection, chains, cycles, every handoff edge
+python scripts/validate_responses.py    # every skill x status x audience x mode, plus negative fixtures
+python scripts/validate_hardware.py     # support levels; no code for profiled or research-only targets
+python scripts/validate_examples.py     # every example in a fresh environment from its lock
+python scripts/verify_sources.py        # source registry; --live re-checks DOIs, arXiv, repositories
 ```
 
-Live Copilot behaviour (needs a Copilot licence): capture the prompts in `evals/behavior/cases.yml` and run
-`python scripts/run_behavior_evals.py`. Release steps: [docs/RELEASE.md](docs/RELEASE.md).
+Results on 2026-10-14 and what remains unverified (live Copilot behaviour evals, Classiq synthesis, remote
+providers): [docs/COMPATIBILITY.md](docs/COMPATIBILITY.md), [CHANGELOG.md](CHANGELOG.md). Design choices:
+[docs/DECISIONS.md](docs/DECISIONS.md). Build plan: [docs/IMPLEMENTATION-PLAN.md](docs/IMPLEMENTATION-PLAN.md).
 
-## Governance
+## Boundaries
 
-Q-Mentor pauses for explicit approval before remote or paid execution, credentials, production or cryptographic
-changes, organisation-wide deployment, or non-public data. It keeps no conversation history; lessons are opt-in,
-sanitized and reviewed as pull requests. See [docs/GOVERNANCE.md](docs/GOVERNANCE.md),
-[docs/IMPROVEMENT.md](docs/IMPROVEMENT.md) and the [decision log](docs/DECISIONS.md).
-
-## Known limits
-
-- Copilot client checks (CLI, cloud agent, IDE) are recorded as `unverified` in `registry/compatibility.yml` until run with a licence.
-- Nothing is `target-validated`: no hardware, cloud simulator or credentials were used.
-- Locks are for CPython 3.13 on x86_64 Linux.
-- Most source entries were taken from the build kit and are marked `verification: kit` until a live check.
-- Not investment advice; not a security certification.
-
-## Layout
-
-```text
-plugin.json                      Agent Plugins 1.0.0 manifest
-com.github.copilot/agents/       q-mentor custom agent
-skills/                          15 SKILL.md files
-registry/                        skill registry, compatibility and stale-API matrix
-schemas/                         response, registry, canonical problem, ProgramIR, translation, result, capability
-knowledge/ domains/finance/      small cited packs + sources.yml
-templates/                       response contract and output templates
-demo/bond-selection/             fixture, canonical model, expected values, result records, report
-examples/                        five targets + Pulser→Classiq conversion
-evals/                           routing, math, response-format, conversion, behaviour, incidents
-scripts/                         validators, router, PQC inventory, deploy, report
-```
-
-MIT licensed.
+Not an investment adviser, scientific authority, security scanner of record, or compute broker. Public or synthetic
+data only. Remote, paid, credentialed, cryptographic, or production actions need explicit approval. Matching a toy
+optimum is not quantum advantage. MIT licence.

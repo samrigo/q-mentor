@@ -17,3 +17,5 @@ Tested: `pulser==1.9.1` (last_verified 2026-10-13).
 `Register.from_coordinates`, `Sequence(register, device)`, `declare_channel("ising", "rydberg_global")`, `Pulse(InterpolatedWaveform(...), InterpolatedWaveform(...), 0)`, `measure("ground-rydberg")`. Emulate with `pulser_simulation.QutipBackendV2` + `QutipConfig(observables=[BitStrings(...)])`; `QutipEmulator` is deprecated (1.9). Noise: `NoiseModel(...)` plus `n_trajectories` in the config.
 
 Worked example and refusal: `examples/bond-selection/pasqal-pulser/`.
+
+v3 notes (2026-10-14): `AnalogDevice.interaction_coeff` = 865 723 rad·µm⁶/µs, while Bloqade's `RB_C6` = 5 420 441 — the same coordinates are different Hamiltonians across SDKs (`examples/conversion/pulser-to-bloqade/`). Exact final-state probabilities: `QutipConfig(observables=[StateResult(evaluation_times=[1.0])])` then `results.final_state.probabilities()` (keys use `r`/`g`). Pulser → Classiq optimization regression: `examples/conversion/pulser-to-classiq-qaoa/`.

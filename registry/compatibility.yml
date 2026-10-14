@@ -1,95 +1,80 @@
-# Supported-client matrix, schema choice, SDK pins and freshness. last_verified dates are
-# the dates a human or CI actually checked; "unverified" means not checked yet.
-contract_version: qmentor.compatibility.v2
-plugin_version: 2.0.0
-last_verified: 2026-10-13
+# Compatibility matrix (qmentor.compatibility.v3): packaging schema, Copilot surfaces, SDK pins with tag SHAs, and
+# stale APIs. `status` is only what was OBSERVED on `last_verified`; `unverified` means not checked, never passed.
+# Human-readable view: docs/COMPATIBILITY.md. Re-verify before every release (docs/RELEASE.md).
+contract_version: qmentor.compatibility.v3
+plugin_version: 3.1.1
+last_verified: 2026-10-14
 
 agent_plugins:
   manifest_schema: https://agent-plugins.org/schemas/1.0.0/plugin.schema.json
-  recognised_by_copilot_cli: ["1.0.0", "1.1.0"]
+  recognised_by_copilot_cli: ["1.0.0", "1.1.0"]   # from the v2 brief; not re-read in 3.1.1
   chosen: "1.0.0"
-  reason: GitHub authoring examples use 1.0.0; no v2 feature needs 1.1.0.
-  source: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference
+  reason: oldest schema covering the needed fields; no 1.1 feature used; closed top-level schema (no legacy component paths)
+  validation: plugin.json validated offline against the vendored copy schemas/vendor/agent-plugins-1.0.0.plugin.schema.json
+  live_schema_fetch: blocked in the build environment (egress proxy); run scripts/validate_package.py --live-schema in CI
 
 clients:
   - client: GitHub Copilot CLI
-    install: git clone -b Claude-v2 https://github.com/samrigo/q-mentor.git && copilot plugin install ./q-mentor
-    components: [skills, com.github.copilot/agents]
-    status: unverified   # requires a Copilot-licensed session; run docs/RELEASE.md checklist
+    version: 1.0.97
+    install: copilot plugin install <path-or-repo>   # deprecated for direct sources; marketplace installs are the future path
+    checks:
+      plugin_install: passed          # "Installed 17 skills" (scripts/test_copilot_discovery.py)
+      skill_discovery: passed         # copilot skill list --json -> 17 q-mentor skills, source=plugin
+      custom_agent_shipped: passed    # q-mentor.agent.md present in the installed plugin
+      disable_enable_uninstall: passed
+      repository_mode_discovery: passed   # 17 project skills from .github/skills (scripts/test_deploy.py)
+      agent_invocation_and_routing: unverified   # needs a licensed, logged-in Copilot session
+      behaviour_evals: unverified               # evals/behavior/cases.yml: 52 cases, not run (no licensed session)
+    notes: Direct plugin installs print a deprecation warning; publish through a marketplace before that path is removed.
   - client: Copilot cloud agent / Copilot app
     install: repository-local deployment (scripts/deploy_repo_local.py)
-    components: [.github/skills, .github/agents]
-    status: unverified
+    checks: {skill_discovery: unverified, behaviour_evals: unverified}
   - client: VS Code / IDE agent mode
     install: repository-local deployment (scripts/deploy_repo_local.py)
-    components: [.github/skills, .github/agents]
-    status: unverified
+    checks: {skill_discovery: unverified, behaviour_evals: unverified}
+  - client: gh CLI
+    version: 2.89.0
+    checks: {gh_skill_publish_dry_run: unavailable}   # `gh skill` is not a command in gh 2.89.0
+  - client: Copilot SDK / hooks / MCP
+    checks: {status: not-used}   # deferred extensions (docs/DECISIONS.md)
 
 python: "3.13"
 lock_platform: x86_64-unknown-linux-gnu
+lock_tool: uv pip compile
 
 targets:
-  - target: qiskit
-    pins: {qiskit: 2.5.2, qiskit-optimization: 0.7.0}
-    offline_path: qiskit.primitives.StatevectorSampler
-    validation_state: locally-executed
-    last_verified: 2026-10-13
-  - target: pennylane
-    pins: {pennylane: 0.45.1}
-    offline_path: default.qubit
-    validation_state: locally-executed
-    last_verified: 2026-10-13
-  - target: dwave
-    pins: {dimod: 0.12.22, dwave-samplers: 1.8.0}
-    offline_path: dimod.ExactSolver, dwave.samplers.SimulatedAnnealingSampler
-    validation_state: locally-executed
-    last_verified: 2026-10-13
-  - target: classiq
-    pins: {classiq: 1.32.0}
-    offline_path: classiq.create_model + write_qmod (no synthesis)
-    validation_state: imported
-    credentialed_gate: unverified
-    last_verified: 2026-10-13
-  - target: pasqal-pulser
-    pins: {pulser: 1.9.1}
-    offline_path: capability report + pulser_simulation.QutipBackendV2
-    validation_state: locally-executed
-    six_bond_mapping: unsupported-exact
-    last_verified: 2026-10-13
+  - {target: qiskit, example: examples/bond-selection/qiskit, pins: {qiskit: 2.5.2, qiskit-optimization: 0.7.0}, tag_sha: {qiskit: c1c01ada399af13e495c27b9b22b4ff942bbad7e, qiskit-optimization: 58472dd02c48de2e2cb36c581463bf5b64e40d95}, offline_path: StatevectorSampler, validation_state: locally-executed}
+  - {target: cirq, example: examples/bond-selection/cirq, pins: {cirq-core: 1.7.0}, tag_sha: {cirq: de651a7886d1a1383d595f95f36b93ed3ea91685}, offline_path: cirq.Simulator, validation_state: locally-executed}
+  - {target: pytket, example: examples/bond-selection/pytket, pins: {pytket: 2.18.5}, tag_sha: {tket: 4a554cbc2699de2f95da18eb3c30ff0961bcc536}, offline_path: Circuit.get_statevector, validation_state: locally-executed}
+  - {target: pennylane, example: examples/bond-selection/pennylane, pins: {pennylane: 0.45.1}, tag_sha: {pennylane: 5f61ce25df3cc28a1ac785d20e47d70761202ed2}, offline_path: default.qubit, validation_state: locally-executed}
+  - {target: classiq, example: examples/bond-selection/classiq, pins: {classiq: 1.32.0}, tag_sha: {classiq-library-reference: 9e5b7bed123716274150e1221addb03e51a785e7}, offline_path: create_model + write_qmod, validation_state: imported, credentialed_gate: unverified}
+  - {target: dwave, example: examples/bond-selection/dwave, pins: {dimod: 0.12.22, dwave-samplers: 1.8.0}, tag_sha: {dimod: 3ecf9cc24b63841b0e2a495ff0cb196dcbe0a0cb, dwave-samplers: 6bb7f6745b82afd6c2e4966559e55f369818fce4}, offline_path: ExactSolver + SimulatedAnnealingSampler, validation_state: locally-executed}
+  - {target: pasqal-pulser, example: examples/bond-selection/pasqal-pulser, pins: {pulser: 1.9.1}, tag_sha: {pulser: 12891850344d369332cd6d16696962e30461c474}, offline_path: QutipBackendV2, validation_state: locally-executed, six_bond_mapping: unsupported-exact}
+  - {target: bloqade, example: examples/bond-selection/bloqade, pins: {bloqade-analog: 0.16.9, numpy: 2.2.6}, tag_sha: {bloqade-analog: fd7f87e61c2b253d2943ae83a2af7d06d40e677c}, offline_path: bloqade python emulator, validation_state: locally-executed, six_bond_mapping: unsupported-exact}
+  - {target: perceval, example: examples/bond-selection/perceval, pins: {perceval-quandela: 1.3.1}, tag_sha: {perceval: 64ed82f9c5e65f43d5092c92a8e218b255cde41d}, offline_path: Processor SLOS, validation_state: locally-executed, six_bond_mapping: conditional-impractical}
+
+conversion_environments:
+  - {fixture: examples/conversion/gate-to-gate, pins: {qiskit: 2.5.2, pytket: 2.18.5, pytket-qiskit: 0.78.0, cirq-core: 1.7.0, ply: "3.11"}, tag_sha: {pytket-qiskit: 6d0c2a016528eb8f873bba34d1a858e68fab6108}}
+  - {fixture: examples/conversion/qiskit-to-perceval, pins: {qiskit: 2.1.2, perceval-quandela: 1.3.1, perceval-interop: 1.3.0}, tag_sha: {qiskit: e87909212fd7bdfdbc3127d6d96edb331f0d97dd, perceval-interop: 49480e974548db713e9271f7e2a0bc534664e34b}, note: "bridge declares qiskit~=2.1.2; package import defect worked around (evals/incidents/002)"}
+  - {fixture: examples/conversion/pulser-to-bloqade, pins: {pulser: 1.9.1, bloqade-analog: 0.16.9, numpy: 2.2.6}}
+  - {fixture: examples/conversion/bqm-to-qaoa, pins: {dimod: 0.12.22, qiskit: 2.5.2}}
+  - {fixture: examples/conversion/pulser-to-classiq-qaoa, pins: {pulser: 1.9.1, classiq: 1.32.0}, note: "Classiq synthesis/execution unverified (credentials)"}
 
 # Stale or removed APIs. scripts/validate_examples.py rejects generated code that uses them.
 stale_apis:
-  - pattern: "QutipEmulator"
-    sdk: pulser
-    since: "1.9"
-    replacement: pulser_simulation.QutipBackendV2
-    evidence: DeprecationWarning observed with pulser 1.9.1 on 2026-10-13
-  - pattern: "NoiseModel(runs="
-    sdk: pulser
-    since: "1.7"
-    replacement: EmulationConfig n_trajectories
-    evidence: DeprecationWarning observed with pulser 1.9.1 on 2026-10-13
-  - pattern: "QAOAAnsatz("
-    sdk: qiskit
-    since: "2.1"
-    replacement: qiskit.circuit.library.qaoa_ansatz
-    evidence: BlueprintCircuit/NLocal DeprecationWarning observed with qiskit 2.5.2 on 2026-10-13
-  - pattern: "from qiskit import execute"
-    sdk: qiskit
-    since: "1.0"
-    replacement: primitives (StatevectorSampler / backend.run)
-    evidence: not importable from qiskit 2.5.2 (checked 2026-10-13)
-  - pattern: "from pulser_simulation import Simulation"
-    sdk: pulser
-    since: "1.0"
-    replacement: pulser_simulation.QutipBackendV2
-    evidence: not importable from pulser-simulation 1.9.1 (checked 2026-10-13)
+  - {pattern: "QutipEmulator", sdk: pulser, since: "1.9", replacement: pulser_simulation.QutipBackendV2, evidence: DeprecationWarning observed with pulser 1.9.1 on 2026-10-13}
+  - {pattern: "NoiseModel(runs=", sdk: pulser, since: "1.7", replacement: EmulationConfig n_trajectories, evidence: DeprecationWarning observed with pulser 1.9.1 on 2026-10-13}
+  - {pattern: "QAOAAnsatz(", sdk: qiskit, since: "2.1", replacement: qiskit.circuit.library.qaoa_ansatz, evidence: BlueprintCircuit/NLocal DeprecationWarning observed with qiskit 2.5.2 on 2026-10-13}
+  - {pattern: "from qiskit import execute", sdk: qiskit, since: "1.0", replacement: "primitives (StatevectorSampler / backend.run)", evidence: not importable from qiskit 2.5.2 (checked 2026-10-13)}
+  - {pattern: "from pulser_simulation import Simulation", sdk: pulser, since: "1.0", replacement: pulser_simulation.QutipBackendV2, evidence: not importable from pulser-simulation 1.9.1 (checked 2026-10-13)}
+  - {pattern: ".build_processor(", sdk: perceval, since: "1.2", replacement: "catalog[...].build_experiment() + pcvl.Processor(backend, experiment)", evidence: DeprecationWarning observed with perceval-quandela 1.3.1 on 2026-10-14}
+  - {pattern: "QiskitConverter(backend_name", sdk: perceval-interop, since: "1.3", replacement: "QiskitConverter().convert(qc) -> Experiment; Processor('SLOS', experiment)", evidence: TypeError observed with perceval-interop 1.3.0 on 2026-10-14}
+  - {pattern: "ExecutionSession.minimize(", sdk: classiq, since: "1.32", replacement: ExecutionSession.variational_minimize, evidence: deprecation in classiq 1.32.0 source (checked 2026-10-14)}
+  - {pattern: "from pytket.extensions.cirq", sdk: pytket-cirq, since: "2026", replacement: "OpenQASM 2 subset or a separately verified route", evidence: Quantinuum lists pytket-cirq as unmaintained (brief, checked 2026-10-14)}
+  - {pattern: "pytket.extensions.quantinuum import QuantinuumBackend", sdk: pytket-quantinuum, since: "0.56.0", replacement: qnexus, evidence: "brief: device submission moved to qnexus from pytket-quantinuum 0.56.0"}
 
-conversion_matrix:
-  sources: [qiskit, classiq, dwave, pasqal-pulser, pennylane]
-  cells:
-    qiskit:        {qiskit: not-applicable, classiq: exact, dwave: exact, pasqal-pulser: unsupported, pennylane: exact}
-    classiq:       {qiskit: exact, classiq: not-applicable, dwave: exact, pasqal-pulser: unsupported, pennylane: exact}
-    dwave:         {qiskit: exact, classiq: exact, dwave: not-applicable, pasqal-pulser: unsupported, pennylane: exact}
-    pasqal-pulser: {qiskit: reimplementation, classiq: reimplementation, dwave: reimplementation, pasqal-pulser: not-applicable, pennylane: reimplementation}
-    pennylane:     {qiskit: exact, classiq: exact, dwave: exact, pasqal-pulser: unsupported, pennylane: not-applicable}
+known_issues:
+  - {sdk: bloqade-analog 0.16.9, issue: "RuntimeError with numpy >= 2.3 (pydantic v1 NDArray TypeAliasType)", workaround: "numpy==2.2.6", incident: evals/incidents/003-bloqade-numpy-pin.yml}
+  - {sdk: perceval-interop 1.3.0, issue: "import fails without the myqlm extra (MyQLMCommunicationLayer)", workaround: "load the qiskit submodule directly", incident: evals/incidents/002-perceval-interop-import.yml}
+  - {sdk: pytket-qiskit 0.78.0, issue: "qiskit_to_tk rejects unbound Parameter (ValueError)", workaround: "bind parameters first", incident: null}
+  - {sdk: cirq-core 1.7.0, issue: "cirq.contrib.qasm_import needs ply, not installed by cirq-core", workaround: "pin ply==3.11", incident: null}

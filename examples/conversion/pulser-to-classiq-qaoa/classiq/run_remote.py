@@ -1,11 +1,11 @@
 """Credential-gated repeat of the optimization comparison on Classiq's own synthesis and executor.
 
 NOT run by tests or CI. It needs `classiq.authenticate()` credentials, uses the Classiq synthesis service and the
-Classiq "simulator" execution backend, and may incur cost. It refuses to start unless QMENTOR_ALLOW_REMOTE=1 is set after an
+Classiq "simulator" execution backend, and may incur cost. It refuses to start unless QMENTOR_ALLOW_REMOTE=1 and QMENTOR_CONFIRM_COST=yes are set after an
 explicit human approval of provider, backend, and budget. Validation state of its output: target-validated only
 after it has actually run; until then the Classiq-side numbers are `unverified`.
 
-Run: QMENTOR_ALLOW_REMOTE=1 python run_remote.py
+Run: QMENTOR_ALLOW_REMOTE=1 QMENTOR_CONFIRM_COST=yes python run_remote.py
 """
 import json
 import os
@@ -48,8 +48,9 @@ def run(p: int, quantile: float, seed: int) -> dict:
 
 
 if __name__ == "__main__":
-    if os.environ.get("QMENTOR_ALLOW_REMOTE") != "1":
-        print("refused: set QMENTOR_ALLOW_REMOTE=1 only after approving provider, backend and budget")
+    if os.environ.get("QMENTOR_ALLOW_REMOTE") != "1" or os.environ.get("QMENTOR_CONFIRM_COST") != "yes":
+        print("refused: set QMENTOR_ALLOW_REMOTE=1 and QMENTOR_CONFIRM_COST=yes only after approving provider, "
+              "backend and budget")
         sys.exit(2)
     results = [run(p, q, s) for p in (1, 2) for q in (1.0, harness.CVAR_ALPHA) for s in harness.SEEDS]
     (HERE / "remote_results.json").write_text(json.dumps(results, indent=2) + "\n")

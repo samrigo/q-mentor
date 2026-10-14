@@ -384,7 +384,7 @@ cases:
     audience: technical
     skills_used: [q-mentor-convert]
     validation_state: unverified
-    next_action: "Approve a credentialed run with QMENTOR_ALLOW_REMOTE=1 to observe synthesis."
+    next_action: "Approve a credentialed run (QMENTOR_ALLOW_REMOTE=1, QMENTOR_CONFIRM_COST=yes) to observe synthesis."
     fields:
       Result: "Complete Classiq files exist, but synthesis and execution were not observed."
       Route: "Rydberg analog -> gate: reimplementation."
@@ -466,9 +466,9 @@ cases:
     skills_used: [q-mentor-implement]
     validation_state: syntax-checked
     fields:
-      Result: "Draft D-Wave QPU adapter written behind QMENTOR_ALLOW_REMOTE; not executed."
-      Files: "`examples/bond-selection/dwave/qpu_adapter.py`"
-      Checks: "`python -m py_compile qpu_adapter.py` syntax-checked; QPU call not run (needs credentials and approval)."
+      Result: "Guarded D-Wave QPU path written behind QMENTOR_ALLOW_REMOTE and QMENTOR_CONFIRM_COST; not executed."
+      Files: "`examples/bond-selection/dwave/adapter.py` (guarded QPU function)"
+      Checks: "`python -m py_compile adapter.py` syntax-checked; QPU call not run (needs credentials and approval)."
       Next: "Approve one budget-capped QPU run, or keep the local ExactSolver path."
   # ------------------------------------------------------------------ test (code)
   - id: test-complete-business

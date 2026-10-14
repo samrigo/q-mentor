@@ -101,6 +101,10 @@
     ],
     "constant": 0.0
   },
-  "qubo_convention": "each pair stored once (i<j); x in {0,1}; units rad/us",
+  "qubo_convention": {
+    "pairs": "each pair stored once (i<j)",
+    "domain": "x in {0,1}",
+    "units": "rad/us"
+  },
   "sha256": "fa7b370995e2d6a1d4073fd62232860b077662cad7d39f071cca7d9ad1f01d83"
 }

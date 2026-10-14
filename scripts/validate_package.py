@@ -271,6 +271,11 @@ def check_schemas_and_artifacts() -> None:
         ("program-ir.schema.json", "examples/conversion/pulser-to-classiq/program_ir.json"),
         ("translation-record.schema.json", "examples/conversion/pulser-to-classiq/translation_record.json"),
         ("capability-report.schema.json", "examples/bond-selection/pasqal-pulser/capability_report.json"),
+        ("canonical-problem.schema.json", "examples/conversion/pulser-to-classiq-qaoa/canonical_problem.json"),
+        ("program-ir.schema.json", "examples/conversion/pulser-to-classiq-qaoa/program_ir.json"),
+        ("translation-record.schema.json", "examples/conversion/pulser-to-classiq-qaoa/translation_record.json"),
+        ("optimization-record.schema.json", "examples/conversion/pulser-to-classiq-qaoa/optimization_record.json"),
+        ("result-record.schema.json", "examples/conversion/pulser-to-classiq-qaoa/source_result.json"),
     ]
     instances += [("result-record.schema.json", str(p.relative_to(ROOT)))
                   for p in sorted((ROOT / "demo/bond-selection/result-records").glob("*.json"))]
@@ -359,6 +364,25 @@ def check_edges() -> None:
             err(f"conversion-edges.yml: representative route {need} has no fixture")
 
 
+def check_compatibility() -> None:
+    """Every pin in registry/compatibility.yml appears with the same version in the folder's requirements.lock."""
+    data = yaml.safe_load((ROOT / "registry/compatibility.yml").read_text())
+    rows = [(r["example"], r["pins"]) for r in data["targets"]] + \
+           [(r["fixture"], r["pins"]) for r in data["conversion_environments"]]
+    for folder, pins in rows:
+        locks = list((ROOT / folder).rglob("requirements.lock"))
+        if not locks:
+            err(f"compatibility: {folder} has no requirements.lock")
+            continue
+        text = "\n".join(lock.read_text() for lock in locks)
+        for name, version in pins.items():
+            if not re.search(rf"(?m)^{re.escape(name)}(\[[^\]]*\])?=={re.escape(str(version))}\b", text):
+                err(f"compatibility: {folder} lock does not pin {name}=={version}")
+    targets = {r["target"] for r in data["targets"]}
+    if len(targets) != 9:
+        err(f"compatibility: expected nine tested-local targets, found {sorted(targets)}")
+
+
 def check_packs() -> None:
     for pack in list((ROOT / "knowledge").glob("*.md")) + list((ROOT / "domains").rglob("*.md")):
         words = len(pack.read_text().split())
@@ -407,6 +431,7 @@ def main() -> int:
     check_help(registry)
     check_backends()
     check_edges()
+    check_compatibility()
     check_coverage(registry)
     check_pqc_fixture()
     for e in errors:

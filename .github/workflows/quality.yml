@@ -2,9 +2,14 @@ name: quality
 
 on:
   push:
-    branches: [main, Claude-v2]
+    branches: [main, Claude-v3]
   pull_request:
   workflow_dispatch:
+    inputs:
+      live_sources:
+        description: "Re-check DOIs, arXiv pages and repositories (network)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -19,20 +24,52 @@ jobs:
           python-version: "3.13"
       - name: Install validator dependencies (pinned)
         run: python -m pip install -r requirements-dev.txt
-      - name: Package, registry, schemas, skills, coverage
+      - name: Package, skills, templates, registries, schemas, help, coverage, pins
         run: python scripts/validate_package.py
       - name: Math fixtures
         run: python scripts/validate_math.py
-      - name: Routing fixtures
+      - name: Routing (intent selection, chains, every handoff edge)
         run: python scripts/validate_routing.py
-      - name: Response-contract fixtures
+      - name: Response templates (every skill x status x audience x mode) and negative fixtures
         run: python scripts/validate_responses.py
-      - name: Static example scan and conversion fixtures
+      - name: Hardware catalog and support levels
+        run: python scripts/validate_hardware.py
+      - name: Evidence cards and claim gates
+        run: python scripts/score_evidence.py
+      - name: Improvement loop (incidents are sanitized and eval-first)
+        run: python scripts/validate_incidents.py
+      - name: Live behaviour cases reference real skills
+        run: python scripts/run_behavior_evals.py --check-cases
+      - name: Static example scan, conversion and route-claim fixtures
         run: python scripts/validate_examples.py --static
       - name: Source registry (offline)
         run: python scripts/verify_sources.py
       - name: Executive brief regenerates from records
         run: python scripts/build_report.py && git diff --exit-code demo/bond-selection/REPORT.md
+      - name: Repository-local deployment lifecycle
+        run: python scripts/test_deploy.py
+
+  copilot:
+    needs: contracts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+      - name: Install validator dependencies and the pinned Copilot CLI
+        run: |
+          python -m pip install -r requirements-dev.txt
+          npm install --prefix "$RUNNER_TEMP/copilot" @github/copilot@1.0.97
+      - name: Plugin-mode and repository-mode discovery (no login required)
+        env:
+          QMENTOR_COPILOT_BIN: ${{ runner.temp }}/copilot/node_modules/.bin/copilot
+        run: |
+          python scripts/test_copilot_discovery.py
+          python scripts/test_deploy.py
 
   examples:
     needs: contracts
@@ -40,7 +77,23 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        target: [qiskit, pennylane, dwave, pasqal-pulser, bond-selection/classiq, pulser-to-classiq]
+        folder:
+          - bond-selection/qiskit
+          - bond-selection/cirq
+          - bond-selection/pytket
+          - bond-selection/pennylane
+          - bond-selection/classiq
+          - bond-selection/dwave
+          - bond-selection/pasqal-pulser
+          - bond-selection/bloqade
+          - bond-selection/perceval
+          - conversion/gate-to-gate
+          - conversion/qiskit-to-perceval
+          - conversion/pulser-to-bloqade
+          - conversion/bqm-to-qaoa
+          - conversion/pulser-to-classiq-qaoa/source
+          - conversion/pulser-to-classiq-qaoa/classiq
+          - conversion/pulser-to-classiq/classiq
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
@@ -50,4 +103,16 @@ jobs:
       - name: Install validator dependencies (pinned)
         run: python -m pip install -r requirements-dev.txt
       - name: Fresh environment from lock, compile, test (offline providers, no credentials)
-        run: python scripts/validate_examples.py --only ${{ matrix.target }}
+        run: python scripts/validate_examples.py --only "examples/${{ matrix.folder }}"
+
+  sources-live:
+    if: github.event_name == 'workflow_dispatch' && inputs.live_sources
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.13"
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Live link check (results are reviewed and committed by a maintainer, never auto-committed)
+        run: python scripts/verify_sources.py --live && git diff --stat

@@ -36,7 +36,7 @@ def canonical_problem(reg, q) -> dict:
         "objective": {"sense": "minimize", "expression": "E(x) = sum_i a_i x_i + sum_{i<j} b_ij x_i x_j + c"},
         "constraints": [],
         "qubo": payload,
-        "qubo_convention": "each pair stored once (i<j); x in {0,1}; units rad/us",
+        "qubo_convention": {"pairs": "each pair stored once (i<j)", "domain": "x in {0,1}", "units": "rad/us"},
         "sha256": digest,
     }
 
