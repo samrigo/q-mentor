@@ -6,7 +6,7 @@
 
 - Ask: native entangler (MS/ZZ), all-to-all versus shuttling, mid-circuit measurement and reuse, shot time and cost per circuit.
 - `tested-local`: pytket circuits and compilation passes (`examples/bond-selection/pytket/`). `profiled`: Quantinuum hardware via `qnexus` (device submission moved out of `pytket-quantinuum` at 0.56.0), IonQ (`qiskit-ionq`), AQT (`qiskit-aqt-provider`).
-- Evidence: four logical qubits beyond break-even (`hw-ions-four-logical-qubits-2024`, preprint, postselected); fault-tolerant code switching (`hw-ions-code-switching-2025`); Helios 98-qubit system (`hw-helios-98-qubit-2026`) — architecture benchmarks, not an optimization advantage.
+- Evidence: four logical qubits beyond break-even (`hw-ions-four-logical-qubits-2024`; listed as a preprint in the brief, now Phys. Rev. Lett. 133, 180601; postselected); fault-tolerant code switching (`hw-ions-code-switching-2025`); Helios 98-qubit system (`hw-helios-98-qubit-2026`, Publisher Correction 2026-07-07) — architecture benchmarks, not an optimization advantage.
 
 ## Neutral atoms (Pasqal, QuEra, Atom Computing)
 

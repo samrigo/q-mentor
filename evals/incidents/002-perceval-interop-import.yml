@@ -1,0 +1,14 @@
+example: false
+origin: build-observation
+consent: "not applicable (found by the 3.1.1 build, no user data)"
+scope: plugin
+prompt_category: conversion
+expected_behaviour: The gate->photonic route imports the Qiskit converter from perceval-interop 1.3.0 and uses the bridge-matched qiskit~=2.1.2.
+actual_failure: "import perceval_interop raises ImportError (MyQLMCommunicationLayer) without the optional myqlm extra; the [qiskit] extra pins qiskit 2.1.x, not 2.5.x."
+risk: Generated conversion code that cannot import, or a silently mismatched Qiskit version.
+sanitized_evidence: "ImportError: cannot import name 'MyQLMCommunicationLayer' from 'perceval_interop.myqlm'"
+affected: examples/conversion/qiskit-to-perceval/adapter.py
+version: {plugin: 3.1.1, client: unverified, model: unspecified}
+counterexample: With the myqlm extra installed the package import succeeds; the workaround must then be removed.
+proposed_assertion: examples/conversion/qiskit-to-perceval/test_example.py::test_upstream_import_defect_documented
+retention: keep until upstream fix, then delete with the workaround

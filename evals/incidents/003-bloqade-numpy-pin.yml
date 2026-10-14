@@ -1,0 +1,14 @@
+example: false
+origin: build-observation
+consent: "not applicable (found by the 3.1.1 build, no user data)"
+scope: plugin
+prompt_category: implementation
+expected_behaviour: Bloqade analog examples pin numpy below 2.3 until bloqade-analog supports numpy's TypeAliasType NDArray.
+actual_failure: "bloqade-analog 0.16.9 with numpy 2.5.4 raises RuntimeError (error checking inheritance of NDArray) at run time; import succeeds, so an import-only gate would pass."
+risk: Code labelled imported/runnable that fails on first execution.
+sanitized_evidence: "RuntimeError: error checking inheritance of NDArray (type: TypeAliasType)"
+affected: examples/bond-selection/bloqade/requirements.in
+version: {plugin: 3.1.1, client: unverified, model: unspecified}
+counterexample: numpy 2.2.6 runs the same program.
+proposed_assertion: examples/bond-selection/bloqade/test_example.py::test_emulator_concentrates_on_ground_state
+retention: keep until bloqade-analog supports numpy >= 2.3

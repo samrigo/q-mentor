@@ -354,11 +354,14 @@ sources:
   volatility: stable
   source_date: '2014'
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/quantum-basics.md
+  checked_at: '2026-10-14'
+  observed_title: A Quantum Approximate Optimization Algorithm
+  observed_date: '2014-11-14'
 - id: ref-lucas-ising-2014
   title: Lucas, Ising formulations of NP problems (2014)
   url: https://doi.org/10.3389/fphy.2014.00005
@@ -388,11 +391,15 @@ sources:
   volatility: stable
   source_date: '2018'
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/quantum-basics.md
+  checked_at: '2026-10-14'
+  observed_title: Quantum Computing in the NISQ era and beyond
+  observed_date: 2018-01-02; v3 2018-07-31
+  check_note: 'published: DOI 10.22331/q-2018-08-06-79'
 - id: ref-egger-finance-2020
   title: Egger et al., quantum computing for finance (2020)
   url: https://arxiv.org/abs/2006.14510
@@ -405,11 +412,15 @@ sources:
   volatility: stable
   source_date: '2020'
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/quantum-basics.md
+  checked_at: '2026-10-14'
+  observed_title: 'Quantum Computing for Finance: State of the Art and Future Prospects'
+  observed_date: 2020-06-25; v3 2021-01-28
+  check_note: 'published: DOI 10.1109/TQE.2020.3030314'
 - id: ref-hoefler-hype-2023
   title: 'Hoefler, Häner, and Troyer, “Disentangling Hype from Practicality: On Realistically Achieving Quantum Advantage” (2023)'
   url: https://arxiv.org/abs/2307.00523
@@ -422,11 +433,15 @@ sources:
   volatility: active
   source_date: '2023'
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/quantum-basics.md
+  checked_at: '2026-10-14'
+  observed_title: 'Disentangling Hype from Practicality: On Realistically Achieving Quantum Advantage'
+  observed_date: '2023-07-02'
+  check_note: 'journal ref: Communications of the ACM, May 2023'
 - id: ref-pulser-2022
   title: Silvério et al., Pulser (2022)
   url: https://quantum-journal.org/papers/q-2022-01-24-629
@@ -438,11 +453,14 @@ sources:
   volatility: stable
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/quantum-basics.md
+  checked_at: '2026-10-14'
+  observed_title: 'Pulser: An open-source package for the design of pulse sequences in programmable neutral-atom arrays'
+  observed_date: '2022-01-24'
 - id: ref-pennylane-2018
   title: Bergholm et al., PennyLane
   url: https://arxiv.org/abs/1811.04968
@@ -455,11 +473,14 @@ sources:
   volatility: stable
   source_date: '2018'
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/quantum-basics.md
+  checked_at: '2026-10-14'
+  observed_title: 'PennyLane: Automatic differentiation of hybrid quantum-classical computations'
+  observed_date: 2018-11-12; v4 2022-07-29
 - id: qiskit-finance-portfolio
   title: Qiskit Finance portfolio optimization tutorial
   url: https://qiskit-community.github.io/qiskit-finance/tutorials/01_portfolio_optimization.html
@@ -540,11 +561,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - registry/backends.yml
+  head_sha: 65ce191a4c3ed48f203d8dd6eea476d0deea9e71
+  checked_at: '2026-10-14'
 - id: sdk-qiskit-community-qiskit-optimization-tutorials-i
   title: tutorial catalog
   url: https://qiskit-community.github.io/qiskit-optimization/tutorials/index.html
@@ -625,11 +648,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - registry/backends.yml
+  head_sha: a861d46e6d77c64b87124a50216995d2d2d6d5fe
+  checked_at: '2026-10-14'
 - id: classiq-docs
   title: Classiq documentation
   url: https://docs.classiq.io
@@ -682,11 +707,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - registry/backends.yml
+  head_sha: 9e5b7bed123716274150e1221addb03e51a785e7
+  checked_at: '2026-10-14'
 - id: classiq-library-portfolio
   title: Classiq library portfolio optimization
   url: https://github.com/Classiq/classiq-library/tree/main/applications/finance/portfolio_optimization
@@ -698,10 +725,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - examples/bond-selection/classiq/
+  head_sha: 9e5b7bed123716274150e1221addb03e51a785e7
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; example page not fetched
 - id: dwave-examples
   title: D-Wave example repositories
   url: https://github.com/dwave-examples
@@ -852,11 +882,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/providers-pasqal-pulser.md
+  head_sha: 4f50ea9a64ff648e7432d003812dd9a53b22a673
+  checked_at: '2026-10-14'
 - id: pulser-qubo-tutorial
   title: Pulser QUBO/QAA tutorial
   url: https://docs.pasqal.com/pulser/tutorials/qubo
@@ -895,11 +927,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - registry/backends.yml
+  head_sha: c1fcc1c35d12aa276f502a8c095c45903e5f5af6
+  checked_at: '2026-10-14'
 - id: pennylane-docs
   title: PennyLane documentation
   url: https://docs.pennylane.ai/en/stable
@@ -1026,11 +1060,15 @@ sources:
   volatility: active
   source_date: '2024'
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/recent-research.md
+  checked_at: '2026-10-14'
+  observed_title: Towards Robust Benchmarking of Quantum Optimization Algorithms
+  observed_date: '2024-05-13'
+  check_note: no journal reference shown
 - id: rr-qaoa-review-2024
   title: A review on Quantum Approximate Optimization Algorithm and its variants” (Physics Reports, 2024)
   url: https://www.sciencedirect.com/science/article/pii/S0370157324001078
@@ -1059,11 +1097,14 @@ sources:
   volatility: active
   source_date: '2024'
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/recent-research.md
+  checked_at: '2026-10-14'
+  observed_title: Hybrid quantum programming with PennyLane Lightning on HPC platforms
+  observed_date: '2024-03-04'
 - id: rr-ml-error-mitigation-2024
   title: Machine learning for practical quantum error mitigation” (Nature Machine Intelligence, 2024)
   url: https://www.nature.com/articles/s42256-024-00927-2
@@ -1092,11 +1133,14 @@ sources:
   volatility: active
   source_date: '2025'
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/hardware-ions-atoms.md
+  checked_at: '2026-10-14'
+  observed_title: Demonstration of Weighted-Graph Optimization on a Rydberg-Atom Array Using Local Light Shifts
+  observed_date: '2025-01-02'
 - id: rr-sdk-benchmarking-2025
   title: Benchmarking the performance of quantum computing software for quantum circuit creation, manipulation and compilation” (Nature Computational Science, 2025)
   url: https://www.nature.com/articles/s43588-025-00792-y
@@ -1125,11 +1169,15 @@ sources:
   volatility: active
   source_date: '2025'
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/hardware-superconducting.md
+  checked_at: '2026-10-14'
+  observed_title: Quantum error correction below the surface code threshold
+  observed_date: '2024-12-09'
+  check_note: Author Correction 2026-04-28
 - id: hw-google-below-threshold-correction-2026
   title: 2026 correction
   url: https://doi.org/10.1038/s41586-026-10559-8
@@ -1143,11 +1191,15 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/hardware-superconducting.md
+  checked_at: '2026-10-14'
+  observed_title: 'Author Correction: Quantum error correction below the surface code threshold'
+  observed_date: '2026-04-28'
+  check_note: corrects 10.1038/s41586-024-08449-y (Fig. 3a axis and legend)
 - id: rr-portfolio-annealing-e2e-2025
   title: End-to-End Portfolio Optimization with Quantum Annealing” (preprint, 2025)
   url: https://arxiv.org/abs/2504.08843
@@ -1160,11 +1212,15 @@ sources:
   volatility: active
   source_date: '2025'
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-07-REFERENCES.md
   used_by:
   - knowledge/hardware-superconducting.md
+  checked_at: '2026-10-14'
+  observed_title: End-to-End Portfolio Optimization with Quantum Annealing
+  observed_date: v1 2025-04-10; v2 2025-12-17
+  check_note: v2 lists DOI 10.1002/qute.202500753 (journal version); brief calls it a preprint; keep type preprint until the journal record is read
 - id: nist-pqc
   title: NIST Post-Quantum Cryptography project
   url: https://csrc.nist.gov/Projects/Post-Quantum-Cryptography
@@ -1275,11 +1331,15 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-superconducting.md
+  checked_at: '2026-10-14'
+  observed_title: Evidence for the utility of quantum computing before fault tolerance
+  observed_date: '2023-06-14'
+  check_note: no correction linked
 - id: hw-cat-qubit-control-2024
   title: Protected cat-qubit control (2024)
   url: https://doi.org/10.1038/s41586-024-07294-3
@@ -1292,11 +1352,15 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-superconducting.md
+  checked_at: '2026-10-14'
+  observed_title: Quantum control of a cat qubit with bit-flip times exceeding ten seconds
+  observed_date: '2024-05-06'
+  check_note: Author Correction 2024-05-17
 - id: hw-cat-qubit-control-correction-2024
   title: axis-unit correction
   url: https://doi.org/10.1038/s41586-024-07565-z
@@ -1310,11 +1374,15 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-superconducting.md
+  checked_at: '2026-10-14'
+  observed_title: 'Author Correction: Quantum control of a cat qubit with bit-flip times exceeding ten seconds'
+  observed_date: '2024-05-17'
+  check_note: corrects 10.1038/s41586-024-07294-3
 - id: hw-concatenated-bosonic-memory-2025
   title: Concatenated bosonic logical memory (2025)
   url: https://doi.org/10.1038/s41586-025-08642-7
@@ -1327,11 +1395,14 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-superconducting.md
+  checked_at: '2026-10-14'
+  observed_title: Hardware-efficient quantum error correction via concatenated bosonic qubits
+  observed_date: '2025-02-26'
 - id: hw-ldpc-cat-codes-2025
   title: LDPC-cat codes (2025)
   url: https://doi.org/10.1038/s41467-025-56298-8
@@ -1349,6 +1420,8 @@ sources:
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-superconducting.md
+  checked_at: '2026-10-14'
+  check_note: publisher fetch error during the build check
 - id: hw-annealing-vs-classical-2025
   title: Quantum annealing applications versus classical solvers (2025)
   url: https://doi.org/10.1038/s41598-025-96220-2
@@ -1366,6 +1439,8 @@ sources:
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-superconducting.md
+  checked_at: '2026-10-14'
+  check_note: publisher fetch error during the build check
 - id: hw-annealing-error-mitigation-2025
   title: Quantum error mitigation in annealing (2025)
   url: https://doi.org/10.1038/s41534-025-00977-3
@@ -1378,16 +1453,19 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-superconducting.md
+  checked_at: '2026-10-14'
+  observed_title: Quantum error mitigation in quantum annealing
+  observed_date: '2025-03-06'
 - id: hw-ions-four-logical-qubits-2024
   title: Entangling four logical qubits beyond break-even (2024 preprint)
   url: https://arxiv.org/abs/2406.02666
   owner: arxiv.org
-  type: preprint
+  type: peer-reviewed
   kind: paper
   family: trapped-ion
   year: 2024
@@ -1395,11 +1473,16 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-ions-atoms.md
+  checked_at: '2026-10-14'
+  observed_title: Entangling four logical qubits beyond break-even in a nonlocal code
+  observed_date: 2024-06-04; v2 2024-08-05
+  check_note: 'published: Phys. Rev. Lett. 133, 180601, DOI 10.1103/PhysRevLett.133.180601; brief calls it a 2024 preprint'
+  doi: 10.1103/PhysRevLett.133.180601
 - id: hw-ions-code-switching-2025
   title: Experimental fault-tolerant code switching (2025)
   url: https://doi.org/10.1038/s41567-024-02727-2
@@ -1412,11 +1495,14 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-ions-atoms.md
+  checked_at: '2026-10-14'
+  observed_title: Experimental fault-tolerant code switching
+  observed_date: '2025-01-24'
 - id: hw-helios-98-qubit-2026
   title: 98-qubit Helios system (2026)
   url: https://doi.org/10.1038/s41586-026-10676-4
@@ -1429,11 +1515,15 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-ions-atoms.md
+  checked_at: '2026-10-14'
+  observed_title: A 98-qubit trapped-ion quantum computer with all-to-all connectivity
+  observed_date: '2026-06-17'
+  check_note: 'Publisher Correction 2026-07-07: 10.1038/s41586-026-10882-0 (not in the brief)'
 - id: hw-atoms-logical-processor-2023
   title: Reconfigurable-array logical processor (2023/2024)
   url: https://doi.org/10.1038/s41586-023-06927-3
@@ -1446,11 +1536,14 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-ions-atoms.md
+  checked_at: '2026-10-14'
+  observed_title: Logical quantum processor based on reconfigurable atom arrays
+  observed_date: 2023-12-06 (issue 2024)
 - id: hw-atoms-magic-state-2025
   title: Logical magic-state distillation (2025)
   url: https://doi.org/10.1038/s41586-025-09367-3
@@ -1463,11 +1556,14 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-ions-atoms.md
+  checked_at: '2026-10-14'
+  observed_title: Experimental demonstration of logical magic state distillation
+  observed_date: '2025-07-14'
 - id: hw-photonic-cluster-states-2024
   title: Resource-efficient high-dimensional cluster states (2024)
   url: https://doi.org/10.1038/s41566-024-01524-w
@@ -1480,11 +1576,14 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-photonic-spin.md
+  checked_at: '2026-10-14'
+  observed_title: Resource-efficient photonic quantum computation with high-dimensional cluster states
+  observed_date: '2024-09-16'
 - id: hw-photonic-manufacturable-2025
   title: Manufacturable photonic platform (2025)
   url: https://doi.org/10.1038/s41586-025-08820-7
@@ -1497,11 +1596,14 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-photonic-spin.md
+  checked_at: '2026-10-14'
+  observed_title: A manufacturable platform for photonic quantum computing
+  observed_date: '2025-02-26'
 - id: hw-photonic-boosted-bell-2025
   title: Boosted Bell-state measurements (2025)
   url: https://doi.org/10.1038/s41534-025-00986-2
@@ -1514,11 +1616,14 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-photonic-spin.md
+  checked_at: '2026-10-14'
+  observed_title: Boosted Bell-state measurements for photonic quantum computation
+  observed_date: '2025-03-08'
 - id: hw-silicon-pipeline-2024
   title: Pipeline architecture for silicon spin qubits (2024)
   url: https://doi.org/10.1038/s41534-024-00823-y
@@ -1531,11 +1636,14 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-photonic-spin.md
+  checked_at: '2026-10-14'
+  observed_title: Pipeline quantum processor architecture for silicon spin qubits
+  observed_date: '2024-03-12'
 - id: hw-silicon-grover-2025
   title: Grover algorithm in a four-qubit silicon processor (2025)
   url: https://doi.org/10.1038/s41565-024-01853-5
@@ -1548,11 +1656,15 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-photonic-spin.md
+  checked_at: '2026-10-14'
+  observed_title: Grover's algorithm in a four-qubit silicon processor above the fault-tolerant threshold
+  observed_date: '2025-02-20'
+  check_note: 'change-history 2025-02-24: abstract reworded (not a retraction)'
 - id: hw-silicon-foundry-2025
   title: Foundry-compatible unit cells exceeding 99% fidelity (2025)
   url: https://doi.org/10.1038/s41586-025-09531-9
@@ -1565,11 +1677,14 @@ sources:
   volatility: active
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-photonic-spin.md
+  checked_at: '2026-10-14'
+  observed_title: Industry-compatible silicon spin-qubit unit cells exceeding 99% fidelity
+  observed_date: '2025-09-24'
 - id: hw-nv-teleportation-2024
   title: NV–photon teleportation interface (2024)
   url: https://doi.org/10.1038/s41534-024-00910-0
@@ -1587,6 +1702,8 @@ sources:
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-photonic-spin.md
+  checked_at: '2026-10-14'
+  check_note: rate-limited (HTTP 429) by nature.com during the build check
 - id: hw-nv-network-node-2025
   title: Hybrid NV network node with error correction (2025)
   url: https://doi.org/10.1038/s41567-025-02831-x
@@ -1672,6 +1789,8 @@ sources:
   brief_origin: README-11-HARDWARE-AND-RESEARCH.md
   used_by:
   - knowledge/hardware-nmr-helium.md
+  checked_at: '2026-10-14'
+  check_note: arXiv abstract page returned body text without metadata
 - id: hw-helium-charge-photon-2026
   title: Charge–photon strong coupling (2026)
   url: https://doi.org/10.1038/s41567-026-03342-z
@@ -1763,11 +1882,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 5d03335702589cd081797c7ad550782199571a01
+  checked_at: '2026-10-14'
 - id: sdk-qiskit-qiskit-commits
   title: commits
   url: https://github.com/Qiskit/qiskit/commits
@@ -1779,10 +1900,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 5d03335702589cd081797c7ad550782199571a01
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-qiskit-qiskit-issues
   title: issues
   url: https://github.com/Qiskit/qiskit/issues
@@ -1794,10 +1918,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 5d03335702589cd081797c7ad550782199571a01
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-quantumai-cirq
   title: Cirq guides and QAOA example
   url: https://quantumai.google/cirq
@@ -1823,10 +1950,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: cfe22fc6ef5dd1fe54f4354b50cb5bfd7d2cc963
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; example page not fetched
 - id: sdk-quantumlib-cirq
   title: Cirq
   url: https://github.com/quantumlib/Cirq
@@ -1837,11 +1967,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: cfe22fc6ef5dd1fe54f4354b50cb5bfd7d2cc963
+  checked_at: '2026-10-14'
 - id: sdk-quantumlib-cirq-commits
   title: commits
   url: https://github.com/quantumlib/Cirq/commits
@@ -1853,10 +1985,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: cfe22fc6ef5dd1fe54f4354b50cb5bfd7d2cc963
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-quantumlib-cirq-issues
   title: issues
   url: https://github.com/quantumlib/Cirq/issues
@@ -1868,10 +2003,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: cfe22fc6ef5dd1fe54f4354b50cb5bfd7d2cc963
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-felis-docs
   title: Felis documentation
   url: https://felis.alice-bob.com/docs
@@ -1910,11 +2048,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 3c62002cfa16dd89a4738786b07b49cdecb7e60f
+  checked_at: '2026-10-14'
 - id: sdk-alice-bob-sw-emulation-examples
   title: emulation examples
   url: https://github.com/Alice-Bob-SW/emulation-examples
@@ -1925,11 +2065,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 90185c4ba592b4f07d5974bde6577ecb426d6eaa
+  checked_at: '2026-10-14'
 - id: sdk-alice-bob-sw-qiskit-alice-bob-provider-commits
   title: commits
   url: https://github.com/Alice-Bob-SW/qiskit-alice-bob-provider/commits
@@ -1941,10 +2083,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 3c62002cfa16dd89a4738786b07b49cdecb7e60f
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-alice-bob-sw-qiskit-alice-bob-provider-issues
   title: issues
   url: https://github.com/Alice-Bob-SW/qiskit-alice-bob-provider/issues
@@ -1956,10 +2101,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 3c62002cfa16dd89a4738786b07b49cdecb7e60f
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-docs-docs-rigetti-com
   title: Rigetti docs
   url: https://docs.rigetti.com
@@ -1998,11 +2146,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 0c48f7be59ce105cf64ccede72a9f543caeab6f8
+  checked_at: '2026-10-14'
 - id: sdk-rigetti-pyquil-commits
   title: commits
   url: https://github.com/rigetti/pyquil/commits
@@ -2014,10 +2164,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 0c48f7be59ce105cf64ccede72a9f543caeab6f8
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-rigetti-pyquil-issues
   title: issues
   url: https://github.com/rigetti/pyquil/issues
@@ -2029,10 +2182,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 0c48f7be59ce105cf64ccede72a9f543caeab6f8
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-docs-iqm-client
   title: current IQM client docs
   url: https://docs.iqm.tech/iqm-client
@@ -2058,10 +2214,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 139e585af1ad66f863eba1ee89fda233dcc1abdd
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; example page not fetched
 - id: sdk-iqm-finland-sdk
   title: SDK source mirror
   url: https://github.com/iqm-finland/sdk
@@ -2072,11 +2231,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 139e585af1ad66f863eba1ee89fda233dcc1abdd
+  checked_at: '2026-10-14'
 - id: sdk-iqm-finland-sdk-commits
   title: commits
   url: https://github.com/iqm-finland/sdk/commits
@@ -2088,10 +2249,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 139e585af1ad66f863eba1ee89fda233dcc1abdd
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-oqc-community-qat-3-0-0-getting-started-index-ht
   title: QAT getting started
   url: https://oqc-community.github.io/qat/3.0.0/getting_started/index.html
@@ -2116,11 +2280,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 02d99b318c779f7795e437e2164962d307ecc6a5
+  checked_at: '2026-10-14'
 - id: sdk-oqc-community-qat-commits
   title: commits
   url: https://github.com/oqc-community/qat/commits
@@ -2132,10 +2298,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 02d99b318c779f7795e437e2164962d307ecc6a5
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-oqc-community-qat-issues
   title: issues
   url: https://github.com/oqc-community/qat/issues
@@ -2147,10 +2316,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 02d99b318c779f7795e437e2164962d307ecc6a5
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-quantinuum-pytket-docs
   title: TKET examples
   url: https://github.com/Quantinuum/pytket-docs
@@ -2161,11 +2333,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: a616ecd3a67733230fa146747c06994c46df75ef
+  checked_at: '2026-10-14'
 - id: sdk-docs-nexus-trainings-getting-started-html
   title: Nexus examples
   url: https://docs.quantinuum.com/nexus/trainings/getting_started.html
@@ -2190,11 +2364,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 4a554cbc2699de2f95da18eb3c30ff0961bcc536
+  checked_at: '2026-10-14'
 - id: sdk-quantinuum-qnexus
   title: qnexus
   url: https://github.com/Quantinuum/qnexus
@@ -2205,11 +2381,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 8f4ce50dd725dacfc224a0a4b43dcde070b006fc
+  checked_at: '2026-10-14'
 - id: sdk-quantinuum-tket-commits
   title: TKET commits
   url: https://github.com/Quantinuum/tket/commits
@@ -2221,10 +2399,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 4a554cbc2699de2f95da18eb3c30ff0961bcc536
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-quantinuum-tket-issues
   title: TKET issues
   url: https://github.com/Quantinuum/tket/issues
@@ -2236,10 +2417,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 4a554cbc2699de2f95da18eb3c30ff0961bcc536
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-quantinuum-qnexus-commits
   title: qnexus commits
   url: https://github.com/Quantinuum/qnexus/commits
@@ -2251,10 +2435,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 8f4ce50dd725dacfc224a0a4b43dcde070b006fc
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-quantinuum-qnexus-issues
   title: qnexus issues
   url: https://github.com/Quantinuum/qnexus/issues
@@ -2266,10 +2453,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 8f4ce50dd725dacfc224a0a4b43dcde070b006fc
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-docs-tket-extensions-pytket-qiskit-api-html
   title: converter API and limitations
   url: https://docs.quantinuum.com/tket/extensions/pytket-qiskit/api.html
@@ -2308,11 +2498,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 01d6555e569200a2a5802ca59870db48e6531066
+  checked_at: '2026-10-14'
 - id: sdk-quantinuum-pytket-qiskit-commits
   title: commits
   url: https://github.com/Quantinuum/pytket-qiskit/commits
@@ -2324,10 +2516,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 01d6555e569200a2a5802ca59870db48e6531066
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-quantinuum-pytket-qiskit-issues
   title: issues
   url: https://github.com/Quantinuum/pytket-qiskit/issues
@@ -2339,10 +2534,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 01d6555e569200a2a5802ca59870db48e6531066
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-ionq-samples-getting-started
   title: IonQ examples
   url: https://github.com/ionq-samples/getting-started
@@ -2353,11 +2551,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 90f7c9ab8d18d6d4a53006d6c958fecc7438289b
+  checked_at: '2026-10-14'
 - id: sdk-qiskit-community-qiskit-ionq-example
   title: provider examples
   url: https://github.com/qiskit-community/qiskit-ionq/tree/main/example
@@ -2369,10 +2569,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: a4a6da4e452bb55ef42f7dac6add5cc25c28aeb4
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; example page not fetched
 - id: sdk-qiskit-community-qiskit-ionq
   title: community Qiskit provider
   url: https://github.com/qiskit-community/qiskit-ionq
@@ -2383,11 +2586,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: a4a6da4e452bb55ef42f7dac6add5cc25c28aeb4
+  checked_at: '2026-10-14'
 - id: sdk-qiskit-community-qiskit-ionq-commits
   title: provider commits
   url: https://github.com/qiskit-community/qiskit-ionq/commits
@@ -2399,10 +2604,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: a4a6da4e452bb55ef42f7dac6add5cc25c28aeb4
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-qiskit-community-qiskit-ionq-issues
   title: provider issues
   url: https://github.com/qiskit-community/qiskit-ionq/issues
@@ -2414,10 +2622,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: a4a6da4e452bb55ef42f7dac6add5cc25c28aeb4
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-qiskit-community-qiskit-aqt-provider
   title: AQT provider docs
   url: https://qiskit-community.github.io/qiskit-aqt-provider
@@ -2443,10 +2654,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 8012a7dd474ad85e400462ed2793f7dd00afce4f
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; example page not fetched
 - id: sdk-qiskit-community-qiskit-aqt-provider-x
   title: Qiskit AQT provider
   url: https://github.com/qiskit-community/qiskit-aqt-provider
@@ -2457,11 +2671,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 8012a7dd474ad85e400462ed2793f7dd00afce4f
+  checked_at: '2026-10-14'
 - id: sdk-qiskit-community-qiskit-aqt-provider-commits
   title: commits
   url: https://github.com/qiskit-community/qiskit-aqt-provider/commits
@@ -2473,10 +2689,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 8012a7dd474ad85e400462ed2793f7dd00afce4f
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-qiskit-community-qiskit-aqt-provider-issues
   title: issues
   url: https://github.com/qiskit-community/qiskit-aqt-provider/issues
@@ -2488,10 +2707,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 8012a7dd474ad85e400462ed2793f7dd00afce4f
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-pasqal-io-pulser-example
   title: source examples
   url: https://github.com/pasqal-io/Pulser/tree/develop/docs
@@ -2503,10 +2725,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 4f50ea9a64ff648e7432d003812dd9a53b22a673
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; example page not fetched
 - id: sdk-pasqal-io-pulser-commits
   title: commits
   url: https://github.com/pasqal-io/Pulser/commits
@@ -2518,10 +2743,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 4f50ea9a64ff648e7432d003812dd9a53b22a673
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-pasqal-io-pulser-issues
   title: issues
   url: https://github.com/pasqal-io/Pulser/issues
@@ -2533,10 +2761,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 4f50ea9a64ff648e7432d003812dd9a53b22a673
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-pasqal-io-qadence-latest-api-backends-pulser
   title: Pulser bridge and limits
   url: https://pasqal-io.github.io/qadence/latest/api/backends/pulser
@@ -2575,11 +2806,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: cc3148068feb475a815e28c758b233af812d1c3a
+  checked_at: '2026-10-14'
 - id: sdk-pasqal-io-qadence-commits
   title: commits
   url: https://github.com/pasqal-io/qadence/commits
@@ -2591,10 +2824,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: cc3148068feb475a815e28c758b233af812d1c3a
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-pasqal-io-qadence-issues
   title: issues
   url: https://github.com/pasqal-io/qadence/issues
@@ -2606,10 +2842,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: cc3148068feb475a815e28c758b233af812d1c3a
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-bloqade-bloqade-quera-com
   title: Bloqade docs
   url: https://bloqade.quera.com
@@ -2634,11 +2873,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 5a2398baf485da35db593c9f6482b355182eac45
+  checked_at: '2026-10-14'
 - id: sdk-queracomputing-bloqade-commits
   title: commits
   url: https://github.com/QuEraComputing/bloqade/commits
@@ -2650,10 +2891,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 5a2398baf485da35db593c9f6482b355182eac45
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-queracomputing-bloqade-issues
   title: issues
   url: https://github.com/QuEraComputing/bloqade/issues
@@ -2665,10 +2909,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 5a2398baf485da35db593c9f6482b355182eac45
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-perceval-docs
   title: Perceval docs
   url: https://perceval.quandela.net/docs
@@ -2693,11 +2940,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 64ed82f9c5e65f43d5092c92a8e218b255cde41d
+  checked_at: '2026-10-14'
 - id: sdk-quandela-perceval-commits
   title: commits
   url: https://github.com/Quandela/Perceval/commits
@@ -2709,10 +2958,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 64ed82f9c5e65f43d5092c92a8e218b255cde41d
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-quandela-perceval-issues
   title: issues
   url: https://github.com/Quandela/Perceval/issues
@@ -2724,10 +2976,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 64ed82f9c5e65f43d5092c92a8e218b255cde41d
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-perceval-interopdocs
   title: interop docs
   url: https://perceval.quandela.net/interopdocs
@@ -2752,11 +3007,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 49480e974548db713e9271f7e2a0bc534664e34b
+  checked_at: '2026-10-14'
 - id: sdk-quandela-perceval-interop-commits
   title: commits
   url: https://github.com/Quandela/Perceval_Interop/commits
@@ -2768,10 +3025,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 49480e974548db713e9271f7e2a0bc534664e34b
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-quandela-perceval-interop-issues
   title: issues
   url: https://github.com/Quandela/Perceval_Interop/issues
@@ -2783,10 +3043,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 49480e974548db713e9271f7e2a0bc534664e34b
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-dwavesystems-dwave-ocean-sdk
   title: Ocean SDK
   url: https://github.com/dwavesystems/dwave-ocean-sdk
@@ -2797,11 +3060,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 7b2a93054c30c51ac8afa318b496572b6c9b6dd9
+  checked_at: '2026-10-14'
 - id: sdk-dwavesystems-dimod
   title: dimod
   url: https://github.com/dwavesystems/dimod
@@ -2812,11 +3077,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 7eadc49df61fdf01848d882636b719548d30b142
+  checked_at: '2026-10-14'
 - id: sdk-dwavesystems-dwave-ocean-sdk-commits
   title: commits
   url: https://github.com/dwavesystems/dwave-ocean-sdk/commits
@@ -2828,10 +3095,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 7b2a93054c30c51ac8afa318b496572b6c9b6dd9
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-dwavesystems-dwave-ocean-sdk-issues
   title: issues
   url: https://github.com/dwavesystems/dwave-ocean-sdk/issues
@@ -2843,10 +3113,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 7b2a93054c30c51ac8afa318b496572b6c9b6dd9
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-qristal-en-stable
   title: Qristal docs
   url: https://qristal.readthedocs.io/en/stable
@@ -2872,10 +3145,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: a0bcfbf4e56adf443e981469e90013e999015183
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; example page not fetched
 - id: sdk-qbrilliance-qristal-core
   title: Qristal core
   url: https://github.com/qbrilliance/qristal-core
@@ -2886,11 +3162,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: a0bcfbf4e56adf443e981469e90013e999015183
+  checked_at: '2026-10-14'
 - id: sdk-qbrilliance-qristal-core-commits
   title: commits
   url: https://github.com/qbrilliance/qristal-core/commits
@@ -2902,10 +3180,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: a0bcfbf4e56adf443e981469e90013e999015183
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-qbrilliance-qristal-core-issues
   title: issues
   url: https://github.com/qbrilliance/qristal-core/issues
@@ -2917,10 +3198,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: a0bcfbf4e56adf443e981469e90013e999015183
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-doc-doc-spinqit-index-html
   title: SDK docs
   url: https://doc.spinq.com/doc/spinqit/index.html
@@ -2946,10 +3230,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 99dc77ed59920d56898eb0b5e66d0214273ec090
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; example page not fetched
 - id: sdk-spinqtech-spinqit
   title: SpinQit
   url: https://github.com/SpinQTech/SpinQit
@@ -2960,11 +3247,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 99dc77ed59920d56898eb0b5e66d0214273ec090
+  checked_at: '2026-10-14'
 - id: sdk-spinqtech-spinqit-commits
   title: commits
   url: https://github.com/SpinQTech/SpinQit/commits
@@ -2976,10 +3265,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 99dc77ed59920d56898eb0b5e66d0214273ec090
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-spinqtech-spinqit-issues
   title: issues
   url: https://github.com/SpinQTech/SpinQit/issues
@@ -2991,10 +3283,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 99dc77ed59920d56898eb0b5e66d0214273ec090
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-classiq-classiq-library-commits
   title: example commits
   url: https://github.com/Classiq/classiq-library/commits
@@ -3006,10 +3301,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 9e5b7bed123716274150e1221addb03e51a785e7
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-classiq-classiq-library-issues
   title: example issues
   url: https://github.com/Classiq/classiq-library/issues
@@ -3021,10 +3319,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 9e5b7bed123716274150e1221addb03e51a785e7
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-classiq-classiq-library-x
   title: releases
   url: https://github.com/Classiq/classiq-library/releases
@@ -3035,11 +3336,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 9e5b7bed123716274150e1221addb03e51a785e7
+  checked_at: '2026-10-14'
 - id: sdk-pennylaneai-pennylane-lightning
   title: Lightning
   url: https://github.com/PennyLaneAI/pennylane-lightning
@@ -3050,11 +3353,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: cf9c83bf8c2839a8a76808a62f3dd535b78bdb2e
+  checked_at: '2026-10-14'
 - id: sdk-pennylaneai-pennylane-commits
   title: commits
   url: https://github.com/PennyLaneAI/pennylane/commits
@@ -3066,10 +3371,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: c1fcc1c35d12aa276f502a8c095c45903e5f5af6
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-pennylaneai-pennylane-issues
   title: issues
   url: https://github.com/PennyLaneAI/pennylane/issues
@@ -3081,10 +3389,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: c1fcc1c35d12aa276f502a8c095c45903e5f5af6
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-docs-braket-latest-developerguide-braket-referen
   title: AWS SDK and repository index
   url: https://docs.aws.amazon.com/braket/latest/developerguide/braket-references.html
@@ -3109,11 +3420,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 1f69001eb9b259ac6ea0afb2c6921f6713306391
+  checked_at: '2026-10-14'
 - id: sdk-amazon-braket-amazon-braket-sdk-python
   title: Python SDK
   url: https://github.com/amazon-braket/amazon-braket-sdk-python
@@ -3124,11 +3437,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: fe9cb10bcd5e740bf083e89b0f9cd18629e7d1b8
+  checked_at: '2026-10-14'
 - id: sdk-amazon-braket-amazon-braket-sdk-python-commits
   title: commits
   url: https://github.com/amazon-braket/amazon-braket-sdk-python/commits
@@ -3140,10 +3455,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: fe9cb10bcd5e740bf083e89b0f9cd18629e7d1b8
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-amazon-braket-amazon-braket-sdk-python-issues
   title: issues
   url: https://github.com/amazon-braket/amazon-braket-sdk-python/issues
@@ -3155,10 +3473,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: fe9cb10bcd5e740bf083e89b0f9cd18629e7d1b8
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-nvidia-cuda-quantum
   title: CUDA-Q docs
   url: https://nvidia.github.io/cuda-quantum
@@ -3184,10 +3505,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 88ba6e285982f3fa840bf9b080f8f9bc84227757
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; example page not fetched
 - id: sdk-nvidia-cuda-quantum-x
   title: CUDA-Q
   url: https://github.com/NVIDIA/cuda-quantum
@@ -3198,11 +3522,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 88ba6e285982f3fa840bf9b080f8f9bc84227757
+  checked_at: '2026-10-14'
 - id: sdk-nvidia-cuda-quantum-commits
   title: commits
   url: https://github.com/NVIDIA/cuda-quantum/commits
@@ -3214,10 +3540,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 88ba6e285982f3fa840bf9b080f8f9bc84227757
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-nvidia-cuda-quantum-issues
   title: issues
   url: https://github.com/NVIDIA/cuda-quantum/issues
@@ -3229,10 +3558,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 88ba6e285982f3fa840bf9b080f8f9bc84227757
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-learn-en-us-azure-quantum-overview-what-is-qshar
   title: Q# docs
   url: https://learn.microsoft.com/en-us/azure/quantum/overview-what-is-qsharp-and-qdk
@@ -3258,10 +3590,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 83cc8ffadc01021f41d8216c4cc3a7cde59f7a0c
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; example page not fetched
 - id: sdk-microsoft-qdk
   title: QDK
   url: https://github.com/microsoft/qdk
@@ -3272,11 +3607,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 83cc8ffadc01021f41d8216c4cc3a7cde59f7a0c
+  checked_at: '2026-10-14'
 - id: sdk-microsoft-qdk-commits
   title: commits
   url: https://github.com/microsoft/qdk/commits
@@ -3288,10 +3625,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 83cc8ffadc01021f41d8216c4cc3a7cde59f7a0c
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-microsoft-qdk-issues
   title: issues
   url: https://github.com/microsoft/qdk/issues
@@ -3303,10 +3643,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 83cc8ffadc01021f41d8216c4cc3a7cde59f7a0c
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-xanaduai-strawberryfields
   title: Strawberry Fields
   url: https://github.com/XanaduAI/strawberryfields
@@ -3317,11 +3660,13 @@ sources:
   volatility: volatile
   source_date: living
   last_verified: '2026-10-14'
-  verification: brief
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 162125d8ad5fd5488322a30c520253189596adf5
+  checked_at: '2026-10-14'
 - id: sdk-xanaduai-strawberryfields-commits
   title: commit
   url: https://github.com/XanaduAI/strawberryfields/commits
@@ -3333,10 +3678,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 162125d8ad5fd5488322a30c520253189596adf5
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; commits page not fetched
 - id: sdk-xanaduai-strawberryfields-issues
   title: issue
   url: https://github.com/XanaduAI/strawberryfields/issues
@@ -3348,10 +3696,13 @@ sources:
   source_date: living
   last_verified: '2026-10-14'
   verification: brief
-  link_status: not-checked
+  link_status: repository-reachable
   brief_origin: README-12-SDK-SOURCE-MAP.md
   used_by:
   - registry/backends.yml
+  head_sha: 162125d8ad5fd5488322a30c520253189596adf5
+  checked_at: '2026-10-14'
+  check_note: repository reachable via git ls-remote; issues page not fetched
 - id: sdk-pytket-extensions-status
   title: Quantinuum lists `pytket-cirq`, `pytket-pennylane`, and `pytket-pyquil` as unmaintained
   url: https://docs.quantinuum.com/tket/api-docs/extensions.html
@@ -3491,6 +3842,7 @@ sources:
   used_by:
   - plugin.json
   - scripts/validate_package.py
+  kind: docs
 - id: copilot-custom-agents-config
   title: Custom agents configuration
   url: https://docs.github.com/en/copilot/reference/custom-agents-configuration
@@ -3503,6 +3855,7 @@ sources:
   link_status: not-checked
   used_by:
   - com.github.copilot/agents/
+  kind: docs
 - id: pulser-2022
   title: 'Silvério et al., Pulser: an open-source package for the design of pulse sequences in programmable neutral-atom arrays'
   url: https://doi.org/10.22331/q-2022-01-24-629
@@ -3511,7 +3864,29 @@ sources:
   volatility: stable
   source_date: '2022'
   last_verified: 2026-10-13
-  verification: v2-build
-  link_status: not-checked
+  verification: live
+  link_status: reachable
   used_by:
   - knowledge/providers-pasqal-pulser.md
+  checked_at: '2026-10-14'
+  observed_title: 'Pulser: An open-source package for the design of pulse sequences in programmable neutral-atom arrays'
+  observed_date: '2022-01-24'
+  kind: paper
+- id: hw-helios-98-qubit-publisher-correction-2026
+  title: 'Publisher Correction: A 98-qubit trapped-ion quantum computer with all-to-all connectivity'
+  url: https://doi.org/10.1038/s41586-026-10882-0
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: trapped-ion
+  year: 2026
+  doi: 10.1038/s41586-026-10882-0
+  correction_of: hw-helios-98-qubit-2026
+  volatility: active
+  source_date: '2026-07-07'
+  last_verified: '2026-10-14'
+  verification: linked-from-live-page
+  link_status: not-checked
+  brief_origin: found during build check
+  used_by:
+  - knowledge/hardware-ions-atoms.md

@@ -1,0 +1,14 @@
+example: false
+origin: build-observation        # not conversation-derived; no consent record required
+consent: "not applicable (found by the 3.1.1 build, no user data)"
+scope: plugin
+prompt_category: conversion
+expected_behaviour: Classiq QAOA uses phase(-cost(v), gamma) and states RX(theta)=exp(-i theta X/2); angles from an RX(2 beta) convention are relabelled, never reused.
+actual_failure: The v2 Pulser->Classiq walk-through used phase(+cost) with interleaved angles, a different sign and parameter layout from the version-matched official example.
+risk: Angles and optimizer results silently incomparable across SDKs; a reported optimum may come from a different unitary family.
+sanitized_evidence: "classiq 1.32.0 docstring RX = exp(-i theta X/2); official qaoa.ipynb at 9e5b7bed uses phase(-maxcut_cost(v), gamma)."
+affected: knowledge/providers-classiq.md
+version: {plugin: 3.1.1, client: unverified, model: unspecified}
+counterexample: Qiskit qaoa_ansatz already uses the exp(-i gamma H) convention with its own RX(2 beta) mixer; it must not be relabelled.
+proposed_assertion: examples/conversion/pulser-to-classiq-qaoa/classiq/test_example.py::test_rx_convention_and_beta_relabelling
+retention: keep (regression for convert)

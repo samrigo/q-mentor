@@ -1,0 +1,14 @@
+example: false
+origin: build-observation
+consent: "not applicable (found by the 3.1.1 build, no user data)"
+scope: plugin
+prompt_category: conversion
+expected_behaviour: A compiler pass is called an optimization only after resources are measured against the uncompiled circuit.
+actual_failure: pytket FullPeepholeOptimise doubled two-qubit gates (30 -> 60) and depth (20 -> 130) on the six-bond QAOA circuit while preserving the unitary.
+risk: Calling compiled code "optimized" when it is strictly more expensive.
+sanitized_evidence: "rebase: 30 ZZPhase, depth 21; peephole: 60 ZZPhase, depth 130; both unitary error < 1e-14"
+affected: examples/bond-selection/pytket/adapter.py
+version: {plugin: 3.1.1, client: unverified, model: unspecified}
+counterexample: On CX-heavy circuits FullPeepholeOptimise can reduce two-qubit count; the comparison must stay measured, not assumed.
+proposed_assertion: examples/bond-selection/pytket/test_example.py::test_compilation_preserves_semantics_and_keeps_cheaper_pass
+retention: keep (regression)

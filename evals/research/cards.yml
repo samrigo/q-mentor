@@ -1,0 +1,52 @@
+# Seeded evidence-card fixtures (README-03, README-05 milestone 6). scripts/score_evidence.py scores each card
+# with the 0-2 rubric and applies the promotion and claim gates; `expect` is the required outcome.
+# Cards are synthetic test inputs, except where `source_id` names a registry entry.
+cards:
+  - id: vendor-random-search
+    claim: "Annealer is 100x faster than classical for portfolio selection"
+    source_type: vendor-result
+    baseline: {kind: random-search, tuned: false, end_to_end: false}
+    artifacts: {code: false, data: false, seeds: false}
+    scale: toy
+    replication: unknown
+    claims_advantage: true
+    expect: {max_total: 2, advantage_claim: reject, status: candidate}
+  - id: preprint-no-artifacts
+    claim: "QAOA beats simulated annealing on 50-variable portfolios"
+    source_type: preprint
+    baseline: {kind: tuned-heuristic, tuned: true, end_to_end: false}
+    artifacts: {code: false, data: false, seeds: false}
+    scale: small
+    replication: unknown
+    claims_advantage: true
+    expect: {max_total: 4, advantage_claim: reject, status: candidate}
+  - id: peer-reviewed-memory-paper
+    claim: "Logical error rate falls with code distance on a superconducting processor"
+    source_id: hw-google-below-threshold-2025
+    source_type: peer-reviewed
+    baseline: {kind: not-applicable, tuned: true, end_to_end: true}
+    artifacts: {code: true, data: true, seeds: true}
+    scale: device
+    replication: same-team
+    claims_advantage: false
+    application_claim: true
+    expect: {min_total: 6, application_claim: reject, status: candidate}
+  - id: conflicting-results
+    claim: "Annealing improves portfolio selection quality"
+    source_type: peer-reviewed
+    baseline: {kind: exact-solver, tuned: true, end_to_end: true}
+    artifacts: {code: true, data: true, seeds: false}
+    scale: small
+    replication: failed
+    contradicted_by: ["synthetic-counter-study"]
+    claims_advantage: false
+    expect: {contradiction_visible: true, status: candidate}
+  - id: strong-but-unpromoted
+    claim: "Tuned classical solver matches the quantum pipeline on all reported instances"
+    source_type: peer-reviewed
+    baseline: {kind: exact-solver, tuned: true, end_to_end: true}
+    artifacts: {code: true, data: true, seeds: true}
+    scale: decision
+    replication: independent
+    claims_advantage: false
+    expect: {min_total: 9, status: candidate}

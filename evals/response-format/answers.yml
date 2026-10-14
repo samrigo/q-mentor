@@ -579,9 +579,9 @@ cases:
     skills_used: [q-mentor-pqc-scan]
     validation_state: locally-executed
     fields:
-      Finding: "3 public-key findings (RSA, ECDH, ECDSA) and 2 symmetric/hash notes (AES-128, SHA-256)."
-      Evidence: "`scripts/pqc_inventory.py` local computation on `evals/behavior/pqc-fixtures`: tls_client.py:12 RSA (high), kex.conf:3 ECDH (medium); official standard FIPS 203 (`fips-203`)."
-      Limit: "Symmetric/hash items are Grover-type considerations, not Shor-type breaks; one comment match is low confidence."
+      Finding: "4 public-key findings (RSA and ECC in tls_client.py; DH and ECC in kex.conf), 2 symmetric/hash notes (AES-128, SHA-256), 1 low-confidence text match."
+      Evidence: "`scripts/pqc_inventory.py` local computation on `evals/behavior/pqc-fixtures`: tls_client.py RSA and ECC (high, import + call site), kex.conf DH and ECC (medium); official standard FIPS 203 (`fips-203`)."
+      Limit: "Symmetric/hash items are Grover-type considerations, not Shor-type breaks; the notes.md RSA mention is a low-confidence text match."
       Next: "Security owner triages harvest-now-decrypt-later exposure for stored ciphertexts."
   - id: pqc-blocked
     skill: q-mentor-pqc-scan
