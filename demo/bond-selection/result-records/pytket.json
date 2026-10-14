@@ -1,0 +1,118 @@
+{
+  "schema": "qmentor.result-record.v3",
+  "target": "pytket",
+  "versions": {
+    "pytket": "2.18.5"
+  },
+  "baseline": {
+    "method": "exhaustive enumeration",
+    "states": 64,
+    "optimum": {
+      "bitstring": "101010",
+      "selected": [
+        "A",
+        "C",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.9,
+      "risk": 1.67,
+      "duration": 14.7,
+      "energy": -9.3725
+    },
+    "unique": true,
+    "runner_up": {
+      "bitstring": "100110",
+      "selected": [
+        "A",
+        "D",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.3,
+      "risk": 1.38,
+      "duration": 15.5,
+      "energy": -9.1675
+    },
+    "gap": 0.205,
+    "best_infeasible_energy": 5.1275,
+    "wall_clock_s": 0.000416
+  },
+  "quantum": {
+    "algorithm": "QAOA p=2, COBYLA maxiter=150, 4 seeded starts, exact expectation",
+    "backend": "pytket Circuit.get_statevector (local exact) + numpy seeded sampling",
+    "seed": 7,
+    "shots": 4096,
+    "qubits": 6,
+    "resources_source": {
+      "gates": 60,
+      "two_qubit_gates": 30,
+      "depth": 20,
+      "gate_types": [
+        "H",
+        "Rx",
+        "Rz",
+        "ZZPhase"
+      ]
+    },
+    "compilation": {
+      "rebase": {
+        "gates": 66,
+        "two_qubit_gates": 30,
+        "depth": 21,
+        "gate_types": [
+          "PhasedX",
+          "Rz",
+          "ZZPhase"
+        ],
+        "unitary_error": 3.925231146709438e-16
+      },
+      "peephole": {
+        "gates": 360,
+        "two_qubit_gates": 60,
+        "depth": 130,
+        "gate_types": [
+          "PhasedX",
+          "Rz",
+          "ZZPhase"
+        ],
+        "unitary_error": 2.756619159146631e-15
+      },
+      "chosen": "rebase"
+    },
+    "best_sampled": {
+      "bitstring": "101010",
+      "selected": [
+        "A",
+        "C",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.9,
+      "risk": 1.67,
+      "duration": 14.7,
+      "energy": -9.3725,
+      "count": 188
+    },
+    "best_feasible_sampled": {
+      "bitstring": "101010",
+      "selected": [
+        "A",
+        "C",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.9,
+      "risk": 1.67,
+      "duration": 14.7,
+      "energy": -9.3725,
+      "count": 188
+    },
+    "feasibility_rate": 0.9031,
+    "optimum_probability": 0.0459,
+    "wall_clock_s": 1.606
+  },
+  "evidence_level": "executable (level 2); matching a 64-state toy is not quantum advantage",
+  "recorded_on": "2026-10-14",
+  "environment": "CPython 3.13.16, x86_64 Linux, fresh venv from requirements.lock"
+}

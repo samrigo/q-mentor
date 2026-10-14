@@ -29,14 +29,8 @@ from pyflakes import api as flakes_api
 from pyflakes import reporter as flakes_reporter
 
 ROOT = Path(__file__).resolve().parents[1]
-TARGETS = [
-    "examples/bond-selection/qiskit",
-    "examples/bond-selection/pennylane",
-    "examples/bond-selection/dwave",
-    "examples/bond-selection/pasqal-pulser",
-    "examples/bond-selection/classiq",
-    "examples/conversion/pulser-to-classiq/classiq",
-]
+# Every folder under examples/ with a requirements.lock is a target; nothing is hand-listed.
+TARGETS = sorted(str(p.parent.relative_to(ROOT)) for p in (ROOT / "examples").rglob("requirements.lock"))
 CONTRACT_FILES = ["README.md", "requirements.in", "requirements.lock", "main.py", "adapter.py", "test_example.py", "expected.json"]
 REMOTE_CALLS = re.compile(r"\b(synthesize\(|ExecutionSession\(|DWaveSampler\(|LeapHybrid\w*\(|QPUBackend\(|QiskitRuntimeService\()")
 NETWORK = re.compile(r"\b(requests\.(get|post)|urllib\.request|http\.client|socket\.socket)\b")
@@ -113,8 +107,8 @@ def static_examples() -> List[str]:
             reasons = scan_python(py)
             if reasons:
                 errors.append(f"{py.relative_to(ROOT)}: {reasons}")
-    for py in sorted((ROOT / "scripts").glob("*.py")) + [ROOT / "demo" / "bond-selection" / "canonical.py",
-                                                          ROOT / "examples/conversion/pulser-to-classiq/extract_ir.py"]:
+    extra = [p for p in (ROOT / "examples").rglob("*.py") if not any(str(p).startswith(str(ROOT / t) + "/") for t in TARGETS)]
+    for py in sorted((ROOT / "scripts").glob("*.py")) + [ROOT / "demo" / "bond-selection" / "canonical.py"] + sorted(extra):
         # Maintainer scripts: network use is allowed only behind explicit --live flags; the
         # validator itself contains the placeholder patterns it searches for.
         ignore = {"network-call"} | ({"placeholder"} if py.name == "validate_examples.py" else set())

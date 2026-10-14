@@ -1,0 +1,8 @@
+{
+  "schema": "qmentor.expected.v3",
+  "target": "perceval",
+  "six_bond": {"status": "conditional-impractical", "max_success_probability": 1e-20, "observed_success_probability": 1.8453476844116582e-34},
+  "sub_problem": {"labels": ["A", "C"], "optimum": "01", "energy": -3.425},
+  "native": {"unconditional_success_probability": 0.00823045267489712, "observed_tvd": 5.0e-16},
+  "tolerances": {"energy_abs": 1e-9, "tvd": 1e-9}
+}

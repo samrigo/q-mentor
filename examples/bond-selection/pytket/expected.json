@@ -1,0 +1,51 @@
+{
+  "schema": "qmentor.expected.v3",
+  "problem_id": "six-bond-selection",
+  "states_enumerated": 64,
+  "optimum": {
+    "bitstring": "101010",
+    "x": [
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+    ],
+    "selected": [
+      "A",
+      "C",
+      "E"
+    ],
+    "yield_score": 11.9,
+    "risk": 1.67,
+    "duration": 14.7,
+    "energy": -9.3725
+  },
+  "runner_up": {
+    "bitstring": "100110",
+    "selected": [
+      "A",
+      "D",
+      "E"
+    ],
+    "energy": -9.1675
+  },
+  "gap": 0.205,
+  "unique_optimum": true,
+  "penalty_separation": {
+    "best_infeasible_energy": 5.1275,
+    "separates": true
+  },
+  "tolerances": {
+    "energy_abs": 1e-09,
+    "metric_abs": 1e-09
+  },
+  "verdict": "classical-now",
+  "verdict_reason": "64 states are trivially enumerable; quantum is a teaching PoC only",
+  "target": "pytket",
+  "quantum": {
+    "min_optimum_probability": 0.015625,
+    "note": "heuristic: must beat a uniform random guess (1/64) and never beat the exact optimum"
+  }
+}

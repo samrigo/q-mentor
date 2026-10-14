@@ -1,0 +1,72 @@
+{
+  "schema": "qmentor.result-record.v3",
+  "target": "bloqade",
+  "versions": {
+    "bloqade-analog": "0.16.9",
+    "numpy": "2.2.6"
+  },
+  "baseline": {
+    "six_bond": {
+      "bitstring": "101010",
+      "selected": [
+        "A",
+        "C",
+        "E"
+      ],
+      "feasible": true,
+      "yield_score": 11.9,
+      "risk": 1.67,
+      "duration": 14.7,
+      "energy": -9.3725
+    },
+    "native_classical_ground_state": {
+      "bitstring": "10101",
+      "energy": -44.686512
+    }
+  },
+  "capability_report": {
+    "schema": "qmentor.capability-report.v3",
+    "problem_id": "six-bond-selection",
+    "target": {
+      "provider": "QuEra",
+      "sdk": "bloqade-analog 0.16.9",
+      "backend": "bloqade python emulator / Aquila AHS",
+      "physical_family": "neutral-atom",
+      "model": "analog",
+      "support_level": "tested-local"
+    },
+    "status": "unsupported-exact",
+    "checks": {
+      "couplings_required": 15,
+      "geometric_degrees_of_freedom_2d": 9,
+      "non_positive_couplings": 0,
+      "best_fit_max_relative_coupling_error": 3.7552,
+      "exact_tolerance": 0.01,
+      "distinct_linear_terms": 6,
+      "local_detuning": "site-dependent scale factors in [0, 1] times one global waveform (Aquila-style); cannot fix the geometry mismatch"
+    },
+    "lost_semantics": [
+      "15 independent pair couplings",
+      "arbitrary coupling ratios"
+    ],
+    "alternatives": [
+      "gate-model QAOA (Qiskit, Cirq, pytket) - exact energy mapping",
+      "D-Wave BQM (dimod) - exact energy model",
+      "a geometry-native problem on Bloqade (this folder's main.py)"
+    ]
+  },
+  "quantum": {
+    "algorithm": "adiabatic sweep: Omega 0->15.7->0 rad/us, delta -16->+16 rad/us over 4.0 us",
+    "backend": "bloqade.analog python emulator (local, noiseless)",
+    "atoms": 5,
+    "spacing_um": 6.1,
+    "most_probable": "10101",
+    "ground_state_probability": 0.516,
+    "shots": 2000,
+    "sampled_ground_state_fraction": 0.505,
+    "wall_clock_s": 1.883
+  },
+  "evidence_level": "executable (level 2) for the native problem; the six-bond QUBO is unsupported-exact here",
+  "recorded_on": "2026-10-14",
+  "environment": "CPython 3.13.16, x86_64 Linux, fresh venv from requirements.lock"
+}
