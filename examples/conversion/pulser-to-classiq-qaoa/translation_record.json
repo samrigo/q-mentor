@@ -1,0 +1,71 @@
+{
+  "schema": "qmentor.translation-record.v3",
+  "edge_id": "pulser-to-classiq-shared-qubo",
+  "route_class": "R",
+  "source": {
+    "framework": "pulser",
+    "version": "1.9.1",
+    "entry": "examples/conversion/pulser-to-classiq-qaoa/source/adapter.py::build_sequence"
+  },
+  "target": {
+    "framework": "classiq",
+    "version": "1.32.0",
+    "entry": "classiq/adapter.py::build_main"
+  },
+  "overall_status": "reimplementation",
+  "summary": "Shared five-variable QUBO reimplemented as Classiq QAOA through CanonicalProblem; analog schedule not converted.",
+  "mappings": [
+    {
+      "source_semantic": "register geometry + C6/r^6 (10 pair couplings)",
+      "target": "quadratic terms of cost(v)",
+      "status": "exact",
+      "evidence": "classiq/test_example.py::test_exported_cost_matches_canonical_on_all_states"
+    },
+    {
+      "source_semantic": "final detuning (uniform linear term)",
+      "target": "linear terms of cost(v)",
+      "status": "exact",
+      "evidence": "same test, all 32 states"
+    },
+    {
+      "source_semantic": "measurement in ground-rydberg basis, bit order q0..q4",
+      "target": "v[0..4] computational basis",
+      "status": "exact",
+      "evidence": "classiq/test_example.py::test_bit_order_round_trip"
+    },
+    {
+      "source_semantic": "adiabatic Omega(t), delta(t) schedule",
+      "target": "QAOA cost/mixer layers",
+      "status": "reimplementation",
+      "evidence": "different algorithm; compared only on decoded energy and optimum probability"
+    },
+    {
+      "source_semantic": "device noise, SPAM, pulse timing",
+      "target": "none",
+      "status": "unsupported-exact",
+      "evidence": "no circuit equivalent; evals/conversion/cases.yml#analog-schedule-exact-claim"
+    }
+  ],
+  "losses": [
+    "analog adiabatic evolution",
+    "device noise model",
+    "pulse timing and waveform shapes"
+  ],
+  "generated_files": [
+    "classiq/adapter.py",
+    "classiq/main.py",
+    "classiq/run_remote.py",
+    "classiq/test_example.py",
+    "classiq/pulser_qaoa_p1.qmod",
+    "classiq/pulser_qaoa_p2.qmod",
+    "classiq/pulser_qaoa_p4.qmod",
+    "optimization_record.json"
+  ],
+  "validation": {
+    "observed_state": "imported",
+    "detail": "Classiq models built offline (p=1,2,4); cost verified on all 32 states; variants locally executed on a reference simulator; Classiq synthesis/execution unverified (credentials)",
+    "commands": [
+      "python scripts/validate_examples.py --only pulser-to-classiq-qaoa"
+    ]
+  }
+}

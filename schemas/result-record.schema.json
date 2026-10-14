@@ -3,14 +3,51 @@
   "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v3/schemas/result-record.schema.json",
   "title": "qmentor.result-record.v3",
   "type": "object",
-  "required": ["schema", "target", "versions", "baseline", "evidence_level"],
+  "required": [
+    "schema",
+    "target",
+    "versions",
+    "baseline",
+    "evidence_level"
+  ],
   "properties": {
-    "schema": {"const": "qmentor.result-record.v3"},
-    "target": {"enum": ["qiskit", "classiq", "dwave-ocean", "pasqal-pulser", "pennylane"]},
-    "versions": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "string"}},
-    "baseline": {"type": "object"},
-    "seed": {"type": "integer"},
-    "shots": {"type": "integer"},
-    "evidence_level": {"type": "string", "pattern": "(not quantum advantage|no quantum hardware)"}
+    "schema": {
+      "const": "qmentor.result-record.v3"
+    },
+    "target": {
+      "enum": [
+        "qiskit",
+        "cirq",
+        "pytket",
+        "classiq",
+        "dwave-ocean",
+        "dwave",
+        "pasqal-pulser",
+        "pennylane",
+        "bloqade",
+        "perceval",
+        "pasqal-pulser (source)"
+      ]
+    },
+    "versions": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "baseline": {
+      "type": "object"
+    },
+    "seed": {
+      "type": "integer"
+    },
+    "shots": {
+      "type": "integer"
+    },
+    "evidence_level": {
+      "type": "string",
+      "pattern": "(not quantum advantage|no quantum hardware)"
+    }
   }
 }

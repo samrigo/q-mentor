@@ -118,13 +118,42 @@ def static_examples() -> List[str]:
     return errors
 
 
+def route_claim_reasons(case: dict, rc) -> List[str]:
+    """Why a claimed conversion must be refused (README-14), or [] if the claim is supported by the registries."""
+    if "edge" in case:
+        edge = next(e for e in rc.edges()["edges"] if e["id"] == case["edge"])
+        if case.get("claimed_default") and edge["maintained_bridge"]["status"] in ("unmaintained", "archived", "experimental"):
+            return ["unmaintained-bridge"]
+        return []
+    route = rc.classify(case["source"], case["target"])
+    target = rc.backends()[case["target"]]
+    reasons = []
+    if target["support_level"] == "research-only":
+        reasons.append("research-only-target")
+    if case.get("emits_code") and not route.may_emit_code:
+        reasons.append("profiled-target-no-code" if target["support_level"] == "profiled" else "no-shipped-edge")
+    if case["claimed_class"] != route.classification and "research-only-target" not in reasons:
+        reasons.append("class-mismatch")
+    return reasons
+
+
 def conversion_fixtures() -> List[str]:
     sys.path.insert(0, str(ROOT / "demo" / "bond-selection"))
+    sys.path.insert(0, str(ROOT / "scripts"))
     import canonical
+
+    import route_conversion
 
     base = ROOT / "evals" / "conversion"
     errors = []
     for case in yaml.safe_load((base / "cases.yml").read_text())["cases"]:
+        if case["kind"] == "route-claim":
+            reasons = route_claim_reasons(case, route_conversion)
+            ok = (not reasons) if case["expect"] == "accept" else case["reason"] in reasons
+            print(f"{'PASS' if ok else 'FAIL'} route {case['id']}: {reasons or 'accepted'}")
+            if not ok:
+                errors.append(f"route claim {case['id']}: got {reasons}")
+            continue
         path = (base / case["file"]).resolve()
         if case["kind"] in ("source", "target"):
             reasons = scan_python(path)

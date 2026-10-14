@@ -1,0 +1,8 @@
+{
+  "schema": "qmentor.expected.v3",
+  "target": "gate-to-gate",
+  "route_class": "E",
+  "edges": ["qiskit-to-pytket", "qiskit-to-cirq-qasm2"],
+  "refused_bridges": ["pytket-cirq", "pytket-pennylane", "pytket-pyquil"],
+  "tolerances": {"unitary_abs": 1e-9}
+}

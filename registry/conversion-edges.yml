@@ -74,7 +74,7 @@ edges:
     preserved: [every bitstring's energy including offset, variable order, decode]
     losses: [annealing dynamics, embedding and chain effects on a QPU are outside the energy model]
     proof_fixture: examples/bond-selection/dwave/test_example.py
-    negative_fixture: evals/conversion/cases.yml#bqm-offset-dropped
+    negative_fixture: examples/conversion/bqm-to-qaoa/test_example.py::test_offset_dropped_is_rejected
     success_probability: null
     approximation_error: null
     maintained_bridge: {name: dimod BinaryQuadraticModel, package: dimod, version: 0.12.22, status: maintained, docs: "https://docs.dwavequantum.com/en/latest/ocean/api_ref_dimod/models.html", issues_reviewed: "https://github.com/dwavesystems/dwave-ocean-sdk/issues"}
@@ -86,8 +86,8 @@ edges:
     classification: R
     preserved: [canonical energy of every bitstring, feasible set, decode]
     losses: [algorithm changes from annealing to QAOA; sampling distributions, schedules and runtimes are not comparable]
-    proof_fixture: evals/conversion/test_bqm_vs_qaoa.py
-    negative_fixture: evals/conversion/test_bqm_vs_qaoa.py::test_reimplementation_not_labelled_exact
+    proof_fixture: examples/conversion/bqm-to-qaoa/test_example.py::test_qiskit_operator_matches_canonical_on_all_states
+    negative_fixture: examples/conversion/bqm-to-qaoa/test_example.py::test_reimplementation_not_labelled_exact
     success_probability: null
     approximation_error: null
     maintained_bridge: {name: canonical QUBO (dimod to_qubo / qiskit SparsePauliOp), package: null, version: null, status: canonical-model, docs: "https://qiskit-community.github.io/qiskit-optimization/tutorials/02_converters_for_quadratic_programs.html", issues_reviewed: null}
@@ -99,7 +99,7 @@ edges:
     classification: R
     preserved: [geometry-derived QUBO (C6/r^6 couplings, detuning linear terms), bit order, decode, feasible set]
     losses: [analog adiabatic schedule, device noise and SPAM, pulse timing (all unsupported-exact on a gate model)]
-    proof_fixture: examples/conversion/pulser-to-classiq-qaoa/test_example.py
+    proof_fixture: examples/conversion/pulser-to-classiq-qaoa/classiq/test_example.py::test_exported_cost_matches_canonical_on_all_states
     negative_fixture: evals/conversion/cases.yml#analog-schedule-exact-claim
     success_probability: null
     approximation_error: null

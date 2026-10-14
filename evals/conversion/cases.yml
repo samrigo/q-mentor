@@ -10,3 +10,13 @@ cases:
   - {file: energy_changing_expression.txt, kind: energy-expression, problem: six-bond, expect: reject, reason: energy-mismatch}
   - {file: good_reimplementation_expression.txt, kind: energy-expression, problem: six-bond, expect: accept}
   - {file: ../../examples/conversion/pulser-to-classiq/translation_record.json, kind: translation-record, expect: accept}
+  - {file: ../../examples/conversion/pulser-to-classiq-qaoa/translation_record.json, kind: translation-record, expect: accept}
+  # README-14 route claims: checked by scripts/route_conversion.py against registry/backends.yml and
+  # registry/conversion-edges.yml. Each claim below must be REJECTED for the stated reason.
+  - {id: analog-schedule-exact-claim, kind: route-claim, source: pulser-local, target: classiq-local, claimed_class: E, expect: reject, reason: class-mismatch, note: "the adiabatic schedule has no exact circuit; the shipped edge is R (shared QUBO)"}
+  - {id: qadence-default-bridge, kind: route-claim, edge: qadence-to-pulser-legacy, claimed_default: true, expect: reject, reason: unmaintained-bridge, note: "Qadence is not actively maintained; legacy-source migration only"}
+  - {id: gate-to-cv, kind: route-claim, source: qiskit-local, target: strawberryfields, claimed_class: C, expect: reject, reason: research-only-target, note: "archived CV SDK; no maintained DV-to-CV route"}
+  - {id: gate-to-helium, kind: route-claim, source: qiskit-local, target: eeroq, claimed_class: E, expect: reject, reason: research-only-target, note: "no public executable contract"}
+  - {id: gate-to-cat-pending, kind: route-claim, source: qiskit-local, target: alice-bob-emulator, claimed_class: E, emits_code: true, expect: reject, reason: profiled-target-no-code, note: "profiled until a pinned clean build passes"}
+  - {id: gate-to-pytket-ok, kind: route-claim, source: qiskit-local, target: pytket-local, claimed_class: E, emits_code: true, expect: accept}
+  - {id: gate-to-perceval-claimed-exact, kind: route-claim, source: qiskit-local, target: perceval-local, claimed_class: E, expect: reject, reason: class-mismatch, note: "postselected photonic conversion is conditional (C)"}

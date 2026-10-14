@@ -1,0 +1,97 @@
+{
+  "schema": "qmentor.program-ir.v3",
+  "source": {
+    "framework": "pulser",
+    "version": "1.9.1",
+    "entry": "examples/conversion/pulser-to-classiq-qaoa/source/adapter.py::build_sequence",
+    "parse_status": "imported-and-built"
+  },
+  "paradigm": "analog neutral-atom (Rydberg) evolution",
+  "register": {
+    "device": "AnalogDevice",
+    "qubit_order": [
+      "q0",
+      "q1",
+      "q2",
+      "q3",
+      "q4"
+    ],
+    "coordinates_um": {
+      "q0": [
+        -7.04,
+        -2.6
+      ],
+      "q1": [
+        -0.04,
+        -2.6
+      ],
+      "q2": [
+        6.96,
+        -2.6
+      ],
+      "q3": [
+        -3.74,
+        4.0
+      ],
+      "q4": [
+        3.86,
+        3.8
+      ]
+    },
+    "interaction_coeff_C6": 865723.02
+  },
+  "initial_state": "all atoms in ground state |g>",
+  "hamiltonian": {
+    "form": "H(t)/hbar = Omega(t)/2 sum_i sigma^x_i - delta(t) sum_i n_i + sum_{i<j} C6/r_ij^6 n_i n_j",
+    "interaction_terms": {
+      "q0-q1": 7.358524254,
+      "q0-q2": 0.114976941,
+      "q0-q3": 5.362722364,
+      "q0-q4": 0.212272268,
+      "q1-q2": 7.358524254,
+      "q1-q3": 4.613733369,
+      "q1-q4": 4.885012666,
+      "q2-q3": 0.219278204,
+      "q2-q4": 6.69422191,
+      "q3-q4": 4.483275739
+    }
+  },
+  "controls": [
+    {
+      "channel": "rydberg_global",
+      "addressing": "Global",
+      "duration_ns": 4000,
+      "amplitude": {
+        "waveform": "InterpolatedWaveform",
+        "points_rad_per_us": [
+          0.0,
+          5.026548246,
+          0.0
+        ]
+      },
+      "detuning": {
+        "waveform": "InterpolatedWaveform",
+        "points_rad_per_us": [
+          -6.0,
+          0.0,
+          6.0
+        ]
+      },
+      "phase": 0.0
+    }
+  ],
+  "gates": [],
+  "measurement": {
+    "basis": "ground-rydberg",
+    "outcome_1_means": "Rydberg state |r>"
+  },
+  "decoding": {
+    "bit_order": "register order q0..q4 = characters left to right",
+    "objective": "canonical QUBO energy of the decoded bitstring"
+  },
+  "unsupported_features_for_gate_targets": [
+    "continuous-time analog evolution under Omega(t), delta(t) with always-on Rydberg interactions",
+    "adiabatic schedule semantics (success depends on the spectral gap along the sweep, not on gate angles)",
+    "device noise and SPAM model"
+  ]
+}

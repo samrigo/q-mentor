@@ -1,0 +1,36 @@
+qfunc hadamard_transform_expanded___0(target: qbit[5]) {
+  repeat (index: 5) {
+    H(target[index]);
+  }
+}
+
+qfunc cost_layer_expanded___0(gamma: real, v: qbit[5]) {
+  phase ((0.815380882444 * ((((v[0] + v[1]) + v[2]) + v[3]) + v[4])) + (-(((((((((((0.015625 * v[0]) * v[2]) + ((0.72877688227 * v[0]) * v[3])) + ((0.028847124873 * v[0]) * v[4])) + ((0.626991664327 * v[1]) * v[3])) + ((0.663857656451 * v[1]) * v[4])) + ((0.029799209232 * v[2]) * v[3])) + ((0.909723427997 * v[2]) * v[4])) + ((0.609262888073 * v[3]) * v[4])) + (v[0] and v[1])) + (v[1] and v[2]))), gamma);
+}
+
+qfunc gate_operand_0_lambda___0_0_expanded___0(q: qbit, beta_captured__mixer_layer__2: real) {
+  RX(beta_captured__mixer_layer__2, q);
+}
+
+qfunc apply_to_all_expanded___0(target: qbit[5], beta_captured__mixer_layer__2: real) {
+  repeat (index: 5) {
+    gate_operand_0_lambda___0_0_expanded___0(target[index], beta_captured__mixer_layer__2);
+  }
+}
+
+qfunc mixer_layer_expanded___0(beta: real, v: qbit[5]) {
+  apply_to_all_expanded___0(v, beta);
+}
+
+qfunc qaoa_ansatz_expanded___0(gammas: real[4], betas: real[4], v: qbit[5]) {
+  repeat (i: 4) {
+    cost_layer_expanded___0(gammas[i], v);
+    mixer_layer_expanded___0(betas[i], v);
+  }
+}
+
+qfunc main(params: real[8], output v: qbit[5]) {
+  allocate(5, v);
+  hadamard_transform_expanded___0(v);
+  qaoa_ansatz_expanded___0(params[0:4], params[4:8], v);
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "qmentor.expected.v3",
+  "target": "pulser (source of pulser-to-classiq-qaoa)",
+  "objective_sha256": "fa7b370995e2d6a1d4073fd62232860b077662cad7d39f071cca7d9ad1f01d83",
+  "optimum": "10110",
+  "optimum_energy": -12.30302249,
+  "observed_qaa_optimum_probability": 0.194214,
+  "tolerances": {
+    "energy_abs": 1e-09
+  }
+}

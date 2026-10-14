@@ -66,7 +66,7 @@
     "sampled_ground_state_fraction": 0.505,
     "wall_clock_s": 1.883
   },
-  "evidence_level": "executable (level 2) for the native problem; the six-bond QUBO is unsupported-exact here",
+  "evidence_level": "executable (level 2) for the native problem; the six-bond QUBO is unsupported-exact here; not quantum advantage",
   "recorded_on": "2026-10-14",
   "environment": "CPython 3.13.16, x86_64 Linux, fresh venv from requirements.lock"
 }

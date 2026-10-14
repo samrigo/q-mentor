@@ -1,0 +1,18 @@
+{
+  "schema": "qmentor.expected.v3",
+  "target": "classiq (pulser-to-classiq-qaoa)",
+  "objective_hash": "fa7b370995e2d6a1d4073fd62232860b077662cad7d39f071cca7d9ad1f01d83",
+  "exact_optimum": {
+    "bitstring": "10110",
+    "energy": -12.30302249,
+    "runner_up": {
+      "bitstring": "10100",
+      "energy": -11.885023059
+    }
+  },
+  "status": "not-improved",
+  "selected": "p1-mean",
+  "tolerances": {
+    "energy_abs": 1e-09
+  }
+}

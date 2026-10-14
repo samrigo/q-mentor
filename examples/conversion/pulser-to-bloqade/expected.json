@@ -1,0 +1,8 @@
+{
+  "schema": "qmentor.expected.v3",
+  "target": "pulser-to-bloqade",
+  "exact_tvd_tolerance": 0.001,
+  "observed": {"matched_tvd": 0.000284, "unmatched_tvd": 0.0825},
+  "most_probable": "101",
+  "c6": {"pulser_AnalogDevice": 865723.02, "bloqade_RB_C6": 5420441.132650757}
+}

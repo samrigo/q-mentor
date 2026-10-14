@@ -350,7 +350,7 @@ cases:
       Result: "pytket circuit generated from the Qiskit QAOA layer via pytket-qiskit 0.78.0."
       Route: "Qiskit gate -> pytket gate: exact (E) on the bound-parameter subset."
       Equivalence: "Unitaries equal up to global phase after reversing Qiskit's little-endian order; implicit swaps removed; negative fixture refuses pytket-cirq (unmaintained)."
-      Validation: "Syntax, import and local run passed; 4 passed in `python -m pytest -q` (qiskit 2.5.2, pytket 2.18.5)."
+      Validation: "Syntax, import and local run passed; 9 passed in `python -m pytest -q` (qiskit 2.5.2, pytket 2.18.5, pytket-qiskit 0.78.0)."
       Files: "`examples/conversion/gate-to-gate/main.py`, `adapter.py`, `test_example.py`, `expected.json`"
   - id: convert-unsupported
     skill: q-mentor-convert
@@ -491,7 +491,7 @@ cases:
     fields:
       Result: "Cross-SDK equivalence holds: 64/64 states match for Qiskit, Cirq, pytket, PennyLane, D-Wave, Classiq."
       Files: "`demo/bond-selection/result-records/*.json`"
-      Checks: "`python scripts/validate_examples.py --all`: 11 environments, all passed; max energy error 1e-12."
+      Checks: "`python scripts/validate_examples.py`: 16 clean environments, all passed; max energy error below 1e-9."
       Next: "No action."
   - id: test-blocked
     skill: q-mentor-test

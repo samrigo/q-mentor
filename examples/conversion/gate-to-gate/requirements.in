@@ -1,0 +1,8 @@
+qiskit==2.5.2
+pytket==2.18.5
+pytket-qiskit==0.78.0
+cirq-core==1.7.0
+# cirq.contrib.qasm_import needs the optional ply parser (not installed by cirq-core)
+ply==3.11
+scipy==1.18.1
+pytest==8.4.2

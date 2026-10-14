@@ -1,0 +1,7 @@
+{
+  "schema": "qmentor.expected.v3",
+  "target": "bqm-to-qaoa",
+  "route_class": "R",
+  "optimum": "101010",
+  "tolerances": {"energy_abs": 1e-9}
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "qmentor.result-record.v3",
+  "target": "pasqal-pulser (source)",
+  "versions": {
+    "pulser": "1.9.1"
+  },
+  "baseline": {
+    "method": "exhaustive enumeration of 32 assignments",
+    "optimum": {
+      "bitstring": "10110",
+      "energy": -12.30302249
+    },
+    "runner_up": {
+      "bitstring": "10100",
+      "energy": -11.885023059
+    }
+  },
+  "quantum": {
+    "algorithm": "QAA (adiabatic sweep), 4 us, global Rydberg channel",
+    "backend": "QutipBackendV2 (noiseless)",
+    "optimum_probability": 0.194214,
+    "expected_energy": -11.309201,
+    "most_probable": "10100"
+  },
+  "evidence_level": "executable on a local emulator (level 2); not quantum advantage"
+}

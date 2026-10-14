@@ -14,7 +14,7 @@ Evidence (from `demo/bond-selection/result-records/*.json`, 9 records, recorded 
 
 | Target | Versions | Observed outcome | Evidence level |
 |---|---|---|---|
-| bloqade | bloqade-analog 0.16.9, numpy 2.2.6 | Six-bond: **unsupported-exact**; native 5-atom program P(ground state) 0.516 | executable (level 2) for the native problem; the six-bond QUBO is unsupported-exact here |
+| bloqade | bloqade-analog 0.16.9, numpy 2.2.6 | Six-bond: **unsupported-exact**; native 5-atom program P(ground state) 0.516 | executable (level 2) for the native problem; the six-bond QUBO is unsupported-exact here; not quantum advantage |
 | cirq | cirq-core 1.7.0 | QAOA best sample `101010`; P(optimum) 0.0449; feasible 0.9004 | executable (level 2); matching a 64-state toy is not quantum advantage |
 | classiq | classiq 1.32.0 | Model built; cost error 1.3e-13 on 64 states; synthesis not run | formulated (level 1); no quantum hardware used; not quantum advantage |
 | dwave | dimod 0.12.22, dwave-samplers 1.8.0 | ExactSolver optimum `101010`; simulated annealing optimum rate 0.145 (classical heuristic) | executable classical toolchain; no quantum hardware used |

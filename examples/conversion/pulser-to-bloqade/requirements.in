@@ -1,0 +1,6 @@
+pulser==1.9.1
+bloqade-analog==0.16.9
+# bloqade-analog 0.16.9 fails at run time with numpy >= 2.3 (pydantic v1 NDArray check); see bond-selection/bloqade
+numpy==2.2.6
+scipy==1.15.3
+pytest==8.4.2

@@ -42,7 +42,7 @@ def main() -> dict:
             "sampled_ground_state_fraction": round(counts.get(ground, 0) / SHOTS, 4),
             "wall_clock_s": round(elapsed, 3),
         },
-        "evidence_level": "executable (level 2) for the native problem; the six-bond QUBO is unsupported-exact here",
+        "evidence_level": "executable (level 2) for the native problem; the six-bond QUBO is unsupported-exact here; not quantum advantage",
     }
     print(json.dumps(record, indent=2))
     return record

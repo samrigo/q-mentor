@@ -1,0 +1,14 @@
+{
+  "schema": "qmentor.expected.v3",
+  "target": "qiskit-to-perceval",
+  "route_class": "C",
+  "success": {
+    "qaoa_two_cnots_same_pair": 0.00823045267489712,
+    "ghz2": 0.1111111111111111,
+    "ghz3": 0.012345679012345678,
+    "note": "the converter heralds one CNOT and postselects the last when two CNOTs act on the same pair (2/27 x 1/9); GHZ chains observed at (1/9)^k"
+  },
+  "tolerances": {
+    "tvd": 1e-09
+  }
+}
