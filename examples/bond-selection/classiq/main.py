@@ -57,7 +57,7 @@ def remote_sample(problem: dict) -> dict:
 def main() -> dict:
     problem = canonical.load_problem()
     record = {
-        "schema": "qmentor.result-record.v2",
+        "schema": "qmentor.result-record.v3",
         "target": "classiq",
         "versions": {"classiq": classiq.__version__},
         "baseline": canonical.exact_baseline(problem),

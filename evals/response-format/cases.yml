@@ -1,15 +1,450 @@
-# Response-contract linter fixtures: the linter must accept the good ones and reject the bad ones
-# with the listed reason code.
+# Negative and edge fixtures for the qmentor.response.v3 linter. Each case states the template, audience,
+# mode, and the exact problem codes the linter must return (empty list = must pass).
 cases:
-  - {file: good-brief-verdict.md, mode: brief, expect: pass}
-  - {file: good-failure.md, mode: brief, expect: pass}
-  - {file: good-detailed.md, mode: detailed, expect: pass}
-  - {file: good-machine.json, mode: machine, expect: pass}
-  - {file: bad-verbose.md, mode: brief, expect: fail, reason: too-long}
-  - {file: bad-headings.md, mode: brief, expect: fail, reason: heading-order}
-  - {file: bad-praise-narration.md, mode: brief, expect: fail, reason: praise-or-narration}
-  - {file: bad-duplicate-conclusion.md, mode: brief, expect: fail, reason: duplicate-sentence}
-  - {file: bad-advantage-claim.md, mode: brief, expect: fail, reason: unsupported-advantage}
-  - {file: bad-placeholder-code.md, mode: brief, expect: fail, reason: placeholder-code}
-  - {file: bad-machine-extra-key.json, mode: machine, expect: fail, reason: schema}
-  - {file: bad-machine-invalid.json, mode: machine, expect: fail, reason: invalid-json}
+  - id: good-decision
+    template: decision
+    audience: business
+    expect: []
+    text: |
+      **Decision:** Classical now; run a quantum version only as a teaching exercise.
+
+      Status: complete
+
+      **Why:** Ordinary software checks all 64 choices instantly; confidence high.
+
+      **Cost / risk:** A pilot costs staff time with no measurable gain at this size.
+
+      **Next gate:** Revisit if the real problem outgrows the classical solver's time budget.
+  - id: status-first
+    template: decision
+    audience: business
+    expect: [lead-first, status-line]
+    text: |
+      Status: complete
+
+      **Decision:** Classical now.
+
+      **Why:** Classical enumeration is instant.
+
+      **Cost / risk:** None worth a pilot.
+
+      **Next gate:** Revisit at larger scale with a tuned classical baseline.
+  - id: intro-and-praise
+    template: decision
+    audience: business
+    expect: [lead-first, praise-or-narration]
+    text: |
+      Great question! Let me walk you through it.
+
+      **Decision:** Classical now.
+
+      Status: complete
+
+      **Why:** Classical enumeration is instant.
+
+      **Cost / risk:** None worth a pilot.
+
+      **Next gate:** Revisit at larger scale.
+  - id: unstable-headings
+    template: decision
+    audience: technical
+    expect: [field-order, unstable-heading]
+    text: |
+      **Decision:** Classical now.
+
+      Status: complete
+
+      ## Details
+
+      **Cost / risk:** Low.
+
+      **Why:** Enumeration of 64 states against a classical baseline.
+
+      **Next gate:** Revisit when n exceeds 60.
+  - id: duplicate-conclusion
+    template: evidence
+    audience: technical
+    expect: [repeated-conclusion]
+    text: |
+      **Finding:** No reviewed study shows annealing beating tuned classical solvers on portfolios.
+
+      Status: complete
+
+      **Evidence:** Peer-reviewed 2025 comparison `hw-annealing-vs-classical-2025` stresses benchmark design.
+
+      **Limit:** Replication unknown.
+
+      **Next:** In summary, no reviewed study shows annealing beating tuned classical solvers on portfolios.
+  - id: verbose-drift
+    template: guide
+    audience: technical
+    expect: [too-long]
+    text: |
+      **Answer:** A QUBO is a quadratic unconstrained binary optimization problem in which every decision is a zero or a one and the cost is a sum of single and pairwise terms, which makes it the common language between annealers, gate-model algorithms such as QAOA, and classical solvers, and which also means that constraints have to be folded into the cost through penalties whose size must be chosen carefully so that infeasible answers never look better than feasible ones even after scaling and numerical effects on real hardware are taken into account by the engineer.
+
+      Status: complete
+
+      **When to use:** Use it whenever a decision problem has yes/no choices with pairwise interactions, for example selecting bonds, routing vehicles, scheduling shifts, or partitioning graphs, and when you want to compare an annealer, a gate-model algorithm and a classical solver on exactly the same objective so that the comparison is fair and reproducible across every software development kit you might want to try later.
+
+      **Next:** Try the six-bond example in demo/bond-selection and enumerate all 64 assignments yourself to see why classical enumeration is the right production choice at this size.
+  - id: detailed-mode-allows-length
+    template: guide
+    audience: technical
+    mode: detailed
+    expect: []
+    text: |
+      **Answer:** A QUBO is a quadratic unconstrained binary optimization problem in which every decision is a zero or a one and the cost is a sum of single and pairwise terms, which makes it the common language between annealers, gate-model algorithms such as QAOA, and classical solvers, and which also means that constraints have to be folded into the cost through penalties whose size must be chosen carefully so that infeasible answers never look better than feasible ones even after scaling and numerical effects on real hardware are taken into account by the engineer.
+
+      Status: complete
+
+      **When to use:** Use it whenever a decision problem has yes/no choices with pairwise interactions, for example selecting bonds, routing vehicles, scheduling shifts, or partitioning graphs, and when you want to compare an annealer, a gate-model algorithm and a classical solver on exactly the same objective so that the comparison is fair and reproducible across every software development kit you might want to try later.
+
+      **Next:** Try the six-bond example in demo/bond-selection and enumerate all 64 assignments yourself to see why classical enumeration is the right production choice at this size.
+  - id: truncated-code
+    template: code
+    audience: technical
+    expect: [truncated-code]
+    text: |
+      **Result:** Added the Qiskit adapter.
+
+      Status: complete
+
+      **Files:** `adapter.py`
+
+      **Checks:** `python -m pytest -q`: 3 passed.
+
+      **Next:** Review.
+
+      ```python
+      import numpy as np
+
+      def energy(x):
+          return float(x @ Q @ x
+  - id: placeholder-code
+    template: code
+    audience: technical
+    expect: [placeholder-code]
+    text: |
+      **Result:** Added the D-Wave adapter.
+
+      Status: complete
+
+      **Files:** `adapter.py`
+
+      **Checks:** `python -m pytest -q`: 2 passed.
+
+      **Next:** Review.
+
+      ```python
+      import dimod
+
+      def build():
+          # TODO: add the quadratic terms
+          ...
+      ```
+  - id: unobserved-complete-code
+    template: code
+    audience: technical
+    expect: [checks-not-observed]
+    text: |
+      **Result:** Implemented the PennyLane example.
+
+      Status: complete
+
+      **Files:** `examples/bond-selection/pennylane/main.py`
+
+      **Checks:** Should work once dependencies are installed.
+
+      **Next:** Run it.
+  - id: two-questions
+    template: frame
+    audience: business
+    expect: [needs-one-question]
+    text: |
+      **Problem:** Which bonds may be selected?
+
+      Status: needs-input
+
+      **Model:** Count and duration constraints are candidates.
+
+      **Assumption:** None yet.
+
+      **Check:** What is the duration target?
+  - id: advantage-claim
+    template: evaluation
+    audience: technical
+    expect: [unsupported-advantage]
+    text: |
+      **Result:** QAOA demonstrates quantum advantage on the six-bond toy.
+
+      Status: complete
+
+      **Baseline:** Enumeration reaches -9.3725.
+
+      **Fairness / uncertainty:** Three seeds.
+
+      **Next:** Scale up.
+  - id: negated-advantage-ok
+    template: evaluation
+    audience: technical
+    expect: []
+    text: |
+      **Result:** Tie: QAOA p=2 matches enumeration at -9.3725; this is not quantum advantage.
+
+      Status: complete
+
+      **Baseline:** Exhaustive enumeration over 64 states.
+
+      **Fairness / uncertainty:** Same instance and decode; three seeds; evidence level 3.
+
+      **Next:** Stop at the toy scale.
+  - id: optimized-without-record
+    template: conversion
+    audience: technical
+    expect: [unsupported-optimized-claim]
+    text: |
+      **Result:** Optimized Classiq QAOA generated from the Pulser program.
+
+      Status: complete
+
+      **Route:** Rydberg analog -> gate: reimplementation.
+
+      **Equivalence:** Same energies on all 32 states.
+
+      **Validation:** Imported on classiq 1.32.0; synthesis unverified.
+
+      **Files:** `main.py`
+  - id: optimized-with-record-ok
+    template: conversion
+    audience: technical
+    expect: []
+    text: |
+      **Result:** Optimized Classiq QAOA variant selected (p=2, COBYLA) from the Pulser problem.
+
+      Status: complete
+
+      **Route:** Rydberg analog -> gate: reimplementation.
+
+      **Equivalence:** Same canonical energies on all 32 states; analog schedule not carried over.
+
+      **Optimization:** Optimum probability improved over p=1 at the same 4096-shot, 60-evaluation budget; see optimization_record.json.
+
+      **Validation:** Imported on classiq 1.32.0; local reference simulation passed; synthesis unverified.
+
+      **Files:** `examples/conversion/pulser-to-classiq-qaoa/classiq/main.py`
+  - id: conversion-without-route-class
+    template: conversion
+    audience: technical
+    expect: [route-class-missing]
+    text: |
+      **Result:** Perceval circuit generated.
+
+      Status: complete
+
+      **Route:** Qiskit to Perceval.
+
+      **Equivalence:** Distribution matches.
+
+      **Validation:** 3 passed locally.
+
+      **Files:** `main.py`
+  - id: business-jargon
+    template: decision
+    audience: business
+    expect: [business-jargon]
+    text: |
+      **Decision:** Classical now; QAOA on a QPU is not justified.
+
+      Status: complete
+
+      **Why:** Enumeration beats it; classical baseline instant.
+
+      **Cost / risk:** QPU time is metered.
+
+      **Next gate:** Revisit at larger scale.
+  - id: decision-without-baseline
+    template: decision
+    audience: technical
+    expect: [no-classical-baseline]
+    text: |
+      **Decision:** Run a bounded experiment.
+
+      Status: complete
+
+      **Why:** The problem has 40 binary variables.
+
+      **Cost / risk:** About two weeks of effort.
+
+      **Next gate:** Stop if no improvement after 20 runs.
+  - id: evidence-without-source
+    template: evidence
+    audience: technical
+    expect: [evidence-without-source]
+    text: |
+      **Finding:** Annealers solve portfolios faster.
+
+      Status: complete
+
+      **Evidence:** Several studies say so.
+
+      **Limit:** Unknown replication.
+
+      **Next:** Cite it.
+  - id: review-without-severity
+    template: review
+    audience: technical
+    expect: [finding-without-severity]
+    text: |
+      **Finding:** Bit order is reversed.
+
+      Status: complete
+
+      **Impact:** Wrong decode.
+
+      **Evidence:** adapter.py:12.
+
+      **Fix / owner:** Reverse bitstrings; PR author.
+  - id: review-four-findings
+    template: review
+    audience: technical
+    expect: [too-many-findings]
+    text: |
+      **Finding:** [high] A.
+
+      Status: complete
+
+      **Impact:** a.
+
+      **Evidence:** f:1.
+
+      **Fix / owner:** x; owner.
+
+      **Finding:** [medium] B.
+
+      **Impact:** b.
+
+      **Evidence:** f:2.
+
+      **Fix / owner:** y; owner.
+
+      **Finding:** [low] C.
+
+      **Impact:** c.
+
+      **Evidence:** f:3.
+
+      **Fix / owner:** z; owner.
+
+      **Finding:** [low] D.
+
+      **Impact:** d.
+
+      **Evidence:** f:4.
+
+      **Fix / owner:** w; owner.
+  - id: vague-next
+    template: guide
+    audience: business
+    expect: [vague-next]
+    text: |
+      **Answer:** A qubit can hold a blend of 0 and 1 until it is measured.
+
+      Status: complete
+
+      **When to use:** Use this picture before learning about gates.
+
+      **Next:** Let me know if you have any other questions.
+  - id: blocked-without-gate
+    template: code
+    audience: technical
+    expect: [blocked-without-gate]
+    text: |
+      **Result:** Not implemented.
+
+      Status: blocked
+
+      **Files:** none
+
+      **Checks:** Not run.
+
+      **Next:** Blocked.
+  - id: bad-status
+    template: code
+    audience: technical
+    expect: [status-enum]
+    text: |
+      **Result:** Done.
+
+      Status: done
+
+      **Files:** `a.py`
+
+      **Checks:** 1 passed.
+
+      **Next:** None needed here.
+  - id: machine-good
+    template: decision
+    mode: machine
+    expect: []
+    text: |
+      {"contract_version": "qmentor.response.v3", "status": "complete", "mode": "machine", "template_id": "decision", "audience": "technical", "result": "Classical now (31/100).", "evidence": ["Why: enumeration of 64 states is trivial; classical baseline enumeration."], "uncertainty": ["Cost / risk: QAOA would be evidence level 3 at most."], "validation": {"state": "not-applicable", "detail": ""}, "artifacts": [], "skills_used": ["q-mentor-frame", "q-mentor-verdict"], "next_action": "Revisit when n > 60."}
+  - id: machine-invalid-json
+    template: decision
+    mode: machine
+    expect: [invalid-json]
+    text: |
+      {"contract_version": "qmentor.response.v3", "status": "complete",
+  - id: machine-extra-key
+    template: decision
+    mode: machine
+    expect: [schema]
+    text: |
+      {"contract_version": "qmentor.response.v3", "status": "complete", "mode": "machine", "template_id": "decision", "audience": "technical", "result": "Classical now.", "evidence": [], "uncertainty": [], "validation": {"state": "not-applicable", "detail": ""}, "artifacts": [], "skills_used": ["q-mentor-verdict"], "next_action": "Revisit later.", "confidence": 0.9}
+  - id: machine-wrong-template
+    template: decision
+    mode: machine
+    expect: [template-mismatch]
+    text: |
+      {"contract_version": "qmentor.response.v3", "status": "complete", "mode": "machine", "template_id": "evidence", "audience": "technical", "result": "Classical now.", "evidence": [], "uncertainty": [], "validation": {"state": "not-applicable", "detail": ""}, "artifacts": [], "skills_used": ["q-mentor-verdict"], "next_action": "Revisit later."}
+  - id: code-only-good
+    template: code
+    mode: code-only
+    expect: []
+    text: |
+      ```text
+      # qmentor.response.v3 template=code status=complete
+      # files: energy.py
+      # checks: python -m pytest -q -> 1 passed
+      # next: review
+      ```
+
+      ```python
+      # energy.py
+      import numpy as np
+
+
+      def energy(x: np.ndarray, q: np.ndarray, c: float) -> float:
+          return float(x @ q @ x + c)
+      ```
+  - id: code-only-with-prose
+    template: code
+    mode: code-only
+    expect: [prose-in-code-only]
+    text: |
+      Here is the code you asked for:
+
+      ```text
+      # qmentor.response.v3 template=code status=complete
+      # files: energy.py
+      # checks: not run
+      # next: run tests
+      ```
+  - id: code-only-no-manifest
+    template: code
+    mode: code-only
+    expect: [manifest-missing]
+    text: |
+      ```python
+      def energy(x):
+          return 0.0
+      ```

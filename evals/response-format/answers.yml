@@ -1,0 +1,642 @@
+# Template matrix for qmentor.response.v3 (README-13). Every user-facing skill has answers for the statuses
+# that apply to it, in business and technical audiences. scripts/validate_responses.py renders each case in
+# brief (its audience), detailed, machine (JSON) and, for code/conversion, code-only mode, then lints every
+# rendering against the template registered for the skill. Field text is realistic content for this
+# repository; numbers come from demo/bond-selection and examples/.
+cases:
+  # ------------------------------------------------------------------ help (guide)
+  - id: help-complete-business
+    skill: q-mentor-help
+    status: complete
+    audience: business
+    skills_used: [q-mentor-help]
+    validation_state: not-applicable
+    fields:
+      Answer: "For a go/no-go on a quantum idea, describe the decision; Q-Mentor frames it, then gives a verdict that may well be \"classical now\"."
+      When to use: "Use the verdict skill when you need a decision; framing runs first automatically, and you get a one-page answer with a classical alternative."
+      Next: "Describe the business decision, the data you can share (public or synthetic), and the deadline."
+  - id: help-complete-technical
+    skill: q-mentor-help
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-help]
+    validation_state: not-applicable
+    fields:
+      Answer: "Best fit: `/q-mentor-convert` (verified cross-hardware code and optimization record); `/q-mentor-translate` runs first to build `ProgramIR` and a `CapabilityReport`."
+      When to use: "Convert when you want files that pass syntax, import, local-run and semantic tests; translate alone when you only need to know what survives (route class E/C/R/A/U)."
+      Next: "Paste the Pulser source file and name the Classiq version you can install."
+  - id: help-needs-input
+    skill: q-mentor-help
+    status: needs-input
+    audience: business
+    skills_used: [q-mentor-help]
+    validation_state: not-applicable
+    fields:
+      Answer: "No skill clearly matches \"make it quantum\" yet; Q-Mentor can explain, decide, or build."
+      When to use: "Explanations suit learning, decisions suit investment questions, and builds suit an accepted design."
+      Next: "Which outcome do you want: an explanation, a go/no-go decision, or working code?"
+  - id: help-blocked
+    skill: q-mentor-help
+    status: blocked
+    audience: technical
+    skills_used: [q-mentor-help]
+    validation_state: not-applicable
+    fields:
+      Answer: "The skill registry is missing, so no skill menu can be shown."
+      When to use: "Help reads only `registry/skills.yml` (or `.github/q-mentor/registry/skills.yml`) and never guesses a menu."
+      Next: "Restore the registry by re-running `python scripts/deploy_repo_local.py --target .` or reinstalling the plugin."
+  # ------------------------------------------------------------------ learn (guide)
+  - id: learn-complete-business
+    skill: q-mentor-learn
+    status: complete
+    audience: business
+    skills_used: [q-mentor-learn]
+    validation_state: not-applicable
+    fields:
+      Answer: "A penalty turns a hard rule (\"pick exactly three bonds\") into a cost, like a fee that makes breaking the rule never worth it."
+      When to use: "Formula: cost = risk - yield + A x (number picked - 3)^2; the misconception is that any large A works, when too large a fee drowns the real trade-offs (source `ref-lucas-ising-2014`)."
+      Next: "Check yourself: why does a fee of 15 work for six bonds but would need retesting for sixty?"
+  - id: learn-complete-technical
+    skill: q-mentor-learn
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-learn]
+    validation_state: not-applicable
+    fields:
+      Answer: "QAOA alternates a cost unitary exp(-i gamma H_C) and a mixer exp(-i beta sum X) for p layers; a classical optimizer tunes the angles."
+      When to use: "With `RX(theta)=exp(-i theta X/2)`, the mixer is RX(2 beta) per qubit; RX(beta) parameterizes the same family with halved beta, so bounds must change (source `ref-farhi-qaoa-2014`)."
+      Next: "Run the one-qubit convention test in `examples/conversion/pulser-to-classiq-qaoa/test_example.py`."
+  - id: learn-needs-input
+    skill: q-mentor-learn
+    status: needs-input
+    audience: business
+    skills_used: [q-mentor-learn]
+    validation_state: not-applicable
+    fields:
+      Answer: "\"Quantum\" covers several ideas; the useful one depends on whether you mean decisions, security, or simulation."
+      When to use: "Decision questions usually start with optimization basics; security questions start with post-quantum cryptography."
+      Next: "Which of those three should the explanation cover first?"
+  # ------------------------------------------------------------------ research (evidence)
+  - id: research-complete-business
+    skill: q-mentor-research
+    status: complete
+    audience: business
+    skills_used: [q-mentor-research]
+    validation_state: not-applicable
+    fields:
+      Finding: "No reviewed study shows quantum annealing beating a well-tuned classical solver on realistic portfolio selection end to end."
+      Evidence: "A 2025 peer-reviewed comparison of annealing applications against classical solvers (`hw-annealing-vs-classical-2025`) stresses benchmark design; a 2025 preprint pipeline (`rr-portfolio-annealing-e2e-2025`) mixes classical allocation with quantum selection."
+      Limit: "Confidence medium: neither isolates the quantum step against a tuned classical solver at equal cost, and replication is unknown."
+      Next: "Grade the preprint's baseline before citing it to leadership."
+  - id: research-complete-technical
+    skill: q-mentor-research
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-research]
+    validation_state: not-applicable
+    fields:
+      Finding: "The weighted-graph Rydberg result is a hardware-specific encoding on small graphs, not general QUBO evidence."
+      Evidence: "Peer-reviewed PRX Quantum 2025 (`hw-rydberg-weighted-graph-2025`, https://doi.org/10.1103/PRXQuantum.6.010301): local light shifts encode vertex weights on a Rydberg array."
+      Limit: "Scale and classical comparison are limited to the instances shown; artifacts and independent replication are unknown."
+      Next: "Use it as a capability fact in `knowledge/hardware-ions-atoms.md`, not as a speedup claim."
+  - id: research-needs-input
+    skill: q-mentor-research
+    status: needs-input
+    audience: technical
+    skills_used: [q-mentor-research]
+    validation_state: not-applicable
+    fields:
+      Finding: "Web research is unavailable in this session, so no current claim can be checked."
+      Evidence: "Q-Mentor never cites from memory; supplied PDFs, DOIs, or arXiv IDs would be read directly."
+      Limit: "Without sources the evidence card would be empty."
+      Next: "Can you attach the paper or paste its DOI?"
+  - id: research-unverified
+    skill: q-mentor-research
+    status: unverified
+    audience: business
+    skills_used: [q-mentor-research]
+    validation_state: unverified
+    fields:
+      Finding: "The vendor's announced result could not be checked against a primary source yet."
+      Evidence: "Only a vendor result (press release, no DOI or preprint) was found; source type: vendor result, dated 2026-10."
+      Limit: "Without a paper, data, or baseline, the claim stays a candidate with unknown confidence."
+      Next: "Ask the vendor for the preprint and benchmark data before using the claim."
+  # ------------------------------------------------------------------ brainstorm (options)
+  - id: brainstorm-complete-business
+    skill: q-mentor-brainstorm
+    status: complete
+    audience: business
+    skills_used: [q-mentor-brainstorm]
+    validation_state: not-applicable
+    fields:
+      Best option: "Keep bond selection on classical optimization software now; it is mature and exact at your scale."
+      Alternatives: "A quantum teaching pilot on a toy portfolio (readiness: learning only); quantum-inspired heuristics (production-ready, classical); scenario simulation research (early)."
+      Tradeoff: "The pilot costs staff time and proves nothing about speed; it is falsified if exact classical solving stays under a second at desk scale."
+      Next: "Pick the option to frame, and Q-Mentor will model it."
+  - id: brainstorm-complete-technical
+    skill: q-mentor-brainstorm
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-brainstorm]
+    validation_state: not-applicable
+    fields:
+      Best option: "Classical MIP/CP-SAT cardinality-constrained selection (readiness 5/5)."
+      Alternatives: "QAOA teaching PoC on a <= 20-variable QUBO (readiness 2); annealer benchmark vs tuned SA (readiness 2); classical tensor-network sampler (readiness 3)."
+      Tradeoff: "Falsifier: a tuned classical solver reaches the optimum faster at every tested size; embedding and shot cost dominate the annealer arm."
+      Next: "Frame the QAOA PoC with explicit penalties if a teaching result is the goal."
+  - id: brainstorm-needs-input
+    skill: q-mentor-brainstorm
+    status: needs-input
+    audience: business
+    skills_used: [q-mentor-brainstorm]
+    validation_state: not-applicable
+    fields:
+      Best option: "Too little context to rank options; classical analytics is the default until a problem is named."
+      Alternatives: "Optimization, risk simulation, and machine learning each lead to different candidates."
+      Tradeoff: "Ranking now would invent assumptions about data and scale."
+      Next: "Which business process takes the most time or money today?"
+  # ------------------------------------------------------------------ frame (frame)
+  - id: frame-complete-business
+    skill: q-mentor-frame
+    status: complete
+    audience: business
+    skills_used: [q-mentor-frame]
+    validation_state: locally-executed
+    fields:
+      Problem: "Pick exactly 3 of 6 bonds to balance yield score, risk, and a total duration near 15 years."
+      Model: "Minimize 1.5 x risk - yield + 15 x (count - 3)^2 + 0.25 x (duration - 15)^2, all scores synthetic (`demo/bond-selection/problem.json`)."
+      Assumption: "The duration target and penalty weights are illustrative; real limits would change the answer."
+      Check: "Checking all 64 choices finds A, C, E as the best (score -9.3725), ahead of A, D, E by 0.2050."
+  - id: frame-complete-technical
+    skill: q-mentor-frame
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-frame]
+    validation_state: locally-executed
+    fields:
+      Problem: "Binary selection x in {0,1}^6, minimize E(x) = x^T Q x + c with cardinality 3 and a duration target as penalties."
+      Model: "Q from 1.5 Sigma - diag(mu) + 15 (1^T x - 3)^2 + 0.25 (d^T x - 15)^2, full symmetric Sigma (cross terms twice), bit k = bond k left to right."
+      Assumption: "Penalty A=15 assumed adequate; it is proven only for this instance."
+      Check: "`python scripts/validate_math.py`: 64 states enumerated, optimum 101010 at -9.3725, penalty separation passed."
+  - id: frame-needs-input
+    skill: q-mentor-frame
+    status: needs-input
+    audience: business
+    skills_used: [q-mentor-frame]
+    validation_state: not-applicable
+    fields:
+      Problem: "Choosing bonds needs one success measure before any model is written."
+      Model: "Candidate objectives are yield, risk, or a weighted mix; constraints are count and duration."
+      Assumption: "Without the measure, any weights would be invented."
+      Check: "Which matters more for this desk: higher yield or lower risk?"
+  - id: frame-blocked
+    skill: q-mentor-frame
+    status: blocked
+    audience: business
+    skills_used: [q-mentor-frame]
+    validation_state: not-applicable
+    fields:
+      Problem: "The request includes client positions and account identifiers, which this workflow may not use."
+      Model: "No model was built; the same structure works on synthetic or public data."
+      Assumption: "No approved workflow for client data was provided."
+      Check: "Replace the data with the synthetic six-bond file or obtain data-owner approval first."
+  # ------------------------------------------------------------------ verdict (decision)
+  - id: verdict-complete-business
+    skill: q-mentor-verdict
+    status: complete
+    audience: business
+    skills_used: [q-mentor-frame, q-mentor-verdict]
+    validation_state: not-applicable
+    fields:
+      Decision: "Classical now; a quantum version is worth running only as a teaching exercise."
+      Why: "Checking all 64 choices with ordinary software finds the best bonds instantly; readiness score 31/100, confidence high."
+      Cost / risk: "A quantum pilot would cost staff time and could not show a speed or quality gain at this size."
+      Next gate: "Revisit only if the real problem exceeds what a tuned classical solver handles within the trading deadline."
+  - id: verdict-complete-technical
+    skill: q-mentor-verdict
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-verdict]
+    validation_state: not-applicable
+    fields:
+      Decision: "Classical now (score 31/100); research/teaching PoC only."
+      Why: "Hard gates pass, but exact enumeration of 2^6 states is trivial; classical baseline: enumeration, or CP-SAT for larger n; confidence high."
+      Cost / risk: "QAOA at n=6 needs 6 qubits and 15 ZZ terms per layer; matching the toy optimum would be evidence level 3, not advantage."
+      Next gate: "Revisit when n > 60 and CP-SAT misses a 1-second budget on the real instance family."
+  - id: verdict-needs-input
+    skill: q-mentor-verdict
+    status: needs-input
+    audience: business
+    skills_used: [q-mentor-frame, q-mentor-verdict]
+    validation_state: not-applicable
+    fields:
+      Decision: "No decision yet: the classical baseline for this scheduling task is unknown."
+      Why: "A fit verdict requires comparing against the software in use today."
+      Cost / risk: "Deciding without it risks funding a pilot that ordinary software already beats."
+      Next gate: "What tool solves this schedule today, and how long does it take?"
+  - id: verdict-unsupported
+    skill: q-mentor-verdict
+    status: unsupported
+    audience: business
+    skills_used: [q-mentor-verdict]
+    validation_state: not-applicable
+    fields:
+      Decision: "Classical now: sorting a 200-row file is not a quantum task."
+      Why: "Any spreadsheet or standard library sorts 200 rows in milliseconds; quantum computers offer no useful sorting method here."
+      Cost / risk: "Any quantum attempt adds cost and risk with no benefit."
+      Next gate: "Use the built-in sort; bring a hard optimization or simulation problem for a quantum assessment."
+  # ------------------------------------------------------------------ design (design)
+  - id: design-complete-business
+    skill: q-mentor-design
+    status: complete
+    audience: business
+    skills_used: [q-mentor-design]
+    validation_state: not-applicable
+    fields:
+      Design: "Run the toy bond problem three ways: exact classical software, a D-Wave-style local annealing simulator, and a gate-model simulator, all on the same synthetic data."
+      Why: "This teaches the differences cheaply; real quantum hardware was rejected because the toy cannot show any benefit."
+      Check: "Pass if every method decodes A, C, E and the classical result is reported first."
+      Next: "Approve the design to generate the local examples."
+  - id: design-complete-technical
+    skill: q-mentor-design
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-design]
+    validation_state: not-applicable
+    fields:
+      Design: "Canonical QUBO -> (1) enumeration baseline, (2) superconducting-flux-annealer / anneal / dimod 0.12.22 / ExactSolver+SA / tested-local, (3) superconducting-gate / gate / qiskit 2.5.2 / StatevectorSampler / tested-local."
+      Why: "Rejected: Pulser analog (six-bond is unsupported-exact: 15 couplings vs 9 geometric DoF)."
+      Check: "All-64-state energy equality, decode 101010, seeds 7/11/13, fixed 4096 shots, stop if any adapter changes an energy."
+      Next: "Translate the QUBO for both targets."
+  - id: design-blocked
+    skill: q-mentor-design
+    status: blocked
+    audience: technical
+    skills_used: [q-mentor-design]
+    validation_state: not-applicable
+    fields:
+      Design: "No design: the requested target (electron-on-helium device) is research-only and has no executable contract."
+      Why: "A design must name a backend with at least a profiled capability record."
+      Check: "Nothing to accept until a target with a public, versioned SDK is chosen."
+      Next: "Choose a tested-local gate simulator (Qiskit or Cirq) for the learning goal."
+  # ------------------------------------------------------------------ translate (mapping)
+  - id: translate-complete-business
+    skill: q-mentor-translate
+    status: complete
+    audience: business
+    skills_used: [q-mentor-translate]
+    validation_state: not-applicable
+    fields:
+      Route: "Neutral-atom pulse program -> gate-based Classiq model: reimplementation of the same optimization problem, not a copy of the program."
+      Preserved: "The problem itself, the answer encoding, and which choices are best."
+      Lost / limited: "The analog timing and the device's physical behaviour are lost; results can be compared only on the answers found."
+      Next: "Generate and test the Classiq version if you want working code."
+  - id: translate-complete-technical
+    skill: q-mentor-translate
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-translate]
+    validation_state: not-applicable
+    fields:
+      Route: "Qiskit gate circuit -> Perceval photonic-DV: conditional (C) via perceval-interop 1.3.0 dual-rail."
+      Preserved: "Logical output distribution conditional on postselection and heralds; logical bit order."
+      Lost / limited: "Deterministic execution: a postselected CNOT succeeds with probability below 1, compounding per gate; loss on hardware."
+      Next: "Convert with the success-rate test in `examples/conversion/qiskit-to-perceval/`."
+  - id: translate-unsupported
+    skill: q-mentor-translate
+    status: unsupported
+    audience: technical
+    skills_used: [q-mentor-translate]
+    validation_state: not-applicable
+    fields:
+      Route: "Six-bond QUBO -> Pulser AnalogDevice: unsupported (exact mapping impossible)."
+      Preserved: "None for execution; the canonical energy remains available for classical or gate targets."
+      Lost / limited: "15 independent couplings cannot be realized by C6/r^6 with 9 geometric degrees of freedom; AnalogDevice has no local detuning."
+      Next: "Use the Bloqade or Pulser native geometry example for analog learning, or a gate target for this QUBO."
+  - id: translate-needs-input
+    skill: q-mentor-translate
+    status: needs-input
+    audience: technical
+    skills_used: [q-mentor-translate]
+    validation_state: not-applicable
+    fields:
+      Route: "Source -> PennyLane: class unknown until the device is named (exact on default.qubit; plugin-specific otherwise)."
+      Preserved: "Nothing yet; PennyLane is a framework, not hardware."
+      Lost / limited: "Device-specific gates, gradients, and shot behaviour are undetermined."
+      Next: "Which PennyLane device or plugin should the mapping target?"
+  # ------------------------------------------------------------------ convert (conversion)
+  - id: convert-complete-business
+    skill: q-mentor-convert
+    status: complete
+    audience: business
+    skills_used: [q-mentor-translate, q-mentor-convert]
+    validation_state: imported
+    next_action: "Run the credentialed Classiq synthesis only after approving its cost."
+    fields:
+      Result: "Working Classiq code that solves the same five-variable problem as the neutral-atom program; it is a new implementation, not a copy."
+      Route: "Neutral-atom analog -> gate model: reimplementation (same problem, different algorithm)."
+      Equivalence: "All 32 answers score identically in both versions; the analog timing is not carried over."
+      Optimization: "On the fixed budget, deeper circuits did not beat the simplest version on the declared measure: not improved."
+      Validation: "Syntax and import passed on Classiq 1.32.0; local reference simulation passed; Classiq cloud synthesis not run (needs credentials)."
+      Files: "`examples/conversion/pulser-to-classiq-qaoa/classiq/main.py`, `optimization_record.json`"
+  - id: convert-complete-technical
+    skill: q-mentor-convert
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-translate, q-mentor-convert]
+    validation_state: locally-executed
+    next_action: "Review the diff, then run `python scripts/validate_examples.py --only conversion/gate-to-gate`."
+    fields:
+      Result: "pytket circuit generated from the Qiskit QAOA layer via pytket-qiskit 0.78.0."
+      Route: "Qiskit gate -> pytket gate: exact (E) on the bound-parameter subset."
+      Equivalence: "Unitaries equal up to global phase after reversing Qiskit's little-endian order; implicit swaps removed; negative fixture refuses pytket-cirq (unmaintained)."
+      Validation: "Syntax, import and local run passed; 4 passed in `python -m pytest -q` (qiskit 2.5.2, pytket 2.18.5)."
+      Files: "`examples/conversion/gate-to-gate/main.py`, `adapter.py`, `test_example.py`, `expected.json`"
+  - id: convert-unsupported
+    skill: q-mentor-convert
+    status: unsupported
+    audience: technical
+    skills_used: [q-mentor-translate, q-mentor-convert]
+    validation_state: not-applicable
+    next_action: "Reimplement the shared QUBO as QAOA (reimplementation) or provide a Hamiltonian-simulation error budget."
+    fields:
+      Result: "No executable conversion is valid: the Pulser adiabatic schedule has no exact Classiq circuit."
+      Route: "Rydberg analog -> gate: unsupported for exact evolution (approximate only with a stated Trotter error)."
+      Equivalence: "Not claimed; the negative fixture `evals/conversion/cases.yml#analog-schedule-exact-claim` rejects an exact label."
+      Validation: "No code generated, so nothing was run."
+      Files: "none"
+  - id: convert-blocked
+    skill: q-mentor-convert
+    status: blocked
+    audience: technical
+    skills_used: [q-mentor-translate, q-mentor-convert]
+    validation_state: failed
+    next_action: "Replace QutipEmulator with QutipBackendV2 (pulser-simulation 1.9.1) and resubmit the source."
+    fields:
+      Result: "Conversion stopped: the source does not import with pulser 1.9.1."
+      Route: "Rydberg analog -> gate: reimplementation planned, not started."
+      Equivalence: "Not evaluated because the source could not be parsed."
+      Validation: "Import failed: `from pulser_simulation import QutipEmulator` is a removed/deprecated API (stale-API fixture)."
+      Files: "none"
+  - id: convert-unverified
+    skill: q-mentor-convert
+    status: unverified
+    audience: technical
+    skills_used: [q-mentor-convert]
+    validation_state: unverified
+    next_action: "Approve a credentialed run with QMENTOR_ALLOW_REMOTE=1 to observe synthesis."
+    fields:
+      Result: "Complete Classiq files exist, but synthesis and execution were not observed."
+      Route: "Rydberg analog -> gate: reimplementation."
+      Equivalence: "Cost expression matches the canonical QUBO on all 32 states (offline check)."
+      Validation: "Syntax-checked and imported; credentialed synthesis unverified."
+      Files: "`examples/conversion/pulser-to-classiq-qaoa/classiq/`"
+  # ------------------------------------------------------------------ evaluate (evaluation)
+  - id: evaluate-complete-business
+    skill: q-mentor-evaluate
+    status: complete
+    audience: business
+    skills_used: [q-mentor-evaluate]
+    validation_state: not-applicable
+    fields:
+      Result: "Insufficient evidence: the vendor's claimed speed-up compares against random guessing, not real optimization software."
+      Baseline: "A fair test would use a tuned commercial or open-source solver on the same problems and time budget."
+      Fairness / uncertainty: "Different budgets and no repeated runs; evidence level 2 of 5."
+      Next: "Request a rerun against a tuned solver with equal time and repeated seeds."
+  - id: evaluate-complete-technical
+    skill: q-mentor-evaluate
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-evaluate]
+    validation_state: not-applicable
+    fields:
+      Result: "Tie on the toy: QAOA p=2 and enumeration both reach -9.3725; scorecard 9/20."
+      Baseline: "Exhaustive enumeration (64 states, < 1 ms); simulated annealing (dwave-samplers 1.8.0, 100 reads)."
+      Fairness / uncertainty: "Same instance and decode; QAOA used 3 seeds x 4096 shots, feasible probability CI wide; mean-energy and CVaR runs are reported separately."
+      Next: "Stop: no scale-up is justified until a larger family beats CP-SAT."
+  - id: evaluate-needs-input
+    skill: q-mentor-evaluate
+    status: needs-input
+    audience: business
+    skills_used: [q-mentor-evaluate]
+    validation_state: not-applicable
+    fields:
+      Result: "The proposal cannot be graded without its success measure."
+      Baseline: "Unknown: the proposal names no classical comparison."
+      Fairness / uncertainty: "Any score now would reward the missing baseline."
+      Next: "What result would make the sponsor call the pilot a success?"
+  # ------------------------------------------------------------------ implement (code)
+  - id: implement-complete-business
+    skill: q-mentor-implement
+    status: complete
+    audience: business
+    skills_used: [q-mentor-implement]
+    validation_state: locally-executed
+    fields:
+      Result: "The gate-model teaching example is written and reproduces the best bond choice (A, C, E)."
+      Files: "`examples/bond-selection/cirq/` (complete, version-pinned)"
+      Checks: "All local tests passed; no cloud service or credentials were used."
+      Next: "Review the code before merging."
+  - id: implement-complete-technical
+    skill: q-mentor-implement
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-implement]
+    validation_state: locally-executed
+    fields:
+      Result: "Added the Cirq six-bond example (cirq-core 1.7.0, seed 7)."
+      Files: "`examples/bond-selection/cirq/{README.md,requirements.in,requirements.lock,main.py,adapter.py,test_example.py,expected.json}`"
+      Checks: "`python scripts/validate_examples.py --only bond-selection/cirq`: 5 passed; all 64 energies within 1e-9."
+      Next: "Request review of the measurement-key bit order."
+  - id: implement-blocked
+    skill: q-mentor-implement
+    status: blocked
+    audience: technical
+    skills_used: [q-mentor-implement]
+    validation_state: not-applicable
+    fields:
+      Result: "No code written: the design targets IonQ hardware, which is profiled, not tested-local."
+      Files: "none"
+      Checks: "Not run; `registry/backends.yml` lists ionq as profiled (capability record only)."
+      Next: "Approve the pytket local path, or approve a credentialed IonQ run with a budget."
+  - id: implement-unverified
+    skill: q-mentor-implement
+    status: unverified
+    audience: technical
+    skills_used: [q-mentor-implement]
+    validation_state: syntax-checked
+    fields:
+      Result: "Draft D-Wave QPU adapter written behind QMENTOR_ALLOW_REMOTE; not executed."
+      Files: "`examples/bond-selection/dwave/qpu_adapter.py`"
+      Checks: "`python -m py_compile qpu_adapter.py` syntax-checked; QPU call not run (needs credentials and approval)."
+      Next: "Approve one budget-capped QPU run, or keep the local ExactSolver path."
+  # ------------------------------------------------------------------ test (code)
+  - id: test-complete-business
+    skill: q-mentor-test
+    status: complete
+    audience: business
+    skills_used: [q-mentor-test]
+    validation_state: locally-executed
+    fields:
+      Result: "All nine local examples agree on the best bonds where the problem fits; two hardware styles correctly report that it does not fit."
+      Files: "`demo/bond-selection/result-records/`"
+      Checks: "Every local test passed on this machine; cloud quantum hardware was not used."
+      Next: "Share the executive brief built from these records."
+  - id: test-complete-technical
+    skill: q-mentor-test
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-test]
+    validation_state: locally-executed
+    fields:
+      Result: "Cross-SDK equivalence holds: 64/64 states match for Qiskit, Cirq, pytket, PennyLane, D-Wave, Classiq."
+      Files: "`demo/bond-selection/result-records/*.json`"
+      Checks: "`python scripts/validate_examples.py --all`: 11 environments, all passed; max energy error 1e-12."
+      Next: "No action."
+  - id: test-blocked
+    skill: q-mentor-test
+    status: blocked
+    audience: technical
+    skills_used: [q-mentor-test]
+    validation_state: failed
+    fields:
+      Result: "test_all_energies failed: target energy differs from canonical on 12 of 64 states."
+      Files: "`examples/bond-selection/qiskit/test_example.py` report"
+      Checks: "`python -m pytest -q`: 1 failed, 4 passed; cause: bitstring read little-endian without reversal."
+      Next: "Reverse Qiskit bitstrings before decoding, then rerun the same command."
+  - id: test-unverified
+    skill: q-mentor-test
+    status: unverified
+    audience: technical
+    skills_used: [q-mentor-test]
+    validation_state: unverified
+    fields:
+      Result: "Local checks passed; the Classiq synthesis check was not run."
+      Files: "`examples/bond-selection/classiq/` test report"
+      Checks: "`python -m pytest -q`: 3 passed; synthesis needs credentials (unverified, not passed)."
+      Next: "Run the credentialed check only after approval."
+  # ------------------------------------------------------------------ review (review)
+  - id: review-complete-business
+    skill: q-mentor-review
+    status: complete
+    audience: business
+    skills_used: [q-mentor-review]
+    validation_state: not-applicable
+    fields:
+      Finding: "[high] The slide calls the toy result a quantum advantage it does not have."
+      Impact: "Leadership could fund a scale-up on a claim that ordinary software beats."
+      Evidence: "Slide 4 compares against random choices; exact classical checking reaches the same answer instantly."
+      Fix / owner: "Replace the phrase with \"matches the classical optimum on a toy\"; owner: project lead."
+  - id: review-complete-technical
+    skill: q-mentor-review
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-review]
+    validation_state: not-applicable
+    fields:
+      Finding: "[high] Mixer uses RX(beta) while bounds assume RX(2 beta)."
+      Impact: "Optimizer explores half the mixer range; reported angles are not comparable with the source."
+      Evidence: "`adapter.py:41` and the one-qubit convention test failing in CI."
+      Fix / owner: "Use RX(2*beta) or halve the bounds and relabel; owner: PR author."
+  - id: review-no-findings
+    skill: q-mentor-review
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-review]
+    validation_state: not-applicable
+    fields:
+      Finding: "No findings in scope: the QUBO expansion, penalty proof and decode in `canonical.py`."
+      Impact: "None identified for the reviewed files."
+      Evidence: "Enumeration of 64 states and the penalty-separation check both pass."
+      Fix / owner: "No change; tests and plotting code were out of scope."
+  - id: review-needs-input
+    skill: q-mentor-review
+    status: needs-input
+    audience: technical
+    skills_used: [q-mentor-review]
+    validation_state: not-applicable
+    fields:
+      Finding: "[info] No diff or files were supplied, so nothing can be reviewed yet."
+      Impact: "A review without the code would be guesswork."
+      Evidence: "The request names a pull request but no content is attached."
+      Fix / owner: "Can you paste the diff or the file paths?"
+  # ------------------------------------------------------------------ pqc-scan (evidence)
+  - id: pqc-complete-business
+    skill: q-mentor-pqc-scan
+    status: complete
+    audience: business
+    skills_used: [q-mentor-pqc-scan]
+    validation_state: locally-executed
+    fields:
+      Finding: "Two places use public-key methods that future quantum computers could break; stored data in one of them deserves early review."
+      Evidence: "Scanner results (local computation, 2026-10-14): RSA key exchange in the TLS client and an elliptic-curve signature in storage; NIST standards FIPS 203/204 (`fips-203`, `fips-204`) define replacements."
+      Limit: "Text matching cannot confirm runtime use or key lifetimes; nothing was changed."
+      Next: "Send the findings to the security owner for a migration decision."
+  - id: pqc-complete-technical
+    skill: q-mentor-pqc-scan
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-pqc-scan]
+    validation_state: locally-executed
+    fields:
+      Finding: "3 public-key findings (RSA, ECDH, ECDSA) and 2 symmetric/hash notes (AES-128, SHA-256)."
+      Evidence: "`scripts/pqc_inventory.py` local computation on `evals/behavior/pqc-fixtures`: tls_client.py:12 RSA (high), kex.conf:3 ECDH (medium); official standard FIPS 203 (`fips-203`)."
+      Limit: "Symmetric/hash items are Grover-type considerations, not Shor-type breaks; one comment match is low confidence."
+      Next: "Security owner triages harvest-now-decrypt-later exposure for stored ciphertexts."
+  - id: pqc-blocked
+    skill: q-mentor-pqc-scan
+    status: blocked
+    audience: business
+    skills_used: [q-mentor-pqc-scan]
+    validation_state: not-applicable
+    fields:
+      Finding: "Scan not run: the repository is marked confidential and no approval for this tool was given."
+      Evidence: "Workflow policy allows public or approved code only."
+      Limit: "No findings exist until an approved scan runs."
+      Next: "Ask the security owner to approve the scan scope."
+  # ------------------------------------------------------------------ exec (decision)
+  - id: exec-complete-business
+    skill: q-mentor-exec
+    status: complete
+    audience: business
+    skills_used: [q-mentor-exec]
+    validation_state: not-applicable
+    fields:
+      Decision: "Keep bond selection on classical software; close the quantum pilot as a completed training exercise."
+      Why: "Every method found the same best bonds that ordinary software found instantly, so the pilot taught skills but showed no business gain (confidence high)."
+      Cost / risk: "Continuing would spend staff time without a measurable benefit at today's scale."
+      Next gate: "Reopen only if a larger real problem exceeds the classical solver's time budget."
+  - id: exec-blocked
+    skill: q-mentor-exec
+    status: blocked
+    audience: business
+    skills_used: [q-mentor-exec]
+    validation_state: not-applicable
+    fields:
+      Decision: "No brief yet: there are no measured results, only a plan, against the classical baseline or anything else."
+      Why: "A leadership decision must rest on recorded results or a formal verdict."
+      Cost / risk: "Briefing from a plan would present intentions as evidence."
+      Next gate: "Run the planned local experiment, or request a verdict, then regenerate the brief."
+  # ------------------------------------------------------------------ improve (improvement)
+  - id: improve-complete-technical
+    skill: q-mentor-improve
+    status: complete
+    audience: technical
+    skills_used: [q-mentor-improve]
+    validation_state: locally-executed
+    fields:
+      Failure: "Sanitized lesson L-003 (consent record C-2026-10-14): a conversion answer compared RX(beta) angles with RX(2 beta) angles."
+      Proposed change: "Add `evals/incidents/003-rx-convention.yml` (fails today), then one sentence in `knowledge/providers-classiq.md`."
+      Regression: "Full suite passed after the change; median eval tokens +1.2%."
+      Review: "Open a PR for the maintainer; no auto-merge."
+  - id: improve-blocked
+    skill: q-mentor-improve
+    status: blocked
+    audience: business
+    skills_used: [q-mentor-improve]
+    validation_state: not-applicable
+    fields:
+      Failure: "No lesson saved: you have not opted in, and silence counts as no."
+      Proposed change: "None; Q-Mentor never stores conversations without consent."
+      Regression: "Not run."
+      Review: "Say \"save a sanitized lesson\" to see and edit the candidate before anything is written."

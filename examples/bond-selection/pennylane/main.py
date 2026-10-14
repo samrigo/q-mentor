@@ -69,7 +69,7 @@ def main() -> dict:
     feasible = [d for d in decoded if d["feasible"]]
     baseline = canonical.exact_baseline(problem)
     record = {
-        "schema": "qmentor.result-record.v2",
+        "schema": "qmentor.result-record.v3",
         "target": "pennylane",
         "versions": {"pennylane": qml.__version__},
         "device": adapter.DEVICE_NAME,

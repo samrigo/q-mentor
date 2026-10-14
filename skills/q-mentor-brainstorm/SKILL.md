@@ -1,39 +1,40 @@
 ---
 name: q-mentor-brainstorm
-description: "Suggest at most five candidate uses of quantum computing for a stated domain or problem and rank their readiness against classical alternatives. Use when the user asks where quantum could help or wants a shortlist of options."
+description: Use when the user wants ideas for where quantum computing could apply — 'where could quantum help our business', 'brainstorm quantum use cases for asset management', 'what logistics problems suit quantum', 'give me options' — returning at most five ranked classical, hybrid, and quantum options.
 license: MIT
 allowed-tools: read
 ---
 
 # Q-Mentor · Brainstorm
 
-Produce one ranked table of ≤ 5 options that exposes assumptions, cost and falsifiers.
+Offer at most five ranked options, at least one classical, each with readiness, assumption, cost, and falsifier.
 
 ## Shared files
 
-Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`:
-registry `registry/skills.yml`, contract `templates/response-contract.md`; packs `knowledge/quantum-fit.md`.
-If the registry or contract cannot be found, answer `Status: blocked` naming the missing file. Do not guess.
+Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`: registry `registry/skills.yml`, contract `templates/response-contract.md`, packs `knowledge/quantum-fit.md`. If the registry is missing or invalid, answer `Status: blocked` naming the file; do not guess.
+
+## Response template: `options`
+
+For **every** user-facing answer, including clarification, error, and direct invocation, render `templates/responses/options.md` through `qmentor.response.v3`; preserve its lead, field order, status, uncertainty, and validation. Do not answer free-form or ask the user to invoke another skill.
 
 ## Input
 
-Domain, problem context, constraints, data class.
+Business context and constraints.
 
 ## Output
 
-Table: option · kernel (optimization/simulation/sampling/algebraic) · classical incumbent · readiness (classical now / PoC / bounded experiment) · falsifier · first cheap test.
-Default mode is brief (`Status`, `Result`, `Validation`, `Next`). Honor `detailed` or `machine` when asked.
+`UseCaseTable` (≤ 5 rows: option · paradigm · readiness · key assumption · falsifier · cost).
 
 ## Procedure
 
-1. Include classical and hybrid options alongside quantum ones; at least one row is usually "classical now".
-2. Rank by readiness using `quantum-fit.md` gates, not novelty.
-3. Each row names the data that would disprove its value.
-4. Keep it to one table plus `Validation` and `Next`.
+1. Identify mathematical kernels (optimization, simulation, sampling, algebraic) in the context; ignore buzzwords.
+2. Rank with `knowledge/quantum-fit.md`; a classical option is always present and usually first for small or routine problems.
+3. Name what would falsify each quantum option (instance size, baseline gap, data loading cost).
+4. No advantage language; readiness is evidence level 1-5, not a promise.
 
 ## Stop when
 
-Problem too underspecified to name a kernel (ask one question).
+Problem too underspecified (needs-input with one question).
 
 ## Handoffs
 

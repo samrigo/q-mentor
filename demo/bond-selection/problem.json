@@ -1,5 +1,5 @@
 {
-  "schema": "qmentor.canonical-problem.v2",
+  "schema": "qmentor.canonical-problem.v3",
   "id": "six-bond-selection",
   "description": "Select exactly three of six bonds, balancing synthetic yield score, covariance risk and closeness to a target total duration. Synthetic, normalized values; not market data or investment advice.",
   "provenance": {"source": "Q-Mentor build kit v2.0.0, README-04", "data_class": "synthetic"},

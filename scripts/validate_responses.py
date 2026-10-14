@@ -1,109 +1,126 @@
-"""Lint answers against qmentor.response.v2.
+"""Response-contract gate for qmentor.response.v3 (README-13).
+
+1. Template matrix (evals/response-format/answers.yml): every user-facing skill has answers in the statuses that
+   apply to it, in business and technical audiences; each is rendered brief/detailed/machine (and code-only for
+   code/conversion templates) and linted against the template the registry assigns to that skill.
+2. Fixtures (evals/response-format/cases.yml): negative and edge texts must return exactly the expected problems.
 
 Usage:
-  python scripts/validate_responses.py                 # run evals/response-format fixtures
-  python scripts/validate_responses.py FILE [--mode brief|detailed|machine]
+  python scripts/validate_responses.py
+  python scripts/validate_responses.py FILE --skill q-mentor-verdict [--audience business] [--mode brief]
 """
 from __future__ import annotations
 
 import argparse
 import json
-import re
 import sys
+from collections import defaultdict
 from pathlib import Path
-from typing import List
 
 import yaml
-from jsonschema import Draft202012Validator
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from qmentor_response import (STATUSES, lint, lint_code_only, lint_machine, lint_text, registry_templates,  # noqa: E402
+                              render_code_only, render_machine, render_text)
 
 ROOT = Path(__file__).resolve().parents[1]
-STATUSES = {"complete", "needs-input", "blocked", "unsupported", "unverified"}
-HEADINGS = {
-    "brief": ["Result", "Validation", "Next"],
-    "detailed": ["Decision", "Assumptions", "Design", "Validation", "Risks", "Next"],
-}
-KNOWN_HEADINGS = set(sum(HEADINGS.values(), [])) | {"Summary", "Sources", "Conclusion", "Overview", "Details", "Recommendation"}
-MAX_WORDS = 180
-PRAISE = re.compile(r"\b(great question|excellent question|happy to help|i hope this helps|hope this helps|absolutely!|certainly!)", re.I)
-NARRATION = re.compile(r"\b(let me (walk|start|first|now)|i first (read|loaded|ran)|then i (loaded|read|ran)|i will now|here's what i did)\b", re.I)
-ADVANTAGE = re.compile(r"[^.]*\b(quantum advantage|quantum speed-?up|outperforms classical|faster than classical)\b[^.]*\.?", re.I)
-NEGATION = re.compile(r"\b(not|no|never|without|isn't|is not|cannot|unsupported)\b", re.I)
+REQUIRED_STATUS = {"complete"}  # every skill; plus at least one non-complete status
+MIN_NON_COMPLETE = 1
 
 
-def strip_code(text: str) -> str:
-    return re.sub(r"```.*?```", " ", text, flags=re.S)
+def matrix() -> int:
+    cases = yaml.safe_load((ROOT / "evals/response-format/answers.yml").read_text())["cases"]
+    reg = registry_templates()
+    failures = 0
+    coverage = defaultdict(lambda: {"status": set(), "audience": set()})
+    for case in cases:
+        skill = case["skill"]
+        tid = reg.get(skill)
+        if not tid:
+            print(f"FAIL {case['id']}: {skill} has no template in the registry")
+            failures += 1
+            continue
+        if case["skills_used"][-1] != skill:
+            print(f"FAIL {case['id']}: terminal skill must be {skill}")
+            failures += 1
+        coverage[skill]["status"].add(case["status"])
+        coverage[skill]["audience"].add(case["audience"])
+        renders = {
+            f"brief/{case['audience']}": (render_text(tid, case["fields"], case["status"], case["audience"]),
+                                         lambda t: lint_text(t, tid, case["audience"], "brief")),
+            "detailed/technical": (render_text(tid, case["fields"], case["status"], "technical", "detailed"),
+                                   lambda t: lint_text(t, tid, "technical", "detailed")),
+        }
+        machine = render_machine(tid, case["fields"], case["status"], audience=case["audience"],
+                                 skills_used=case["skills_used"], validation_state=case["validation_state"],
+                                 next_action=case.get("next_action"))
+        renders["machine"] = (json.dumps(machine), lambda t: lint_machine(t, tid))
+        if tid in ("code", "conversion") and case["audience"] == "technical":
+            files = machine["artifacts"] or ["none"]
+            checks = case["fields"].get("Checks") or case["fields"].get("Validation")
+            code = {"example.py": ("python", "import json\n\nprint(json.dumps({'status': 'ok'}))")} \
+                if case["status"] == "complete" else {}
+            renders["code-only"] = (render_code_only(tid, case["status"], files, checks, machine["next_action"], code),
+                                    lambda t: lint_code_only(t, tid))
+        for mode, (text, check) in renders.items():
+            problems = check(text)
+            if problems:
+                failures += 1
+                print(f"FAIL {case['id']} [{mode}]: {problems}")
+    for name, tid in reg.items():
+        if not tid:
+            continue
+        cov = coverage.get(name)
+        if not cov:
+            print(f"FAIL coverage: {name} has no template answers")
+            failures += 1
+            continue
+        missing = []
+        if "complete" not in cov["status"]:
+            missing.append("complete")
+        if len(cov["status"] - {"complete"}) < MIN_NON_COMPLETE:
+            missing.append("a needs-input/blocked/unsupported/unverified answer")
+        if name not in ("q-mentor-exec", "q-mentor-improve") and cov["audience"] != {"business", "technical"}:
+            missing.append("both audiences")
+        if missing:
+            failures += 1
+            print(f"FAIL coverage: {name} lacks {', '.join(missing)}")
+    statuses = set().union(*(c["status"] for c in coverage.values()))
+    if statuses != set(STATUSES):
+        failures += 1
+        print(f"FAIL coverage: statuses exercised {sorted(statuses)}")
+    print(f"matrix: {len(cases)} answers x modes over {len(coverage)} skills; "
+          f"{'all passed' if not failures else f'{failures} failure(s)'}")
+    return failures
 
 
-def lint_text(text: str, mode: str) -> List[str]:
-    problems: List[str] = []
-    lines = [ln.rstrip() for ln in text.strip().splitlines()]
-    if not lines or not re.fullmatch(r"Status: (\S+)", lines[0]) or lines[0].split(": ", 1)[1] not in STATUSES:
-        problems.append("praise-or-narration" if lines and (PRAISE.search(lines[0]) or NARRATION.search(lines[0])) else "status-line")
-    found = [ln.lstrip("#").strip() for ln in lines[1:]
-             if ln.startswith("#") or ln.strip() in KNOWN_HEADINGS]
-    if found != HEADINGS[mode]:
-        problems.append("heading-order")
-    prose = strip_code(text)
-    if PRAISE.search(prose) or NARRATION.search(prose):
-        problems.append("praise-or-narration")
-    words = len(re.sub(r"https?://\S+", "", prose).split())
-    if mode == "brief" and words > MAX_WORDS:
-        problems.append("too-long")
-    sentences = [s.strip().lower() for s in re.split(r"(?<=[.!?])\s+|\n+", prose) if len(s.split()) >= 5]
-    if len(sentences) != len(set(sentences)):
-        problems.append("duplicate-sentence")
-    for match in ADVANTAGE.finditer(prose):
-        if not NEGATION.search(match.group(0)):
-            problems.append("unsupported-advantage")
-            break
-    for block in re.findall(r"```[a-zA-Z]*\n(.*?)```", text, flags=re.S):
-        if re.search(r"^\s*\.\.\.|\bTODO\b|<your[- ]", block, flags=re.M):
-            problems.append("placeholder-code")
-            break
-    return sorted(set(problems))
-
-
-def lint_json(text: str) -> List[str]:
-    try:
-        data = json.loads(text)
-    except json.JSONDecodeError:
-        return ["invalid-json"]
-    schema = json.loads((ROOT / "schemas" / "response-v2.schema.json").read_text())
-    errors = list(Draft202012Validator(schema).iter_errors(data))
-    return ["schema"] if errors else []
-
-
-def lint(path: Path, mode: str) -> List[str]:
-    text = path.read_text(encoding="utf-8")
-    return lint_json(text) if mode == "machine" else lint_text(text, mode)
-
-
-def run_fixtures() -> int:
-    base = ROOT / "evals" / "response-format"
-    cases = yaml.safe_load((base / "cases.yml").read_text())["cases"]
+def fixtures() -> int:
+    cases = yaml.safe_load((ROOT / "evals/response-format/cases.yml").read_text())["cases"]
     failures = 0
     for case in cases:
-        problems = lint(base / case["file"], case["mode"])
-        if case["expect"] == "pass":
-            ok = not problems
-        else:
-            ok = case["reason"] in problems
+        got = lint(case["text"], case["template"], case.get("audience", "technical"), case.get("mode", "brief"))
+        ok = sorted(got) == sorted(case["expect"])
         failures += not ok
-        print(f"{'PASS' if ok else 'FAIL'} {case['file']}: {problems or 'clean'}")
-    print(f"{len(cases) - failures}/{len(cases)} response-format cases passed")
-    return 1 if failures else 0
+        print(f"{'PASS' if ok else 'FAIL'} {case['id']}: {got}" + ("" if ok else f" (expected {case['expect']})"))
+    print(f"fixtures: {len(cases) - failures}/{len(cases)} passed")
+    return failures
 
 
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("file", nargs="?")
-    parser.add_argument("--mode", default="brief", choices=["brief", "detailed", "machine"])
+    parser.add_argument("--skill")
+    parser.add_argument("--audience", default="technical")
+    parser.add_argument("--mode", default="brief")
     args = parser.parse_args()
-    if not args.file:
-        return run_fixtures()
-    problems = lint(Path(args.file), args.mode)
-    print(problems or "clean")
-    return 1 if problems else 0
+    if args.file:
+        tid = registry_templates()[args.skill]
+        problems = lint(Path(args.file).read_text(encoding="utf-8"), tid, args.audience, args.mode)
+        print("OK" if not problems else " ".join(problems))
+        return 1 if problems else 0
+    failures = matrix() + fixtures()
+    print("responses: OK" if not failures else f"responses: {failures} failure(s)")
+    return 1 if failures else 0
 
 
 if __name__ == "__main__":

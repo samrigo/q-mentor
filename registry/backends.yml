@@ -1,0 +1,741 @@
+# Backend capability catalog (qmentor.backends.v3) built from brief/README-11 and README-12.
+# physical_family, model (computing model), sdk, backend and support_level are separate fields.
+#   tested-local  : a pinned offline example passes in a clean environment (example: path)
+#   profiled      : capability documented + fixture in evals/hardware/cases.yml; no runnable adapter
+#   research-only : teach/assess only; never executable code
+# backend_kind distinguishes a local simulator/emulator from a QPU or a hybrid solver.
+# Load ONE record per decision (at most three candidates); never the whole file into context.
+# SDK versions: PyPI on 2026-10-14. Access is checked at request time; no paid job runs automatically.
+contract_version: qmentor.backends.v3
+plugin_version: 3.1.1
+last_verified: 2026-10-14
+families:
+  - superconducting-gate
+  - superconducting-cat
+  - superconducting-flux-annealer
+  - trapped-ion
+  - neutral-atom
+  - photonic
+  - silicon-spin
+  - diamond-color-center
+  - liquid-state-nmr
+  - electrons-on-helium
+  - topological
+  - none-framework-or-simulator
+access_layers:
+  - {name: Amazon Braket, kind: access, note: "Cloud access to several vendors (incl. QuEra Aquila AHS); store the concrete device separately."}
+  - {name: Azure Quantum, kind: access, note: "Cloud access layer; Q# programs are not evidence of a topological QPU."}
+  - {name: Classiq, kind: programming, note: "High-level Qmod modelling and synthesis; synthesis/execution need credentials."}
+  - {name: PennyLane, kind: programming, note: "Differentiable framework; always name the concrete device/plugin."}
+  - {name: NVIDIA CUDA-Q, kind: runtime, note: "Kernel language and GPU simulation runtime; targets are separate."}
+  - {name: Qiskit, kind: programming, note: "Gate SDK; IBM hardware via qiskit-ibm-runtime; other vendors via providers."}
+  - {name: pytket, kind: compilation, note: "Compiler and circuit SDK; Quantinuum devices via qnexus."}
+  - {name: Q#, kind: language, note: "Language and QDK; target chosen separately."}
+backends:
+  # ---------------- superconducting gate ----------------
+  - id: qiskit-local
+    provider: IBM Quantum (Qiskit)
+    physical_family: superconducting-gate
+    model: gate
+    backend_kind: local-simulator
+    sdk: {package: qiskit, version: 2.5.2, maintained: true}
+    backend: qiskit.primitives.StatevectorSampler (exact local statevector)
+    native_ops: any Qiskit standard gate (no transpilation to hardware basis in the example)
+    connectivity: all-to-all (simulator)
+    measurement: computational basis; little-endian bitstrings (reverse for canonical order)
+    noise: none
+    queue_cost_boundary: local CPU only
+    local_validation: examples/bond-selection/qiskit (all 64 energies, QAOA p=1 sampling, decode)
+    remote_access: IBM QPUs via qiskit-ibm-runtime (see ibm-qpu)
+    source_url: https://github.com/Qiskit/qiskit
+    example: examples/bond-selection/qiskit
+    last_verified: 2026-10-14
+    support_level: tested-local
+    hardware_questions: [native gates, coupling graph, dynamic circuits, calibration age, two-qubit error, depth]
+  - id: ibm-qpu
+    provider: IBM Quantum
+    physical_family: superconducting-gate
+    model: gate
+    backend_kind: qpu
+    sdk: {package: qiskit-ibm-runtime, version: 0.50.0, maintained: true}
+    backend: IBM Heron-class QPUs via Qiskit Runtime (account required)
+    native_ops: device basis (e.g. ECR/CZ + single-qubit rotations); read from backend.target at request time
+    connectivity: heavy-hex coupling map
+    measurement: computational basis; dynamic circuits on supported devices
+    noise: device calibration (T1/T2, two-qubit error) changes daily
+    queue_cost_boundary: credentialed, queued, plan-dependent cost; explicit approval required
+    local_validation: transpile against a fake backend is possible; not shipped as an adapter
+    remote_access: credentialed
+    source_url: https://docs.quantum.ibm.com/
+    example: null
+    fixture: evals/hardware/cases.yml#ibm-qpu
+    last_verified: 2026-10-14
+    support_level: profiled
+  - id: cirq-local
+    provider: Google Quantum AI (Cirq)
+    physical_family: superconducting-gate
+    model: gate
+    backend_kind: local-simulator
+    sdk: {package: cirq-core, version: 1.7.0, maintained: true}
+    backend: cirq.Simulator (exact local statevector, seeded sampling)
+    native_ops: Cirq gates (ZZPowGate, rx, H) decomposed for a line/grid layout in the example
+    connectivity: example uses cirq.LineQubit; hardware grids are device-specific
+    measurement: measurement key "x"; big-endian bit order matching canonical order
+    noise: none
+    queue_cost_boundary: local CPU only
+    local_validation: examples/bond-selection/cirq (all 64 energies via diagonal cost, QAOA sampling, decode)
+    remote_access: Google QPUs via cirq-google (restricted access; see google-qpu)
+    source_url: https://github.com/quantumlib/Cirq
+    example: examples/bond-selection/cirq
+    last_verified: 2026-10-14
+    support_level: tested-local
+  - id: google-qpu
+    provider: Google Quantum AI
+    physical_family: superconducting-gate
+    model: gate
+    backend_kind: qpu
+    sdk: {package: cirq-google, version: 1.7.0, maintained: true}
+    backend: Google Sycamore/Willow-class processors (restricted partner access)
+    native_ops: sqrt-iSWAP/CZ-family + single-qubit; device-specific
+    connectivity: 2-D grid
+    measurement: computational basis
+    noise: device-specific
+    queue_cost_boundary: not publicly purchasable; partner access only
+    local_validation: none shipped
+    remote_access: restricted
+    source_url: https://quantumai.google/cirq
+    example: null
+    fixture: evals/hardware/cases.yml#google-qpu
+    last_verified: 2026-10-14
+    support_level: profiled
+  - id: rigetti-pyquil
+    provider: Rigetti
+    physical_family: superconducting-gate
+    model: gate
+    backend_kind: qpu
+    sdk: {package: pyquil, version: 4.22.0, maintained: true}
+    backend: Rigetti Ankaa-class QPUs (and the QVM simulator, which needs the separate quilc/qvm services)
+    native_ops: RX(±pi/2, pi), RZ, CZ/ISWAP-family (device ISA)
+    connectivity: square-lattice device graph
+    measurement: computational basis
+    noise: device-specific
+    queue_cost_boundary: credentialed (Rigetti QCS or Braket); approval required
+    local_validation: "not tested-local: pyquil 4.22 requires Python <3.13 and local quilc/qvm services"
+    remote_access: credentialed
+    source_url: https://github.com/rigetti/pyquil
+    example: null
+    fixture: evals/hardware/cases.yml#rigetti-pyquil
+    last_verified: 2026-10-14
+    support_level: profiled
+  - id: iqm-client
+    provider: IQM
+    physical_family: superconducting-gate
+    model: gate
+    backend_kind: qpu
+    sdk: {package: "iqm-client[qiskit]", version: 36.0.0, maintained: true}
+    backend: IQM Garnet/Emerald-class QPUs (qiskit-on-iqm repository is archived; use iqm-client[qiskit])
+    native_ops: PRX + CZ
+    connectivity: square lattice / crystal topology (device-specific)
+    measurement: computational basis
+    noise: device-specific
+    queue_cost_boundary: credentialed (IQM Resonance); approval required
+    local_validation: none shipped; facade/mock backends exist upstream but are not pinned here
+    remote_access: credentialed
+    source_url: https://github.com/iqm-finland/sdk
+    example: null
+    fixture: evals/hardware/cases.yml#iqm-client
+    last_verified: 2026-10-14
+    support_level: profiled
+  - id: oqc-qat
+    provider: Oxford Quantum Circuits
+    physical_family: superconducting-gate
+    model: gate
+    backend_kind: qpu
+    sdk: {package: qat-compiler, version: 3.5.0, maintained: true}
+    backend: OQC Toshiko/Lucy-class QPUs via OQC cloud or Braket
+    native_ops: device-specific (QAT compiles from QASM/QIR)
+    connectivity: device-specific
+    measurement: computational basis
+    noise: device-specific
+    queue_cost_boundary: credentialed; approval required
+    local_validation: "not tested-local: qat-compiler 3.5.0 requires Python <3.13"
+    remote_access: credentialed
+    source_url: https://github.com/oqc-community/qat
+    example: null
+    fixture: evals/hardware/cases.yml#oqc-qat
+    last_verified: 2026-10-14
+    support_level: profiled
+  # ---------------- superconducting bosonic / cat ----------------
+  - id: alice-bob-emulator
+    provider: Alice & Bob
+    physical_family: superconducting-cat
+    model: gate
+    backend_kind: local-emulator
+    sdk: {package: qiskit-alice-bob-provider, version: 2.0.0, maintained: true}
+    backend: local physical-cat and logical-cat emulators (Felis); QPU access separate
+    native_ops: bias-preserving gate set on cat qubits; physical vs logical targets differ
+    connectivity: emulator-defined
+    measurement: computational basis; noise biased toward phase flips
+    noise: tunable bit-flip/phase-flip model (average photon number)
+    queue_cost_boundary: local emulator; cloud QPU credentialed
+    local_validation: "pending a clean pinned build (not promoted in 3.1.1)"
+    remote_access: credentialed for QPU
+    source_url: https://github.com/Alice-Bob-SW/qiskit-alice-bob-provider
+    example: null
+    fixture: evals/hardware/cases.yml#alice-bob-emulator
+    last_verified: 2026-10-14
+    support_level: profiled
+  - id: aws-ocelot
+    provider: AWS Center for Quantum Computing
+    physical_family: superconducting-cat
+    model: gate
+    backend_kind: none
+    sdk: {package: null, version: null, maintained: null}
+    backend: Ocelot research chip (no public programming route)
+    native_ops: unknown publicly
+    connectivity: unknown publicly
+    measurement: unknown publicly
+    noise: research results only
+    queue_cost_boundary: not accessible
+    local_validation: none
+    remote_access: none
+    source_url: brief/README-11-HARDWARE-AND-RESEARCH.md
+    example: null
+    fixture: evals/hardware/cases.yml#aws-ocelot
+    last_verified: 2026-10-14
+    support_level: research-only
+  # ---------------- flux annealing ----------------
+  - id: dwave-local
+    provider: D-Wave (Ocean)
+    physical_family: superconducting-flux-annealer
+    model: anneal
+    backend_kind: local-simulator
+    sdk: {package: dimod + dwave-samplers, version: "0.12.22 / 1.8.0", maintained: true}
+    backend: dimod.ExactSolver (exact) and dwave.samplers.SimulatedAnnealingSampler (classical heuristic)
+    native_ops: BQM linear/quadratic biases + offset
+    connectivity: unconstrained (no embedding locally)
+    measurement: samples with energies
+    noise: none (simulated annealing is classical)
+    queue_cost_boundary: local CPU only
+    local_validation: examples/bond-selection/dwave (offset and all 64 energies, decode)
+    remote_access: QPU and hybrid solvers via Leap (see dwave-qpu, dwave-hybrid)
+    source_url: https://github.com/dwavesystems/dimod
+    example: examples/bond-selection/dwave
+    last_verified: 2026-10-14
+    support_level: tested-local
+  - id: dwave-qpu
+    provider: D-Wave
+    physical_family: superconducting-flux-annealer
+    model: anneal
+    backend_kind: qpu
+    sdk: {package: dwave-system, version: 1.36.0, maintained: true}
+    backend: Advantage / Advantage2 QPUs via Leap (DWaveSampler + EmbeddingComposite)
+    native_ops: Ising h/J within hardware ranges
+    connectivity: Pegasus / Zephyr; minor embedding with chains
+    measurement: num_reads samples; chain breaks
+    noise: analog control errors; chain-strength sensitivity
+    queue_cost_boundary: credentialed, metered QPU time; approval required
+    local_validation: guarded adapter path documented in examples/bond-selection/dwave/README.md; not run
+    remote_access: credentialed
+    source_url: https://docs.dwavequantum.com/en/latest/ocean/
+    example: null
+    fixture: evals/hardware/cases.yml#dwave-qpu
+    last_verified: 2026-10-14
+    support_level: profiled
+  - id: dwave-hybrid
+    provider: D-Wave
+    physical_family: superconducting-flux-annealer
+    model: anneal
+    backend_kind: hybrid-solver
+    sdk: {package: dwave-system, version: 1.36.0, maintained: true}
+    backend: Leap hybrid BQM/CQM solvers (classical + QPU; not a pure-QPU benchmark)
+    native_ops: BQM / CQM
+    connectivity: handled by the service
+    measurement: best samples
+    noise: n/a (service)
+    queue_cost_boundary: credentialed, metered; approval required
+    local_validation: none
+    remote_access: credentialed
+    source_url: https://docs.dwavequantum.com/en/latest/ocean/
+    example: null
+    fixture: evals/hardware/cases.yml#dwave-hybrid
+    last_verified: 2026-10-14
+    support_level: profiled
+  # ---------------- trapped ions ----------------
+  - id: pytket-local
+    provider: Quantinuum (TKET)
+    physical_family: trapped-ion
+    model: gate
+    backend_kind: local-simulator
+    sdk: {package: pytket, version: 2.18.5, maintained: true}
+    backend: pytket Circuit.get_statevector / get_unitary (exact, small circuits); compiler passes local
+    native_ops: TKET op set; example compiles to a ZZPhase/PhasedX-style basis with a pass and checks semantics
+    connectivity: all-to-all (ion-like); compiler respects any Architecture given
+    measurement: canonical bit order verified against the statevector
+    noise: none
+    queue_cost_boundary: local CPU only
+    local_validation: examples/bond-selection/pytket (pre/post compilation unitary and energy equivalence)
+    remote_access: Quantinuum devices via qnexus (see quantinuum-hw)
+    source_url: https://github.com/Quantinuum/tket
+    example: examples/bond-selection/pytket
+    last_verified: 2026-10-14
+    support_level: tested-local
+  - id: quantinuum-hw
+    provider: Quantinuum
+    physical_family: trapped-ion
+    model: gate
+    backend_kind: qpu
+    sdk: {package: qnexus, version: 0.51.1, maintained: true}
+    backend: H-series / Helios via Quantinuum Nexus (device submission moved to qnexus from pytket-quantinuum 0.56.0)
+    native_ops: ZZPhase / ZZMax, PhasedX, Rz; mid-circuit measurement and reuse
+    connectivity: all-to-all via ion transport
+    measurement: mid-circuit and final
+    noise: device-specific; HQC credit cost model
+    queue_cost_boundary: credentialed, credit-metered; approval required
+    local_validation: none shipped beyond pytket-local compilation
+    remote_access: credentialed
+    source_url: https://docs.quantinuum.com/tket/extensions/pytket-quantinuum/
+    example: null
+    fixture: evals/hardware/cases.yml#quantinuum-hw
+    last_verified: 2026-10-14
+    support_level: profiled
+  - id: ionq
+    provider: IonQ
+    physical_family: trapped-ion
+    model: gate
+    backend_kind: qpu
+    sdk: {package: qiskit-ionq, version: 1.1.1, maintained: true}
+    backend: IonQ Aria/Forte via IonQ cloud (also Braket/Azure); IonQ cloud simulator needs an API key
+    native_ops: GPi, GPi2, MS/ZZ
+    connectivity: all-to-all
+    measurement: computational basis
+    noise: device-specific
+    queue_cost_boundary: credentialed; approval required
+    local_validation: none (the provider's simulator is a cloud service)
+    remote_access: credentialed
+    source_url: https://github.com/qiskit-community/qiskit-ionq
+    example: null
+    fixture: evals/hardware/cases.yml#ionq
+    last_verified: 2026-10-14
+    support_level: profiled
+  - id: aqt
+    provider: Alpine Quantum Technologies
+    physical_family: trapped-ion
+    model: gate
+    backend_kind: qpu
+    sdk: {package: qiskit-aqt-provider, version: 2.0.0, maintained: true}
+    backend: AQT IBEX/PINE systems via AQT ARNICA; provider ships offline simulators
+    native_ops: R(theta, phi), RZ, RXX (MS)
+    connectivity: all-to-all
+    measurement: computational basis
+    noise: device-specific
+    queue_cost_boundary: credentialed; approval required
+    local_validation: offline simulator exists upstream; not promoted until separately tested
+    remote_access: credentialed
+    source_url: https://github.com/qiskit-community/qiskit-aqt-provider
+    example: null
+    fixture: evals/hardware/cases.yml#aqt
+    last_verified: 2026-10-14
+    support_level: profiled
+  # ---------------- neutral atoms ----------------
+  - id: pulser-local
+    provider: Pasqal (Pulser)
+    physical_family: neutral-atom
+    model: analog
+    backend_kind: local-emulator
+    sdk: {package: pulser + pulser-simulation, version: 1.9.1, maintained: true}
+    backend: pulser_simulation.QutipBackendV2 on pulser.devices.AnalogDevice (global Rydberg channel)
+    native_ops: global Omega(t), delta(t), phase; C6/r^6 interactions from geometry
+    connectivity: geometry-defined (all pairs interact, decaying as r^-6); minimum spacing per device
+    measurement: ground-rydberg basis
+    noise: optional EmulationConfig noise (SPAM, dephasing, trajectories)
+    queue_cost_boundary: local CPU only
+    local_validation: examples/bond-selection/pasqal-pulser (six-bond unsupported-exact report + 4-atom native QUBO emulation)
+    remote_access: Pasqal QPU via pasqal-cloud (see pasqal-qpu)
+    source_url: https://github.com/pasqal-io/Pulser
+    example: examples/bond-selection/pasqal-pulser
+    last_verified: 2026-10-14
+    support_level: tested-local
+  - id: pasqal-qpu
+    provider: Pasqal
+    physical_family: neutral-atom
+    model: analog
+    backend_kind: qpu
+    sdk: {package: pasqal-cloud, version: 0.24.0, maintained: true}
+    backend: Pasqal Fresnel-class analog QPU via Pasqal Cloud (or Azure)
+    native_ops: global Rydberg drive; device-specific DMM/local detuning availability
+    connectivity: geometry-defined
+    measurement: ground-rydberg basis
+    noise: device-specific
+    queue_cost_boundary: credentialed; approval required
+    local_validation: Pulser device validation of the sequence (pulser-local)
+    remote_access: credentialed
+    source_url: https://docs.pasqal.com/
+    example: null
+    fixture: evals/hardware/cases.yml#pasqal-qpu
+    last_verified: 2026-10-14
+    support_level: profiled
+  - id: bloqade-local
+    provider: QuEra (Bloqade)
+    physical_family: neutral-atom
+    model: analog
+    backend_kind: local-emulator
+    sdk: {package: bloqade-analog, version: 0.16.9, maintained: true}
+    backend: bloqade-analog python emulator (.bloqade.python())
+    native_ops: global Rabi amplitude/phase, detuning (global and local), C6/r^6 interactions
+    connectivity: geometry-defined
+    measurement: ground-Rydberg bitstrings (bloqade reports 0 = Rydberg in its bitstring convention; adapter decodes)
+    noise: none in the emulator
+    queue_cost_boundary: local CPU only
+    local_validation: examples/bond-selection/bloqade (native analog MIS program + six-bond unsupported-exact report)
+    remote_access: QuEra Aquila via Amazon Braket AHS (see quera-aquila)
+    source_url: https://github.com/QuEraComputing/bloqade-analog
+    example: examples/bond-selection/bloqade
+    last_verified: 2026-10-14
+    support_level: tested-local
+  - id: quera-aquila
+    provider: QuEra
+    physical_family: neutral-atom
+    model: analog
+    backend_kind: qpu
+    sdk: {package: amazon-braket-sdk, version: 1.127.3.post0, maintained: true}
+    backend: Aquila analog Hamiltonian simulation (AHS) via Amazon Braket
+    native_ops: global drive (amplitude, phase, detuning); local detuning pattern
+    connectivity: geometry-defined; position resolution and spacing limits per device properties
+    measurement: pre- and post-sequence atom occupancy
+    noise: device-specific; atom loss
+    queue_cost_boundary: credentialed, per-task and per-shot cost on Braket; approval required
+    local_validation: Bloqade/Braket local AHS simulators only
+    remote_access: credentialed
+    source_url: https://docs.aws.amazon.com/braket/latest/developerguide/braket-quera-submitting-analog-program-aquila.html
+    example: null
+    fixture: evals/hardware/cases.yml#quera-aquila
+    last_verified: 2026-10-14
+    support_level: profiled
+  - id: neutral-atom-gate
+    provider: Pasqal, QuEra, Atom Computing (gate mode)
+    physical_family: neutral-atom
+    model: gate
+    backend_kind: qpu
+    sdk: {package: "bloqade-circuit / vendor SDKs", version: "0.15.3 (bloqade-circuit)", maintained: true}
+    backend: gate-model neutral-atom processors (availability varies by vendor and access program)
+    native_ops: CZ via Rydberg blockade + single-qubit rotations; atom movement on some devices
+    connectivity: reconfigurable
+    measurement: computational basis; mid-circuit on some devices
+    noise: device-specific
+    queue_cost_boundary: access-program dependent
+    local_validation: none shipped
+    remote_access: restricted or credentialed
+    source_url: https://github.com/QuEraComputing/bloqade
+    example: null
+    fixture: evals/hardware/cases.yml#neutral-atom-gate
+    last_verified: 2026-10-14
+    support_level: profiled
+  # ---------------- photonics ----------------
+  - id: perceval-local
+    provider: Quandela (Perceval)
+    physical_family: photonic
+    model: photonic-DV
+    backend_kind: local-simulator
+    sdk: {package: perceval-quandela, version: 1.3.1, maintained: true}
+    backend: Perceval local Processor with the SLOS backend (perfect or noisy source model)
+    native_ops: beam splitters, phase shifters, permutations; heralded/postselected CNOT/CZ for dual-rail logic
+    connectivity: linear-optical mode graph
+    measurement: photon-number detection; postselection and heralds
+    noise: optional source brightness/indistinguishability/loss
+    queue_cost_boundary: local CPU only
+    local_validation: examples/bond-selection/perceval (six-bond resource report + native dual-rail program with success rate)
+    remote_access: Quandela Cloud QPUs (see quandela-qpu)
+    source_url: https://github.com/Quandela/Perceval
+    example: examples/bond-selection/perceval
+    last_verified: 2026-10-14
+    support_level: tested-local
+  - id: quandela-qpu
+    provider: Quandela
+    physical_family: photonic
+    model: photonic-DV
+    backend_kind: qpu
+    sdk: {package: perceval-quandela, version: 1.3.1, maintained: true}
+    backend: Quandela cloud photonic QPUs (e.g. Ascella/Belenos-class) via RemoteProcessor
+    native_ops: reconfigurable interferometer; single-photon sources
+    connectivity: mode count per device
+    measurement: threshold/PNR detectors; postselection
+    noise: loss, distinguishability, brightness
+    queue_cost_boundary: credentialed (Quandela cloud token); approval required
+    local_validation: perceval-local with a noisy source model only
+    remote_access: credentialed
+    source_url: https://perceval.quandela.net/docs/
+    example: null
+    fixture: evals/hardware/cases.yml#quandela-qpu
+    last_verified: 2026-10-14
+    support_level: profiled
+  - id: pennylane-photonic-device
+    provider: Xanadu (PennyLane device plugins)
+    physical_family: photonic
+    model: photonic-CV
+    backend_kind: local-simulator
+    sdk: {package: "pennylane device plugins", version: null, maintained: null}
+    backend: device-specific photonic plugins; the Strawberry Fields plugin depends on an archived SDK
+    native_ops: Gaussian/non-Gaussian CV ops (plugin-specific)
+    connectivity: plugin-specific
+    measurement: homodyne/photon-number (plugin-specific)
+    noise: plugin-specific
+    queue_cost_boundary: plugin-specific
+    local_validation: none pinned; capability record only
+    remote_access: none verified
+    source_url: https://docs.pennylane.ai/en/stable/
+    example: null
+    fixture: evals/hardware/cases.yml#pennylane-photonic-device
+    last_verified: 2026-10-14
+    support_level: profiled
+  - id: strawberryfields
+    provider: Xanadu (Strawberry Fields, archived)
+    physical_family: photonic
+    model: photonic-CV
+    backend_kind: none
+    sdk: {package: strawberryfields, version: 0.23.0, maintained: false}
+    backend: archived SDK; historical CV examples only
+    native_ops: CV gates (historical)
+    connectivity: n/a
+    measurement: n/a
+    noise: n/a
+    queue_cost_boundary: no maintained route
+    local_validation: none
+    remote_access: none
+    source_url: https://github.com/XanaduAI/strawberryfields
+    example: null
+    fixture: evals/hardware/cases.yml#strawberryfields
+    last_verified: 2026-10-14
+    support_level: research-only
+  - id: psiquantum
+    provider: PsiQuantum
+    physical_family: photonic
+    model: photonic-DV
+    backend_kind: none
+    sdk: {package: null, version: null, maintained: null}
+    backend: no public versioned programming route verified
+    native_ops: unknown publicly
+    connectivity: unknown publicly
+    measurement: fusion-based (published architecture)
+    noise: component benchmarks only
+    queue_cost_boundary: not accessible
+    local_validation: none
+    remote_access: none
+    source_url: brief/README-11-HARDWARE-AND-RESEARCH.md
+    example: null
+    fixture: evals/hardware/cases.yml#psiquantum
+    last_verified: 2026-10-14
+    support_level: research-only
+  - id: orca
+    provider: ORCA Computing
+    physical_family: photonic
+    model: photonic-DV
+    backend_kind: none
+    sdk: {package: null, version: null, maintained: null}
+    backend: no public versioned programming route verified
+    native_ops: unknown publicly
+    connectivity: unknown publicly
+    measurement: unknown publicly
+    noise: unknown publicly
+    queue_cost_boundary: not accessible
+    local_validation: none
+    remote_access: none
+    source_url: brief/README-11-HARDWARE-AND-RESEARCH.md
+    example: null
+    fixture: evals/hardware/cases.yml#orca
+    last_verified: 2026-10-14
+    support_level: research-only
+  # ---------------- frameworks / layers with a local simulator ----------------
+  - id: pennylane-default-qubit
+    provider: PennyLane (framework)
+    physical_family: none-framework-or-simulator
+    model: gate
+    backend_kind: local-simulator
+    sdk: {package: pennylane, version: 0.45.1, maintained: true}
+    backend: default.qubit (exact statevector; seeded shots)
+    native_ops: PennyLane operators; qml.qaoa cost/mixer layers
+    connectivity: all-to-all (simulator)
+    measurement: wire order = canonical order
+    noise: none
+    queue_cost_boundary: local CPU only
+    local_validation: examples/bond-selection/pennylane (Hamiltonian energy on all 64 states, seeded optimisation, decode)
+    remote_access: hardware only through a named device plugin (profiled per plugin)
+    source_url: https://github.com/PennyLaneAI/pennylane
+    example: examples/bond-selection/pennylane
+    last_verified: 2026-10-14
+    support_level: tested-local
+  - id: classiq-local
+    provider: Classiq (programming and synthesis layer)
+    physical_family: none-framework-or-simulator
+    model: gate
+    backend_kind: local-simulator
+    sdk: {package: classiq, version: 1.32.0, maintained: true}
+    backend: create_model / write_qmod offline (validation state `imported`); synthesis and execution need credentials
+    native_ops: Qmod functions (phase, RX, hadamard_transform, repeat …) synthesised to the chosen target
+    connectivity: chosen at synthesis
+    measurement: per execution backend
+    noise: per execution backend
+    queue_cost_boundary: synthesis service and execution are credentialed; approval required
+    local_validation: examples/bond-selection/classiq and examples/conversion/pulser-to-classiq-qaoa (cost expression on all states)
+    remote_access: credentialed
+    source_url: https://github.com/Classiq/classiq-library
+    example: examples/bond-selection/classiq
+    last_verified: 2026-10-14
+    support_level: tested-local
+  # ---------------- silicon spin ----------------
+  - id: diraq
+    provider: Diraq
+    physical_family: silicon-spin
+    model: gate
+    backend_kind: none
+    sdk: {package: null, version: null, maintained: null}
+    backend: no public versioned programming route verified
+    native_ops: exchange-based two-qubit gates (published research)
+    connectivity: research devices
+    measurement: spin readout
+    noise: research results only
+    queue_cost_boundary: not accessible
+    local_validation: none
+    remote_access: none
+    source_url: brief/README-11-HARDWARE-AND-RESEARCH.md
+    example: null
+    fixture: evals/hardware/cases.yml#diraq
+    last_verified: 2026-10-14
+    support_level: research-only
+  - id: quantum-motion
+    provider: Quantum Motion
+    physical_family: silicon-spin
+    model: gate
+    backend_kind: none
+    sdk: {package: null, version: null, maintained: null}
+    backend: no public versioned programming route verified
+    native_ops: unknown publicly
+    connectivity: unknown publicly
+    measurement: unknown publicly
+    noise: unknown publicly
+    queue_cost_boundary: not accessible
+    local_validation: none
+    remote_access: none
+    source_url: brief/README-11-HARDWARE-AND-RESEARCH.md
+    example: null
+    fixture: evals/hardware/cases.yml#quantum-motion
+    last_verified: 2026-10-14
+    support_level: research-only
+  - id: intel-spin
+    provider: Intel
+    physical_family: silicon-spin
+    model: gate
+    backend_kind: none
+    sdk: {package: null, version: null, maintained: null}
+    backend: no public versioned hardware programming route verified
+    native_ops: unknown publicly
+    connectivity: unknown publicly
+    measurement: unknown publicly
+    noise: unknown publicly
+    queue_cost_boundary: not accessible
+    local_validation: none
+    remote_access: none
+    source_url: brief/README-11-HARDWARE-AND-RESEARCH.md
+    example: null
+    fixture: evals/hardware/cases.yml#intel-spin
+    last_verified: 2026-10-14
+    support_level: research-only
+  - id: sqc
+    provider: Silicon Quantum Computing
+    physical_family: silicon-spin
+    model: gate
+    backend_kind: none
+    sdk: {package: null, version: null, maintained: null}
+    backend: no public versioned programming route verified
+    native_ops: unknown publicly
+    connectivity: unknown publicly
+    measurement: unknown publicly
+    noise: unknown publicly
+    queue_cost_boundary: not accessible
+    local_validation: none
+    remote_access: none
+    source_url: brief/README-11-HARDWARE-AND-RESEARCH.md
+    example: null
+    fixture: evals/hardware/cases.yml#sqc
+    last_verified: 2026-10-14
+    support_level: research-only
+  # ---------------- diamond ----------------
+  - id: qristal
+    provider: Quantum Brilliance (Qristal)
+    physical_family: diamond-color-center
+    model: gate
+    backend_kind: local-simulator
+    sdk: {package: qristal-core (source build), version: null, maintained: true}
+    backend: Qristal local simulators; diamond QPU access separate
+    native_ops: device-specific small register
+    connectivity: small register
+    measurement: computational basis
+    noise: emulator noise models
+    queue_cost_boundary: local after a source build; QPU not public
+    local_validation: "not tested-local: no pinned wheel on PyPI at build time; promote after a clean source build"
+    remote_access: none verified
+    source_url: https://github.com/qbrilliance/qristal-core
+    example: null
+    fixture: evals/hardware/cases.yml#qristal
+    last_verified: 2026-10-14
+    support_level: profiled
+  # ---------------- NMR ----------------
+  - id: spinqit-sim
+    provider: SpinQ (SpinQit)
+    physical_family: liquid-state-nmr
+    model: gate
+    backend_kind: local-simulator
+    sdk: {package: spinqit, version: 0.3.0, maintained: true}
+    backend: SpinQit basic simulator; NMR desktop devices (2-3 qubits, education-scale) separately
+    native_ops: SpinQit gate set
+    connectivity: 2-3 qubits on hardware
+    measurement: ensemble expectation / probabilities
+    noise: NMR pseudo-pure state limits on hardware
+    queue_cost_boundary: local simulator; device purchase/access separate
+    local_validation: "not promoted: docs label 0.2.4 while PyPI has 0.3.0; resolve before pinning"
+    remote_access: device-specific
+    source_url: https://github.com/SpinQTech/SpinQit
+    example: null
+    fixture: evals/hardware/cases.yml#spinqit-sim
+    last_verified: 2026-10-14
+    support_level: profiled
+  # ---------------- electrons on helium ----------------
+  - id: eeroq
+    provider: EeroQ and research groups
+    physical_family: electrons-on-helium
+    model: gate
+    backend_kind: none
+    sdk: {package: null, version: null, maintained: null}
+    backend: no public programmable multi-qubit backend
+    native_ops: proposed (blueprint)
+    connectivity: proposed
+    measurement: device-level readout demonstrated
+    noise: research results only
+    queue_cost_boundary: not accessible
+    local_validation: none
+    remote_access: none
+    source_url: brief/README-11-HARDWARE-AND-RESEARCH.md
+    example: null
+    fixture: evals/hardware/cases.yml#eeroq
+    last_verified: 2026-10-14
+    support_level: research-only
+  # ---------------- topological ----------------
+  - id: microsoft-topological
+    provider: Microsoft (Azure Quantum research program)
+    physical_family: topological
+    model: gate
+    backend_kind: none
+    sdk: {package: qsharp, version: 1.31.0, maintained: true}
+    backend: no programmable topological QPU; Q# targets simulators and other vendors' hardware
+    native_ops: parity measurements (device-level research)
+    connectivity: n/a
+    measurement: parity readout (research)
+    noise: research results only
+    queue_cost_boundary: not accessible
+    local_validation: none
+    remote_access: none
+    source_url: https://doi.org/10.1038/s41586-024-08445-2
+    example: null
+    fixture: evals/hardware/cases.yml#microsoft-topological
+    last_verified: 2026-10-14
+    support_level: research-only

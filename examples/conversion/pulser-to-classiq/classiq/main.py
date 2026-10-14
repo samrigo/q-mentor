@@ -25,7 +25,7 @@ def main() -> dict:
     ranking = sorted((adapter.canonical_energy(x), "".join(map(str, x)))
                      for x in itertools.product((0, 1), repeat=adapter.N))
     record = {
-        "schema": "qmentor.result-record.v2",
+        "schema": "qmentor.result-record.v3",
         "target": "classiq",
         "versions": {"classiq": classiq.__version__},
         "model_bytes": len(model),

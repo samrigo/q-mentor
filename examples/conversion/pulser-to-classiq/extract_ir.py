@@ -28,7 +28,7 @@ def extract() -> tuple[dict, dict]:
     ids = list(register.qubit_ids)
     coords = {q: [round(float(v), 9) for v in register.qubits[q].as_array()] for q in ids}
     ir = {
-        "schema": "qmentor.program-ir.v2",
+        "schema": "qmentor.program-ir.v3",
         "source": {"framework": "pulser", "version": pulser.__version__,
                    "entry": "examples/bond-selection/pasqal-pulser/main.py::build_qaa_sequence",
                    "parse_status": "imported-and-built"},
@@ -58,7 +58,7 @@ def extract() -> tuple[dict, dict]:
         ],
     }
     problem = {
-        "schema": "qmentor.canonical-problem.v2",
+        "schema": "qmentor.canonical-problem.v3",
         "id": "pulser-native-4-atom-line",
         "provenance": {"derived_from": "program_ir.json", "data_class": "synthetic"},
         "variables": [{"index": k, "id": q, "domain": "binary"} for k, q in enumerate(ids)],

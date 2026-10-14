@@ -20,4 +20,4 @@ Prices and weights (not just in/out), lot sizes, liquidity, turnover and transac
 Optimum A, C, E (`101010`): yield 11.9, risk 1.67, duration 14.7, energy −9.3725. Runner-up A, D, E at −9.1675. Verdict: classical now; quantum teaching PoC only.
 
 ## Sources
-`markowitz-1952`, `qiskit-finance-portfolio`, `cvxpy` in `knowledge/sources.yml`.
+`ref-markowitz-1952`, `qiskit-finance-portfolio`, `cvxpy` in `knowledge/sources.yml`.

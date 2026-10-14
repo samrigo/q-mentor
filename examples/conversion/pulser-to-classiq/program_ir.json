@@ -1,5 +1,5 @@
 {
-  "schema": "qmentor.program-ir.v2",
+  "schema": "qmentor.program-ir.v3",
   "source": {
     "framework": "pulser",
     "version": "1.9.1",

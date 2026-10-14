@@ -1,19 +1,21 @@
 ---
 name: q-mentor-review
-description: "Review math, code, hardware fit, claims, tests and simpler classical alternatives for quantum-computing work and report findings only. Use before accepting generated code or advice, or when asked to sanity-check a diff or result."
+description: Use when quantum work must be reviewed — 'review my QAOA code', 'check this QUBO formulation', 'sanity-check this quantum PoC', 'is the math right', 'review this diff before I merge', 'audit these claims' — returning findings only.
 license: MIT
 allowed-tools: read, search
 ---
 
 # Q-Mentor · Review
 
-Findings with severity and evidence; no rewrites.
+Return findings only, highest severity first, covering math, code, hardware fit, claims, tests, and simpler classical alternatives.
 
 ## Shared files
 
-Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`:
-registry `registry/skills.yml`, contract `templates/response-contract.md`; packs `knowledge/optimization-math.md`.
-If the registry or contract cannot be found, answer `Status: blocked` naming the missing file. Do not guess.
+Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`: registry `registry/skills.yml`, contract `templates/response-contract.md`, packs `knowledge/optimization-math.md`. If the registry is missing or invalid, answer `Status: blocked` naming the file; do not guess.
+
+## Response template: `review`
+
+For **every** user-facing answer, including clarification, error, and direct invocation, render `templates/responses/review.md` through `qmentor.response.v3`; preserve its lead, field order, status, uncertainty, and validation. Do not answer free-form or ask the user to invoke another skill.
 
 ## Input
 
@@ -21,22 +23,21 @@ Diff, files, artifacts, claims.
 
 ## Output
 
-Findings list: severity (high/medium/low) · location · evidence · why it matters · suggested fix. If none: `Result: No findings` and what was checked.
-Default mode is brief (`Status`, `Result`, `Validation`, `Next`). Honor `detailed` or `machine` when asked.
+Up to three findings in the answer (severity · impact · evidence · fix/owner); more in a findings artifact. "No findings" names the scope reviewed.
 
 ## Procedure
 
-1. Objective faithful to the business problem? Units, bit order, matrix convention, penalties explicit?
-2. Baseline strong and fairly tuned? Feasibility and decoding tested independently of the sampler?
-3. Resources and costs end to end? Seeds, versions, backend metadata recorded?
-4. Code: placeholders, undefined names, stale APIs (`registry/compatibility.yml`), undeclared network calls, secrets.
-5. Conclusion matches the evidence level? Could classical software do this more simply?
-6. If cryptography appears, recommend `q-mentor-pqc-scan`.
+1. Math: objective fidelity, units, bit order, matrix convention, penalty separation, Ising constants (`knowledge/optimization-math.md`).
+2. Code: completeness, pins, stale APIs, undeclared names, network calls, credentials, decode independent of the sampler.
+3. Hardware fit: family/model/backend/support level; geometry, postselection, dynamic-circuit needs.
+4. Claims: advantage, `optimized`, `secure`; evidence level; baseline strength.
+5. Tests: seeds, budgets, all-state equivalence, negative fixtures. Ask: can classical software do this more simply?
+6. No patch unless the user asked for a fix.
 
 ## Stop when
 
-Material risk lacks mitigation or owner (escalate).
+Material risk lacks mitigation or owner (finding says so).
 
 ## Handoffs
 
-`q-mentor-implement`/`q-mentor-test` for accepted fixes; `q-mentor-pqc-scan` when crypto is in scope. The agent decides; do not ask the user to type another command unless approval or a material choice is needed.
+`q-mentor-implement`/`q-mentor-test` for accepted fixes; `q-mentor-pqc-scan` when cryptography is in scope. The agent decides; do not ask the user to type another command unless approval or a material choice is needed.

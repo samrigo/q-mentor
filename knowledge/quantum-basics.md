@@ -20,4 +20,4 @@
 "Quantum computers try every answer at once." Superposition does not give you all answers on readout; useful algorithms need interference that amplifies good answers, and many problems have no known exponential speed-up.
 
 ## Sources
-Preskill 2018 (NISQ), Deutsch 1985 — see `sources.yml` (`preskill-2018`, `deutsch-1985`).
+Preskill 2018 (NISQ), Deutsch 1985 — see `sources.yml` (`ref-preskill-nisq-2018`, `ref-deutsch-1985`).

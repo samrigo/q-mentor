@@ -1,645 +1,3517 @@
-# Source registry. verification: 'kit' = taken from the v2 build kit (README-07) and not yet
-# live-checked; 'live' = URL fetched and content checked on last_verified. volatile sources must
-# be re-verified every release (scripts/verify_sources.py --live).
-contract_version: qmentor.sources.v2
+# Source registry (qmentor.sources.v3). Every link in brief/README-*.md plus v2 entries.
+# kind: paper | docs | repository | commits | issues | example. link_status: not-checked | reachable |
+# metadata-only | blocked-by-publisher | moved | broken (a publisher 403 is not a broken DOI).
+# Live check: scripts/verify_sources.py --live (DOI via Crossref, arXiv API, GitHub via git ls-remote).
+# Results of the release check are recorded in docs/SOURCE-CHECK.md.
+contract_version: qmentor.sources.v3
 sources:
-  - id: copilot-plugins-about
-    title: "About GitHub Copilot plugins"
-    url: https://docs.github.com/en/copilot/concepts/agents/about-plugins
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [README.md]
-  - id: copilot-cli-plugins-creating
-    title: "Creating a plugin for Copilot CLI"
-    url: https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: live
-    used_by: [README.md]
-  - id: copilot-cli-plugin-reference
-    title: "Copilot CLI plugin reference"
-    url: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: live
-    used_by: [registry/compatibility.yml]
-  - id: agent-plugins-spec
-    title: "Agent Plugins specification"
-    url: https://agent-plugins.org/specification
-    owner: "Agent Plugins"
-    type: specification
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: live
-    used_by: [plugin.json]
-  - id: agent-plugins-schema-1-0-0
-    title: "Agent Plugins plugin.json schema 1.0.0"
-    url: https://agent-plugins.org/schemas/1.0.0/plugin.schema.json
-    owner: "Agent Plugins"
-    type: specification
-    volatility: active
-    source_date: "1.0.0"
-    last_verified: 2026-10-13
-    verification: live
-    used_by: [plugin.json, scripts/validate_package.py]
-  - id: copilot-add-skills
-    title: "Adding agent skills"
-    url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: live
-    used_by: [skills/]
-  - id: copilot-custom-agents-config
-    title: "Custom agents configuration"
-    url: https://docs.github.com/en/copilot/reference/custom-agents-configuration
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: live
-    used_by: [com.github.copilot/agents/]
-  - id: copilot-cli-command-reference
-    title: "Copilot CLI command reference"
-    url: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [docs/INSTALL.md]
-  - id: copilot-hooks-reference
-    title: "Hooks reference"
-    url: https://docs.github.com/en/copilot/reference/hooks-reference
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [docs/DECISIONS.md]
-  - id: copilot-tool-permissions
-    title: "Allowing tools in Copilot CLI"
-    url: https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/allowing-tools
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [skills/]
-  - id: copilot-repo-instructions
-    title: "Repository custom instructions"
-    url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [.github/copilot-instructions.md]
-  - id: copilot-optimize-usage
-    title: "Optimize AI usage and cost"
-    url: https://docs.github.com/en/copilot/tutorials/optimize-ai-usage
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [docs/GOVERNANCE.md]
-  - id: copilot-models-pricing
-    title: "Models and pricing"
-    url: https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [docs/GOVERNANCE.md]
-  - id: copilot-budgets
-    title: "Budget controls"
-    url: https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/budgets
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [docs/GOVERNANCE.md]
-  - id: artifact-attestations
-    title: "Artifact attestations"
-    url: https://docs.github.com/en/actions/concepts/security/artifact-attestations
-    owner: "GitHub"
-    type: vendor-documentation
-    volatility: active
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [docs/RELEASE.md]
-  - id: markowitz-1952
-    title: "Markowitz, Portfolio Selection"
-    url: https://doi.org/10.1111/j.1540-6261.1952.tb01525.x
-    owner: "Journal of Finance"
-    type: peer-reviewed
-    volatility: stable
-    source_date: "1952"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [domains/finance/portfolio-optimization.md]
-  - id: feynman-1982
-    title: "Feynman, Simulating Physics with Computers"
-    url: https://doi.org/10.1007/BF02650179
-    owner: "Int. J. Theor. Phys."
-    type: peer-reviewed
-    volatility: stable
-    source_date: "1982"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/quantum-basics.md]
-  - id: deutsch-1985
-    title: "Deutsch, Quantum theory, the Church-Turing principle and the universal quantum computer"
-    url: https://doi.org/10.1098/rspa.1985.0070
-    owner: "Proc. R. Soc. A"
-    type: peer-reviewed
-    volatility: stable
-    source_date: "1985"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/quantum-basics.md]
-  - id: shor-1994
-    title: "Shor, Algorithms for quantum computation: discrete logarithms and factoring"
-    url: https://doi.org/10.1109/SFCS.1994.365700
-    owner: "IEEE FOCS"
-    type: peer-reviewed
-    volatility: stable
-    source_date: "1994"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/pqc.md]
-  - id: grover-1996
-    title: "Grover, A fast quantum mechanical algorithm for database search"
-    url: https://doi.org/10.1145/237814.237866
-    owner: "ACM STOC"
-    type: peer-reviewed
-    volatility: stable
-    source_date: "1996"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/pqc.md]
-  - id: farhi-2014-qaoa
-    title: "Farhi, Goldstone & Gutmann, A Quantum Approximate Optimization Algorithm"
-    url: https://arxiv.org/abs/1411.4028
-    owner: "arXiv"
-    type: preprint
-    volatility: stable
-    source_date: "2014"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/optimization-math.md]
-  - id: lucas-2014
-    title: "Lucas, Ising formulations of many NP problems"
-    url: https://doi.org/10.3389/fphy.2014.00005
-    owner: "Frontiers in Physics"
-    type: peer-reviewed
-    volatility: stable
-    source_date: "2014"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/optimization-math.md]
-  - id: preskill-2018
-    title: "Preskill, Quantum Computing in the NISQ era and beyond"
-    url: https://arxiv.org/abs/1801.00862
-    owner: "arXiv / Quantum"
-    type: peer-reviewed
-    volatility: stable
-    source_date: "2018"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/quantum-basics.md]
-  - id: egger-2020
-    title: "Egger et al., Quantum computing for Finance: state of the art and future prospects"
-    url: https://arxiv.org/abs/2006.14510
-    owner: "arXiv"
-    type: preprint
-    volatility: stable
-    source_date: "2020"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [domains/finance/claims-and-limits.md]
-  - id: hoefler-2023
-    title: "Hoefler, Häner & Troyer, Disentangling hype from practicality: on realistically achieving quantum advantage"
-    url: https://arxiv.org/abs/2307.00523
-    owner: "arXiv"
-    type: preprint
-    volatility: stable
-    source_date: "2023"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/quantum-fit.md]
-  - id: pulser-2022
-    title: "Silvério et al., Pulser: an open-source package for the design of pulse sequences in programmable neutral-atom arrays"
-    url: https://doi.org/10.22331/q-2022-01-24-629
-    owner: "Quantum"
-    type: peer-reviewed
-    volatility: stable
-    source_date: "2022"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/providers-pasqal-pulser.md]
-  - id: pennylane-paper
-    title: "Bergholm et al., PennyLane: automatic differentiation of hybrid quantum-classical computations"
-    url: https://arxiv.org/abs/1811.04968
-    owner: "arXiv"
-    type: preprint
-    volatility: stable
-    source_date: "2018"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/framework-pennylane.md]
-  - id: qiskit-finance-portfolio
-    title: "Qiskit Finance portfolio optimization tutorial"
-    url: https://qiskit-community.github.io/qiskit-finance/tutorials/01_portfolio_optimization.html
-    owner: "Qiskit community"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [domains/finance/portfolio-optimization.md]
-  - id: qiskit-optimization-docs
-    title: "Qiskit Optimization documentation"
-    url: https://qiskit-community.github.io/qiskit-optimization/
-    owner: "Qiskit community"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "0.7.0"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/providers-qiskit.md]
-  - id: qiskit-optimization-converters
-    title: "Qiskit Optimization converters tutorial"
-    url: https://qiskit-community.github.io/qiskit-optimization/tutorials/02_converters_for_quadratic_programs.html
-    owner: "Qiskit community"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "0.7.0"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [examples/bond-selection/qiskit/]
-  - id: qiskit-optimization-release-notes
-    title: "Qiskit Optimization release notes"
-    url: https://qiskit-community.github.io/qiskit-optimization/release_notes.html
-    owner: "Qiskit community"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [registry/compatibility.yml]
-  - id: ortools-cpsat
-    title: "OR-Tools CP-SAT solver"
-    url: https://developers.google.com/optimization/cp/cp_solver
-    owner: "Google"
-    type: vendor-documentation
-    volatility: active
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/optimization-math.md]
-  - id: ortools-mip
-    title: "OR-Tools MIP guide"
-    url: https://developers.google.com/optimization/mip
-    owner: "Google"
-    type: vendor-documentation
-    volatility: active
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/optimization-math.md]
-  - id: cvxpy
-    title: "CVXPY documentation"
-    url: https://www.cvxpy.org/
-    owner: "CVXPY"
-    type: vendor-documentation
-    volatility: active
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [domains/finance/portfolio-optimization.md]
-  - id: classiq-docs
-    title: "Classiq documentation"
-    url: https://docs.classiq.io/
-    owner: "Classiq"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/providers-classiq.md]
-  - id: classiq-qmod-reference
-    title: "Qmod reference"
-    url: https://docs.classiq.io/qmod-reference
-    owner: "Classiq"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/providers-classiq.md]
-  - id: classiq-library-portfolio
-    title: "Classiq library portfolio optimization"
-    url: https://github.com/Classiq/classiq-library/tree/main/applications/finance/portfolio_optimization
-    owner: "Classiq"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [examples/bond-selection/classiq/]
-  - id: dwave-ocean
-    title: "D-Wave Ocean SDK documentation"
-    url: https://docs.dwavequantum.com/en/latest/ocean/
-    owner: "D-Wave"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/providers-dwave.md]
-  - id: dwave-models
-    title: "D-Wave model concepts"
-    url: https://docs.dwavequantum.com/en/latest/concepts/models.html
-    owner: "D-Wave"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/providers-dwave.md]
-  - id: dwave-samplesets
-    title: "D-Wave SampleSet semantics"
-    url: https://docs.dwavequantum.com/en/latest/concepts/samplesets.html
-    owner: "D-Wave"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/providers-dwave.md]
-  - id: dwave-examples
-    title: "D-Wave example repositories"
-    url: https://github.com/dwave-examples
-    owner: "D-Wave"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/providers-dwave.md]
-  - id: pasqal-docs
-    title: "Pasqal documentation"
-    url: https://docs.pasqal.com/
-    owner: "Pasqal"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/providers-pasqal-pulser.md]
-  - id: pulser-programming
-    title: "Pulser programming guide"
-    url: https://docs.pasqal.com/pulser/programming/
-    owner: "Pasqal"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/providers-pasqal-pulser.md]
-  - id: pulser-qubo-tutorial
-    title: "Pulser QUBO/QAA tutorial"
-    url: https://docs.pasqal.com/pulser/tutorials/qubo/
-    owner: "Pasqal"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [examples/bond-selection/pasqal-pulser/]
-  - id: pulser-noise
-    title: "Pulser noise models"
-    url: https://docs.pasqal.com/pulser/noise_model/
-    owner: "Pasqal"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [examples/bond-selection/pasqal-pulser/]
-  - id: pulser-repo
-    title: "Pulser source repository"
-    url: https://github.com/pasqal-io/Pulser
-    owner: "Pasqal"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/providers-pasqal-pulser.md]
-  - id: pennylane-docs
-    title: "PennyLane documentation"
-    url: https://docs.pennylane.ai/en/stable/
-    owner: "Xanadu"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/framework-pennylane.md]
-  - id: pennylane-qaoa
-    title: "PennyLane QAOA module"
-    url: https://docs.pennylane.ai/en/stable/code/qp_qaoa.html
-    owner: "Xanadu"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/framework-pennylane.md]
-  - id: pennylane-devices
-    title: "PennyLane devices"
-    url: https://docs.pennylane.ai/en/stable/code/qp_devices.html
-    owner: "Xanadu"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/framework-pennylane.md]
-  - id: pennylane-interfaces
-    title: "PennyLane interfaces and gradients"
-    url: https://docs.pennylane.ai/en/stable/introduction/interfaces.html
-    owner: "Xanadu"
-    type: vendor-documentation
-    volatility: volatile
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/framework-pennylane.md]
-  - id: rr-quantum-optimization-review
-    title: "Challenges and opportunities in quantum optimization"
-    url: https://www.nature.com/articles/s42254-024-00770-9
-    owner: "Nature Reviews Physics"
-    type: peer-reviewed
-    volatility: active
-    source_date: "2024"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/recent-research.md]
-  - id: rr-robust-benchmarking
-    title: "Towards Robust Benchmarking of Quantum Optimization Algorithms"
-    url: https://arxiv.org/abs/2405.07624
-    owner: "arXiv"
-    type: preprint
-    volatility: active
-    source_date: "2024"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/recent-research.md, knowledge/research-method.md]
-  - id: rr-qaoa-review
-    title: "A review on Quantum Approximate Optimization Algorithm and its variants"
-    url: https://www.sciencedirect.com/science/article/pii/S0370157324001078
-    owner: "Physics Reports"
-    type: peer-reviewed
-    volatility: active
-    source_date: "2024"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/recent-research.md]
-  - id: rr-pennylane-lightning-hpc
-    title: "Hybrid quantum programming with PennyLane Lightning on HPC platforms"
-    url: https://arxiv.org/abs/2403.02512
-    owner: "arXiv"
-    type: preprint
-    volatility: active
-    source_date: "2024"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/recent-research.md]
-  - id: rr-ml-error-mitigation
-    title: "Machine learning for practical quantum error mitigation"
-    url: https://www.nature.com/articles/s42256-024-00927-2
-    owner: "Nature Machine Intelligence"
-    type: peer-reviewed
-    volatility: active
-    source_date: "2024"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/recent-research.md]
-  - id: rr-rydberg-weighted-graph
-    title: "Demonstration of Weighted-Graph Optimization on a Rydberg-Atom Array"
-    url: https://doi.org/10.1103/PRXQuantum.6.010301
-    owner: "PRX Quantum"
-    type: peer-reviewed
-    volatility: active
-    source_date: "2025"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/recent-research.md]
-  - id: rr-sdk-benchmarking
-    title: "Benchmarking the performance of quantum computing software for quantum circuit creation, manipulation and compilation"
-    url: https://www.nature.com/articles/s43588-025-00792-y
-    owner: "Nature Computational Science"
-    type: peer-reviewed
-    volatility: active
-    source_date: "2025"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/recent-research.md]
-  - id: rr-qec-below-threshold
-    title: "Quantum error correction below the surface code threshold"
-    url: https://doi.org/10.1038/s41586-024-08449-y
-    owner: "Nature"
-    type: peer-reviewed
-    volatility: active
-    source_date: "2025"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/recent-research.md]
-  - id: rr-e2e-portfolio-annealing
-    title: "End-to-End Portfolio Optimization with Quantum Annealing"
-    url: https://arxiv.org/abs/2504.08843
-    owner: "arXiv"
-    type: preprint
-    volatility: active
-    source_date: "2025"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/recent-research.md, domains/finance/claims-and-limits.md]
-  - id: nist-pqc
-    title: "NIST Post-Quantum Cryptography project"
-    url: https://csrc.nist.gov/Projects/Post-Quantum-Cryptography
-    owner: "NIST"
-    type: official-standard
-    volatility: active
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/pqc.md]
-  - id: fips-203
-    title: "FIPS 203: ML-KEM"
-    url: https://csrc.nist.gov/pubs/fips/203/final
-    owner: "NIST"
-    type: official-standard
-    volatility: stable
-    source_date: "2024-08"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/pqc.md]
-  - id: fips-204
-    title: "FIPS 204: ML-DSA"
-    url: https://csrc.nist.gov/pubs/fips/204/final
-    owner: "NIST"
-    type: official-standard
-    volatility: stable
-    source_date: "2024-08"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/pqc.md]
-  - id: fips-205
-    title: "FIPS 205: SLH-DSA"
-    url: https://csrc.nist.gov/pubs/fips/205/final
-    owner: "NIST"
-    type: official-standard
-    volatility: stable
-    source_date: "2024-08"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/pqc.md]
-  - id: nccoe-pqc
-    title: "NCCoE Migration to Post-Quantum Cryptography"
-    url: https://www.nccoe.nist.gov/crypto-agility-considerations-migrating-post-quantum-cryptographic-algorithms
-    owner: "NIST NCCoE"
-    type: official-standard
-    volatility: active
-    source_date: "living"
-    last_verified: 2026-10-13
-    verification: kit
-    used_by: [knowledge/pqc.md]
+- id: copilot-plugins-about
+  title: About GitHub Copilot plugins
+  url: https://docs.github.com/en/copilot/concepts/agents/about-plugins
+  owner: GitHub
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - README.md
+- id: copilot-cli-plugins-creating
+  title: Creating a plugin for Copilot CLI
+  url: https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating
+  owner: GitHub
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - README.md
+- id: copilot-cli-plugin-reference
+  title: Copilot CLI plugin reference
+  url: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference
+  owner: GitHub
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/compatibility.yml
+- id: agent-plugins-spec
+  title: Agent Plugins specification
+  url: https://agent-plugins.org/specification
+  owner: Agent Plugins
+  type: specification
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - plugin.json
+- id: sdk-agent-plugins-schemas
+  title: schemas
+  url: https://agent-plugins.org/schemas
+  owner: agent-plugins.org
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: copilot-add-skills
+  title: Adding agent skills
+  url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills
+  owner: GitHub
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - skills/
+- id: copilot-cli-command-reference
+  title: Copilot CLI command reference
+  url: https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-command-reference
+  owner: GitHub
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - docs/INSTALL.md
+- id: sdk-docs-en-copilot-concepts-agents-copilot-cli-abou
+  title: Custom agents
+  url: https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-custom-agents
+  owner: docs.github.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: copilot-hooks-reference
+  title: Hooks reference
+  url: https://docs.github.com/en/copilot/reference/hooks-reference
+  owner: GitHub
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - docs/DECISIONS.md
+- id: copilot-tool-permissions
+  title: Allowing tools in Copilot CLI
+  url: https://docs.github.com/en/copilot/how-tos/copilot-cli/use-copilot-cli/allowing-tools
+  owner: GitHub
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - skills/
+- id: sdk-docs-en-copilot-concepts-agents-copilot-cli-comp
+  title: Customization feature comparison
+  url: https://docs.github.com/en/copilot/concepts/agents/copilot-cli/comparing-cli-features
+  owner: docs.github.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: copilot-repo-instructions
+  title: Repository custom instructions
+  url: https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/add-custom-instructions/add-repository-instructions
+  owner: GitHub
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - .github/copilot-instructions.md
+- id: sdk-docs-en-copilot-tutorials-cloud-agent-get-the-be
+  title: Best results with Copilot cloud agent
+  url: https://docs.github.com/en/copilot/tutorials/cloud-agent/get-the-best-results
+  owner: docs.github.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: copilot-optimize-usage
+  title: Optimize AI usage and cost
+  url: https://docs.github.com/en/copilot/tutorials/optimize-ai-usage
+  owner: GitHub
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - docs/GOVERNANCE.md
+- id: copilot-models-pricing
+  title: Models and pricing
+  url: https://docs.github.com/en/copilot/reference/copilot-billing/models-and-pricing
+  owner: GitHub
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - docs/GOVERNANCE.md
+- id: copilot-budgets
+  title: Budget controls
+  url: https://docs.github.com/en/copilot/concepts/billing-and-usage/organizations-and-enterprises/budgets
+  owner: GitHub
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - docs/GOVERNANCE.md
+- id: sdk-docs-en-copilot-how-tos-copilot-sdk-features
+  title: Copilot SDK features
+  url: https://docs.github.com/en/copilot/how-tos/copilot-sdk/features
+  owner: docs.github.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: artifact-attestations
+  title: Artifact attestations
+  url: https://docs.github.com/en/actions/concepts/security/artifact-attestations
+  owner: GitHub
+  type: vendor-documentation
+  kind: docs
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - docs/RELEASE.md
+- id: ref-markowitz-1952
+  title: Markowitz, “Portfolio Selection” (1952)
+  url: https://doi.org/10.1111/j.1540-6261.1952.tb01525.x
+  owner: Journal of Finance
+  type: peer-reviewed
+  kind: paper
+  family: history
+  year: 1952
+  doi: 10.1111/j.1540-6261.1952.tb01525.x
+  volatility: stable
+  source_date: '1952'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/quantum-basics.md
+- id: ref-feynman-1982
+  title: Feynman, “Simulating Physics with Computers” (1982)
+  url: https://doi.org/10.1007/BF02650179
+  owner: Int. J. Theor. Phys.
+  type: peer-reviewed
+  kind: paper
+  family: history
+  year: 1982
+  doi: 10.1007/BF02650179
+  volatility: stable
+  source_date: '1982'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/quantum-basics.md
+- id: ref-deutsch-1985
+  title: Deutsch, “Quantum theory, the Church–Turing principle…” (1985)
+  url: https://doi.org/10.1098/rspa.1985.0070
+  owner: Proc. R. Soc. A
+  type: peer-reviewed
+  kind: paper
+  family: history
+  year: 1985
+  doi: 10.1098/rspa.1985.0070
+  volatility: stable
+  source_date: '1985'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/quantum-basics.md
+- id: ref-shor-1994
+  title: Shor, factoring and discrete logarithms (1994)
+  url: https://doi.org/10.1109/SFCS.1994.365700
+  owner: IEEE FOCS
+  type: peer-reviewed
+  kind: paper
+  family: history
+  year: 1994
+  doi: 10.1109/SFCS.1994.365700
+  volatility: stable
+  source_date: '1994'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/quantum-basics.md
+- id: ref-grover-1996
+  title: Grover, database search (1996)
+  url: https://doi.org/10.1145/237814.237866
+  owner: ACM STOC
+  type: peer-reviewed
+  kind: paper
+  family: history
+  year: 1996
+  doi: 10.1145/237814.237866
+  volatility: stable
+  source_date: '1996'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/quantum-basics.md
+- id: ref-farhi-qaoa-2014
+  title: Farhi, Goldstone, and Gutmann, QAOA (2014)
+  url: https://arxiv.org/abs/1411.4028
+  owner: arXiv
+  type: preprint
+  kind: paper
+  family: history
+  year: 2014
+  arxiv: '1411.4028'
+  volatility: stable
+  source_date: '2014'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/quantum-basics.md
+- id: ref-lucas-ising-2014
+  title: Lucas, Ising formulations of NP problems (2014)
+  url: https://doi.org/10.3389/fphy.2014.00005
+  owner: Frontiers in Physics
+  type: peer-reviewed
+  kind: paper
+  family: history
+  year: 2014
+  doi: 10.3389/fphy.2014.00005
+  volatility: stable
+  source_date: '2014'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/quantum-basics.md
+- id: ref-preskill-nisq-2018
+  title: Preskill, quantum computing in the NISQ era (2018)
+  url: https://arxiv.org/abs/1801.00862
+  owner: arXiv / Quantum
+  type: preprint
+  kind: paper
+  family: history
+  year: 2018
+  arxiv: '1801.00862'
+  volatility: stable
+  source_date: '2018'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/quantum-basics.md
+- id: ref-egger-finance-2020
+  title: Egger et al., quantum computing for finance (2020)
+  url: https://arxiv.org/abs/2006.14510
+  owner: arXiv
+  type: preprint
+  kind: paper
+  family: history
+  year: 2020
+  arxiv: '2006.14510'
+  volatility: stable
+  source_date: '2020'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/quantum-basics.md
+- id: ref-hoefler-hype-2023
+  title: 'Hoefler, Häner, and Troyer, “Disentangling Hype from Practicality: On Realistically Achieving Quantum Advantage” (2023)'
+  url: https://arxiv.org/abs/2307.00523
+  owner: arXiv
+  type: preprint
+  kind: paper
+  family: history
+  year: 2023
+  arxiv: '2307.00523'
+  volatility: active
+  source_date: '2023'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/quantum-basics.md
+- id: ref-pulser-2022
+  title: Silvério et al., Pulser (2022)
+  url: https://quantum-journal.org/papers/q-2022-01-24-629
+  owner: quantum-journal.org
+  type: peer-reviewed
+  kind: paper
+  family: history
+  year: 2022
+  volatility: stable
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/quantum-basics.md
+- id: ref-pennylane-2018
+  title: Bergholm et al., PennyLane
+  url: https://arxiv.org/abs/1811.04968
+  owner: arXiv
+  type: preprint
+  kind: paper
+  family: history
+  year: 2018
+  arxiv: '1811.04968'
+  volatility: stable
+  source_date: '2018'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/quantum-basics.md
+- id: qiskit-finance-portfolio
+  title: Qiskit Finance portfolio optimization tutorial
+  url: https://qiskit-community.github.io/qiskit-finance/tutorials/01_portfolio_optimization.html
+  owner: Qiskit community
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - domains/finance/portfolio-optimization.md
+- id: qiskit-optimization-docs
+  title: Qiskit Optimization documentation
+  url: https://qiskit-community.github.io/qiskit-optimization
+  owner: Qiskit community
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: 0.7.0
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/providers-qiskit.md
+- id: ortools-cpsat
+  title: OR-Tools CP-SAT solver
+  url: https://developers.google.com/optimization/cp/cp_solver
+  owner: Google
+  type: vendor-documentation
+  kind: docs
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/optimization-math.md
+- id: ortools-mip
+  title: OR-Tools MIP guide
+  url: https://developers.google.com/optimization/mip
+  owner: Google
+  type: vendor-documentation
+  kind: docs
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/optimization-math.md
+- id: cvxpy
+  title: CVXPY documentation
+  url: https://www.cvxpy.org
+  owner: CVXPY
+  type: vendor-documentation
+  kind: docs
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - domains/finance/portfolio-optimization.md
+- id: sdk-qiskit-community-qiskit-optimization
+  title: optimization source
+  url: https://github.com/qiskit-community/qiskit-optimization
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: qiskit-community/qiskit-optimization
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-community-qiskit-optimization-tutorials-i
+  title: tutorial catalog
+  url: https://qiskit-community.github.io/qiskit-optimization/tutorials/index.html
+  owner: qiskit-community.github.io
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-community-qiskit-optimization-tutorials-0
+  title: QuadraticProgram
+  url: https://qiskit-community.github.io/qiskit-optimization/tutorials/01_quadratic_program.html
+  owner: qiskit-community.github.io
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: qiskit-optimization-converters
+  title: Qiskit Optimization converters tutorial
+  url: https://qiskit-community.github.io/qiskit-optimization/tutorials/02_converters_for_quadratic_programs.html
+  owner: Qiskit community
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: 0.7.0
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - examples/bond-selection/qiskit/
+- id: sdk-qiskit-community-qiskit-optimization-tutorials-0-x
+  title: minimum-eigen/QAOA workflow
+  url: https://qiskit-community.github.io/qiskit-optimization/tutorials/03_minimum_eigen_optimizer.html
+  owner: qiskit-community.github.io
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: qiskit-optimization-release-notes
+  title: Qiskit Optimization release notes
+  url: https://qiskit-community.github.io/qiskit-optimization/release_notes.html
+  owner: Qiskit community
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/compatibility.yml
+- id: sdk-qiskit-community-qopt-best-practices
+  title: best practices
+  url: https://github.com/qiskit-community/qopt-best-practices
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: qiskit-community/qopt-best-practices
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: classiq-docs
+  title: Classiq documentation
+  url: https://docs.classiq.io
+  owner: Classiq
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/providers-classiq.md
+- id: classiq-qmod-reference
+  title: Qmod reference
+  url: https://docs.classiq.io/qmod-reference
+  owner: Classiq
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/providers-classiq.md
+- id: sdk-docs-sdk-reference
+  title: SDK reference
+  url: https://docs.classiq.io/sdk-reference
+  owner: docs.classiq.io
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-classiq-classiq-library
+  title: Classiq library
+  url: https://github.com/Classiq/classiq-library
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: Classiq/classiq-library
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: classiq-library-portfolio
+  title: Classiq library portfolio optimization
+  url: https://github.com/Classiq/classiq-library/tree/main/applications/finance/portfolio_optimization
+  owner: Classiq
+  type: vendor-documentation
+  kind: example
+  repo: Classiq/classiq-library
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - examples/bond-selection/classiq/
+- id: dwave-examples
+  title: D-Wave example repositories
+  url: https://github.com/dwave-examples
+  owner: D-Wave
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/providers-dwave.md
+- id: dwave-ocean
+  title: D-Wave Ocean SDK documentation
+  url: https://docs.dwavequantum.com/en/latest/ocean
+  owner: D-Wave
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/providers-dwave.md
+- id: sdk-docs-en-latest-ocean-packages-html
+  title: package/API index
+  url: https://docs.dwavequantum.com/en/latest/ocean/packages.html
+  owner: docs.dwavequantum.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: dwave-models
+  title: D-Wave model concepts
+  url: https://docs.dwavequantum.com/en/latest/concepts/models.html
+  owner: D-Wave
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/providers-dwave.md
+- id: sdk-docs-en-latest-ocean-workflow-html
+  title: formulation workflow
+  url: https://docs.dwavequantum.com/en/latest/ocean/workflow.html
+  owner: docs.dwavequantum.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-en-latest-quantum-research-workflow-html
+  title: local and QPU workflow
+  url: https://docs.dwavequantum.com/en/latest/quantum_research/workflow.html
+  owner: docs.dwavequantum.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: dwave-samplesets
+  title: D-Wave SampleSet semantics
+  url: https://docs.dwavequantum.com/en/latest/concepts/samplesets.html
+  owner: D-Wave
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/providers-dwave.md
+- id: pasqal-docs
+  title: Pasqal documentation
+  url: https://docs.pasqal.com
+  owner: Pasqal
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/providers-pasqal-pulser.md
+- id: sdk-docs-pulser
+  title: Pulser overview
+  url: https://docs.pasqal.com/pulser
+  owner: docs.pasqal.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: pulser-programming
+  title: Pulser programming guide
+  url: https://docs.pasqal.com/pulser/programming
+  owner: Pasqal
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/providers-pasqal-pulser.md
+- id: pulser-repo
+  title: Pulser source repository
+  url: https://github.com/pasqal-io/Pulser
+  owner: Pasqal
+  type: vendor-documentation
+  kind: repository
+  repo: pasqal-io/Pulser
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/providers-pasqal-pulser.md
+- id: pulser-qubo-tutorial
+  title: Pulser QUBO/QAA tutorial
+  url: https://docs.pasqal.com/pulser/tutorials/qubo
+  owner: Pasqal
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - examples/bond-selection/pasqal-pulser/
+- id: pulser-noise
+  title: Pulser noise models
+  url: https://docs.pasqal.com/pulser/noise_model
+  owner: Pasqal
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - examples/bond-selection/pasqal-pulser/
+- id: sdk-pennylaneai-pennylane
+  title: source repository
+  url: https://github.com/PennyLaneAI/pennylane
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: PennyLaneAI/pennylane
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: pennylane-docs
+  title: PennyLane documentation
+  url: https://docs.pennylane.ai/en/stable
+  owner: Xanadu
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/framework-pennylane.md
+- id: pennylane-qaoa
+  title: PennyLane QAOA module
+  url: https://docs.pennylane.ai/en/stable/code/qp_qaoa.html
+  owner: Xanadu
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/framework-pennylane.md
+- id: sdk-pennylane-demos-tutorial-qubo
+  title: QUBO demo
+  url: https://pennylane.ai/demos/tutorial_QUBO
+  owner: pennylane.ai
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pennylane-demos-tutorial-qaoa-intro
+  title: QAOA demo
+  url: https://pennylane.ai/demos/tutorial_qaoa_intro
+  owner: pennylane.ai
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: pennylane-devices
+  title: PennyLane devices
+  url: https://docs.pennylane.ai/en/stable/code/qp_devices.html
+  owner: Xanadu
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/framework-pennylane.md
+- id: pennylane-interfaces
+  title: PennyLane interfaces and gradients
+  url: https://docs.pennylane.ai/en/stable/introduction/interfaces.html
+  owner: Xanadu
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/framework-pennylane.md
+- id: sdk-pennylane-demonstrations
+  title: demo catalog
+  url: https://www.pennylane.ai/demonstrations
+  owner: pennylane.ai
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - registry/backends.yml
+- id: rr-challenges-quantum-optimization-2024
+  title: Challenges and opportunities in quantum optimization” (Nature Reviews Physics, 2024)
+  url: https://www.nature.com/articles/s42254-024-00770-9
+  owner: Nature Reviews Physics
+  type: peer-reviewed
+  kind: paper
+  family: optimization
+  year: 2024
+  volatility: active
+  source_date: '2024'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/recent-research.md
+- id: rr-robust-benchmarking-2024
+  title: Towards Robust Benchmarking of Quantum Optimization Algorithms” (preprint, 2024)
+  url: https://arxiv.org/abs/2405.07624
+  owner: arXiv
+  type: preprint
+  kind: paper
+  family: optimization
+  year: 2024
+  arxiv: '2405.07624'
+  volatility: active
+  source_date: '2024'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/recent-research.md
+- id: rr-qaoa-review-2024
+  title: A review on Quantum Approximate Optimization Algorithm and its variants” (Physics Reports, 2024)
+  url: https://www.sciencedirect.com/science/article/pii/S0370157324001078
+  owner: Physics Reports
+  type: peer-reviewed
+  kind: paper
+  family: optimization
+  year: 2024
+  volatility: active
+  source_date: '2024'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/recent-research.md
+- id: rr-pennylane-lightning-hpc-2024
+  title: Hybrid quantum programming with PennyLane Lightning on HPC platforms” (preprint, 2024)
+  url: https://arxiv.org/abs/2403.02512
+  owner: arXiv
+  type: preprint
+  kind: paper
+  family: software
+  year: 2024
+  arxiv: '2403.02512'
+  volatility: active
+  source_date: '2024'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/recent-research.md
+- id: rr-ml-error-mitigation-2024
+  title: Machine learning for practical quantum error mitigation” (Nature Machine Intelligence, 2024)
+  url: https://www.nature.com/articles/s42256-024-00927-2
+  owner: Nature Machine Intelligence
+  type: peer-reviewed
+  kind: paper
+  family: mitigation
+  year: 2024
+  volatility: active
+  source_date: '2024'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/recent-research.md
+- id: hw-rydberg-weighted-graph-2025
+  title: Demonstration of Weighted-Graph Optimization on a Rydberg-Atom Array Using Local Light Shifts” (PRX Quantum, 2025)
+  url: https://doi.org/10.1103/PRXQuantum.6.010301
+  owner: PRX Quantum
+  type: peer-reviewed
+  kind: paper
+  family: neutral-atom
+  year: 2025
+  doi: 10.1103/PRXQuantum.6.010301
+  volatility: active
+  source_date: '2025'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/hardware-ions-atoms.md
+- id: rr-sdk-benchmarking-2025
+  title: Benchmarking the performance of quantum computing software for quantum circuit creation, manipulation and compilation” (Nature Computational Science, 2025)
+  url: https://www.nature.com/articles/s43588-025-00792-y
+  owner: Nature Computational Science
+  type: peer-reviewed
+  kind: paper
+  family: software
+  year: 2025
+  volatility: active
+  source_date: '2025'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/recent-research.md
+- id: hw-google-below-threshold-2025
+  title: Quantum error correction below the surface code threshold” (Nature, 2025)
+  url: https://doi.org/10.1038/s41586-024-08449-y
+  owner: Nature
+  type: peer-reviewed
+  kind: paper
+  family: superconducting
+  year: 2025
+  doi: 10.1038/s41586-024-08449-y
+  volatility: active
+  source_date: '2025'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/hardware-superconducting.md
+- id: hw-google-below-threshold-correction-2026
+  title: 2026 correction
+  url: https://doi.org/10.1038/s41586-026-10559-8
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: superconducting
+  year: 2026
+  doi: 10.1038/s41586-026-10559-8
+  correction_of: hw-google-below-threshold-2025
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/hardware-superconducting.md
+- id: rr-portfolio-annealing-e2e-2025
+  title: End-to-End Portfolio Optimization with Quantum Annealing” (preprint, 2025)
+  url: https://arxiv.org/abs/2504.08843
+  owner: arXiv
+  type: preprint
+  kind: paper
+  family: annealing
+  year: 2025
+  arxiv: '2504.08843'
+  volatility: active
+  source_date: '2025'
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/hardware-superconducting.md
+- id: nist-pqc
+  title: NIST Post-Quantum Cryptography project
+  url: https://csrc.nist.gov/Projects/Post-Quantum-Cryptography
+  owner: NIST
+  type: official-standard
+  kind: docs
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/pqc.md
+- id: fips-203
+  title: 'FIPS 203: ML-KEM'
+  url: https://csrc.nist.gov/pubs/fips/203/final
+  owner: NIST
+  type: official-standard
+  kind: docs
+  volatility: stable
+  source_date: 2024-08
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/pqc.md
+- id: fips-204
+  title: 'FIPS 204: ML-DSA'
+  url: https://csrc.nist.gov/pubs/fips/204/final
+  owner: NIST
+  type: official-standard
+  kind: docs
+  volatility: stable
+  source_date: 2024-08
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/pqc.md
+- id: fips-205
+  title: 'FIPS 205: SLH-DSA'
+  url: https://csrc.nist.gov/pubs/fips/205/final
+  owner: NIST
+  type: official-standard
+  kind: docs
+  volatility: stable
+  source_date: 2024-08
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/pqc.md
+- id: nccoe-pqc
+  title: NCCoE Migration to Post-Quantum Cryptography
+  url: https://www.nccoe.nist.gov/crypto-agility-considerations-migrating-post-quantum-cryptographic-algorithms
+  owner: NIST NCCoE
+  type: official-standard
+  kind: docs
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-07-REFERENCES.md
+  used_by:
+  - knowledge/pqc.md
+- id: sdk-docs-explore-algorithms-search-and-optimization-
+  title: current Classiq QAOA example
+  url: https://docs.classiq.io/explore/algorithms/search_and_optimization/grover_mixer_qaoa/gm_qaoa
+  owner: docs.classiq.io
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-10-CODE-CONVERSION.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-classiq-insights-quantum-computing-for-finance-h
+  title: Classiq oracle example
+  url: https://www.classiq.io/insights/quantum-computing-for-finance-how-high-level-quantum-programming-and-gpu-acceleration-are-changing-the-game
+  owner: classiq.io
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-10-CODE-CONVERSION.md
+  used_by:
+  - registry/backends.yml
+- id: hw-ibm-utility-2023
+  title: IBM utility experiment (2023)
+  url: https://doi.org/10.1038/s41586-023-06096-3
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: superconducting
+  year: 2023
+  doi: 10.1038/s41586-023-06096-3
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-superconducting.md
+- id: hw-cat-qubit-control-2024
+  title: Protected cat-qubit control (2024)
+  url: https://doi.org/10.1038/s41586-024-07294-3
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: cat
+  year: 2024
+  doi: 10.1038/s41586-024-07294-3
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-superconducting.md
+- id: hw-cat-qubit-control-correction-2024
+  title: axis-unit correction
+  url: https://doi.org/10.1038/s41586-024-07565-z
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: cat
+  year: 2024
+  doi: 10.1038/s41586-024-07565-z
+  correction_of: hw-cat-qubit-control-2024
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-superconducting.md
+- id: hw-concatenated-bosonic-memory-2025
+  title: Concatenated bosonic logical memory (2025)
+  url: https://doi.org/10.1038/s41586-025-08642-7
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: cat
+  year: 2025
+  doi: 10.1038/s41586-025-08642-7
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-superconducting.md
+- id: hw-ldpc-cat-codes-2025
+  title: LDPC-cat codes (2025)
+  url: https://doi.org/10.1038/s41467-025-56298-8
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: cat
+  year: 2025
+  doi: 10.1038/s41467-025-56298-8
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-superconducting.md
+- id: hw-annealing-vs-classical-2025
+  title: Quantum annealing applications versus classical solvers (2025)
+  url: https://doi.org/10.1038/s41598-025-96220-2
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: annealing
+  year: 2025
+  doi: 10.1038/s41598-025-96220-2
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-superconducting.md
+- id: hw-annealing-error-mitigation-2025
+  title: Quantum error mitigation in annealing (2025)
+  url: https://doi.org/10.1038/s41534-025-00977-3
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: annealing
+  year: 2025
+  doi: 10.1038/s41534-025-00977-3
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-superconducting.md
+- id: hw-ions-four-logical-qubits-2024
+  title: Entangling four logical qubits beyond break-even (2024 preprint)
+  url: https://arxiv.org/abs/2406.02666
+  owner: arxiv.org
+  type: preprint
+  kind: paper
+  family: trapped-ion
+  year: 2024
+  arxiv: '2406.02666'
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-ions-atoms.md
+- id: hw-ions-code-switching-2025
+  title: Experimental fault-tolerant code switching (2025)
+  url: https://doi.org/10.1038/s41567-024-02727-2
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: trapped-ion
+  year: 2025
+  doi: 10.1038/s41567-024-02727-2
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-ions-atoms.md
+- id: hw-helios-98-qubit-2026
+  title: 98-qubit Helios system (2026)
+  url: https://doi.org/10.1038/s41586-026-10676-4
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: trapped-ion
+  year: 2026
+  doi: 10.1038/s41586-026-10676-4
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-ions-atoms.md
+- id: hw-atoms-logical-processor-2023
+  title: Reconfigurable-array logical processor (2023/2024)
+  url: https://doi.org/10.1038/s41586-023-06927-3
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: neutral-atom
+  year: 2023
+  doi: 10.1038/s41586-023-06927-3
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-ions-atoms.md
+- id: hw-atoms-magic-state-2025
+  title: Logical magic-state distillation (2025)
+  url: https://doi.org/10.1038/s41586-025-09367-3
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: neutral-atom
+  year: 2025
+  doi: 10.1038/s41586-025-09367-3
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-ions-atoms.md
+- id: hw-photonic-cluster-states-2024
+  title: Resource-efficient high-dimensional cluster states (2024)
+  url: https://doi.org/10.1038/s41566-024-01524-w
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: photonic
+  year: 2024
+  doi: 10.1038/s41566-024-01524-w
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-photonic-spin.md
+- id: hw-photonic-manufacturable-2025
+  title: Manufacturable photonic platform (2025)
+  url: https://doi.org/10.1038/s41586-025-08820-7
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: photonic
+  year: 2025
+  doi: 10.1038/s41586-025-08820-7
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-photonic-spin.md
+- id: hw-photonic-boosted-bell-2025
+  title: Boosted Bell-state measurements (2025)
+  url: https://doi.org/10.1038/s41534-025-00986-2
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: photonic
+  year: 2025
+  doi: 10.1038/s41534-025-00986-2
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-photonic-spin.md
+- id: hw-silicon-pipeline-2024
+  title: Pipeline architecture for silicon spin qubits (2024)
+  url: https://doi.org/10.1038/s41534-024-00823-y
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: silicon-spin
+  year: 2024
+  doi: 10.1038/s41534-024-00823-y
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-photonic-spin.md
+- id: hw-silicon-grover-2025
+  title: Grover algorithm in a four-qubit silicon processor (2025)
+  url: https://doi.org/10.1038/s41565-024-01853-5
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: silicon-spin
+  year: 2025
+  doi: 10.1038/s41565-024-01853-5
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-photonic-spin.md
+- id: hw-silicon-foundry-2025
+  title: Foundry-compatible unit cells exceeding 99% fidelity (2025)
+  url: https://doi.org/10.1038/s41586-025-09531-9
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: silicon-spin
+  year: 2025
+  doi: 10.1038/s41586-025-09531-9
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-photonic-spin.md
+- id: hw-nv-teleportation-2024
+  title: NV–photon teleportation interface (2024)
+  url: https://doi.org/10.1038/s41534-024-00910-0
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: diamond
+  year: 2024
+  doi: 10.1038/s41534-024-00910-0
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-photonic-spin.md
+- id: hw-nv-network-node-2025
+  title: Hybrid NV network node with error correction (2025)
+  url: https://doi.org/10.1038/s41567-025-02831-x
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: diamond
+  year: 2025
+  doi: 10.1038/s41567-025-02831-x
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-photonic-spin.md
+- id: hw-nv-room-temperature-2025
+  title: Room-temperature NV register benchmarking (2025)
+  url: https://doi.org/10.1038/s41534-025-01164-0
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: diamond
+  year: 2025
+  doi: 10.1038/s41534-025-01164-0
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-photonic-spin.md
+- id: hw-nmr-education-2024
+  title: NMR Quantum Computer for Education (2024)
+  url: https://doi.org/10.1541/ieejfms.144.252
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: nmr
+  year: 2024
+  doi: 10.1541/ieejfms.144.252
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-nmr-helium.md
+- id: hw-nmr-desk-reliability-2025
+  title: Reliability analysis of algorithms on a desk Quantum Computer (2025)
+  url: https://doi.org/10.1016/j.measen.2025.101859
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: nmr
+  year: 2025
+  doi: 10.1016/j.measen.2025.101859
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-nmr-helium.md
+- id: hw-helium-blueprint-2023
+  title: Spin-qubit architecture blueprint (2023)
+  url: https://arxiv.org/abs/2303.03688
+  owner: arxiv.org
+  type: preprint
+  kind: paper
+  family: electrons-on-helium
+  year: 2023
+  arxiv: '2303.03688'
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-nmr-helium.md
+- id: hw-helium-charge-photon-2026
+  title: Charge–photon strong coupling (2026)
+  url: https://doi.org/10.1038/s41567-026-03342-z
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: electrons-on-helium
+  year: 2026
+  doi: 10.1038/s41567-026-03342-z
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-nmr-helium.md
+- id: hw-topological-parity-2025
+  title: Interferometric parity measurement in InAs–Al devices (2025)
+  url: https://doi.org/10.1038/s41586-024-08445-2
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: topological
+  year: 2025
+  doi: 10.1038/s41586-024-08445-2
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-nmr-helium.md
+- id: hw-kitaev-chain-readout-2026
+  title: single-shot parity readout of a minimal Kitaev chain (2026)
+  url: https://doi.org/10.1038/s41586-025-09927-7
+  owner: doi.org
+  type: peer-reviewed
+  kind: paper
+  family: topological
+  year: 2026
+  doi: 10.1038/s41586-025-09927-7
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-nmr-helium.md
+- id: hw-topological-scrutiny-commentary-2025
+  title: independent scrutiny
+  url: https://www.nature.com/articles/d41586-025-00527-z
+  owner: nature.com
+  type: commentary
+  kind: paper
+  family: topological
+  year: 2025
+  volatility: active
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-11-HARDWARE-AND-RESEARCH.md
+  used_by:
+  - knowledge/hardware-nmr-helium.md
+- id: sdk-docs-docs-quantum-ibm-com
+  title: IBM docs
+  url: https://docs.quantum.ibm.com
+  owner: docs.quantum.ibm.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-qiskit
+  title: Qiskit
+  url: https://github.com/Qiskit/qiskit
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: Qiskit/qiskit
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-qiskit-commits
+  title: commits
+  url: https://github.com/Qiskit/qiskit/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: Qiskit/qiskit
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-qiskit-issues
+  title: issues
+  url: https://github.com/Qiskit/qiskit/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: Qiskit/qiskit
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantumai-cirq
+  title: Cirq guides and QAOA example
+  url: https://quantumai.google/cirq
+  owner: quantumai.google
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantumlib-cirq-example
+  title: tutorial source
+  url: https://github.com/quantumlib/Cirq/tree/main/docs
+  owner: github.com
+  type: repository
+  kind: example
+  repo: quantumlib/Cirq
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantumlib-cirq
+  title: Cirq
+  url: https://github.com/quantumlib/Cirq
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: quantumlib/Cirq
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantumlib-cirq-commits
+  title: commits
+  url: https://github.com/quantumlib/Cirq/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: quantumlib/Cirq
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantumlib-cirq-issues
+  title: issues
+  url: https://github.com/quantumlib/Cirq/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: quantumlib/Cirq
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-felis-docs
+  title: Felis documentation
+  url: https://felis.alice-bob.com/docs
+  owner: felis.alice-bob.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-felis-docs-getting-started-physical-example
+  title: physical emulator example
+  url: https://felis.alice-bob.com/docs/getting_started/physical_example
+  owner: felis.alice-bob.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-alice-bob-sw-qiskit-alice-bob-provider
+  title: Qiskit provider
+  url: https://github.com/Alice-Bob-SW/qiskit-alice-bob-provider
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: Alice-Bob-SW/qiskit-alice-bob-provider
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-alice-bob-sw-emulation-examples
+  title: emulation examples
+  url: https://github.com/Alice-Bob-SW/emulation-examples
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: Alice-Bob-SW/emulation-examples
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-alice-bob-sw-qiskit-alice-bob-provider-commits
+  title: commits
+  url: https://github.com/Alice-Bob-SW/qiskit-alice-bob-provider/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: Alice-Bob-SW/qiskit-alice-bob-provider
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-alice-bob-sw-qiskit-alice-bob-provider-issues
+  title: issues
+  url: https://github.com/Alice-Bob-SW/qiskit-alice-bob-provider/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: Alice-Bob-SW/qiskit-alice-bob-provider
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-docs-rigetti-com
+  title: Rigetti docs
+  url: https://docs.rigetti.com
+  owner: docs.rigetti.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pyquil-docs-pyquil-docs-rigetti-com
+  title: pyQuil guide
+  url: https://pyquil-docs.rigetti.com
+  owner: pyquil-docs.rigetti.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-rigetti-pyquil
+  title: pyQuil
+  url: https://github.com/rigetti/pyquil
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: rigetti/pyquil
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-rigetti-pyquil-commits
+  title: commits
+  url: https://github.com/rigetti/pyquil/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: rigetti/pyquil
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-rigetti-pyquil-issues
+  title: issues
+  url: https://github.com/rigetti/pyquil/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: rigetti/pyquil
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-iqm-client
+  title: current IQM client docs
+  url: https://docs.iqm.tech/iqm-client
+  owner: docs.iqm.tech
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-iqm-finland-sdk-example
+  title: examples
+  url: https://github.com/iqm-finland/sdk/tree/main/iqm_academy_examples
+  owner: github.com
+  type: repository
+  kind: example
+  repo: iqm-finland/sdk
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-iqm-finland-sdk
+  title: SDK source mirror
+  url: https://github.com/iqm-finland/sdk
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: iqm-finland/sdk
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-iqm-finland-sdk-commits
+  title: commits
+  url: https://github.com/iqm-finland/sdk/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: iqm-finland/sdk
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-oqc-community-qat-3-0-0-getting-started-index-ht
+  title: QAT getting started
+  url: https://oqc-community.github.io/qat/3.0.0/getting_started/index.html
+  owner: oqc-community.github.io
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-oqc-community-qat
+  title: QAT source examples
+  url: https://github.com/oqc-community/qat
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: oqc-community/qat
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-oqc-community-qat-commits
+  title: commits
+  url: https://github.com/oqc-community/qat/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: oqc-community/qat
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-oqc-community-qat-issues
+  title: issues
+  url: https://github.com/oqc-community/qat/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: oqc-community/qat
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantinuum-pytket-docs
+  title: TKET examples
+  url: https://github.com/Quantinuum/pytket-docs
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: Quantinuum/pytket-docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-nexus-trainings-getting-started-html
+  title: Nexus examples
+  url: https://docs.quantinuum.com/nexus/trainings/getting_started.html
+  owner: docs.quantinuum.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantinuum-tket
+  title: TKET
+  url: https://github.com/Quantinuum/tket
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: Quantinuum/tket
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantinuum-qnexus
+  title: qnexus
+  url: https://github.com/Quantinuum/qnexus
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: Quantinuum/qnexus
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantinuum-tket-commits
+  title: TKET commits
+  url: https://github.com/Quantinuum/tket/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: Quantinuum/tket
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantinuum-tket-issues
+  title: TKET issues
+  url: https://github.com/Quantinuum/tket/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: Quantinuum/tket
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantinuum-qnexus-commits
+  title: qnexus commits
+  url: https://github.com/Quantinuum/qnexus/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: Quantinuum/qnexus
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantinuum-qnexus-issues
+  title: qnexus issues
+  url: https://github.com/Quantinuum/qnexus/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: Quantinuum/qnexus
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-tket-extensions-pytket-qiskit-api-html
+  title: converter API and limitations
+  url: https://docs.quantinuum.com/tket/extensions/pytket-qiskit/api.html
+  owner: docs.quantinuum.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-tket-extensions-pytket-qiskit-changelog-htm
+  title: changelog
+  url: https://docs.quantinuum.com/tket/extensions/pytket-qiskit/changelog.html
+  owner: docs.quantinuum.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantinuum-pytket-qiskit
+  title: pytket-qiskit
+  url: https://github.com/Quantinuum/pytket-qiskit
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: Quantinuum/pytket-qiskit
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantinuum-pytket-qiskit-commits
+  title: commits
+  url: https://github.com/Quantinuum/pytket-qiskit/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: Quantinuum/pytket-qiskit
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantinuum-pytket-qiskit-issues
+  title: issues
+  url: https://github.com/Quantinuum/pytket-qiskit/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: Quantinuum/pytket-qiskit
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-ionq-samples-getting-started
+  title: IonQ examples
+  url: https://github.com/ionq-samples/getting-started
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: ionq-samples/getting-started
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-community-qiskit-ionq-example
+  title: provider examples
+  url: https://github.com/qiskit-community/qiskit-ionq/tree/main/example
+  owner: github.com
+  type: repository
+  kind: example
+  repo: qiskit-community/qiskit-ionq
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-community-qiskit-ionq
+  title: community Qiskit provider
+  url: https://github.com/qiskit-community/qiskit-ionq
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: qiskit-community/qiskit-ionq
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-community-qiskit-ionq-commits
+  title: provider commits
+  url: https://github.com/qiskit-community/qiskit-ionq/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: qiskit-community/qiskit-ionq
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-community-qiskit-ionq-issues
+  title: provider issues
+  url: https://github.com/qiskit-community/qiskit-ionq/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: qiskit-community/qiskit-ionq
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-community-qiskit-aqt-provider
+  title: AQT provider docs
+  url: https://qiskit-community.github.io/qiskit-aqt-provider
+  owner: qiskit-community.github.io
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-community-qiskit-aqt-provider-example
+  title: example
+  url: https://github.com/qiskit-community/qiskit-aqt-provider/tree/master/examples
+  owner: github.com
+  type: repository
+  kind: example
+  repo: qiskit-community/qiskit-aqt-provider
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-community-qiskit-aqt-provider-x
+  title: Qiskit AQT provider
+  url: https://github.com/qiskit-community/qiskit-aqt-provider
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: qiskit-community/qiskit-aqt-provider
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-community-qiskit-aqt-provider-commits
+  title: commits
+  url: https://github.com/qiskit-community/qiskit-aqt-provider/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: qiskit-community/qiskit-aqt-provider
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qiskit-community-qiskit-aqt-provider-issues
+  title: issues
+  url: https://github.com/qiskit-community/qiskit-aqt-provider/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: qiskit-community/qiskit-aqt-provider
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pasqal-io-pulser-example
+  title: source examples
+  url: https://github.com/pasqal-io/Pulser/tree/develop/docs
+  owner: github.com
+  type: repository
+  kind: example
+  repo: pasqal-io/Pulser
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pasqal-io-pulser-commits
+  title: commits
+  url: https://github.com/pasqal-io/Pulser/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: pasqal-io/Pulser
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pasqal-io-pulser-issues
+  title: issues
+  url: https://github.com/pasqal-io/Pulser/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: pasqal-io/Pulser
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pasqal-io-qadence-latest-api-backends-pulser
+  title: Pulser bridge and limits
+  url: https://pasqal-io.github.io/qadence/latest/api/backends/pulser
+  owner: pasqal-io.github.io
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pasqal-io-qadence-latest-tutorials-digital-analo
+  title: backend tutorial
+  url: https://pasqal-io.github.io/qadence/latest/tutorials/digital_analog_qc/pulser-basic
+  owner: pasqal-io.github.io
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qadence
+  title: Qadence
+  url: https://github.com/pasqal-io/qadence
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: pasqal-io/qadence
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pasqal-io-qadence-commits
+  title: commits
+  url: https://github.com/pasqal-io/qadence/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: pasqal-io/qadence
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pasqal-io-qadence-issues
+  title: issues
+  url: https://github.com/pasqal-io/qadence/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: pasqal-io/qadence
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-bloqade-bloqade-quera-com
+  title: Bloqade docs
+  url: https://bloqade.quera.com
+  owner: bloqade.quera.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-queracomputing-bloqade
+  title: public examples
+  url: https://github.com/QuEraComputing/bloqade
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: QuEraComputing/bloqade
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-queracomputing-bloqade-commits
+  title: commits
+  url: https://github.com/QuEraComputing/bloqade/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: QuEraComputing/bloqade
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-queracomputing-bloqade-issues
+  title: issues
+  url: https://github.com/QuEraComputing/bloqade/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: QuEraComputing/bloqade
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-perceval-docs
+  title: Perceval docs
+  url: https://perceval.quandela.net/docs
+  owner: perceval.quandela.net
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quandela-perceval
+  title: public examples
+  url: https://github.com/Quandela/Perceval
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: Quandela/Perceval
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quandela-perceval-commits
+  title: commits
+  url: https://github.com/Quandela/Perceval/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: Quandela/Perceval
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quandela-perceval-issues
+  title: issues
+  url: https://github.com/Quandela/Perceval/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: Quandela/Perceval
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-perceval-interopdocs
+  title: interop docs
+  url: https://perceval.quandela.net/interopdocs
+  owner: perceval.quandela.net
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-perceval-interop
+  title: repository examples/tests
+  url: https://github.com/Quandela/Perceval_Interop
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: Quandela/Perceval_Interop
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quandela-perceval-interop-commits
+  title: commits
+  url: https://github.com/Quandela/Perceval_Interop/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: Quandela/Perceval_Interop
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quandela-perceval-interop-issues
+  title: issues
+  url: https://github.com/Quandela/Perceval_Interop/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: Quandela/Perceval_Interop
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-dwavesystems-dwave-ocean-sdk
+  title: Ocean SDK
+  url: https://github.com/dwavesystems/dwave-ocean-sdk
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: dwavesystems/dwave-ocean-sdk
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-dwavesystems-dimod
+  title: dimod
+  url: https://github.com/dwavesystems/dimod
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: dwavesystems/dimod
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-dwavesystems-dwave-ocean-sdk-commits
+  title: commits
+  url: https://github.com/dwavesystems/dwave-ocean-sdk/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: dwavesystems/dwave-ocean-sdk
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-dwavesystems-dwave-ocean-sdk-issues
+  title: issues
+  url: https://github.com/dwavesystems/dwave-ocean-sdk/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: dwavesystems/dwave-ocean-sdk
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qristal-en-stable
+  title: Qristal docs
+  url: https://qristal.readthedocs.io/en/stable
+  owner: qristal.readthedocs.io
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qbrilliance-qristal-core-example
+  title: source examples
+  url: https://github.com/qbrilliance/qristal-core/tree/main/examples
+  owner: github.com
+  type: repository
+  kind: example
+  repo: qbrilliance/qristal-core
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qbrilliance-qristal-core
+  title: Qristal core
+  url: https://github.com/qbrilliance/qristal-core
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: qbrilliance/qristal-core
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qbrilliance-qristal-core-commits
+  title: commits
+  url: https://github.com/qbrilliance/qristal-core/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: qbrilliance/qristal-core
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-qbrilliance-qristal-core-issues
+  title: issues
+  url: https://github.com/qbrilliance/qristal-core/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: qbrilliance/qristal-core
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-doc-doc-spinqit-index-html
+  title: SDK docs
+  url: https://doc.spinq.com/doc/spinqit/index.html
+  owner: doc.spinq.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-spinqtech-spinqit-example
+  title: repository examples
+  url: https://github.com/SpinQTech/SpinQit/tree/main/example
+  owner: github.com
+  type: repository
+  kind: example
+  repo: SpinQTech/SpinQit
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-spinqtech-spinqit
+  title: SpinQit
+  url: https://github.com/SpinQTech/SpinQit
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: SpinQTech/SpinQit
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-spinqtech-spinqit-commits
+  title: commits
+  url: https://github.com/SpinQTech/SpinQit/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: SpinQTech/SpinQit
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-spinqtech-spinqit-issues
+  title: issues
+  url: https://github.com/SpinQTech/SpinQit/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: SpinQTech/SpinQit
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-classiq-classiq-library-commits
+  title: example commits
+  url: https://github.com/Classiq/classiq-library/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: Classiq/classiq-library
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-classiq-classiq-library-issues
+  title: example issues
+  url: https://github.com/Classiq/classiq-library/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: Classiq/classiq-library
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-classiq-classiq-library-x
+  title: releases
+  url: https://github.com/Classiq/classiq-library/releases
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: Classiq/classiq-library
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pennylaneai-pennylane-lightning
+  title: Lightning
+  url: https://github.com/PennyLaneAI/pennylane-lightning
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: PennyLaneAI/pennylane-lightning
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pennylaneai-pennylane-commits
+  title: commits
+  url: https://github.com/PennyLaneAI/pennylane/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: PennyLaneAI/pennylane
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pennylaneai-pennylane-issues
+  title: issues
+  url: https://github.com/PennyLaneAI/pennylane/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: PennyLaneAI/pennylane
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-braket-latest-developerguide-braket-referen
+  title: AWS SDK and repository index
+  url: https://docs.aws.amazon.com/braket/latest/developerguide/braket-references.html
+  owner: docs.aws.amazon.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-amazon-braket-amazon-braket-examples
+  title: example notebooks
+  url: https://github.com/amazon-braket/amazon-braket-examples
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: amazon-braket/amazon-braket-examples
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-amazon-braket-amazon-braket-sdk-python
+  title: Python SDK
+  url: https://github.com/amazon-braket/amazon-braket-sdk-python
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: amazon-braket/amazon-braket-sdk-python
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-amazon-braket-amazon-braket-sdk-python-commits
+  title: commits
+  url: https://github.com/amazon-braket/amazon-braket-sdk-python/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: amazon-braket/amazon-braket-sdk-python
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-amazon-braket-amazon-braket-sdk-python-issues
+  title: issues
+  url: https://github.com/amazon-braket/amazon-braket-sdk-python/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: amazon-braket/amazon-braket-sdk-python
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-nvidia-cuda-quantum
+  title: CUDA-Q docs
+  url: https://nvidia.github.io/cuda-quantum
+  owner: nvidia.github.io
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-nvidia-cuda-quantum-example
+  title: repo examples
+  url: https://github.com/NVIDIA/cuda-quantum/tree/main/docs
+  owner: github.com
+  type: repository
+  kind: example
+  repo: NVIDIA/cuda-quantum
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-nvidia-cuda-quantum-x
+  title: CUDA-Q
+  url: https://github.com/NVIDIA/cuda-quantum
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: NVIDIA/cuda-quantum
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-nvidia-cuda-quantum-commits
+  title: commits
+  url: https://github.com/NVIDIA/cuda-quantum/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: NVIDIA/cuda-quantum
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-nvidia-cuda-quantum-issues
+  title: issues
+  url: https://github.com/NVIDIA/cuda-quantum/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: NVIDIA/cuda-quantum
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-learn-en-us-azure-quantum-overview-what-is-qshar
+  title: Q# docs
+  url: https://learn.microsoft.com/en-us/azure/quantum/overview-what-is-qsharp-and-qdk
+  owner: learn.microsoft.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-microsoft-qdk-example
+  title: Katas
+  url: https://github.com/microsoft/qdk/tree/main/katas
+  owner: github.com
+  type: repository
+  kind: example
+  repo: microsoft/qdk
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-microsoft-qdk
+  title: QDK
+  url: https://github.com/microsoft/qdk
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: microsoft/qdk
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-microsoft-qdk-commits
+  title: commits
+  url: https://github.com/microsoft/qdk/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: microsoft/qdk
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-microsoft-qdk-issues
+  title: issues
+  url: https://github.com/microsoft/qdk/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: microsoft/qdk
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-xanaduai-strawberryfields
+  title: Strawberry Fields
+  url: https://github.com/XanaduAI/strawberryfields
+  owner: github.com
+  type: repository
+  kind: repository
+  repo: XanaduAI/strawberryfields
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-xanaduai-strawberryfields-commits
+  title: commit
+  url: https://github.com/XanaduAI/strawberryfields/commits
+  owner: github.com
+  type: repository
+  kind: commits
+  repo: XanaduAI/strawberryfields
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-xanaduai-strawberryfields-issues
+  title: issue
+  url: https://github.com/XanaduAI/strawberryfields/issues
+  owner: github.com
+  type: repository
+  kind: issues
+  repo: XanaduAI/strawberryfields
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-pytket-extensions-status
+  title: Quantinuum lists `pytket-cirq`, `pytket-pennylane`, and `pytket-pyquil` as unmaintained
+  url: https://docs.quantinuum.com/tket/api-docs/extensions.html
+  owner: docs.quantinuum.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-tket-extensions-pytket-quantinuum
+  title: Quantinuum backend guide
+  url: https://docs.quantinuum.com/tket/extensions/pytket-quantinuum
+  owner: docs.quantinuum.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-12-SDK-SOURCE-MAP.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-tket-extensions-pytket-braket-api-html
+  title: pytket–Braket conversion
+  url: https://docs.quantinuum.com/tket/extensions/pytket-braket/api.html
+  owner: docs.quantinuum.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-14-CONVERSION-ATLAS.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-quantumai-cirq-build-interop
+  title: Cirq QASM subset
+  url: https://quantumai.google/cirq/build/interop
+  owner: quantumai.google
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-14-CONVERSION-ATLAS.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-en-stable-introduction-importing-workflows-
+  title: PennyLane imports Qiskit
+  url: https://docs.pennylane.ai/en/stable/introduction/importing_workflows.html
+  owner: docs.pennylane.ai
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-14-CONVERSION-ATLAS.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-pulser-pulses
+  title: Pulser waveforms
+  url: https://docs.pasqal.com/pulser/pulses
+  owner: docs.pasqal.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-14-CONVERSION-ATLAS.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-bloqade-vendored-bloqade-analog
+  title: Bloqade analog
+  url: https://www.bloqade.quera.com/vendored/bloqade-analog
+  owner: bloqade.quera.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-14-CONVERSION-ATLAS.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-braket-latest-developerguide-braket-quera-s
+  title: Braket AHS/Aquila
+  url: https://docs.aws.amazon.com/braket/latest/developerguide/braket-quera-submitting-analog-program-aquila.html
+  owner: docs.aws.amazon.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-14-CONVERSION-ATLAS.md
+  used_by:
+  - registry/backends.yml
+- id: sdk-docs-en-latest-ocean-api-ref-dimod-models-html
+  title: D-Wave's BQM offset and Ising/QUBO transforms
+  url: https://docs.dwavequantum.com/en/latest/ocean/api_ref_dimod/models.html
+  owner: docs.dwavequantum.com
+  type: vendor-documentation
+  kind: docs
+  volatility: volatile
+  source_date: living
+  last_verified: '2026-10-14'
+  verification: brief
+  link_status: not-checked
+  brief_origin: README-14-CONVERSION-ATLAS.md
+  used_by:
+  - registry/backends.yml
+- id: agent-plugins-schema-1-0-0
+  title: Agent Plugins plugin.json schema 1.0.0
+  url: https://agent-plugins.org/schemas/1.0.0/plugin.schema.json
+  owner: Agent Plugins
+  type: specification
+  volatility: active
+  source_date: 1.0.0
+  last_verified: 2026-10-13
+  verification: v2-build
+  link_status: not-checked
+  used_by:
+  - plugin.json
+  - scripts/validate_package.py
+- id: copilot-custom-agents-config
+  title: Custom agents configuration
+  url: https://docs.github.com/en/copilot/reference/custom-agents-configuration
+  owner: GitHub
+  type: vendor-documentation
+  volatility: volatile
+  source_date: living
+  last_verified: 2026-10-13
+  verification: v2-build
+  link_status: not-checked
+  used_by:
+  - com.github.copilot/agents/
+- id: pulser-2022
+  title: 'Silvério et al., Pulser: an open-source package for the design of pulse sequences in programmable neutral-atom arrays'
+  url: https://doi.org/10.22331/q-2022-01-24-629
+  owner: Quantum
+  type: peer-reviewed
+  volatility: stable
+  source_date: '2022'
+  last_verified: 2026-10-13
+  verification: v2-build
+  link_status: not-checked
+  used_by:
+  - knowledge/providers-pasqal-pulser.md

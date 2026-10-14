@@ -79,7 +79,7 @@ def run_qaoa(problem: dict) -> dict:
 def main() -> dict:
     problem = canonical.load_problem()
     record = {
-        "schema": "qmentor.result-record.v2",
+        "schema": "qmentor.result-record.v3",
         "target": "qiskit",
         "versions": {"qiskit": __import__("qiskit").__version__,
                      "qiskit-optimization": __import__("qiskit_optimization").__version__},

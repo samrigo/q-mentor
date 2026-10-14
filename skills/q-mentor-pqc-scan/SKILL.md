@@ -1,41 +1,41 @@
 ---
 name: q-mentor-pqc-scan
-description: "Inventory quantum-vulnerable cryptography (RSA, DH, ECC) separately from symmetric and hash use, with evidence and confidence, and hand findings to a security owner. Use when the user asks about post-quantum readiness, PQC or a crypto inventory."
+description: Use when the user wants a post-quantum cryptography inventory — 'scan this repo for quantum-vulnerable crypto', 'where do we use RSA or ECC', 'PQC readiness check', 'harvest-now-decrypt-later exposure', 'which certificates need migration review' — returning evidence-backed findings routed to a human security owner.
 license: MIT
 allowed-tools: read, search
 ---
 
 # Q-Mentor · PQC scan
 
-Findings only. Never migrate, certify or call a system unsafe from a string match.
+Inventory cryptographic use with evidence and confidence; never migrate or declare a system safe/unsafe.
 
 ## Shared files
 
-Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`:
-registry `registry/skills.yml`, contract `templates/response-contract.md`; packs `knowledge/pqc.md`.
-If the registry or contract cannot be found, answer `Status: blocked` naming the missing file. Do not guess.
+Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`: registry `registry/skills.yml`, contract `templates/response-contract.md`, packs `knowledge/pqc.md`. If the registry is missing or invalid, answer `Status: blocked` naming the file; do not guess.
+
+## Response template: `evidence`
+
+For **every** user-facing answer, including clarification, error, and direct invocation, render `templates/responses/evidence.md` through `qmentor.response.v3`; preserve its lead, field order, status, uncertainty, and validation. Do not answer free-form or ask the user to invoke another skill.
 
 ## Input
 
-Repository paths, configs or dependency manifests in scope.
+Source code or configuration (public or approved).
 
 ## Output
 
-Findings: location · algorithm/protocol · category (public-key Shor-exposed / symmetric / hash / unclear) · evidence line · confidence · data-lifetime exposure · next step for the security owner.
-Default mode is brief (`Status`, `Result`, `Validation`, `Next`). Honor `detailed` or `machine` when asked.
+`CryptoFindings`: file:line, algorithm, category (public-key exposure vs symmetric/hash consideration), confidence, stored-data/key-lifetime notes, NIST reference, security-owner next step. Reference scanner: `scripts/pqc_inventory.py`.
 
 ## Procedure
 
-1. Search code, configs and dependency manifests for public-key algorithms, protocols and libraries.
-2. Classify; a bare text match is low confidence until the call site or config confirms it.
-3. Treat AES/SHA findings as key-size or output-size review items, not breaks.
-4. Note long-lived data and certificates.
-5. Reference NIST FIPS 203/204/205 and the NIST PQC page; do not state migration deadlines without a live check.
+1. Flag RSA, finite-field DH, and elliptic-curve key exchange/signatures for migration review.
+2. Treat symmetric ciphers and hashes separately (Grover-type considerations, not Shor-type breaks).
+3. Separate a text match from confirmed use; mark false-positive candidates (comments, docs) with low confidence.
+4. Link findings to current NIST guidance (`knowledge/pqc.md`); no compliance promise, no silent replacement.
 
 ## Stop when
 
-No authorised scope; secrets found (report the location only, never the value).
+Non-public code without approval; scope unclear.
 
 ## Handoffs
 
-`q-mentor-review` and a human security owner. Never automatic migration. The agent decides; do not ask the user to type another command unless approval or a material choice is needed.
+`q-mentor-review` and a human security owner; never automatic migration. The agent decides; do not ask the user to type another command unless approval or a material choice is needed.

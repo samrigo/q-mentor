@@ -38,7 +38,8 @@ def plan(registry: dict, primary: str, present: Iterable[str] = (),
          follow_ons: Iterable[str] = ()) -> List[str]:
     """Return the ordered chain for a primary skill plus requested follow-ons."""
     skills = index(registry)
-    have: Set[str] = set(present) | set(registry.get("user_supplied_artifacts", []))
+    # Only artifacts actually present count; a user goal is always present.
+    have: Set[str] = set(present) | {"UserGoal"}
     for name in [primary, *follow_ons]:
         if name not in skills:
             raise RoutingError("blocked", f"unknown or unavailable skill: {name}")
@@ -62,7 +63,10 @@ def plan(registry: dict, primary: str, present: Iterable[str] = (),
                 raise RoutingError("needs-input", f"{name} requires {still}")
         any_of = spec.get("requires_any")
         if any_of and not (set(any_of) & have):
-            raise RoutingError("blocked", f"{name} requires one of {any_of}")
+            for prereq in spec.get("prerequisites", []):
+                satisfy(prereq)
+            if not (set(any_of) & have):
+                raise RoutingError("blocked", f"{name} requires one of {any_of}")
         visiting.discard(name)
         chain.append(name)
         have.update(spec.get("produces", []))
@@ -78,6 +82,33 @@ def plan(registry: dict, primary: str, present: Iterable[str] = (),
     if len(chain) > registry["max_skills_per_turn"]:
         raise RoutingError("checkpoint", f"chain of {len(chain)} exceeds {registry['max_skills_per_turn']}: {chain}")
     return chain
+
+
+# Precedence when several skills match a prompt: the later lifecycle phase is the requested outcome.
+PRECEDENCE = ["q-mentor-help", "q-mentor-learn", "q-mentor-brainstorm", "q-mentor-research", "q-mentor-frame",
+              "q-mentor-verdict", "q-mentor-design", "q-mentor-translate", "q-mentor-evaluate", "q-mentor-implement",
+              "q-mentor-convert", "q-mentor-test", "q-mentor-review", "q-mentor-pqc-scan", "q-mentor-exec",
+              "q-mentor-improve"]
+
+
+def select_primary(registry: dict, prompt: str) -> Optional[str]:
+    """Deterministic stand-in for the agent's intent match: registry intents only, never a skill name."""
+    text = " " + " ".join(prompt.lower().replace("?", " ").replace(",", " ").split()) + " "
+    explicit = [s["name"] for s in registry["skills"] if f"/{s['name']}" in text]
+    if explicit:
+        return explicit[0]
+    scores = {}
+    for spec in registry["skills"]:
+        if not spec["user_invocable"]:
+            continue
+        hits = sum(1 for intent in spec["intents"] if f" {intent.lower()} " in text or f" {intent.lower()}" in text)
+        if hits:
+            scores[spec["name"]] = hits
+    if not scores:
+        return None
+    best = max(scores.values())
+    tied = [n for n, v in scores.items() if v == best]
+    return max(tied, key=lambda n: PRECEDENCE.index(n) if n in PRECEDENCE else -1)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v3/schemas/backend-capability.schema.json",
+  "title": "qmentor.backends.v3 (registry/backends.yml)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "plugin_version",
+    "last_verified",
+    "families",
+    "access_layers",
+    "backends"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "qmentor.backends.v3"
+    },
+    "plugin_version": {
+      "type": "string"
+    },
+    "last_verified": {
+      "type": "string",
+      "format": "date"
+    },
+    "families": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "access_layers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "kind",
+          "note"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "access",
+              "programming",
+              "compilation",
+              "runtime",
+              "language"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "backends": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "provider",
+          "physical_family",
+          "model",
+          "sdk",
+          "backend_kind",
+          "backend",
+          "native_ops",
+          "connectivity",
+          "measurement",
+          "noise",
+          "queue_cost_boundary",
+          "local_validation",
+          "remote_access",
+          "source_url",
+          "last_verified",
+          "support_level"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "provider": {
+            "type": "string"
+          },
+          "physical_family": {
+            "type": "string"
+          },
+          "model": {
+            "enum": [
+              "gate",
+              "analog",
+              "anneal",
+              "photonic-DV",
+              "photonic-CV",
+              "simulator"
+            ]
+          },
+          "sdk": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "package",
+              "version"
+            ],
+            "properties": {
+              "package": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "version": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "maintained": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              }
+            }
+          },
+          "backend": {
+            "type": "string"
+          },
+          "native_ops": {
+            "type": "string"
+          },
+          "connectivity": {
+            "type": "string"
+          },
+          "measurement": {
+            "type": "string"
+          },
+          "noise": {
+            "type": "string"
+          },
+          "queue_cost_boundary": {
+            "type": "string"
+          },
+          "local_validation": {
+            "type": "string"
+          },
+          "remote_access": {
+            "type": "string"
+          },
+          "source_url": {
+            "type": "string"
+          },
+          "example": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "fixture": {
+            "type": "string",
+            "description": "positive/negative fixture path (required for profiled and research-only)"
+          },
+          "last_verified": {
+            "type": "string"
+          },
+          "support_level": {
+            "enum": [
+              "tested-local",
+              "profiled",
+              "research-only"
+            ]
+          },
+          "hardware_questions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "backend_kind": {
+            "enum": [
+              "local-simulator",
+              "local-emulator",
+              "qpu",
+              "hybrid-solver",
+              "none"
+            ]
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "support_level": {
+                  "const": "tested-local"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "example"
+              ],
+              "properties": {
+                "example": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "support_level": {
+                  "const": "research-only"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "example": {
+                  "const": null
+                }
+              },
+              "required": [
+                "fixture"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "support_level": {
+                  "const": "profiled"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "example": {
+                  "const": null
+                }
+              },
+              "required": [
+                "fixture"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

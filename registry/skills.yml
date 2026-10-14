@@ -1,26 +1,55 @@
-# Q-Mentor skill registry (contract: qmentor.skill-registry.v2).
+# Q-Mentor skill registry (contract: qmentor.skill-registry.v3).
 # The custom agent reads this file at the start of every task and owns chaining.
-# prerequisites: run only when the artifacts in `requires` are missing or invalid.
-# follow_ons: possible next skills; the requested outcome decides which run.
+# q-mentor-help renders its menu from this file only (scripts/render_help.py); there is no second menu.
+#   requires / requires_any : artifacts the skill needs; prerequisites run only when they are missing.
+#   follow_ons              : possible next skills; the requested outcome decides which run.
+#   template_id             : the ONE mandatory response template (templates/responses/<id>.md); null = internal.
+#   summary / use_when / example / output : help-menu text (plain language).
 # Validated by scripts/validate_package.py against schemas/skill-registry.schema.json.
-contract_version: qmentor.skill-registry.v2
-plugin_version: 2.0.0
+contract_version: qmentor.skill-registry.v3
+plugin_version: 3.1.1
+response_contract: qmentor.response.v3
 max_skills_per_turn: 5
 max_chain_depth: 5
 user_supplied_artifacts: [UserGoal, UserDocument, SourceCode, Diff, Paper]  # ConsentRecord must be given explicitly
 skills:
   - name: q-mentor-orchestrate
     user_invocable: false
+    template_id: null
+    summary: Internal router that picks and orders the fewest skills for your goal.
+    use_when: Any request spanning more than one phase; never called by users.
+    example: "Analyze, design, implement and validate the six-bond example."
+    output: PhasePlan (internal)
     intents: [multi-phase, end-to-end, analyze and implement, convert and validate, full workflow]
     requires: [UserGoal]
     produces: [PhasePlan]
     prerequisites: []
-    follow_ons: [q-mentor-learn, q-mentor-research, q-mentor-brainstorm, q-mentor-frame, q-mentor-verdict, q-mentor-design, q-mentor-translate, q-mentor-evaluate, q-mentor-implement, q-mentor-test, q-mentor-review, q-mentor-pqc-scan, q-mentor-exec, q-mentor-improve]
+    follow_ons: [q-mentor-help, q-mentor-learn, q-mentor-research, q-mentor-brainstorm, q-mentor-frame, q-mentor-verdict, q-mentor-design, q-mentor-translate, q-mentor-convert, q-mentor-evaluate, q-mentor-implement, q-mentor-test, q-mentor-review, q-mentor-pqc-scan, q-mentor-exec, q-mentor-improve]
     side_effects: none
     tools: [read, search]
     packs: []
+  - name: q-mentor-help
+    user_invocable: true
+    template_id: guide
+    summary: Explains what each Q-Mentor skill does and which one fits your task.
+    use_when: You ask what Q-Mentor can do or which skill fits.
+    example: "What can Q-Mentor do for a Pulser-to-Classiq conversion?"
+    output: Skill guide
+    intents: [what can you do, which skill, how do I start, help, menu, capabilities]
+    requires: [UserGoal]
+    produces: [SkillGuide]
+    prerequisites: []
+    follow_ons: [q-mentor-learn, q-mentor-research, q-mentor-brainstorm, q-mentor-frame, q-mentor-verdict, q-mentor-design, q-mentor-translate, q-mentor-convert, q-mentor-evaluate, q-mentor-implement, q-mentor-test, q-mentor-review, q-mentor-pqc-scan, q-mentor-exec, q-mentor-improve]
+    side_effects: none
+    tools: [read]
+    packs: []
   - name: q-mentor-learn
     user_invocable: true
+    template_id: guide
+    summary: Explains one quantum concept with an analogy, one formula, and a common misconception.
+    use_when: You want one concept explained, such as annealing or a hardware family.
+    example: "Explain QAOA to a portfolio manager."
+    output: Explanation with a source
     intents: [explain, what is, teach, how does, mental model, intuition]
     requires: [UserGoal]
     produces: [Explanation]
@@ -28,9 +57,14 @@ skills:
     follow_ons: [q-mentor-research, q-mentor-frame]
     side_effects: none
     tools: [read]
-    packs: [knowledge/quantum-basics.md, knowledge/optimization-math.md]
+    packs: [knowledge/quantum-basics.md, knowledge/optimization-math.md, knowledge/hardware-index.md]
   - name: q-mentor-research
     user_invocable: true
+    template_id: evidence
+    summary: Checks current papers and claims and grades the evidence.
+    use_when: You ask whether a claim or paper holds up.
+    example: "Is there evidence QAOA beats Gurobi on portfolios?"
+    output: Graded evidence card
     intents: [evidence, paper, latest, state of the art, literature, claim check]
     requires: [UserGoal]
     produces: [EvidenceCard]
@@ -41,6 +75,11 @@ skills:
     packs: [knowledge/research-method.md, knowledge/recent-research.md]
   - name: q-mentor-brainstorm
     user_invocable: true
+    template_id: options
+    summary: Suggests up to five ranked classical, hybrid, and quantum use cases.
+    use_when: You want ideas for where quantum might help.
+    example: "Where could quantum help an asset manager?"
+    output: Up to five ranked options
     intents: [use cases, ideas, where could quantum help, shortlist, options]
     requires: [UserGoal]
     produces: [UseCaseTable]
@@ -51,6 +90,11 @@ skills:
     packs: [knowledge/quantum-fit.md]
   - name: q-mentor-frame
     user_invocable: true
+    template_id: frame
+    summary: Turns a business problem into variables, objective, constraints, and checks.
+    use_when: You need a precise model of a real problem.
+    example: "Frame picking 3 of 6 bonds as an optimization problem."
+    output: ProblemSpec and CanonicalProblem
     intents: [formulate, frame, model the problem, variables, objective, constraints, QUBO]
     requires: [UserGoal]
     produces: [ProblemSpec, CanonicalProblem]
@@ -61,6 +105,11 @@ skills:
     packs: [knowledge/optimization-math.md, domains/finance/portfolio-optimization.md]
   - name: q-mentor-verdict
     user_invocable: true
+    template_id: decision
+    summary: Decides classical now, teaching PoC, bounded experiment, or candidate experiment.
+    use_when: You ask whether quantum is a fit, or need a go/no-go.
+    example: "Should we use quantum to sort a 200-row CSV?"
+    output: Verdict with classical alternative
     intents: [should we use quantum, is quantum a fit, go no-go, readiness, verdict]
     requires: [ProblemSpec]
     produces: [Verdict]
@@ -71,6 +120,11 @@ skills:
     packs: [knowledge/quantum-fit.md]
   - name: q-mentor-design
     user_invocable: true
+    template_id: design
+    summary: Designs the experiment, target plans, and tests before any quantum code.
+    use_when: An experiment is justified and needs a plan and tests.
+    example: "Design a D-Wave versus Qiskit comparison for the bond problem."
+    output: Design and TargetPlan
     intents: [design, architecture, plan the experiment, target plan]
     requires: [Verdict, CanonicalProblem]
     produces: [Design, TargetPlan]
@@ -78,19 +132,45 @@ skills:
     follow_ons: [q-mentor-translate, q-mentor-evaluate]
     side_effects: none
     tools: [read, search]
-    packs: [knowledge/optimization-math.md]
+    packs: [knowledge/optimization-math.md, knowledge/hardware-index.md]
   - name: q-mentor-translate
     user_invocable: true
-    intents: [convert, translate, port, compare targets, same problem in another SDK]
-    requires: [CanonicalProblem]
+    template_id: mapping
+    summary: Maps a problem or program between computing models and says what survives.
+    use_when: You ask what survives a move to another SDK or hardware.
+    example: "Can this Pulser sequence run on Classiq, and what is lost?"
+    output: CapabilityReport and TranslationRecord
+    intents: [translate, port, compare targets, can this run on, same problem in another SDK, map]
+    requires: []
+    requires_any: [CanonicalProblem, SourceCode]
     produces: [ProgramIR, CapabilityReport, TranslationRecord]
     prerequisites: [q-mentor-frame]
-    follow_ons: [q-mentor-evaluate, q-mentor-implement, q-mentor-test]
+    follow_ons: [q-mentor-convert, q-mentor-evaluate]
     side_effects: none
     tools: [read, search]
-    packs: [knowledge/providers-qiskit.md, knowledge/providers-classiq.md, knowledge/providers-dwave.md, knowledge/providers-pasqal-pulser.md, knowledge/framework-pennylane.md]
+    packs: [knowledge/conversion-atlas.md, knowledge/hardware-index.md]
+  - name: q-mentor-convert
+    user_invocable: true
+    template_id: conversion
+    summary: Produces and verifies complete target code across hardware, and measures optimization quality.
+    use_when: You want verified code on another SDK or hardware.
+    example: "Convert my Pulser optimization code to Classiq and say if it improved."
+    output: Verified files and optimization record
+    intents: [convert, convert code, rewrite in, port the code, optimize the conversion, cross-hardware]
+    requires: [ProgramIR, CapabilityReport]
+    produces: [TranslationRecord, OptimizationRecord, ConversionEdge, Implementation, Diff]
+    prerequisites: [q-mentor-translate]
+    follow_ons: [q-mentor-test, q-mentor-review, q-mentor-evaluate]
+    side_effects: execute
+    tools: [read, search, edit, execute]
+    packs: [knowledge/conversion-atlas.md, knowledge/providers-classiq.md, knowledge/providers-pasqal-pulser.md]
   - name: q-mentor-evaluate
     user_invocable: true
+    template_id: evaluation
+    summary: Grades a paper, proposal, or experiment for baseline, fairness, and reproducibility.
+    use_when: You need a scorecard or a fair comparison plan.
+    example: "Is this vendor benchmark against random search fair?"
+    output: Scorecard and ExperimentPlan
     intents: [grade, scorecard, assess paper, assess proposal, fair comparison, benchmark plan]
     requires: [UserGoal]
     produces: [Scorecard, ExperimentPlan]
@@ -101,16 +181,26 @@ skills:
     packs: [knowledge/research-method.md, knowledge/quantum-fit.md]
   - name: q-mentor-implement
     user_invocable: true
+    template_id: code
+    summary: Writes the smallest complete, version-pinned code change from an accepted design.
+    use_when: A design is accepted and you want runnable files.
+    example: "Implement the accepted design for Qiskit."
+    output: Complete files or diff
     intents: [implement, write the code, build the example, scaffold]
     requires: [Design]
-    produces: [Implementation]
+    produces: [Implementation, Diff]
     prerequisites: [q-mentor-design]
     follow_ons: [q-mentor-test, q-mentor-review]
     side_effects: edit
     tools: [read, search, edit]
-    packs: [knowledge/providers-qiskit.md, knowledge/providers-classiq.md, knowledge/providers-dwave.md, knowledge/providers-pasqal-pulser.md, knowledge/framework-pennylane.md]
+    packs: [knowledge/providers-qiskit.md, knowledge/providers-dwave.md, knowledge/framework-pennylane.md]
   - name: q-mentor-test
     user_invocable: true
+    template_id: code
+    summary: Runs deterministic, equivalence, statistical, and noise tests and reports what was observed.
+    use_when: You want code or results validated.
+    example: "Do the energies match across SDKs for all 64 states?"
+    output: Test report and result record
     intents: [test, validate, verify, run the checks, equivalence]
     requires: [Implementation]
     produces: [TestReport, ResultRecord]
@@ -121,6 +211,11 @@ skills:
     packs: []
   - name: q-mentor-review
     user_invocable: true
+    template_id: review
+    summary: Reviews math, code, hardware fit, claims, and simpler classical alternatives; findings only.
+    use_when: You want findings before merging or presenting.
+    example: "Review my QAOA code before I merge."
+    output: Findings with severity
     intents: [review, check this code, audit the math, sanity check]
     requires: [Diff]
     produces: [Findings]
@@ -131,6 +226,11 @@ skills:
     packs: [knowledge/optimization-math.md]
   - name: q-mentor-pqc-scan
     user_invocable: true
+    template_id: evidence
+    summary: Inventories quantum-vulnerable cryptography and routes it to a security owner.
+    use_when: You need a post-quantum crypto inventory.
+    example: "Where do we use RSA or ECC in this repo?"
+    output: Crypto findings with confidence
     intents: [post-quantum, PQC, crypto inventory, RSA, ECC, harvest now decrypt later]
     requires: [SourceCode]
     produces: [CryptoFindings]
@@ -141,9 +241,14 @@ skills:
     packs: [knowledge/pqc.md]
   - name: q-mentor-exec
     user_invocable: true
+    template_id: decision
+    summary: Writes a one-page leadership decision brief from results, never from plans.
+    use_when: You need a leadership brief from results.
+    example: "Summarize the six-bond results for the steering committee."
+    output: ExecutiveBrief
     intents: [executive summary, brief, leadership, one pager]
-    requires_any: [ResultRecord, Verdict]
     requires: []
+    requires_any: [ResultRecord, Verdict]
     produces: [ExecutiveBrief]
     prerequisites: []
     follow_ons: [q-mentor-improve]
@@ -152,9 +257,14 @@ skills:
     packs: []
   - name: q-mentor-improve
     user_invocable: true
+    template_id: improvement
+    summary: Turns a recorded failure, opted-in lesson, or new source into an eval-first change proposal.
+    use_when: A maintainer fixes Q-Mentor from evidence.
+    example: "Q-Mentor mixed up RX(beta) and RX(2 beta); record it."
+    output: Reviewed change proposal
     intents: [improve the plugin, lesson, incident, regression, update knowledge]
-    requires_any: [ConsentRecord, TestReport, EvidenceCard]
     requires: []
+    requires_any: [ConsentRecord, TestReport, EvidenceCard]
     produces: [LessonCandidate, ChangeProposal]
     prerequisites: []
     follow_ons: [q-mentor-research, q-mentor-test]

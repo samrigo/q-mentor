@@ -1,0 +1,169 @@
+# Sparse conversion registry (qmentor.conversion-edges.v3), from brief/README-14.
+# model_matrix holds the CANDIDATE class for each computing-model pair; it is not a promise of executability.
+# edges lists only shipped bridges and negative routes, each with a proof fixture that the CI runs.
+# Classes: E exact (supported subset) | C conditional (postselected) | R reimplementation | A approximation | U unsupported.
+# An unlisted request gets a capability report first (scripts/route_conversion.py); it is never labelled
+# supported without a fixture. Re-read SDK docs, changelog, commit SHA and issues before each release.
+contract_version: qmentor.conversion-edges.v3
+plugin_version: 3.1.1
+checked_at: 2026-10-14
+model_matrix:
+  gate:           {gate: E, rydberg-analog: A or R, anneal: R, photonic-DV: C, photonic-CV: U, research-only: U}
+  rydberg-analog: {gate: A or R, rydberg-analog: E or A, anneal: R, photonic-DV: U, photonic-CV: U, research-only: U}
+  anneal:         {gate: R, rydberg-analog: R, anneal: E, photonic-DV: R, photonic-CV: U, research-only: U}
+  photonic-DV:    {gate: C, rydberg-analog: U, anneal: R, photonic-DV: E, photonic-CV: U, research-only: U}
+  photonic-CV:    {gate: U, rydberg-analog: U, anneal: U, photonic-DV: U, photonic-CV: E, research-only: U}
+  research-only:  {gate: U, rydberg-analog: U, anneal: U, photonic-DV: U, photonic-CV: U, research-only: U}
+edges:
+  - id: qiskit-to-pytket
+    source: {model: gate, physical_family: superconducting-gate, sdk: qiskit, version: 2.5.2, sha: null, backend: StatevectorSampler}
+    target: {model: gate, physical_family: trapped-ion, sdk: pytket, version: 2.18.5, sha: null, backend: pytket statevector}
+    classification: E
+    preserved: [unitary up to global phase, qubit/bit order (verified), measurements, bound parameters]
+    losses: [symbolic parameters must be bound or mapped explicitly, implicit swaps from placement must be undone]
+    proof_fixture: examples/conversion/gate-to-gate/test_example.py::test_qiskit_to_pytket_unitary
+    negative_fixture: examples/conversion/gate-to-gate/test_example.py::test_unmaintained_bridge_refused
+    success_probability: null
+    approximation_error: null
+    maintained_bridge: {name: pytket-qiskit, package: pytket-qiskit, version: 0.78.0, status: maintained, docs: "https://docs.quantinuum.com/tket/extensions/pytket-qiskit/api.html", issues_reviewed: "https://github.com/Quantinuum/pytket-qiskit/issues"}
+    validation_state: locally-executed
+    checked_at: 2026-10-14
+  - id: qiskit-to-cirq-qasm2
+    source: {model: gate, physical_family: superconducting-gate, sdk: qiskit, version: 2.5.2, sha: null, backend: StatevectorSampler}
+    target: {model: gate, physical_family: superconducting-gate, sdk: cirq-core, version: 1.7.0, sha: null, backend: cirq.Simulator}
+    classification: E
+    preserved: [unitary up to global phase on the OpenQASM 2 subset, measurement keys, bit order (verified)]
+    losses: [anything outside OpenQASM 2 (classical control, custom gate definitions with parameters) is rejected, not translated]
+    proof_fixture: examples/conversion/gate-to-gate/test_example.py::test_qiskit_to_cirq_unitary
+    negative_fixture: examples/conversion/gate-to-gate/test_example.py::test_dynamic_circuit_rejected
+    success_probability: null
+    approximation_error: null
+    maintained_bridge: {name: Cirq OpenQASM 2 importer, package: cirq-core, version: 1.7.0, status: maintained, docs: "https://quantumai.google/cirq/build/interop", issues_reviewed: "https://github.com/quantumlib/Cirq/issues"}
+    validation_state: locally-executed
+    checked_at: 2026-10-14
+  - id: qiskit-to-perceval-dual-rail
+    source: {model: gate, physical_family: superconducting-gate, sdk: qiskit, version: 2.5.2, sha: null, backend: StatevectorSampler}
+    target: {model: photonic-DV, physical_family: photonic, sdk: perceval-quandela, version: 1.3.1, sha: null, backend: Processor SLOS (perfect source)}
+    classification: C
+    preserved: [logical output distribution conditional on postselection/heralds, logical bit order]
+    losses: [deterministic execution (only a postselected fraction succeeds), photon loss and source imperfections in a real device]
+    proof_fixture: examples/conversion/qiskit-to-perceval/test_example.py::test_conditional_distribution_and_success_rate
+    negative_fixture: examples/conversion/qiskit-to-perceval/test_example.py::test_postselected_fidelity_not_reported_as_deterministic
+    success_probability: null   # measured per circuit; recorded in examples/conversion/qiskit-to-perceval/expected.json
+    approximation_error: null
+    maintained_bridge: {name: perceval-interop QiskitConverter, package: perceval-interop, version: 1.3.0, status: maintained, docs: "https://perceval.quandela.net/interopdocs/", issues_reviewed: "https://github.com/Quandela/Perceval_Interop/issues"}
+    validation_state: locally-executed
+    checked_at: 2026-10-14
+  - id: pulser-to-bloqade-hamiltonian
+    source: {model: rydberg-analog, physical_family: neutral-atom, sdk: pulser, version: 1.9.1, sha: null, backend: QutipBackendV2}
+    target: {model: rydberg-analog, physical_family: neutral-atom, sdk: bloqade-analog, version: 0.16.9, sha: null, backend: bloqade python emulator}
+    classification: E
+    preserved: [atom coordinates, Omega(t), delta(t), phase, duration, time grid, initial state, readout decode]
+    losses: [C6 differs between the default device models; E holds only after rescaling coordinates to match C6/r^6, otherwise A with the measured error]
+    proof_fixture: examples/conversion/pulser-to-bloqade/test_example.py::test_matched_hamiltonian_distributions_agree
+    negative_fixture: examples/conversion/pulser-to-bloqade/test_example.py::test_unmatched_c6_is_approximation
+    success_probability: null
+    approximation_error: "recorded in examples/conversion/pulser-to-bloqade/expected.json (total-variation distance)"
+    maintained_bridge: {name: canonical Hamiltonian (no SDK bridge), package: null, version: null, status: canonical-model, docs: "https://www.bloqade.quera.com/vendored/bloqade-analog/", issues_reviewed: null}
+    validation_state: locally-executed
+    checked_at: 2026-10-14
+  - id: canonical-qubo-to-dwave-bqm
+    source: {model: anneal, physical_family: none-framework-or-simulator, sdk: canonical QUBO (numpy), version: null, sha: null, backend: exhaustive enumeration}
+    target: {model: anneal, physical_family: superconducting-flux-annealer, sdk: dimod, version: 0.12.22, sha: null, backend: ExactSolver}
+    classification: E
+    preserved: [every bitstring's energy including offset, variable order, decode]
+    losses: [annealing dynamics, embedding and chain effects on a QPU are outside the energy model]
+    proof_fixture: examples/bond-selection/dwave/test_example.py
+    negative_fixture: evals/conversion/cases.yml#bqm-offset-dropped
+    success_probability: null
+    approximation_error: null
+    maintained_bridge: {name: dimod BinaryQuadraticModel, package: dimod, version: 0.12.22, status: maintained, docs: "https://docs.dwavequantum.com/en/latest/ocean/api_ref_dimod/models.html", issues_reviewed: "https://github.com/dwavesystems/dwave-ocean-sdk/issues"}
+    validation_state: locally-executed
+    checked_at: 2026-10-14
+  - id: dwave-bqm-to-qiskit-qaoa
+    source: {model: anneal, physical_family: superconducting-flux-annealer, sdk: dimod, version: 0.12.22, sha: null, backend: ExactSolver}
+    target: {model: gate, physical_family: superconducting-gate, sdk: qiskit, version: 2.5.2, sha: null, backend: StatevectorSampler}
+    classification: R
+    preserved: [canonical energy of every bitstring, feasible set, decode]
+    losses: [algorithm changes from annealing to QAOA; sampling distributions, schedules and runtimes are not comparable]
+    proof_fixture: evals/conversion/test_bqm_vs_qaoa.py
+    negative_fixture: evals/conversion/test_bqm_vs_qaoa.py::test_reimplementation_not_labelled_exact
+    success_probability: null
+    approximation_error: null
+    maintained_bridge: {name: canonical QUBO (dimod to_qubo / qiskit SparsePauliOp), package: null, version: null, status: canonical-model, docs: "https://qiskit-community.github.io/qiskit-optimization/tutorials/02_converters_for_quadratic_programs.html", issues_reviewed: null}
+    validation_state: locally-executed
+    checked_at: 2026-10-14
+  - id: pulser-to-classiq-shared-qubo
+    source: {model: rydberg-analog, physical_family: neutral-atom, sdk: pulser, version: 1.9.1, sha: null, backend: QutipBackendV2}
+    target: {model: gate, physical_family: none-framework-or-simulator, sdk: classiq, version: 1.32.0, sha: null, backend: Qmod model (synthesis credential-gated)}
+    classification: R
+    preserved: [geometry-derived QUBO (C6/r^6 couplings, detuning linear terms), bit order, decode, feasible set]
+    losses: [analog adiabatic schedule, device noise and SPAM, pulse timing (all unsupported-exact on a gate model)]
+    proof_fixture: examples/conversion/pulser-to-classiq-qaoa/test_example.py
+    negative_fixture: evals/conversion/cases.yml#analog-schedule-exact-claim
+    success_probability: null
+    approximation_error: null
+    maintained_bridge: {name: canonical QUBO via ProgramIR (no SDK bridge), package: null, version: null, status: canonical-model, docs: "https://docs.classiq.io/qmod-reference", issues_reviewed: "https://github.com/Classiq/classiq-library/issues"}
+    validation_state: imported
+    checked_at: 2026-10-14
+    notes: "Classiq synthesis/execution needs credentials (unverified). Optimization variants are measured on a local reference simulator of the identical ansatz; see optimization_record.json."
+  - id: pulser-analog-to-gate-exact
+    source: {model: rydberg-analog, physical_family: neutral-atom, sdk: pulser, version: 1.9.1, sha: null, backend: QutipBackendV2}
+    target: {model: gate, physical_family: none-framework-or-simulator, sdk: classiq, version: 1.32.0, sha: null, backend: Qmod model}
+    classification: U
+    preserved: []
+    losses: [time-dependent analog evolution has no exact circuit equivalent without a stated Trotter/synthesis error]
+    proof_fixture: evals/conversion/cases.yml#analog-schedule-exact-claim
+    success_probability: null
+    approximation_error: "A only with a documented Hamiltonian-simulation decomposition and error bound"
+    maintained_bridge: {name: none, package: null, version: null, status: none, docs: null, issues_reviewed: null}
+    validation_state: negative-tested
+    checked_at: 2026-10-14
+  - id: qadence-to-pulser-legacy
+    source: {model: gate, physical_family: neutral-atom, sdk: qadence, version: 1.11.5, sha: null, backend: digital-analog program}
+    target: {model: rydberg-analog, physical_family: neutral-atom, sdk: pulser, version: 1.9.1, sha: null, backend: QutipBackendV2}
+    classification: U
+    preserved: []
+    losses: [bridge is experimental and Qadence is not actively maintained; legacy-source migration only, never a default target]
+    proof_fixture: evals/conversion/cases.yml#qadence-default-bridge
+    success_probability: null
+    approximation_error: null
+    maintained_bridge: {name: Qadence Pulser backend, package: qadence, version: 1.11.5, status: unmaintained, docs: "https://pasqal-io.github.io/qadence/latest/api/backends/pulser/", issues_reviewed: "https://github.com/pasqal-io/qadence/issues"}
+    validation_state: negative-tested
+    checked_at: 2026-10-14
+  - id: gate-to-photonic-cv
+    source: {model: gate, physical_family: superconducting-gate, sdk: qiskit, version: 2.5.2, sha: null, backend: StatevectorSampler}
+    target: {model: photonic-CV, physical_family: photonic, sdk: strawberryfields, version: 0.23.0, sha: null, backend: archived}
+    classification: U
+    preserved: []
+    losses: [no maintained DV-to-CV converter; Strawberry Fields is archived]
+    proof_fixture: evals/conversion/cases.yml#gate-to-cv
+    success_probability: null
+    approximation_error: null
+    maintained_bridge: {name: none, package: null, version: null, status: archived, docs: null, issues_reviewed: "https://github.com/XanaduAI/strawberryfields/issues"}
+    validation_state: negative-tested
+    checked_at: 2026-10-14
+  - id: gate-to-research-only
+    source: {model: gate, physical_family: superconducting-gate, sdk: qiskit, version: 2.5.2, sha: null, backend: StatevectorSampler}
+    target: {model: research-only, physical_family: "electrons-on-helium | topological | silicon-spin", sdk: none, version: null, sha: null, backend: none}
+    classification: U
+    preserved: []
+    losses: [no public, versioned, executable contract exists]
+    proof_fixture: evals/conversion/cases.yml#gate-to-helium
+    success_probability: null
+    approximation_error: null
+    maintained_bridge: {name: none, package: null, version: null, status: none, docs: null, issues_reviewed: null}
+    validation_state: negative-tested
+    checked_at: 2026-10-14
+  - id: gate-to-cat-or-nmr-pending
+    source: {model: gate, physical_family: superconducting-gate, sdk: qiskit, version: 2.5.2, sha: null, backend: StatevectorSampler}
+    target: {model: gate, physical_family: "superconducting-cat | liquid-state-nmr", sdk: "qiskit-alice-bob-provider | spinqit", version: null, sha: null, backend: local emulators (profiled)}
+    classification: U
+    preserved: []
+    losses: [candidate E on a tiny supported gate set, but no tested-local promotion yet; capability report only]
+    proof_fixture: evals/conversion/cases.yml#gate-to-cat-pending
+    success_probability: null
+    approximation_error: null
+    maintained_bridge: {name: "Alice & Bob Qiskit provider / SpinQit compiler", package: null, version: null, status: maintained, docs: "https://felis.alice-bob.com/docs/", issues_reviewed: "https://github.com/Alice-Bob-SW/qiskit-alice-bob-provider/issues"}
+    validation_state: negative-tested
+    checked_at: 2026-10-14

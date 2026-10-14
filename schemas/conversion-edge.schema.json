@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v3/schemas/conversion-edge.schema.json",
+  "title": "qmentor.conversion-edge.v3 (registry/conversion-edges.yml)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "plugin_version", "checked_at", "model_matrix", "edges"],
+  "properties": {
+    "contract_version": {"const": "qmentor.conversion-edges.v3"},
+    "plugin_version": {"type": "string"},
+    "checked_at": {"type": "string", "format": "date"},
+    "model_matrix": {
+      "type": "object",
+      "description": "README-14 candidate classes: source model -> target model -> class",
+      "additionalProperties": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^(E|C|R|A|U)( or (E|C|R|A|U))?$"}}
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "source", "target", "classification", "preserved", "losses", "proof_fixture", "validation_state", "maintained_bridge", "checked_at"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "source": {"$ref": "#/$defs/endpoint"},
+          "target": {"$ref": "#/$defs/endpoint"},
+          "classification": {"enum": ["E", "C", "R", "A", "U"]},
+          "preserved": {"type": "array", "items": {"type": "string"}},
+          "losses": {"type": "array", "items": {"type": "string"}},
+          "proof_fixture": {"type": "string", "description": "path of the test that proves the class (or the negative fixture for U)"},
+          "negative_fixture": {"type": "string"},
+          "success_probability": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+          "approximation_error": {"type": ["string", "null"]},
+          "maintained_bridge": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "status"],
+            "properties": {
+              "name": {"type": "string"},
+              "package": {"type": ["string", "null"]},
+              "version": {"type": ["string", "null"]},
+              "status": {"enum": ["maintained", "experimental", "unmaintained", "archived", "none", "canonical-model"]},
+              "docs": {"type": ["string", "null"]},
+              "issues_reviewed": {"type": ["string", "null"]}
+            }
+          },
+          "validation_state": {"enum": ["draft", "syntax-checked", "imported", "locally-executed", "target-validated", "negative-tested", "unverified"]},
+          "checked_at": {"type": "string", "format": "date"},
+          "notes": {"type": "string"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "endpoint": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "sdk", "backend"],
+      "properties": {
+        "model": {"enum": ["gate", "rydberg-analog", "anneal", "photonic-DV", "photonic-CV", "research-only"]},
+        "physical_family": {"type": "string"},
+        "sdk": {"type": "string"},
+        "version": {"type": ["string", "null"]},
+        "sha": {"type": ["string", "null"], "pattern": "^([0-9a-f]{40})?$"},
+        "backend": {"type": "string"}
+      }
+    }
+  }
+}

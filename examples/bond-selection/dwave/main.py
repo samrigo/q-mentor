@@ -35,7 +35,7 @@ def main() -> dict:
     feasible = [v for v in vectors if canonical.is_feasible(v, problem)]
     opt_bits = canonical.bitstring(best)
     record = {
-        "schema": "qmentor.result-record.v2",
+        "schema": "qmentor.result-record.v3",
         "target": "dwave-ocean",
         "versions": {"dimod": dimod.__version__,
                      "dwave-samplers": __import__("dwave.samplers", fromlist=["__version__"]).__version__},

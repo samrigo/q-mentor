@@ -1,5 +1,5 @@
 {
-  "schema": "qmentor.result-record.v2",
+  "schema": "qmentor.result-record.v3",
   "target": "dwave-ocean",
   "versions": {
     "dimod": "0.12.22",

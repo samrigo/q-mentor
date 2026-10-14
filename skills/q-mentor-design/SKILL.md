@@ -1,19 +1,21 @@
 ---
 name: q-mentor-design
-description: "Produce a target-neutral design and target-specific starter plan (canonical model, exact baseline, result schema, target plans, tests, stop condition) after a positive or teaching-PoC verdict. Use when the user wants to plan an experiment or architecture."
+description: Use when an experiment or implementation must be designed after framing — 'design the QAOA experiment', 'plan a D-Wave and Qiskit comparison', 'what would the PoC architecture be', 'design tests for the quantum prototype' — producing a target-neutral design, target plans, interfaces, threat model, and test plan before code.
 license: MIT
 allowed-tools: read, search
 ---
 
 # Q-Mentor · Design
 
-Fix every interface before code; ≤ 600 words.
+Design the experiment target-neutrally first, then per-target plans and acceptance tests, before any quantum code.
 
 ## Shared files
 
-Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`:
-registry `registry/skills.yml`, contract `templates/response-contract.md`; packs `knowledge/optimization-math.md`.
-If the registry or contract cannot be found, answer `Status: blocked` naming the missing file. Do not guess.
+Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`: registry `registry/skills.yml`, contract `templates/response-contract.md`, packs `knowledge/optimization-math.md`, `knowledge/hardware-index.md`. If the registry is missing or invalid, answer `Status: blocked` naming the file; do not guess.
+
+## Response template: `design`
+
+For **every** user-facing answer, including clarification, error, and direct invocation, render `templates/responses/design.md` through `qmentor.response.v3`; preserve its lead, field order, status, uncertainty, and validation. Do not answer free-form or ask the user to invoke another skill.
 
 ## Input
 
@@ -21,21 +23,20 @@ Accepted `Verdict` and `CanonicalProblem`.
 
 ## Output
 
-`templates/provider-design.md`: canonical model, exact baseline, `ResultRecord` fields, per-target plan with pins and CapabilityReport status, test plan, threat model, stop condition.
-Default mode is brief (`Status`, `Result`, `Validation`, `Next`). Honor `detailed` or `machine` when asked.
+`Design` + `TargetPlan`s (`templates/provider-design.md`): canonical model, classical baseline, per target: physical family · computing model · SDK/version · backend · support level (`registry/backends.yml`), resource estimate, interfaces, threat model, acceptance tests, stop conditions.
 
 ## Procedure
 
-1. Keep business math SDK-independent; adapters may change syntax, never the objective.
-2. Specify the exact classical baseline and the expected fixture result.
-3. For each named target: algorithm, backend/device (offline first), encoding, resource estimate, version pins, capability status (`exact`, `approximate`, `unsupported-exact`, `unknown`).
-4. Test plan: deterministic formulation/decoding, cross-target energy equivalence on all enumerable states, seeded statistics, noise sensitivity, opt-in remote smoke tests.
-5. Every component gets a contract and a failure mode.
+1. Keep business math in the canonical model; adapters may change syntax, never the objective.
+2. Choose at most three suitable targets plus one classical path, from `knowledge/hardware-index.md` and `registry/backends.yml`. Only `tested-local` targets get code plans by default; `profiled` get a capability plan; `research-only` get none.
+3. Explain mismatches (dense QUBO on a geometry-limited Rydberg array, photonic postselection cost, unavailable dynamic circuits).
+4. Acceptance tests: all-state energy equivalence for toys, decode in declared bit order, seeds, fixed budget, feasibility, stop condition.
+5. Record the rejected alternative and why.
 
 ## Stop when
 
-The design cannot preserve the canonical objective; verdict missing or classical-now without a teaching request.
+The design cannot preserve the canonical objective; required capability unavailable.
 
 ## Handoffs
 
-`q-mentor-translate` for named targets, then `q-mentor-evaluate`. The agent decides; do not ask the user to type another command unless approval or a material choice is needed.
+`q-mentor-translate` for named targets; then `q-mentor-evaluate`. The agent decides; do not ask the user to type another command unless approval or a material choice is needed.

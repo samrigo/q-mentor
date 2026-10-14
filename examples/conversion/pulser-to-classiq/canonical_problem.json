@@ -1,5 +1,5 @@
 {
-  "schema": "qmentor.canonical-problem.v2",
+  "schema": "qmentor.canonical-problem.v3",
   "id": "pulser-native-4-atom-line",
   "provenance": {
     "derived_from": "program_ir.json",

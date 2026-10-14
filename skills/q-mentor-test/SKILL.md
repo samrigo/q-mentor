@@ -1,40 +1,41 @@
 ---
 name: q-mentor-test
-description: "Create or run deterministic, equivalence, statistical, noise and cross-target tests in a clean pinned environment and report the observed validation state without hiding failures. Use after implement, or when asked to validate or verify results."
+description: Use when quantum code or results must be tested or validated — 'run the tests', 'check the energies match across SDKs', 'validate the D-Wave example', 'does this reproduce the optimum', 'verify my QAOA results' — running deterministic, equivalence, statistical, and noise tests and reporting the highest validation state actually observed.
 license: MIT
-allowed-tools: read, search, edit
+allowed-tools: read, search
 ---
 
 # Q-Mentor · Test
 
-Evidence, not reassurance. ≤ 120 words on success; focused diagnostics on failure.
+Run tests in order and report exactly what was observed, failures included.
 
 ## Shared files
 
-Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`:
-registry `registry/skills.yml`, contract `templates/response-contract.md`.
-If the registry or contract cannot be found, answer `Status: blocked` naming the missing file. Do not guess.
+Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`: registry `registry/skills.yml`, contract `templates/response-contract.md`. If the registry is missing or invalid, answer `Status: blocked` naming the file; do not guess.
+
+## Response template: `code`
+
+For **every** user-facing answer, including clarification, error, and direct invocation, render `templates/responses/code.md` through `qmentor.response.v3`; preserve its lead, field order, status, uncertainty, and validation. Do not answer free-form or ask the user to invoke another skill.
 
 ## Input
 
-Implementation and fixtures (run `q-mentor-implement` first if no code exists).
+Implementation and fixtures.
 
 ## Output
 
-`TestReport` and `ResultRecord` (`schemas/result-record.schema.json`): commands, attempts, seeds, shots, backend, versions, thresholds, pass/fail, negative results, highest observed validation state.
-Default mode is brief (`Status`, `Result`, `Validation`, `Next`). Honor `detailed` or `machine` when asked.
+Test report + `ResultRecord` (`schemas/result-record.schema.json`): commands, pass/fail counts, seeds, shots, backend, versions, thresholds, highest observed state.
 
 ## Procedure
 
-1. Prefer the repository scripts: `python scripts/validate_math.py`, `python scripts/validate_examples.py`, `python -m pytest -q` inside the target folder. Shell commands need the user's confirmation; they are not pre-approved.
-2. Order: syntax → import → local execution → exact energy equivalence on all enumerable states → seeded statistics → noise sensitivity.
-3. Statistical failure is reported once with its seed; never re-run until it passes.
+1. Prefer repository gates: `python scripts/validate_math.py`, `python scripts/validate_examples.py --only <target>`, `python -m pytest -q` in the target folder. Each shell command needs user confirmation; none is pre-approved.
+2. Order: syntax → import → local execution → all-state energy equivalence → decode/feasibility → seeded statistics → noise/resource sensitivity → optimization quality at a fixed budget.
+3. A statistical failure is reported once with its seed; never re-run until it passes.
 4. Credentialed or remote checks are opt-in and stay `unverified` when not run — never `passed`.
 5. On failure: first failing command, smallest diagnostic, one repair.
 
 ## Stop when
 
-Flaky, cherry-picked, incomplete or irreproducible result; missing environment (report `unverified`).
+Flaky, cherry-picked, incomplete, or irreproducible result; environment unavailable (`unverified`).
 
 ## Handoffs
 

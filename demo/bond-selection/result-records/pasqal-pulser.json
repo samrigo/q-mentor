@@ -1,5 +1,5 @@
 {
-  "schema": "qmentor.result-record.v2",
+  "schema": "qmentor.result-record.v3",
   "target": "pasqal-pulser",
   "versions": {
     "pulser": "1.9.1"

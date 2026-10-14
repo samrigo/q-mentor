@@ -1,0 +1,463 @@
+# Hardware-catalog evals (README-11). Each profiled or research-only backend has a negative fixture: Q-Mentor
+# must name family, model, SDK, backend and support level, and must not emit runnable code. Checked offline by
+# scripts/validate_hardware.py against registry/backends.yml (reference capability-report renderer), and usable
+# as live Copilot prompts with the same assertions.
+cases:
+- id: ibm-qpu
+  prompt: Run the six-bond QAOA on an IBM QPU.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: google-qpu
+  prompt: Can I run this on Google's Willow chip?
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: rigetti-pyquil
+  prompt: Generate pyQuil code for the bond QUBO on Rigetti.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: iqm-client
+  prompt: Target IQM Garnet with the six-bond circuit.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: oqc-qat
+  prompt: Compile the circuit for OQC hardware.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: alice-bob-emulator
+  prompt: Use Alice & Bob cat qubits for the QAOA circuit.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: aws-ocelot
+  prompt: Write code for AWS Ocelot.
+  expect:
+    support_level: research-only
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - unsupported
+- id: dwave-qpu
+  prompt: Submit the six-bond BQM to the D-Wave Advantage2 QPU.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: dwave-hybrid
+  prompt: Use D-Wave's hybrid solver and report it as a QPU result.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: quantinuum-hw
+  prompt: Run the circuit on Quantinuum Helios.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: ionq
+  prompt: Port the circuit to IonQ Forte.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: aqt
+  prompt: Run on AQT hardware.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: pasqal-qpu
+  prompt: Send my Pulser sequence to Pasqal's QPU.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: quera-aquila
+  prompt: Run the Bloqade program on Aquila.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: neutral-atom-gate
+  prompt: Use a neutral-atom gate-model processor for QAOA.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: quandela-qpu
+  prompt: Run the Perceval circuit on Quandela Belenos.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: pennylane-photonic-device
+  prompt: Run my PennyLane circuit on photonic hardware.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: strawberryfields
+  prompt: Write Strawberry Fields code for a CV QAOA.
+  expect:
+    support_level: research-only
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - unsupported
+- id: psiquantum
+  prompt: Write code for PsiQuantum's machine.
+  expect:
+    support_level: research-only
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - unsupported
+- id: orca
+  prompt: Target ORCA's photonic computer.
+  expect:
+    support_level: research-only
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - unsupported
+- id: diraq
+  prompt: Run on a Diraq silicon spin processor.
+  expect:
+    support_level: research-only
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - unsupported
+- id: quantum-motion
+  prompt: Generate code for Quantum Motion hardware.
+  expect:
+    support_level: research-only
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - unsupported
+- id: intel-spin
+  prompt: Use Intel's silicon spin qubits.
+  expect:
+    support_level: research-only
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - unsupported
+- id: sqc
+  prompt: Program a Silicon Quantum Computing device.
+  expect:
+    support_level: research-only
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - unsupported
+- id: qristal
+  prompt: Run the circuit on a Quantum Brilliance diamond QPU with Qristal.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: spinqit-sim
+  prompt: Run the six-bond QAOA on a SpinQ NMR desktop.
+  expect:
+    support_level: profiled
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - needs-input
+    - unsupported
+    - blocked
+- id: eeroq
+  prompt: Write code for an electron-on-helium quantum computer.
+  expect:
+    support_level: research-only
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - unsupported
+- id: microsoft-topological
+  prompt: Run my Q# program on Microsoft's topological qubits.
+  expect:
+    support_level: research-only
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+    status:
+    - unsupported
+- id: provider-name-alone
+  prompt: Use Pasqal.
+  expect:
+    resolves_to:
+    - pulser-local
+    - pasqal-qpu
+    - neutral-atom-gate
+    status:
+    - needs-input
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+- id: simulator-not-qpu
+  prompt: Our PennyLane default.qubit run proves it works on quantum hardware, right?
+  expect:
+    backend: pennylane-default-qubit
+    backend_kind: local-simulator
+    status:
+    - complete
+    executable_code: true
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+- id: annealer-is-not-gate
+  prompt: D-Wave is superconducting, so it can run our Qiskit circuit.
+  expect:
+    backend: dwave-qpu
+    model: anneal
+    status:
+    - unsupported
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level
+- id: recommend-at-most-three
+  prompt: Which hardware should we try for a 20-variable QUBO?
+  expect:
+    max_candidates: 3
+    requires_classical_path: true
+    status:
+    - complete
+    executable_code: false
+    must_name:
+    - physical_family
+    - model
+    - sdk
+    - backend
+    - support_level

@@ -1,0 +1,53 @@
+# Hardware Landscape and Research, 2023–2026
+
+This is the build catalog, not a claim that every system is publicly accessible. Keep **physical modality**, **computing model**, **SDK**, and **cloud access** as separate fields. A device can support more than one model; a framework can target several modalities. Refresh access, backend properties, and paper status before each release.
+
+## Coverage levels
+
+`tested-local` means a pinned offline example passes. `profiled` means documented capability and a negative/positive fixture, without a runnable local adapter. `research-only` means no production code generation or hardware claim. The table states **build acceptance targets**, not capabilities already delivered by this readme kit. Backend availability is checked at request time; no paid job runs automatically.
+
+| Physical family / model | Major providers to catalog | v3 minimum | Hardware questions the skill must ask |
+|---|---|---|---|
+| Superconducting gate circuits | IBM, Google Quantum AI, Rigetti, IQM, OQC | Qiskit and Cirq `tested-local`; pyQuil, IQM, OQC `profiled` | Native gates, coupling graph, dynamic circuits, calibration age, two-qubit error, depth |
+| Superconducting bosonic/cat qubits | Alice & Bob; AWS Ocelot research | Alice & Bob Qiskit local emulators `profiled` pending a pinned clean build; AWS `research-only` | Physical versus logical cat qubits, noise bias, oscillator/photon model, bias-preserving gates, emulator versus QPU |
+| Superconducting flux annealing | D-Wave | Ocean BQM/CQM `tested-local`; QPU `profiled` | QUBO/Ising convention, topology, embedding, chain strength, anneal schedule, hybrid-solver boundary |
+| Trapped-ion gate circuits | Quantinuum, IonQ, AQT | pytket `tested-local`; IonQ and AQT bridges `profiled` until separately tested | Native entangler, all-to-all versus shuttling, mid-circuit operations, shot/time cost |
+| Neutral-atom arrays: analog and gate | Pasqal, QuEra, Atom Computing | Pulser and Bloqade analog `tested-local`; gate backends `profiled` | Geometry, blockade, interaction graph, local addressing, atom movement, pulse timing and noise |
+| Photonic: discrete-variable and continuous-variable | Quandela, Xanadu; PsiQuantum and ORCA as `research-only` until a public versioned programming route is verified | Perceval `tested-local`; PennyLane device-specific examples `profiled`; archived Strawberry Fields is a historical reference | Modes, photon number/loss, postselection, detector model, feed-forward, DV/CV encoding |
+| Silicon spin / quantum dots | Diraq, Quantum Motion, Intel, Silicon Quantum Computing | `research-only` until a public provider SDK and backend contract are verified | Exchange gates, shuttling, control wiring, connectivity, readout, operating temperature |
+| Diamond/color-center spins | Quantum Brilliance | Qristal local example `profiled` or `tested-local` after a clean build | Small register size, electron/nuclear-spin control, connectivity, noise and room-temperature claims |
+| Liquid-state NMR nuclear spins | SpinQ; academic tabletop systems | SpinQit simulator `profiled`; 2–3-qubit NMR hardware is education-scale, not a scalable optimization backend | Molecule/ensemble encoding, polarization, pulse calibration, coherence, tiny register, operating-system/backend support |
+| Electrons on helium | EeroQ; research groups | `research-only` until a public provider SDK and programmable multi-qubit backend are verified | Charge versus spin encoding, shuttling, microwave coupling/readout, actual two-qubit gate evidence |
+| Topological/Majorana devices | Microsoft Azure Quantum research program | `research-only`; Q# is a language, not proof of a topological QPU | What was experimentally measured, what was inferred, and whether programmable qubits exist |
+
+Amazon Braket, Azure Quantum, Classiq, PennyLane, NVIDIA CUDA-Q, Qiskit, and pytket are **access, programming, or compilation layers**. Store their concrete target backend separately. Do not count a simulator, annealer, photonic sampler, and universal gate device as interchangeable “qubit” targets.
+
+## Capability record per backend
+
+Store `provider`, `physical_family`, `model` (`gate`, `analog`, `anneal`, `photonic-DV`, `photonic-CV`, `simulator`), `sdk/package/version`, `backend`, `native_ops`, `connectivity/geometry`, `measurement`, `noise`, `queue/cost boundary`, `local validation`, `remote access`, `source_url`, `last_verified`, and `support_level`. If a field is unknown, say so. A provider name alone is insufficient to generate code.
+
+The provider recommender must compare at most three suitable paths with one classical path. It must explain a mismatch such as dense arbitrary QUBO on a geometry-limited Rydberg array, a photonic postselection cost, or a gate circuit requiring unavailable dynamic operations. Never infer real-hardware support from an SDK simulator.
+
+## Curated primary research since 2023
+
+Each item is a reading seed and a claim/eval source. The plugin must record publication date, version/correction, hardware, task, baseline, artifact availability, and what the paper **does not** establish. Papers on memory, components, or physics are not application-speedup evidence.
+
+| Family | Papers and reason to read |
+|---|---|
+| Superconducting gates | [IBM utility experiment (2023)](https://doi.org/10.1038/s41586-023-06096-3): error mitigation and classical comparison. [Google below-threshold surface-code memory (2025; corrected 2026)](https://doi.org/10.1038/s41586-024-08449-y): logical-memory scaling, with [correction](https://doi.org/10.1038/s41586-026-10559-8). |
+| Bosonic/cat qubits | [Protected cat-qubit control (2024)](https://doi.org/10.1038/s41586-024-07294-3), with [axis-unit correction](https://doi.org/10.1038/s41586-024-07565-z): bit-flip protection under control, not universal fault tolerance. [Concatenated bosonic logical memory (2025)](https://doi.org/10.1038/s41586-025-08642-7): memory scaling. [LDPC-cat codes (2025)](https://doi.org/10.1038/s41467-025-56298-8): theoretical resource estimate, not deployed hardware. |
+| Annealing | [Quantum annealing applications versus classical solvers (2025)](https://doi.org/10.1038/s41598-025-96220-2): limitations and benchmark design. [Quantum error mitigation in annealing (2025)](https://doi.org/10.1038/s41534-025-00977-3): hardware and model assumptions. [End-to-end portfolio optimization (2025)](https://arxiv.org/abs/2504.08843): hybrid pipeline; separate its classical allocation from quantum selection. |
+| Trapped ions | [Entangling four logical qubits beyond break-even (2024 preprint)](https://arxiv.org/abs/2406.02666): logical-state evidence and postselection. [Experimental fault-tolerant code switching (2025)](https://doi.org/10.1038/s41567-024-02727-2): dynamic logical operations. [98-qubit Helios system (2026)](https://doi.org/10.1038/s41586-026-10676-4): architecture and performance benchmarks, not an optimization advantage claim. |
+| Neutral atoms | [Reconfigurable-array logical processor (2023/2024)](https://doi.org/10.1038/s41586-023-06927-3): logical operations and atom transport. [Weighted-graph optimization on a Rydberg array (2025)](https://doi.org/10.1103/PRXQuantum.6.010301): local shifts and graph encoding. [Logical magic-state distillation (2025)](https://doi.org/10.1038/s41586-025-09367-3): fault-tolerant component, not generic QUBO execution. |
+| Photonics | [Resource-efficient high-dimensional cluster states (2024)](https://doi.org/10.1038/s41566-024-01524-w): photonic measurement model. [Manufacturable photonic platform (2025)](https://doi.org/10.1038/s41586-025-08820-7): component benchmarks conditional on detection and excluding loss. [Boosted Bell-state measurements (2025)](https://doi.org/10.1038/s41534-025-00986-2): fusion resource tradeoffs. |
+| Silicon spins | [Pipeline architecture for silicon spin qubits (2024)](https://doi.org/10.1038/s41534-024-00823-y): proposed scaling architecture. [Grover algorithm in a four-qubit silicon processor (2025)](https://doi.org/10.1038/s41565-024-01853-5): small algorithm demonstration. [Foundry-compatible unit cells exceeding 99% fidelity (2025)](https://doi.org/10.1038/s41586-025-09531-9): fabrication and gate fidelity. |
+| Diamond/color centers | [NV–photon teleportation interface (2024)](https://doi.org/10.1038/s41534-024-00910-0): network component. [Hybrid NV network node with error correction (2025)](https://doi.org/10.1038/s41567-025-02831-x): memory and entanglement. [Room-temperature NV register benchmarking (2025)](https://doi.org/10.1038/s41534-025-01164-0): small-register characterization. |
+| NMR nuclear spins | [NMR Quantum Computer for Education (2024)](https://doi.org/10.1541/ieejfms.144.252): limits of an educational device. [Reliability analysis of algorithms on a desk Quantum Computer (2025)](https://doi.org/10.1016/j.measen.2025.101859): small-device reliability characterization. Neither establishes a scalable optimization advantage. |
+| Electrons on helium | [Spin-qubit architecture blueprint (2023)](https://arxiv.org/abs/2303.03688): proposed gates/readout, not a delivered processor. [Charge–photon strong coupling (2026)](https://doi.org/10.1038/s41567-026-03342-z): device-level readout/control evidence; do not infer programmable two-qubit computation. |
+| Topological research | [Interferometric parity measurement in InAs–Al devices (2025)](https://doi.org/10.1038/s41586-024-08445-2) and [single-shot parity readout of a minimal Kitaev chain (2026)](https://doi.org/10.1038/s41586-025-09927-7): device-level evidence. Preserve the distinction between parity evidence and a useful programmable topological processor; record [independent scrutiny](https://www.nature.com/articles/d41586-025-00527-z) as commentary, not a primary paper. |
+
+## Research refresh gate
+
+Link audit `2026-10-14`: all 31 paper/correction identifiers above and the 13 distinct foundational identifiers in [README-07](README-07-REFERENCES.md) returned matching publication metadata. Some DOI redirects require publisher login or block automated reading; that is `metadata-only` or `blocked-by-publisher`, not proof of full-text access. Recheck titles, dates, corrections, and accessibility at build/release time.
+
+At a minor release, search the primary literature for each family since the previous `last_verified` date; review corrections, retractions, code/data links, and credible classical counterresults. Add a paper only if it changes a capability, limitation, test, or decision. Do not accumulate an undifferentiated bibliography. The cross-cutting optimization and software-benchmark sources remain in [README-07](README-07-REFERENCES.md).

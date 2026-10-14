@@ -1,41 +1,41 @@
 ---
 name: q-mentor-exec
-description: "Turn result records or an accepted verdict into a one-page leadership brief with decision, evidence level, baseline, cost, uncertainty and one gated next step. Use for executive summaries; it never manufactures conclusions from plans."
+description: Use when the user wants a leadership-ready summary of quantum work — 'write an executive brief', 'one-pager for the steering committee', 'summarize the PoC results for leadership', 'decision memo on quantum readiness' — built only from result records or a verdict.
 license: MIT
 allowed-tools: read
 ---
 
 # Q-Mentor · Executive brief
 
-One page or less, reconciled with artifacts.
+Convert measured evidence into one decision with limits, cost, risk, and the next gate.
 
 ## Shared files
 
-Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`:
-registry `registry/skills.yml`, contract `templates/response-contract.md`.
-If the registry or contract cannot be found, answer `Status: blocked` naming the missing file. Do not guess.
+Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`: registry `registry/skills.yml`, contract `templates/response-contract.md`. If the registry is missing or invalid, answer `Status: blocked` naming the file; do not guess.
+
+## Response template: `decision`
+
+For **every** user-facing answer, including clarification, error, and direct invocation, render `templates/responses/decision.md` through `qmentor.response.v3`; preserve its lead, field order, status, uncertainty, and validation. Do not answer free-form or ask the user to invoke another skill.
 
 ## Input
 
-`ResultRecord`s or an accepted `Verdict` (`requires_any`). Without one of them: `Status: blocked`.
+`ResultRecord`s or a `Verdict` (required; plans are not evidence).
 
 ## Output
 
-`templates/executive-brief.md`.
-Default mode is brief (`Status`, `Result`, `Validation`, `Next`). Honor `detailed` or `machine` when asked.
+`ExecutiveBrief` (`templates/executive-brief.md`); numbers reconcile with the records; regenerated report: `scripts/build_report.py`.
 
 ## Procedure
 
-1. Use numbers only from result records or the verdict; cite their ids.
-2. State the evidence level; matching a toy optimum is never advantage.
-3. Put the classical baseline next to every quantum number.
-4. List uncertainty and limits.
-5. One next action with owner and gate.
+1. If no result records or verdict exist → `Status: blocked`; `Next gate` names the run or verdict needed. Never manufacture conclusions from a plan.
+2. Lead with the decision; one measured fact against a named classical baseline; evidence level.
+3. Cost/risk: the one factor most likely to change the decision; separate AI-credit and hardware spend.
+4. Matching a toy optimum is not advantage; say so when relevant.
 
 ## Stop when
 
-Results are not decision-ready or are missing.
+Results not decision-ready (blocked).
 
 ## Handoffs
 
-`q-mentor-improve` only after explicit user opt-in. The agent decides; do not ask the user to type another command unless approval or a material choice is needed.
+`q-mentor-improve` only after explicit opt-in. The agent decides; do not ask the user to type another command unless approval or a material choice is needed.

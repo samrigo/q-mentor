@@ -1,31 +1,138 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v2/schemas/translation-record.schema.json",
-  "title": "qmentor.translation-record.v2",
+  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v3/schemas/translation-record.schema.json",
+  "title": "qmentor.translation-record.v3",
   "type": "object",
-  "required": ["schema", "source", "target", "overall_status", "mappings", "losses", "generated_files", "validation"],
+  "required": [
+    "schema",
+    "source",
+    "target",
+    "overall_status",
+    "mappings",
+    "losses",
+    "generated_files",
+    "validation",
+    "route_class"
+  ],
   "properties": {
-    "schema": {"const": "qmentor.translation-record.v2"},
-    "source": {"type": "object", "required": ["framework", "version"]},
-    "target": {"type": "object", "required": ["framework", "version"]},
-    "overall_status": {"enum": ["exact", "reimplementation", "approximate", "unsupported-exact", "unknown"]},
-    "summary": {"type": "string"},
+    "schema": {
+      "const": "qmentor.translation-record.v3"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "framework",
+        "version"
+      ]
+    },
+    "target": {
+      "type": "object",
+      "required": [
+        "framework",
+        "version"
+      ]
+    },
+    "overall_status": {
+      "enum": [
+        "exact",
+        "conditional",
+        "reimplementation",
+        "approximate",
+        "unsupported-exact",
+        "unknown"
+      ]
+    },
+    "summary": {
+      "type": "string"
+    },
     "mappings": {
-      "type": "array", "minItems": 1,
+      "type": "array",
+      "minItems": 1,
       "items": {
-        "type": "object", "required": ["source_semantic", "target", "status", "evidence"],
-        "properties": {"status": {"enum": ["exact", "reimplementation", "approximate", "unsupported-exact", "unknown"]}}
+        "type": "object",
+        "required": [
+          "source_semantic",
+          "target",
+          "status",
+          "evidence"
+        ],
+        "properties": {
+          "status": {
+            "enum": [
+              "exact",
+              "conditional",
+              "reimplementation",
+              "approximate",
+              "unsupported-exact",
+              "unknown"
+            ]
+          }
+        }
       }
     },
-    "losses": {"type": "array", "items": {"type": "string"}},
-    "error_bound": {"type": "string"},
-    "generated_files": {"type": "array", "items": {"type": "string"}},
+    "losses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "error_bound": {
+      "type": "string"
+    },
+    "generated_files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "validation": {
-      "type": "object", "required": ["commands", "observed_state"],
-      "properties": {"observed_state": {"enum": ["draft", "syntax-checked", "imported", "locally-executed", "target-validated", "unverified"]}}
+      "type": "object",
+      "required": [
+        "commands",
+        "observed_state"
+      ],
+      "properties": {
+        "observed_state": {
+          "enum": [
+            "draft",
+            "syntax-checked",
+            "imported",
+            "locally-executed",
+            "target-validated",
+            "unverified"
+          ]
+        }
+      }
+    },
+    "route_class": {
+      "enum": [
+        "E",
+        "C",
+        "R",
+        "A",
+        "U"
+      ],
+      "description": "README-14 route class of the whole conversion"
+    },
+    "edge_id": {
+      "type": "string",
+      "description": "registry/conversion-edges.yml id"
     }
   },
   "allOf": [
-    {"if": {"properties": {"overall_status": {"const": "approximate"}}}, "then": {"required": ["error_bound"]}}
+    {
+      "if": {
+        "properties": {
+          "overall_status": {
+            "const": "approximate"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "error_bound"
+        ]
+      }
+    }
   ]
 }

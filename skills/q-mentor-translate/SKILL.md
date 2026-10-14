@@ -1,42 +1,42 @@
 ---
 name: q-mentor-translate
-description: "Map one canonical problem or source program to execution targets (Qiskit, Classiq, D-Wave, Pasqal/Pulser, PennyLane) through ProgramIR and a CapabilityReport, with a TranslationRecord. Use for convert, port, translate or 'same problem in another SDK' requests."
+description: Use when the user wants a quantum problem or program mapped between execution targets without code yet — 'can this run on Pasqal', 'what is lost moving my Qiskit circuit to Perceval', 'compare how each SDK represents this QUBO', 'map this Pulser sequence to Bloqade' — producing a CapabilityReport and TranslationRecord through a canonical model.
 license: MIT
 allowed-tools: read, search
 ---
 
 # Q-Mentor · Translate
 
-Semantic translation with an explicit status; one comparison table by default.
+Classify a source → target route by computing model and state exactly what survives, before any code.
 
 ## Shared files
 
-Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`:
-registry `registry/skills.yml`, contract `templates/response-contract.md`; packs `knowledge/providers-pasqal-pulser.md`, `knowledge/providers-classiq.md`, `knowledge/providers-qiskit.md`.
-If the registry or contract cannot be found, answer `Status: blocked` naming the missing file. Do not guess.
+Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`: registry `registry/skills.yml`, contract `templates/response-contract.md`, packs `knowledge/conversion-atlas.md`, `knowledge/hardware-index.md`. If the registry is missing or invalid, answer `Status: blocked` naming the file; do not guess.
+
+## Response template: `mapping`
+
+For **every** user-facing answer, including clarification, error, and direct invocation, render `templates/responses/mapping.md` through `qmentor.response.v3`; preserve its lead, field order, status, uncertainty, and validation. Do not answer free-form or ask the user to invoke another skill.
 
 ## Input
 
-`CanonicalProblem` (frame first if missing) or source code; target(s).
+`CanonicalProblem` or parsed source code (`SourceCode`); target.
 
 ## Output
 
-Comparison table: semantic element · source · target · status. Plus `CapabilityReport` and `TranslationRecord` (schemas in `schemas/`). Load only the provider packs for the targets named (≤ 3).
-Default mode is brief (`Status`, `Result`, `Validation`, `Next`). Honor `detailed` or `machine` when asked.
+`ProgramIR`, `CapabilityReport`, `TranslationRecord` (schemas in `schemas/`) with route class: exact, conditional, reimplementation, approximate, unsupported.
 
 ## Procedure
 
-1. Pin the source SDK version; the source must import or parse. If not, repair or reject first.
-2. Extract `ProgramIR`: variables, objective, constants, bit/wire order, Hamiltonians, register geometry, gates or pulses, timing, initial state, measurements, decoding, backend assumptions.
-3. Per target, emit a `CapabilityReport`: `exact`, `approximate` (with error bound), `unsupported-exact`, or `unknown`.
-4. Pasqal/Pulser: check coupling signs, geometry degrees of freedom, device distances, addressability/DMM, pulse limits before any code. Pulser → Classiq is never line-by-line: shared QUBOs are a *reimplementation*; analog evolution is `unsupported-exact`.
-5. State conventions: Qiskit little-endian bitstrings; dimod SPIN = −canonical spin; PennyLane wire order; Classiq global-phase constant.
-6. Code only for `exact` or user-approved `approximate` mappings, via `q-mentor-implement`.
+1. Pin the source SDK version; the source must parse/import. If not, reject or repair first.
+2. Extract `ProgramIR`: variables, objective, constants, bit/wire order, Hamiltonian, geometry, gates or pulses, timing, initial state, measurement, decoding, backend assumptions.
+3. Look up both endpoints in `registry/backends.yml` (support level, model) and the route class in `knowledge/conversion-atlas.md` / `registry/conversion-edges.yml`. A shared QASM file, language, or cloud is not hardware equivalence.
+4. Exact only on the supported subset with a proof fixture; conditional reports postselection success; reimplementation names the algorithm change; approximate states an error bound; unsupported names the nearest valid alternative.
+5. Research-only targets → unsupported for executable code. Never route through an unmaintained bridge by default.
 
 ## Stop when
 
-Target cannot represent the semantics exactly and no approximation was approved; source does not parse; SDK version unknown.
+Target cannot represent the semantics and no approximation was approved; source does not parse; SDK version unknown.
 
 ## Handoffs
 
-`q-mentor-evaluate`; `q-mentor-implement` only for exact or approved approximate mappings; `q-mentor-test`. The agent decides; do not ask the user to type another command unless approval or a material choice is needed.
+`q-mentor-convert` when code is requested; otherwise `q-mentor-evaluate`. The agent decides; do not ask the user to type another command unless approval or a material choice is needed.

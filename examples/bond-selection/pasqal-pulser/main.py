@@ -68,7 +68,7 @@ def main() -> dict:
     seq = build_qaa_sequence(register)
     spam = NoiseModel(state_prep_error=0.005, p_false_pos=0.01, p_false_neg=0.05)
     record = {
-        "schema": "qmentor.result-record.v2",
+        "schema": "qmentor.result-record.v3",
         "target": "pasqal-pulser",
         "versions": {"pulser": pulser.__version__},
         "six_bond_capability": report["status"],

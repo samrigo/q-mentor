@@ -1,6 +1,6 @@
 """Generate the executive brief for the six-bond demo from result records only.
 
-Reads demo/bond-selection/result-records/*.json (schema qmentor.result-record.v2) and
+Reads demo/bond-selection/result-records/*.json (schema qmentor.result-record.v3) and
 writes demo/bond-selection/REPORT.md. Refuses (exit 1) when no records exist: the brief
 must never be manufactured from a plan.
 """

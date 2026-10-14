@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v3/schemas/optimization-record.schema.json",
+  "title": "qmentor.optimization-record.v3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "problem_id", "objective_hash", "feasible_set", "exact_optimum", "classical_baseline", "primary_metric", "resource_cap", "budget", "conventions", "variants", "selected", "status", "selection_reason", "execution", "versions"],
+  "properties": {
+    "schema": {"const": "qmentor.optimization-record.v3"},
+    "problem_id": {"type": "string"},
+    "objective_hash": {"type": "string", "description": "sha256 of the canonical QUBO; identical for every variant"},
+    "feasible_set": {"type": "string"},
+    "exact_optimum": {"type": "object", "required": ["bitstring", "energy"], "properties": {"bitstring": {"type": "string"}, "energy": {"type": "number"}}},
+    "classical_baseline": {"type": "object", "required": ["method", "best_energy", "wall_time_s"]},
+    "primary_metric": {"type": "string"},
+    "resource_cap": {"type": "string"},
+    "budget": {
+      "type": "object",
+      "required": ["shots_per_evaluation", "max_evaluations", "seeds"],
+      "properties": {
+        "shots_per_evaluation": {"type": "integer", "minimum": 1},
+        "max_evaluations": {"type": "integer", "minimum": 1},
+        "seeds": {"type": "array", "minItems": 2, "items": {"type": "integer"}}
+      }
+    },
+    "conventions": {
+      "type": "object",
+      "required": ["cost_unitary", "mixer_unitary", "rx_convention", "angle_bounds", "phase_decorator"],
+      "properties": {
+        "cost_unitary": {"type": "string"},
+        "mixer_unitary": {"type": "string"},
+        "rx_convention": {"type": "string"},
+        "angle_bounds": {"type": "string"},
+        "phase_decorator": {"type": "string"},
+        "cvar_alpha": {"type": ["number", "null"]}
+      }
+    },
+    "variants": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["id", "p", "optimizer", "objective_mode", "best_feasible_energy", "gap_to_optimum", "feasible_probability", "expected_energy", "optimum_probability", "evaluations", "depth", "two_qubit_gates", "wall_time_s", "per_seed"],
+        "properties": {
+          "id": {"type": "string"},
+          "p": {"type": "integer", "minimum": 1},
+          "optimizer": {"type": "string"},
+          "objective_mode": {"enum": ["mean", "cvar"]},
+          "best_feasible_energy": {"type": "number"},
+          "gap_to_optimum": {"type": "number"},
+          "feasible_probability": {"type": "object", "required": ["mean", "ci95"]},
+          "expected_energy": {"type": "object", "required": ["mean", "ci95"]},
+          "optimum_probability": {"type": "object", "required": ["mean", "ci95"]},
+          "evaluations": {"type": "integer"},
+          "depth": {"type": "integer"},
+          "two_qubit_gates": {"type": "integer"},
+          "wall_time_s": {"type": "number"},
+          "per_seed": {"type": "array"}
+        }
+      }
+    },
+    "baseline_variant": {"type": "string", "description": "the simpler variant kept unless another improves the primary metric"},
+    "selected": {"type": "string"},
+    "status": {"enum": ["improved", "not-improved", "inconclusive"]},
+    "selection_reason": {"type": "string"},
+    "execution": {
+      "type": "object",
+      "required": ["engine", "validation_state", "target_sdk_execution"],
+      "properties": {
+        "engine": {"type": "string"},
+        "validation_state": {"type": "string"},
+        "target_sdk_execution": {"enum": ["observed", "unverified-credential-required", "not-applicable"]}
+      }
+    },
+    "versions": {"type": "object"}
+  }
+}

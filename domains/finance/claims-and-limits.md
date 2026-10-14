@@ -14,6 +14,6 @@
 No investment recommendations, live trading, client or position data, or production credentials. Outputs are teaching and engineering artefacts.
 
 ## Evidence anchors
-- Survey of finance use cases and prospects: `egger-2020`.
-- Overhead and I/O criteria for useful advantage: `hoefler-2023`.
-- An end-to-end annealing portfolio pipeline to audit against these questions: `rr-e2e-portfolio-annealing` (preprint).
+- Survey of finance use cases and prospects: `ref-egger-finance-2020`.
+- Overhead and I/O criteria for useful advantage: `ref-hoefler-hype-2023`.
+- An end-to-end annealing portfolio pipeline to audit against these questions: `rr-portfolio-annealing-e2e-2025` (preprint).

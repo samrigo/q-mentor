@@ -112,7 +112,7 @@ def capability_report(problem: dict) -> dict:
     exact = all(c["pass"] for c in checks)
     approx_ok = max_rel_err <= APPROX_REL_TOL and has_local_detuning
     return {
-        "schema": "qmentor.capability-report.v2",
+        "schema": "qmentor.capability-report.v3",
         "problem_id": problem["id"],
         "target": "pasqal-pulser",
         "device": DEVICE.name,

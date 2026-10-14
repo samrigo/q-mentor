@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v2/schemas/capability-report.schema.json",
-  "title": "qmentor.capability-report.v2",
+  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v3/schemas/capability-report.schema.json",
+  "title": "qmentor.capability-report.v3",
   "type": "object",
   "required": ["schema", "problem_id", "target", "status", "checks", "lost_semantics", "alternatives"],
   "properties": {
-    "schema": {"const": "qmentor.capability-report.v2"},
+    "schema": {"const": "qmentor.capability-report.v3"},
     "status": {"enum": ["exact", "approximate", "unsupported-exact", "unknown"]},
     "checks": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["check", "required", "observed", "pass"]}},
     "lost_semantics": {"type": "array", "items": {"type": "string"}},

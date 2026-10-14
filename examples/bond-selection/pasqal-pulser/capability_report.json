@@ -1,5 +1,5 @@
 {
-  "schema": "qmentor.capability-report.v2",
+  "schema": "qmentor.capability-report.v3",
   "problem_id": "six-bond-selection",
   "target": "pasqal-pulser",
   "device": "AnalogDevice",

@@ -1,6 +1,52 @@
-# Routing fixtures. `prompt` is for live Copilot runs; `primary`, `present`, `follow_ons`
-# encode the intended reading so scripts/validate_routing.py can test the registry.
+# Routing fixtures (README-05 / README-09). `prompt` is what a live Copilot run receives.
+# Two kinds of assertion, both checked offline by scripts/validate_routing.py:
+#   select: the primary skill the registry intents pick from the prompt text alone (no skill names).
+#   chain:  the ordered chain the reference router builds from primary + present artifacts + follow_ons.
+# Only artifacts in `present` exist; a user goal always exists.
 cases:
+  # ---- automatic selection from plain prompts (user never names a skill) ----
+  - id: help-what-can-you-do
+    prompt: "What can you do?"
+    expect: {select: q-mentor-help}
+  - id: help-which-skill
+    prompt: "Which skill should I use to compare SDKs?"
+    expect: {select: q-mentor-help}
+  - id: select-verdict
+    prompt: "Should we use quantum for picking 3 of 6 bonds?"
+    expect: {select: q-mentor-verdict}
+  - id: select-learn
+    prompt: "Explain how annealing works"
+    expect: {select: q-mentor-learn}
+  - id: select-convert
+    prompt: "Convert this Pulser code to Classiq"
+    expect: {select: q-mentor-convert}
+  - id: select-translate
+    prompt: "Can this run on Pasqal hardware?"
+    expect: {select: q-mentor-translate}
+  - id: select-pqc
+    prompt: "Where do we use RSA in this repo?"
+    expect: {select: q-mentor-pqc-scan}
+  - id: select-research
+    prompt: "What does the latest paper on QAOA portfolio benchmarks show?"
+    expect: {select: q-mentor-research}
+  - id: select-direct-invocation
+    prompt: "/q-mentor-frame pick 3 of 6 bonds"
+    expect: {select: q-mentor-frame}
+  - id: select-test
+    prompt: "Run the checks on the D-Wave example"
+    expect: {select: q-mentor-test}
+  # ---- chains ----
+  - id: help-is-read-only
+    prompt: "What can Q-Mentor do for a Pulser-to-Classiq conversion?"
+    primary: q-mentor-help
+    present: []
+    expect: {status: complete, chain: [q-mentor-help]}
+  - id: help-then-chosen-skill
+    prompt: "OK, explain QAOA then."
+    primary: q-mentor-help
+    present: []
+    follow_ons: [q-mentor-learn]
+    expect: {status: complete, chain: [q-mentor-help, q-mentor-learn]}
   - id: three-skill-chain
     prompt: "Is quantum worth trying for my six-bond selection, and if so design the experiment."
     primary: q-mentor-design
@@ -21,6 +67,33 @@ cases:
     primary: q-mentor-translate
     present: [CanonicalProblem]
     expect: {status: complete, chain: [q-mentor-translate]}
+  - id: translate-from-source-code
+    prompt: "What survives if I move this Qiskit circuit to Perceval?"
+    primary: q-mentor-translate
+    present: [SourceCode]
+    expect: {status: complete, chain: [q-mentor-translate]}
+  - id: convert-from-source-and-test
+    prompt: "Convert this Pulser code to Classiq and test it."
+    primary: q-mentor-convert
+    present: [SourceCode]
+    follow_ons: [q-mentor-test]
+    expect: {status: complete, chain: [q-mentor-translate, q-mentor-convert, q-mentor-test]}
+  - id: convert-test-review
+    prompt: "Port my Qiskit circuit to pytket, validate it and review the diff."
+    primary: q-mentor-convert
+    present: [SourceCode]
+    follow_ons: [q-mentor-test, q-mentor-review]
+    expect: {status: complete, chain: [q-mentor-translate, q-mentor-convert, q-mentor-test, q-mentor-review]}
+  - id: convert-with-existing-report
+    prompt: "Here is the capability report; generate the Classiq code."
+    primary: q-mentor-convert
+    present: [ProgramIR, CapabilityReport]
+    expect: {status: complete, chain: [q-mentor-convert]}
+  - id: convert-from-problem-only
+    prompt: "Convert the six-bond problem to Bloqade."
+    primary: q-mentor-convert
+    present: []
+    expect: {status: complete, chain: [q-mentor-frame, q-mentor-translate, q-mentor-convert]}
   - id: implement-and-validate
     prompt: "Implement the accepted design for Qiskit and validate it."
     primary: q-mentor-implement
@@ -78,9 +151,20 @@ cases:
   - id: review-then-pqc
     prompt: "Review this diff; it touches TLS key handling."
     primary: q-mentor-review
-    present: []
+    present: [Diff]
+    follow_ons: [q-mentor-pqc-scan]
+    expect: {status: needs-input}
+  - id: review-then-pqc-with-source
+    prompt: "Review this diff and the TLS module it touches."
+    primary: q-mentor-review
+    present: [Diff, SourceCode]
     follow_ons: [q-mentor-pqc-scan]
     expect: {status: complete, chain: [q-mentor-review, q-mentor-pqc-scan]}
+  - id: review-without-diff
+    prompt: "Review my code."
+    primary: q-mentor-review
+    present: []
+    expect: {status: needs-input}
   - id: research-then-evaluate
     prompt: "Find the evidence for quantum annealing in portfolio optimization and grade it."
     primary: q-mentor-research
@@ -93,3 +177,9 @@ cases:
     present: []
     follow_ons: [q-mentor-frame]
     expect: {status: complete, chain: [q-mentor-brainstorm, q-mentor-frame]}
+  - id: test-then-exec
+    prompt: "Run the tests and brief leadership on the result."
+    primary: q-mentor-test
+    present: [Implementation]
+    follow_ons: [q-mentor-exec]
+    expect: {status: complete, chain: [q-mentor-test, q-mentor-exec]}

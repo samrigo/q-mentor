@@ -1,42 +1,41 @@
 ---
 name: q-mentor-learn
-description: "Explain one quantum-computing or optimization concept with a domain-relevant analogy, one formula, a common misconception and a cited source. Use when the user asks what something is, how it works, or needs a mental model (qubits, QUBO, QAOA, annealing, penalties, Ising)."
+description: Use when the user wants a quantum-computing concept explained — 'explain QAOA', 'what is a QUBO', 'how does quantum annealing work', 'what is a cat qubit', 'difference between Pulser and Qiskit', 'why do penalties matter' — with a domain analogy, one formula, a misconception, and a source.
 license: MIT
 allowed-tools: read
 ---
 
 # Q-Mentor · Learn
 
-Build an accurate mental model of ONE concept in at most 220 words.
+Teach one concept so the user can restate it or pass a tiny check.
 
 ## Shared files
 
-Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`:
-registry `registry/skills.yml`, contract `templates/response-contract.md`; packs `knowledge/quantum-basics.md`, `knowledge/optimization-math.md`.
-If the registry or contract cannot be found, answer `Status: blocked` naming the missing file. Do not guess.
+Resolve from the plugin root (`../../` from this file) or, in repository mode, from `.github/q-mentor/`: registry `registry/skills.yml`, contract `templates/response-contract.md`, packs `knowledge/quantum-basics.md`, `knowledge/optimization-math.md`, `knowledge/hardware-index.md`. If the registry is missing or invalid, answer `Status: blocked` naming the file; do not guess.
+
+## Response template: `guide`
+
+For **every** user-facing answer, including clarification, error, and direct invocation, render `templates/responses/guide.md` through `qmentor.response.v3`; preserve its lead, field order, status, uncertainty, and validation. Do not answer free-form or ask the user to invoke another skill.
 
 ## Input
 
-Concept or question; learner's level if stated; domain pack if relevant (finance first).
+Concept, the user's level if known, domain (finance by default).
 
 ## Output
 
-`Explanation`: plain-language idea → domain analogy → one formula → one misconception → one-line self-check question → source label.
-Default mode is brief (`Status`, `Result`, `Validation`, `Next`). Honor `detailed` or `machine` when asked.
+One explanation: analogy from the user's domain, exactly one formula, one common misconception, one source id from `knowledge/sources.yml`, and a one-line self-check.
 
 ## Procedure
 
-1. Identify the single concept. If several are asked, explain the most foundational one and list the rest under `Next`.
-2. Read only the pack that covers it.
-3. Use the user's domain for the analogy; default to the finance demo.
-4. Give exactly one formula with symbols defined.
-5. Name a common misconception and correct it.
-6. Cite the pack's source id and its type.
+1. Pick the single concept asked; if two are asked, explain the one the second depends on first and offer the other as `Next`.
+2. Use `knowledge/quantum-basics.md` or `knowledge/optimization-math.md`; for hardware families use `knowledge/hardware-index.md` (physical family ≠ computing model ≠ SDK).
+3. Business audience: avoid acronyms or spell them out once. Technical audience: name conventions (bit order, `RX(θ)=exp(-iθX/2)`).
+4. Label any claim about performance as fact/assumption/estimate/unknown; never imply practical speedup.
 
 ## Stop when
 
-Goal ambiguous between unrelated concepts (ask one question); a prerequisite gap makes the explanation misleading (teach the prerequisite instead).
+Ambiguous goal or a prerequisite gap (needs-input with one question).
 
 ## Handoffs
 
-`q-mentor-research` for a current or contested claim; `q-mentor-frame` when the user brings a real problem. The agent decides; do not ask the user to type another command unless approval or a material choice is needed.
+`q-mentor-research` for a current claim; `q-mentor-frame` when the user has a real problem. The agent decides; do not ask the user to type another command unless approval or a material choice is needed.

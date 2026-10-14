@@ -1,12 +1,12 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v2/schemas/canonical-problem.schema.json",
-  "title": "qmentor.canonical-problem.v2",
+  "$id": "https://github.com/samrigo/q-mentor/blob/Claude-v3/schemas/canonical-problem.schema.json",
+  "title": "qmentor.canonical-problem.v3",
   "description": "A ProblemSpec with either model data + parameters (expanded by code) or an explicit QUBO.",
   "type": "object",
   "required": ["schema", "id", "variables", "bit_order", "objective", "provenance"],
   "properties": {
-    "schema": {"const": "qmentor.canonical-problem.v2"},
+    "schema": {"const": "qmentor.canonical-problem.v3"},
     "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
     "description": {"type": "string"},
     "provenance": {
